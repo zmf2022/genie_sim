@@ -1,4 +1,19 @@
 ![image.png](./docs/image.png)
+<div align="center">
+  <a href="https://github.com/AgibotTech/genie_sim">
+    <img src="https://img.shields.io/badge/GitHub-grey?logo=GitHub" alt="GitHub">
+  </a>
+  <a href="https://huggingface.co/datasets/agibot-world/GenieSimAssets">
+    <img src="https://img.shields.io/badge/HuggingFace-yellow?logo=HuggingFace" alt="HuggingFace">
+  </a>
+  <a href="https://agibot-world.com/sim-evaluation">
+    <img src="https://img.shields.io/badge/Genie%20Sim%20Benchmark-blue?style=plastic" alt="Genie Sim Benchmark">
+  </a>
+  <a href="https://genie.agibot.com/en/geniestudio">
+    <img src="https://img.shields.io/badge/Genie_Studio-green?style=flat" alt="Genie Studio">
+  </a>
+</div>
+
 # 1. Genie Sim
 Genie Sim is the simulation framework from AgiBot, which provides developers efficient data generation capabilities and evaluation benchmarks to accelerate embodied intelligence development. Genie Sim has established a comprehensive closed loop pipeline, encompassing trajectory generation, model training, benchmarking, and deployment validation. Users can quickly validate algorithm performance and optimize models through this efficient simulation toolchain. Whether for simple grasping tasks or complex long-range operations, Genie Sim can provide a highly realistic simulation environment and precise evaluation metrics, empowering developers to efficiently complete the development and iteration of robotic technologies.
 
