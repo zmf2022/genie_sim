@@ -1,4 +1,4 @@
-![image.png](./docs/image.png)
+![image.png](./docs/image.jpg)
 <div align="center">
   <a href="https://github.com/AgibotTech/genie_sim">
     <img src="https://img.shields.io/badge/GitHub-grey?logo=GitHub" alt="GitHub">
@@ -14,8 +14,10 @@
   </a>
 </div>
 
-# 1. Genie Sim
+# 1. Genie Sim Benchmark
 Genie Sim is the simulation framework from AgiBot, which provides developers efficient data generation capabilities and evaluation benchmarks to accelerate embodied intelligence development. Genie Sim has established a comprehensive closed loop pipeline, encompassing trajectory generation, model training, benchmarking, and deployment validation. Users can quickly validate algorithm performance and optimize models through this efficient simulation toolchain. Whether for simple grasping tasks or complex long-range operations, Genie Sim can provide a highly realistic simulation environment and precise evaluation metrics, empowering developers to efficiently complete the development and iteration of robotic technologies.
+
+Genie Sim Benchmark, as the open-source evaluation version of Genie Sim, is dedicated to providing precise performance testing and optimization support for embodied AI models.
 
 # 2. Features
 - Flexible and user-friendly simulation configuration and interface
@@ -35,7 +37,7 @@ Embodied intelligence simulation benchmarks in Genie Sim are designed to evaluat
 Please refer to [this page](http://agibot-world.com/sim-evaluation/docs) for installation, user guide and API reference
 
 ## 3.3 Support
-<img src="./docs/wechat.JPEG" width="20%"/>
+<img src="./docs/wechat.JPEG" width="30%"/>
 
 ## 3.4 TODO List
 - [ ] Release more long-horizon benchmark mainuplation tasks
