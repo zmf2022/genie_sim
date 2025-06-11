@@ -3,11 +3,37 @@
 # License: Mozilla Public License Version 2.0
 
 import numpy as np
+import threading
+import os
+import rclpy
+import json
+from base_utils.ros_utils import SimROSNode
+
+ROOT_DIR = os.environ.get("SIM_REPO_ROOT")
 
 
 class BasePolicy:
-    def __init__(self) -> None:
-        pass
+    def __init__(self, task_name) -> None:
+        rclpy.init()
+        # load robot_cfg
+        with open(
+            os.path.join(ROOT_DIR, "benchmark/ader/eval_tasks", f"{task_name}.json"),
+            "r",
+        ) as f:
+            task_content = json.load(f)
+        self.robot_cfg_file = task_content["robot"]["robot_cfg"]
+        with open(
+            os.path.join(
+                ROOT_DIR, "server/source/genie.sim.lab/robot_cfg/", self.robot_cfg_file
+            ),
+            "r",
+        ) as f:
+            self.robot_cfg = json.load(f)
+        self.sim_ros_node = SimROSNode(robot_cfg=self.robot_cfg)
+        self.spin_thread = threading.Thread(
+            target=rclpy.spin, args=(self.sim_ros_node,)
+        )
+        self.spin_thread.start()
 
     def reset(self):
         """Called at the beginning of an episode."""

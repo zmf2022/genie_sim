@@ -27,30 +27,39 @@ Genie Sim Benchmark, as the open-source evaluation version of Genie Sim, is dedi
 - 550+ High fidelity and physically accurate 3D simulation environment and assets
 - Standardized evaluation metrics to quantify performance of embodied AI models
 - Evaluation results achieve less than 5% sim to real evaluation error on GO-1 model
+- Support UniVLA baseline model in simulation evaluation
 
-# 3. Contents
+# 3. Updates
+- [6/11/2025] v2.0
+  - Add 10 more manipulation tasks for Agibot World Challenge 2025
+  - Open-source 30+ simulation environment and assets including scenes like supermarket, office , restaurant, factory and home
+  - Optimize communication framework and improve simulation running speed by 2x
+  - Integrate UniVLA and support model inference simulation evaluation
+  - Update automatic evaluation framework for more complicated long-range tasks
 
-## 3.1 Introduction
+# 4. Contents
+
+## 4.1 Introduction
 Embodied intelligence simulation benchmarks in Genie Sim are designed to evaluate and advance the development of embodied AI models. These benchmarks provide realistic environments, diverse tasks and standardized metrics to measure the performance of robotic AI systems, which reduce the requirement of expensive physical hardware and real-world testing, avoid risky and dangerous testing scenarios and accelerate training and evaluaiton process of AI agents.
 
-## 3.2 Getting Started
+## 4.2 Getting Started
 Please refer to [this page](http://agibot-world.com/sim-evaluation/docs) for installation, user guide and API reference
 
-## 3.3 Support
+## 4.3 Support
 <img src="./docs/wechat.JPEG" width="30%"/>
 
-## 3.4 TODO List
+## 4.4 TODO List
 - [ ] Release more long-horizon benchmark mainuplation tasks
 - [ ] More scenes and assets for each benchmark task
 - [ ] Scenario layout and manipulation trajectory generalization toolkit
 
-## 3.5 FAQ
+## 4.5 FAQ
 - How to shut down the isaac sim server when errors occur, causing the process not responding?
   Kill the process in terminal using `pkill -9 -f raise_standalone_sim`
 - How to choose different render modes?
   The default render mode is `RaytracedLighting(RealTime)`. For tasks that contain transparent objects, use `RealTimePathTracing(RealTime-2.0)` for perspective relationship of objects
 
-## 3.6 License and Citation
+## 4.6 License and Citation
 All the data and code within this repo are under Mozilla Public License 2.0
 Please consider citing our work either way below if it helps your research.
 ```
@@ -62,7 +71,7 @@ Please consider citing our work either way below if it helps your research.
 }
 ```
 
-## 3.7 References
+## 4.7 References
 1. PDDL Parser (2020). Version 1.1. [Source code]. https://github.com/pucrs-automated-planning/pddl-parser.
 2. BDDL. Version 1.x.x [Source code]. https://github.com/StanfordVL/bddl
 3. CUROBO [Source code]. https://github.com/NVlabs/curobo

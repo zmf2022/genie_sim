@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2023-2025, AgiBot Inc. All Rights Reserved.
 # Author: Genie Sim Team
 # License: Mozilla Public License Version 2.0
@@ -19,7 +18,6 @@ from planner.manip_solver import (
 )
 from benchmark.tasks.demo_task import DemoTask
 from tasks.dummy_task import DummyTask
-from objects.object_base import USDObject
 from base_utils.transform_utils import calculate_rotation_matrix
 
 
@@ -50,7 +48,7 @@ class DemoEnv(BaseEnv):
             try:
                 self.task = DemoTask(self)
             except ImportError:
-                raise Exception("bddl is not available.")
+                raise Exception("ader is not available.")
 
     def load(self, task_file):
         self.generate_layout(task_file)
@@ -60,19 +58,6 @@ class DemoEnv(BaseEnv):
         self.task_info = task_info
         self.policy_stages, self.policy_objects = load_task_solution(task_info)
         self.policy_objects = self.update_objects(self.policy_objects)
-
-        self.add_states_object(task_info["objects"])
-
-    def add_states_object(self, objects_info):
-        for obj_info in objects_info:
-            obj_id = obj_info["object_id"]
-            if obj_id == "fix_pose":
-                continue
-            obj_params_file = os.path.join(
-                obj_info["data_info_dir"], "object_parameters.json"
-            )
-            states_obj = USDObject(obj_params_file, robot=self.robot, abilities=None)
-            self.states_objects_by_name[obj_id] = states_obj
 
     def reset_variables(self):
         """
@@ -283,18 +268,12 @@ class DemoEnv(BaseEnv):
             if success == False:
                 break
 
-        # self.robots.apply_action(action)
         observaion = self.get_observation()
-        info = {}
-        # reward, info = self.task.get_reward(self, info)
-        done, info = self.task.get_termination(self, info)
         self.task.step(self)
+        self.action_update()
+        need_update = True
 
-        if done:
-            info["final_step"] = self.current_step
-            self.reset()
-
-        return observaion, None, done, info
+        return observaion, self.has_done, need_update, self.task.task_progress
 
     def start_recording(self, task_name, camera_prim_list, fps):
         self.robot.client.start_recording(
@@ -306,7 +285,7 @@ class DemoEnv(BaseEnv):
                     "render_depth": False,
                     "render_semantic": False,
                 },
-                "pose": ["/World/G1/gripper_center"],
+                "pose": [],
                 "joint_position": True,
                 "gripper": True,
             },

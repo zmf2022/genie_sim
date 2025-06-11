@@ -30,6 +30,7 @@ class OmniObject:
         self.type = type
         self.obj_pose = pose
         self.obj_length = size
+        self.info = {}
 
         self.xyz = np.array([0, 0, 0])
         self.direction = np.array([0, 0, 0.05])

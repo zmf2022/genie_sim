@@ -25,6 +25,7 @@ repos:
               robot/isaac_sim/aimdk/
           )$
 
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0 # Use the ref you want to point at
     hooks:
@@ -43,6 +44,8 @@ repos:
       - id: debug-statements
       - id: check-merge-conflict
       - id: check-docstring-first
+      - id: check-byte-order-marker # Forbid UTF-8 byte-order markers
+      - id: end-of-file-fixer
 
   # https://blogs.halodoc.io/code-version-best-practices-with-clean-commit-formats/
   - repo: https://github.com/commitizen-tools/commitizen

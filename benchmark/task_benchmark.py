@@ -22,13 +22,17 @@ from benchmark.envs.dummy_env import DummyEnv
 from robot.genie_robot import IsaacSimRpcRobot
 from policy.base import BasePolicy
 from benchmark.policy.demopolicy import DemoPolicy
+import ader
 
 from layout.task_generate import TaskGenerator
 
 from hooks.task import TaskMetric, TaskHook
 from base_utils.error_code import ErrorCode
+from base_utils.eval_utils import *
 
 import base_utils
+
+import rclpy
 
 base_utils.check_and_fix_env()
 
@@ -84,7 +88,7 @@ class TaskBenchmark(object):
             [
                 item
                 for item in os.listdir(
-                    os.path.join(base_utils.benchmark_bddl_path(), "task_definitions")
+                    os.path.join(base_utils.benchmark_ader_path(), "task_definitions")
                 )
                 if item != "domain_igibson.bddl"
             ]
@@ -99,20 +103,10 @@ class TaskBenchmark(object):
         return tasks
 
     def evaluate_policy(self):
-        task2scene_json = os.path.join(
-            base_utils.benchmark_bddl_path(),
-            "task_to_preselected_scenes.json",
-        )
-        with open(task2scene_json) as f:
-            task_to_scenes = json.load(f)
-
         for task in self.tasks:
-            if not task in task_to_scenes.keys():
-                continue
-
             # load task config
             task_config_file = os.path.join(
-                base_utils.benchmark_bddl_path(), "eval_tasks", task + ".json"
+                base_utils.benchmark_ader_path(), "eval_tasks", task + ".json"
             )
             self.task_config = base_utils.load_json(task_config_file)
             self.task_config["specific_task_name"] = task
@@ -128,47 +122,38 @@ class TaskBenchmark(object):
 
             episode = 0
             per_episode_metrics = {}
-            scenes = sorted(set(task_to_scenes[task]))
-            logger.info(
-                "Evaluating agent on task {} on {} scenes".format(task, len(scenes))
-            )
             scene_instance_ids = [0]
-            for scene in scenes:
-                # One scene, including multiple instances (such as different positions and table appearances), each instance has several episodes, and each episode operates on different object positions
-                self.task_config["scene"]["scene_usd"] = scene
-                logger.info("Evaluating agent on scene {}".format(scene))
-                for instance_id in scene_instance_ids:
-                    # one instance
-                    self.task_config["scene"]["scene_instance_id"] = instance_id
+            for instance_id in scene_instance_ids:
+                # one instance
+                self.task_config["scene"]["scene_instance_id"] = instance_id
 
-                    task_generator = TaskGenerator(self.task_config)
-                    task_folder = os.path.join(
-                        base_utils.benchmark_root_path(),
-                        "saved_task/%s" % (self.task_config["task"]),
-                    )
-                    task_generator.generate_tasks(
-                        save_path=task_folder,
-                        task_num=self.episodes_per_instance,
-                        task_name=self.task_config["task"],
-                    )
-                    robot_position = task_generator.robot_init_pose["position"]
-                    robot_rotation = task_generator.robot_init_pose["quaternion"]
-                    self.task_config["robot"]["robot_init_pose"][
-                        "position"
-                    ] = robot_position
-                    self.task_config["robot"]["robot_init_pose"][
-                        "quaternion"
-                    ] = robot_rotation
-                    specific_task_files = glob.glob(task_folder + "/*.json")
-                    for episode_id in range(self.episodes_per_instance):
-                        self.single_evaluate_ret = EVAL_TEMPLATE
-                        # one episode
-                        episode_file = specific_task_files[episode_id]
-                        per_episode_metrics[episode] = self.evaluate_episode(
-                            episode_file
-                        )
-                        episode += 1
-                        evaluate_results.append(self.single_evaluate_ret)
+                task_generator = TaskGenerator(self.task_config)
+                task_folder = os.path.join(
+                    base_utils.benchmark_root_path(),
+                    "saved_task/%s" % (self.task_config["task"]),
+                )
+                task_generator.generate_tasks(
+                    save_path=task_folder,
+                    task_num=self.episodes_per_instance,
+                    task_name=self.task_config["task"],
+                )
+                robot_position = task_generator.robot_init_pose["position"]
+                robot_rotation = task_generator.robot_init_pose["quaternion"]
+                self.task_config["robot"]["robot_init_pose"][
+                    "position"
+                ] = robot_position
+                self.task_config["robot"]["robot_init_pose"][
+                    "quaternion"
+                ] = robot_rotation
+                specific_task_files = glob.glob(task_folder + "/*.json")
+                for episode_id in range(self.episodes_per_instance):
+                    self.single_evaluate_ret = EVAL_TEMPLATE
+                    # one episode
+                    episode_file = specific_task_files[episode_id]
+                    per_episode_metrics[episode] = self.evaluate_episode(episode_file)
+                    episode += 1
+                    summarize_scores(self.single_evaluate_ret)
+                    evaluate_results.append(self.single_evaluate_ret)
 
             # output evaluate_results
             with open(evaluate_ret_file, "w+") as f:
@@ -192,10 +177,13 @@ class TaskBenchmark(object):
             gripper_control_type=self.args.gripper_control_type,
         )
 
-        if self.args.policy_class == "DemoPolicy":
+        if self.args.env_class == "DemoEnv":
             env = DemoEnv(robot, episode_file, self.task_config)
         else:
             env = DummyEnv(robot, episode_file, self.task_config)
+        init_pose = self.task_config["robot"].get("init_arm_pose")
+        if init_pose:
+            robot.set_init_pose(init_pose)
 
         (
             start_callbacks,
@@ -220,14 +208,18 @@ class TaskBenchmark(object):
             )
 
         try:
-            while True:
+            env.do_eval_action()
+            while rclpy.ok():
                 action = self.policy.act(observaion, step_num=env.current_step)
                 for callback in step_callbacks:  # during task
                     callback(env, action)
-                observaion, reward, done, info = env.step(action)
+                observaion, done, need_update, task_progress = env.step(action)
+                if need_update:
+                    self.update_eval_ret(task_progress)
+
+                self.policy.sim_ros_node.loop_rate.sleep()
 
                 if done:
-                    self.assemble_ret(info)
                     break
         except KeyboardInterrupt:
             self.single_evaluate_ret["result"]["code"] = int(
@@ -262,6 +254,9 @@ class TaskBenchmark(object):
         else:
             self.single_evaluate_ret["result"]["code"] = self.convert_code(info)
             self.single_evaluate_ret["result"]["msg"] = ""
+
+    def update_eval_ret(self, task_progress):
+        self.single_evaluate_ret["result"]["progress"] = task_progress
 
     def other_output(self, log_file, summary_log_file, per_episode_metrics):
         with open(log_file, "w+") as f:
@@ -326,25 +321,62 @@ class TaskBenchmark(object):
 
 def main():
     parser = argparse.ArgumentParser()
-    # fmt: off
-    parser.add_argument("--client_host", type=str, default="localhost:50051", help="The client host")
-    parser.add_argument("--num_episode", type=int, default=1, help="Set number of episodes to run")
-    parser.add_argument("--policy_class", type=str, default="DemoPolicy", choices=["DemoPolicy", "DummyPolicy"], help="Choose the policy class")
-    parser.add_argument("--env_class", type=str, default="DemoEnv", choices=["DemoEnv", "DummyEnv"], help="Choose the task env")
-    parser.add_argument("--task_name", type=str, default="genie_task_supermarket",help="Specify the task to evaluate")
-    parser.add_argument("--output_dir", type=str, default=os.path.join(base_utils.benchmark_root_path(), "output"), help="Set output directory")
-    parser.add_argument("--gripper_control_type", type=int, default=0, help="Set gripper control type, 0-position control, 1-velocity control")
-    parser.add_argument("--fps", type=int, default=30, help="Set the fps of the recording")
+    parser.add_argument(
+        "--client_host",
+        type=str,
+        default="localhost:50051",
+        help="The client host",
+    )
+    parser.add_argument(
+        "--num_episode",
+        type=int,
+        default=1,
+        help="Set number of episodes to run",
+    )
+    parser.add_argument(
+        "--policy_class",
+        type=str,
+        default="DemoPolicy",
+        choices=["DemoPolicy", "DummyPolicy"],
+        help="Choose the policy class",
+    )
+    parser.add_argument(
+        "--env_class",
+        type=str,
+        default="DummyEnv",
+        choices=["DemoEnv", "DummyEnv"],
+        help="Choose the task env",
+    )
+    parser.add_argument(
+        "--task_name",
+        type=str,
+        default="iros_stamp_the_seal",
+        help="Specify the task to evaluate",
+    )
+    parser.add_argument(
+        "--output_dir",
+        type=str,
+        default=os.path.join(base_utils.benchmark_root_path(), "output"),
+        help="Set output directory",
+    )
+    parser.add_argument(
+        "--gripper_control_type",
+        type=int,
+        default=0,
+        help="Set gripper control type, 0-position control, 1-velocity control",
+    )
+    parser.add_argument(
+        "--fps", type=int, default=30, help="Set the fps of the recording"
+    )
     parser.add_argument("--record", action="store_true", help="Enable data recording")
     args = parser.parse_args()
-    # fmt: on
 
     logger.info(
         "Evaluating agent of type {} on {}".format(args.policy_class, args.task_name)
     )
 
     if args.policy_class == "DemoPolicy":
-        policy = DemoPolicy()
+        policy = DemoPolicy(task_name=args.task_name)
     elif False:
         # placeholder, customize your own policy here
         pass

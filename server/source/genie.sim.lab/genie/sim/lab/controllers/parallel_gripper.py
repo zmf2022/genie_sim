@@ -18,14 +18,10 @@ from base_utils.logger import Logger
 
 logger = Logger()  # Create singleton instance
 
-if os.getenv("ISAACSIM_VERSION") == "v45":
-    from isaacsim.core.api.materials import PhysicsMaterial
-    from isaacsim.core.utils.types import ArticulationAction
-    from isaacsim.robot.manipulators.grippers.gripper import Gripper
-else:
-    from omni.isaac.core.materials import PhysicsMaterial
-    from omni.isaac.core.utils.types import ArticulationAction
-    from omni.isaac.manipulators.grippers.gripper import Gripper
+from isaacsim.core.api.materials import PhysicsMaterial
+from isaacsim.core.utils.types import ArticulationAction
+from isaacsim.robot.manipulators.grippers.gripper import Gripper
+
 
 from pxr import UsdPhysics
 
@@ -51,7 +47,7 @@ class ParallelGripper(Gripper):
         joint_opened_positions: np.ndarray = None,
         joint_closed_positions: np.ndarray = None,
         action_deltas: np.ndarray = None,
-        joint_controll_prim=None,
+        joint_control_prim=None,
         gripper_type: str = "angular",
         gripper_max_force=5,
     ) -> None:
@@ -63,13 +59,17 @@ class ParallelGripper(Gripper):
         self._joint_closed_velocities = joint_closed_velocities
         self._joint_opened_positions = joint_opened_positions
         self._joint_closed_positions = joint_closed_positions
-        self._joint_control_prim = joint_controll_prim
+        self._joint_control_prim = joint_control_prim
         self._get_joint_positions_func = None
         self._set_joint_positions_func = None
-        self._action_deltas = action_deltas
+        self._action_deltas = np.array([-0.0628, 0.0628])  # action_deltas
         self._articulation_num_dofs = None
-        self.physics_material = PhysicsMaterial(prim_path="/World/gripper_physics")
-        self.object_material = PhysicsMaterial(prim_path="/World/object_physics")
+        self.physics_material = PhysicsMaterial(
+            prim_path="/World/gripper_physics", static_friction=1, dynamic_friction=1
+        )
+        self.object_material = PhysicsMaterial(
+            prim_path="/World/object_physics", static_friction=1, dynamic_friction=1
+        )
         self.modify_friction_mode("/World/gripper_physics")
         self.modify_friction_mode("/World/object_physics")
         self.is_reached = False
@@ -186,6 +186,7 @@ class ParallelGripper(Gripper):
                     ]
                 )
         self._set_joint_positions_func = set_joint_positions_func
+
         return
 
     def apply_default_action(self):
@@ -282,10 +283,10 @@ class ParallelGripper(Gripper):
         stage = omni.usd.get_context().get_stage()
         prim = stage.GetPrimAtPath(self._joint_control_prim)
         logger.info(self._joint_control_prim)
-        if prim:
-            drive = UsdPhysics.DriveAPI.Get(prim, self.gripper_type)
-            drive.GetDampingAttr().Set(5e4)
-            drive.GetStiffnessAttr().Set(5e6)
+        # if prim:
+        #     drive = UsdPhysics.DriveAPI.Get(prim, self.gripper_type)
+        #     drive.GetDampingAttr().Set(5e4)
+        #     drive.GetStiffnessAttr().Set(5e6)
 
     def forward(self, action: str) -> ArticulationAction:
         """calculates the ArticulationAction for all of the articulation joints that corresponds to "open"
@@ -319,15 +320,20 @@ class ParallelGripper(Gripper):
             self.is_reached = False
             target_joint_positions = [None] * self._articulation_num_dofs
             # max_force = np.abs(self._joint_opened_positions[0]*20)
-            max_force = 180
-            if prim:
-                drive.GetMaxForceAttr().Set(max_force)
-                if "left_Left" in self._joint_control_prim:
-                    drive.GetDampingAttr().Set(5e4)
-                    drive.GetStiffnessAttr().Set(5e6)
-                else:
-                    drive.GetDampingAttr().Set(5e4)
-                    drive.GetStiffnessAttr().Set(5e6)
+            # max_force = 180
+            # if prim:
+            #     drive.GetMaxForceAttr().Set(max_force)
+            #     if "left_Left" in self._joint_control_prim:
+            #         # drive.GetDampingAttr().Set(5e1)
+            #         # drive.GetStiffnessAttr().Set(5e2)
+            #         drive.GetDampingAttr().Set(5e4)
+            #         drive.GetStiffnessAttr().Set(5e6)
+            #     else:
+            #         # drive.GetDampingAttr().Set(5e1)
+            #         # drive.GetStiffnessAttr().Set(5e2)
+            #         drive.GetDampingAttr().Set(5e4)
+            #         drive.GetStiffnessAttr().Set(5e6)
+
             # link_drive_1.GetStiffnessAttr().Set(0)
             # link_drive_2.GetStiffnessAttr().Set(0)
             target_joint_positions[self._joint_dof_indicies[0]] = (
@@ -348,7 +354,7 @@ class ParallelGripper(Gripper):
                 current_drive_finger_position
             )
             if prim:
-                drive.GetStiffnessAttr().Set(0)
+                # drive.GetStiffnessAttr().Set(0)
                 drive.GetMaxForceAttr().Set(target_force)
             # link_drive_1.GetStiffnessAttr().Set(0.0005)
             # link_drive_2.GetStiffnessAttr().Set(0.0005)
@@ -427,4 +433,5 @@ class ParallelGripper(Gripper):
                 control_actions.joint_efforts[1]
             )
         self._articulation_apply_action_func(control_actions=joint_actions)
+
         return

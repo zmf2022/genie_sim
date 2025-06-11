@@ -1,0 +1,3 @@
+[submodule "AgiBot-World"]
+	path = AgiBot-World
+	url = https://github.com/OpenDriveLab/AgiBot-World.git

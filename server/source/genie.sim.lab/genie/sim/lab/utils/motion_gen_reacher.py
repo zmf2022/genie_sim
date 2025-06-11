@@ -35,20 +35,13 @@ from curobo.wrap.reacher.motion_gen import (
 from curobo.geom.sphere_fit import SphereFitType
 import os
 
-if os.getenv("ISAACSIM_VERSION") == "v45":
-    from isaacsim.core.api.objects import cuboid, sphere
-    from isaacsim.core.api import World
-    from isaacsim.core.prims import SingleArticulation
-    from isaacsim.core.utils.types import ArticulationAction
-    from isaacsim.core.prims import SingleXFormPrim
-    from isaacsim.sensors.camera import Camera
-else:
-    from omni.isaac.core.objects import cuboid, sphere
-    from omni.isaac.core import World
-    from omni.isaac.core.articulations import Articulation as SingleArticulation
-    from omni.isaac.core.utils.types import ArticulationAction
-    from omni.isaac.core.prims import XFormPrim as SingleXFormPrim
-    from omni.isaac.sensor import Camera
+from isaacsim.core.api.objects import cuboid, sphere
+from isaacsim.core.api import World
+from isaacsim.core.prims import SingleArticulation
+from isaacsim.core.utils.types import ArticulationAction
+from isaacsim.core.prims import SingleXFormPrim
+from isaacsim.sensors.camera import Camera
+
 
 import omni.replicator.core as rep
 from scipy.spatial.transform import Rotation as R
@@ -113,7 +106,7 @@ class CuroboMotion:
             trajopt_tsteps=step,
             num_trajopt_noisy_seeds=1,
             num_batch_trajopt_seeds=2,
-            collision_activation_distance=0.0005,
+            collision_activation_distance=0.005,
         )
 
         self.tensor_args = tensor_args

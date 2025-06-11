@@ -55,6 +55,7 @@ class Rpc_Client:
                 )
                 grpc.channel_ready_future(self.channel).result(timeout=5)
                 self.robot_urdf = robot_urdf
+                break
             except grpc.FutureTimeoutError as e:
                 logger.error(f"Failed to connect to gRPC server[{i}]: {e}")
                 time.sleep(3)
@@ -357,9 +358,6 @@ class Rpc_Client:
         req.fps = fps
         req.task_name = task_name
         if "camera" in data_keys:
-            render_depth = data_keys["camera"]["render_depth"]
-            render_semantic = data_keys["camera"]["render_semantic"]
-            camera_prim_list = data_keys["camera"]["camera_prim_list"]
             req.isCam = True
             req.CameraReq.render_depth = data_keys["camera"]["render_depth"]
             req.CameraReq.render_semantic = data_keys["camera"]["render_semantic"]
@@ -664,6 +662,16 @@ class Rpc_Client:
             cmd = sim_observation_service_pb2.JointCommand()
             cmd.position = pos
             req.joint_cmd.append(cmd)
+
+        for j in object_joints:
+            oj = sim_observation_service_pb2.ObjectJoint()
+            oj.prim_path = j["prim_path"]
+            for jp in j["joint_cmd"]:
+                cmd = sim_observation_service_pb2.JointCommand()
+                cmd.position = jp
+                oj.joint_cmd.append(cmd)
+            req.object_joint.append(oj)
+
         response = stub.SetObjectPose(req)
         return response
 
@@ -727,6 +735,24 @@ class Rpc_Client:
         if isinstance(value, bool):
             req.bool_value = value
         response = stub.OmniCmdChangeProperty(req)
+        return response
+
+    def GetPartiPointNumInbbox(self, prim_path, bbox=None):
+        stub = sim_observation_service_pb2_grpc.SimObservationServiceStub(self.channel)
+        req = sim_observation_service_pb2.GetPartiPointNumInbboxReq()
+        req.prim_path = prim_path
+        for v in bbox:
+            req.bbox.append(v)
+
+        response = stub.GetPartiPointNumInbbox(req)
+        return response
+
+    def GetObjectAABB(self, prim_path):
+        stub = sim_observation_service_pb2_grpc.SimObservationServiceStub(self.channel)
+        req = sim_observation_service_pb2.GetObjectAABBReq()
+        req.prim_path = prim_path
+
+        response = stub.GetObjectAABB(req)
         return response
 
 
@@ -873,7 +899,7 @@ def run():
 
                 # test cabinet
                 rpc_client.InitRobot(
-                    "G1_120s_horizon.json",
+                    "G1_120s.json",
                     "G1.usd",
                     "omnimanip_Simple_Room_01/simple_room.usd",
                     init_position=[-0.4, 0, -0.55],

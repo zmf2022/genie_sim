@@ -82,14 +82,15 @@ def get_transform(trans, rot):
 class IsaacSimRpcRobot(Robot):
     def __init__(
         self,
-        robot_cfg="G1_120s.json",
-        scene_usd="Pick_Place_G1_Yellow_Table.usd",
+        robot_cfg="Franka_120s.json",
+        scene_usd="Pick_Place_Franka_Yellow_Table.usd",
         client_host="localhost:50051",
         position=[0, 0, 0],
         rotation=[1, 0, 0, 0],
         gripper_control_type=0,
     ):
         robot_urdf = robot_cfg.split(".")[0] + ".urdf"
+        self.robot_cfg = robot_cfg
         self.client = Rpc_Client(client_host, robot_urdf)
         self.client.InitRobot(
             robot_cfg=robot_cfg,
@@ -100,24 +101,25 @@ class IsaacSimRpcRobot(Robot):
         )
         self.joint_names = {
             "left": [
-                "Joint1_l",
-                "Joint2_l",
-                "Joint3_l",
-                "Joint4_l",
-                "Joint5_l",
-                "Joint6_l",
-                "Joint7_l",
+                "idx21_arm_l_joint1",
+                "idx22_arm_l_joint2",
+                "idx23_arm_l_joint3",
+                "idx24_arm_l_joint4",
+                "idx25_arm_l_joint5",
+                "idx26_arm_l_joint6",
+                "idx27_arm_l_joint7",
             ],
             "right": [
-                "Joint1_r",
-                "Joint2_r",
-                "Joint3_r",
-                "Joint4_r",
-                "Joint5_r",
-                "Joint6_r",
-                "Joint7_r",
+                "idx61_arm_r_joint1",
+                "idx62_arm_r_joint2",
+                "idx63_arm_r_joint3",
+                "idx64_arm_r_joint4",
+                "idx65_arm_r_joint5",
+                "idx66_arm_r_joint6",
+                "idx67_arm_r_joint7",
             ],
         }
+
         self.cam_info = None
         self.robot_gripper_2_grasp_gripper = np.array(
             [[0.0, 0.0, 1.0], [0.0, 1.0, 0.0], [-1.0, 0.0, 0.0]]
@@ -126,24 +128,51 @@ class IsaacSimRpcRobot(Robot):
         self.init_rotation = rotation
         self.gripper_control_type = gripper_control_type
         self.last_eef_pos = [(), ()]
-        self.init_transform()
         self.setup()
+        self.left_grasp_close = False
+        self.right_grasp_close = False
+        self.reset_odometry()
+
+    def reset_odometry(self):
+        self.init_transform()
+        self.odometry = {
+            "pos": np.array([0.0, 0.0, 0.0]),
+            "rpy": np.array([0.0, 0.0, 0.0]),
+        }
+        self.abs_odometry = {
+            "pos": np.array(self.init_position),
+            "rot": np.array(self.init_rotation),
+        }
+
+    def set_init_pose(self, init_pose):
+        target_joint_position = []
+        target_joint_indices = []
+        for idx, val in enumerate(init_pose):
+            if val is None:
+                continue
+            if not np.isfinite(val):
+                continue
+            target_joint_position.append(val)
+            target_joint_indices.append(idx)
+        self.client.set_joint_positions(
+            target_joint_position,
+            is_trajectory=False,
+            joint_indices=target_joint_indices,
+        )
 
     def reset(self):
         self.target_object = None
         self.client.reset()
         time.sleep(0.5)
-
         self.close_gripper(id="right")
         time.sleep(0.5)
-        pass
 
     def setup(self):
         self.target_object = None
         self.ik_solver = ik_solver.Solver(
-            urdf_path=f"{SIM_REPO_ROOT}/base_utils/IK-SDK/G1.urdf",
+            urdf_path=f"{SIM_REPO_ROOT}/base_utils/IK-SDK/G1_NO_GRIPPER.urdf",
             config_path=str(
-                os.path.join(f"{SIM_REPO_ROOT}/base_utils/IK-SDK/config", "solver.yaml")
+                os.path.join(f"{SIM_REPO_ROOT}/base_utils/IK-SDK", "solver.yaml")
             ),
             use_relaxed_ik=True,
             use_elbow=False,
@@ -253,16 +282,14 @@ class IsaacSimRpcRobot(Robot):
 
         return observation
 
-    def open_gripper(self, id="left", width=0.5):
+    def open_gripper(self, id="left", width=0.1):
         is_Right = True if id == "right" else False
-        # if width is None:
-        width = 0.08
         self.client.set_gripper_state(
             gripper_command="open", is_right=is_Right, opened_width=width
         )
         self.client.DetachObj()
 
-    def close_gripper(self, id="left", force=150):
+    def close_gripper(self, id="left", force=50):
         is_Right = True if id == "right" else False
         self.client.set_gripper_state(
             gripper_command="close", is_right=is_Right, opened_width=0.00
@@ -272,6 +299,7 @@ class IsaacSimRpcRobot(Robot):
             self.client.AttachObj(prim_paths=["/World/Objects/" + self.target_object])
 
     def move_pose(self, target_pose, type, arm="right", **kwargs):
+        # import ipdb;ipdb.set_trace()
         if type.lower() == "trajectory":
             content = {
                 "type": "trajectory_4x4_pose",
@@ -308,6 +336,8 @@ class IsaacSimRpcRobot(Robot):
             'pose': np.array, 4x4
             'joint': np.array, 1xN
         """
+        if content == None:
+            return
         type = content["type"]
         arm_name = content.get("arm", "right")
         if type == "matrix":
@@ -349,7 +379,10 @@ class IsaacSimRpcRobot(Robot):
 
                 logger.info(f"target_position is{target_position}")
                 logger.info(f"target_rotation is{target_rotation}")
-
+                # import ipdb;ipdb.set_trace()
+                # inverse_local_orientation = [self.init_rotation[0], -1*self.init_rotation[1], -1*self.init_rotation[2], -1*self.init_rotation[3]]
+                # local_position = quat_multiplication(inverse_local_orientation,T-self.init_position)
+                # target_position = local_position
             state = (
                 self.client.moveto(
                     target_position=target_position,
@@ -379,39 +412,14 @@ class IsaacSimRpcRobot(Robot):
             )
 
         elif type == "joint":
-            gripper_control_type = 0  # 0 Position mode, 1 Force mode
-            if gripper_control_type == 0:
-                joint_indices = np.arange(18)
-                joint_indices = np.append(joint_indices, [18, 20])
-                state = self.client.set_joint_positions(
-                    content["position"], content["is_trajectory"], joint_indices
-                )
-            else:
-                left_joint = content["position"][18]
-                right_joint = content["position"][19]
-                if left_joint < 0.5:
-                    self.client.set_gripper_state(
-                        gripper_command="close", is_right=False, opened_width=0.00
-                    )
-                else:
-                    self.client.set_gripper_state(
-                        gripper_command="open", is_right=False, opened_width=0.08
-                    )
-
-                if right_joint < 0.5:
-                    self.client.set_gripper_state(
-                        gripper_command="close", is_right=True, opened_width=0.00
-                    )
-                else:
-                    self.client.set_gripper_state(
-                        gripper_command="open", is_right=True, opened_width=0.08
-                    )
-
-                main_joint_position = content["position"][:18]
-                joint_indices = np.arange(18)
-                state = self.client.set_joint_positions(
-                    main_joint_position, content["is_trajectory"], joint_indices
-                )
+            # base control
+            tgt_base_velocity = content["base_velocity"]
+            PHYSICS_DT = 1 / 120  # To be optimized2
+            if any(tgt_base_velocity) != 0:
+                delta_pos = np.array([tgt_base_velocity[0] * PHYSICS_DT, 0.0, 0.0])
+                delta_rpy = np.array([0.0, 0.0, tgt_base_velocity[1] * PHYSICS_DT])
+                self.update_odometry(delta_pos, delta_rpy)
+            state = True
 
         elif type == "euler":
             is_backend = True
@@ -546,12 +554,7 @@ class IsaacSimRpcRobot(Robot):
 
     def get_prim_world_pose(self, prim_path, camera=False):
         rotation_x_180 = np.array(
-            [
-                [1.0, 0.0, 0.0, 0],
-                [0.0, -1.0, 0.0, 0],
-                [0.0, 0.0, -1.0, 0],
-                [0, 0, 0, 1],
-            ],
+            [[1.0, 0.0, 0.0, 0], [0.0, -1.0, 0.0, 0], [0.0, 0.0, -1.0, 0], [0, 0, 0, 1]]
         )
         response = self.client.get_object_pose(prim_path=prim_path)
         x, y, z = (
@@ -625,7 +628,7 @@ class IsaacSimRpcRobot(Robot):
         )
         pose = np.eye(4)
         pose[:3, 3] = xyz
-        pose[:3, :3] = quat_to_rot_matrix(quat)
+        pose[:3, :3] = get_rotation_matrix_from_quaternion(quat)
         return pose
 
     def init_transform(self):
@@ -639,12 +642,22 @@ class IsaacSimRpcRobot(Robot):
     def get_init_pose(self):
         return self.init_position, self.init_rotation
 
+    def update_odometry(self, delta_pos, delta_rpy):
+        self.odometry["pos"] = delta_pos
+        self.odometry["rpy"] = delta_rpy
+        self.update_transform()
+        self.abs_odometry["pos"], self.abs_odometry["rot"] = (
+            self.transform_from_base_to_world(
+                self.odometry["pos"], self.odometry["rpy"]
+            )
+        )
+        self.set_base_pose(self.abs_odometry["pos"], self.abs_odometry["rot"])
+
     def update_transform(self):
-        base_pos, base_rot = self.get_base_pose()
-        base_rot_matrix = quat_to_rot_matrix(base_rot)
+        base_rot_matrix = quat_to_rot_matrix(self.abs_odometry["rot"])
         translation_matrix = np.zeros((4, 4))
         translation_matrix[:3, :3] = base_rot_matrix
-        translation_matrix[:3, 3] = base_pos
+        translation_matrix[:3, 3] = self.abs_odometry["pos"]
         translation_matrix[3, 3] = 1
         self.ego_transform = translation_matrix
 
@@ -765,27 +778,26 @@ class IsaacSimRpcRobot(Robot):
         joint_pos = self.client.get_joint_positions()
         return joint_pos
 
-    def set_joint_pose(self, target_joint_position, is_trajectory=False):
-        self.client.set_joint_positions(
-            target_joint_position=target_joint_position, is_trajectory=is_trajectory
-        )
-
     def set_base_pose(self, target_pos, target_rot):
         self.client.SetObjectPose(
-            [{"prim_path": "robot", "position": target_pos, "rotation": target_rot}], []
+            [
+                {
+                    "prim_path": "robot",
+                    "position": target_pos,
+                    "rotation": target_rot,
+                }
+            ],
+            [],
         )
 
-    def get_base_pose(self):
-        rsp = self.client.get_object_pose("robot")
-        position = (
-            rsp.object_pose.position.x,
-            rsp.object_pose.position.y,
-            rsp.object_pose.position.z,
+    def set_object_pose(self, prim_path, target_pos, target_rot):
+        self.client.SetObjectPose(
+            [
+                {
+                    "prim_path": prim_path,
+                    "position": target_pos,
+                    "rotation": target_rot,
+                }
+            ],
+            [],
         )
-        rotation = (
-            rsp.object_pose.rpy.rw,
-            rsp.object_pose.rpy.rx,
-            rsp.object_pose.rpy.ry,
-            rsp.object_pose.rpy.rz,
-        )
-        return position, rotation

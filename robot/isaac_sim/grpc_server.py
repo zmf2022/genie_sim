@@ -168,15 +168,21 @@ class JointService(joint_channel_pb2_grpc.JointControlService):
     def SetJointPosition(self, req, rsp):
         rsp = joint_channel_pb2.SetJointRsp()
         joint_num = len(req.commands)
-        target_joint_position = np.zeros(joint_num)
+        target_joint_position = []
         target_joint_indices = []
         is_trajectory = req.is_trajectory
         for index in range(joint_num):
-            target_joint_position[index] = req.commands[index].position
-            target_joint_indices.append(req.commands[index].sequence)
+            v = req.commands[index].position
+            idc = req.commands[index].sequence
+            if v is None:
+                continue
+            if not np.isfinite(v):
+                continue
+            target_joint_position.append(v)
+            target_joint_indices.append(idc)
         self.server_function.blocking_start_server(
             data={
-                "target_joints_position": target_joint_position,
+                "target_joints_position": np.array(target_joint_position),
                 "is_trajectory": is_trajectory,
                 "target_joints_indices": target_joint_indices,
             },
@@ -188,19 +194,31 @@ class JointService(joint_channel_pb2_grpc.JointControlService):
     def GetEEPose(self, req, rsp):
         rsp = joint_channel_pb2.GetEEPoseRsp()
         is_right = req.is_right
-        position, rotation = self.server_function.blocking_start_server(
+        pose = self.server_function.blocking_start_server(
             data={"isRight": is_right}, Command=18
         )
 
-        rsp.ee_pose.position.x, rsp.ee_pose.position.y, rsp.ee_pose.position.z = (
-            position
-        )
-        (
-            rsp.ee_pose.rpy.rw,
-            rsp.ee_pose.rpy.rx,
-            rsp.ee_pose.rpy.ry,
-            rsp.ee_pose.rpy.rz,
-        ) = rotation
+        if pose:
+            position, rotation = pose
+            (
+                rsp.ee_pose.position.x,
+                rsp.ee_pose.position.y,
+                rsp.ee_pose.position.z,
+            ) = position
+            (
+                rsp.ee_pose.rpy.rw,
+                rsp.ee_pose.rpy.rx,
+                rsp.ee_pose.rpy.ry,
+                rsp.ee_pose.rpy.rz,
+            ) = rotation
+        else:
+            rsp.ee_pose.position.x = 0
+            rsp.ee_pose.position.y = 0
+            rsp.ee_pose.position.z = 0
+            rsp.ee_pose.rpy.rw = 1
+            rsp.ee_pose.rpy.rx = 0
+            rsp.ee_pose.rpy.ry = 0
+            rsp.ee_pose.rpy.rz = 0
         return rsp
 
     def GetIKStatus(self, req, rsp):
@@ -320,18 +338,27 @@ class ObjectService(sim_object_service_pb2_grpc.SimObjectService):
             data={"object_prim_path": prim_path}, Command=5
         )
         rsp.prim_path = prim_path
-        position, rotation = object_pose
-        (
-            rsp.object_pose.position.x,
-            rsp.object_pose.position.y,
-            rsp.object_pose.position.z,
-        ) = position
-        (
-            rsp.object_pose.rpy.rw,
-            rsp.object_pose.rpy.rx,
-            rsp.object_pose.rpy.ry,
-            rsp.object_pose.rpy.rz,
-        ) = rotation
+        if object_pose:
+            position, rotation = object_pose
+            (
+                rsp.object_pose.position.x,
+                rsp.object_pose.position.y,
+                rsp.object_pose.position.z,
+            ) = position
+            (
+                rsp.object_pose.rpy.rw,
+                rsp.object_pose.rpy.rx,
+                rsp.object_pose.rpy.ry,
+                rsp.object_pose.rpy.rz,
+            ) = rotation
+        else:
+            rsp.object_pose.position.x = 0
+            rsp.object_pose.position.y = 0
+            rsp.object_pose.position.z = 0
+            rsp.object_pose.rpy.rw = 1
+            rsp.object_pose.rpy.rx = 0
+            rsp.object_pose.rpy.ry = 0
+            rsp.object_pose.rpy.rz = 0
         return rsp
 
     def GetObjectJoint(self, req, rsp):
@@ -428,8 +455,6 @@ class ObservationService(sim_observation_service_pb2_grpc.SimObservationService)
         fps = req.fps
         task_name = req.task_name
         camera_prim_list = []
-        for prim in req.CameraReq.camera_prim_list:
-            camera_prim_list.append(prim)
         object_prim = req.objectPrims
         result = self.server_function.blocking_start_server(
             data={
@@ -849,6 +874,28 @@ class ObservationService(sim_observation_service_pb2_grpc.SimObservationService)
             cmd["value"] = req.bool_value
 
         rsp.msg = self.server_function.blocking_start_server(data=cmd, Command=32)
+        return rsp
+
+    def GetPartiPointNumInbbox(self, req, rsp):
+        rsp = sim_observation_service_pb2.GetPartiPointNumInbboxRsp()
+        cmd = {}
+        cmd["prim_path"] = req.prim_path
+        cmd["bbox_3d"] = []
+        for v in req.bbox:
+            cmd["bbox_3d"].append(v)
+
+        ret = self.server_function.blocking_start_server(data=cmd, Command=33)
+        rsp.num = ret["num"]
+        return rsp
+
+    def GetObjectAABB(self, req, rsp):
+        rsp = sim_observation_service_pb2.GetObjectAABBRsp()
+        cmd = {}
+        cmd["prim_path"] = req.prim_path
+
+        ret = self.server_function.blocking_start_server(data=cmd, Command=34)
+        for val in ret["points"]:
+            rsp.bbox.append(val)
         return rsp
 
 

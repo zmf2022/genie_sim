@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2023-2025, AgiBot Inc. All Rights Reserved.
 # Author: Genie Sim Team
 # License: Mozilla Public License Version 2.0
@@ -23,7 +22,6 @@ from robot import Robot
 from planner.manip_solver import load_task_solution
 from benchmark.tasks.demo_task import DemoTask
 from tasks.dummy_task import DummyTask
-from objects.object_base import USDObject
 from base_utils.time_utils import TimerContextManager
 
 
@@ -37,7 +35,6 @@ class DummyEnv(BaseEnv):
         self.camera_list = self.init_task_config["recording_setting"]["camera_list"]
         self.specific_task_name = self.init_task_config["specific_task_name"]
 
-        self.states_objects_by_name = {}
         # Initialize the scene layout according to task_file
         self.load(task_file)
         if need_setup:
@@ -48,15 +45,6 @@ class DummyEnv(BaseEnv):
             self.task = DummyTask(self)
         else:
             try:
-                import bddl
-
-                with open(
-                    os.path.join(
-                        os.path.dirname(bddl.__file__), "activity_manifest.txt"
-                    )
-                ) as f:
-                    all_activities = [line.strip() for line in f.readlines()]
-
                 self.task = DemoTask(self)
             except ImportError:
                 raise Exception("bddl is not available.")
@@ -69,19 +57,6 @@ class DummyEnv(BaseEnv):
         self.task_info = task_info
         self.policy_stages, self.policy_objects = load_task_solution(task_info)
         self.policy_objects = self.update_objects(self.policy_objects)
-
-        self.add_states_object(task_info["objects"])
-
-    def add_states_object(self, objects_info):
-        for obj_info in objects_info:
-            obj_id = obj_info["object_id"]
-            obj_params_file = os.path.join(
-                obj_info["data_info_dir"], "object_parameters.json"
-            )
-            states_obj = USDObject(
-                obj_params_file, robot=self.robot, abilities=None, obj_info=obj_info
-            )
-            self.states_objects_by_name[obj_id] = states_obj
 
     def reset_variables(self):
         """
@@ -131,20 +106,16 @@ class DummyEnv(BaseEnv):
         observaion = None
         self.robot.move(actions)
         self.current_step += 1
-        info = {}
-        done = False
+        need_update = False
         if self.current_step != 1 and self.current_step % 30 == 0:
             observaion = self.get_observation()
-            done, info = self.task.get_termination(self, info)
             self.task.step(self)
+            self.action_update()
+            need_update = True
 
-        if done:
-            info["final_step"] = self.current_step
-            self.reset()
+        return observaion, self.has_done, need_update, self.task.task_progress
 
-        return observaion, None, done, info
-
-    def start_recording(self, task_name, camera_prim_list, fps):
+    def start_recording(self, task_name, camera_prim_list, fps, extra_objects_prim=[]):
         self.robot.client.start_recording(
             task_name=task_name,
             fps=fps,
@@ -154,7 +125,7 @@ class DummyEnv(BaseEnv):
                     "render_depth": False,
                     "render_semantic": False,
                 },
-                "pose": ["/World/G1/gripper_center"],
+                "pose": extra_objects_prim,
                 "joint_position": True,
                 "gripper": True,
             },

@@ -8,12 +8,12 @@ import json
 import numpy as np
 import glob
 
-root_dir = os.environ.get("SIM_REPO_ROOT")
-work_dir = os.path.join(root_dir, "teleop")
-sys.path.append(root_dir)
-sys.path.append(work_dir)
-sys.path.append(os.path.join(root_dir, "benchmark"))
-from benchmark.envs.demo_env import DemoEnv
+ROOT_DIR = os.environ.get("SIM_REPO_ROOT")
+WORK_DIR = os.path.join(ROOT_DIR, "teleop")
+sys.path.append(ROOT_DIR)
+sys.path.append(WORK_DIR)
+sys.path.append(os.path.join(ROOT_DIR, "benchmark"))
+from benchmark.envs.dummy_env import DummyEnv
 from robot.genie_robot import IsaacSimRpcRobot
 from layout.task_generate import TaskGenerator
 from vr_server import VRServer
@@ -23,8 +23,21 @@ from pynput import keyboard
 import threading
 
 from base_utils.logger import Logger
+from base_utils.eval_utils import *
+from base_utils.ros_utils import SimROSNode
+from copy import deepcopy
+import rclpy
+import time
+import signal
 
 logger = Logger()
+
+
+def handle_exit(signum, frame):
+    raise KeyboardInterrupt(f"Receive signal {signum}, start cleaning...")
+
+
+signal.signal(signal.SIGINT, handle_exit)  # Ctrl+C
 
 
 def scale_quat_to_euler(q, s):
@@ -63,9 +76,10 @@ class TeleOp(object):
             self.init_keyboard_control()
         else:
             raise ValueError("Invalid mode")
-        self.lock = threading.Lock()
         self.reset_flg = False
         self.switch_flg = False
+        self.single_evaluate_ret = deepcopy(EVAL_TEMPLATE)
+        self.eval_out_dir = os.path.join(WORK_DIR, "output")
 
     def init_pico_control(self):
         self.vr_server = VRServer(self.host_ip, self.port)
@@ -94,36 +108,36 @@ class TeleOp(object):
 
         def on_press(key):
             try:
-                if key.char == 'w':
+                if key.char == "w":
                     self.command_ += np.array([0.01, 0.0, 0.0])
-                elif key.char == 's':
+                elif key.char == "s":
                     self.command_ += np.array([-0.01, 0.0, 0.0])
-                elif key.char == 'a':
+                elif key.char == "a":
                     self.command_ += np.array([0.0, 0.01, 0.0])
-                elif key.char == 'd':
+                elif key.char == "d":
                     self.command_ += np.array([0.0, -0.01, 0.0])
-                elif key.char == 'q':
+                elif key.char == "q":
                     self.command_ += np.array([0.0, 0.0, 0.01])
-                elif key.char == 'e':
+                elif key.char == "e":
                     self.command_ += np.array([0.0, 0.0, -0.01])
-                elif key.char == 'j':
+                elif key.char == "j":
                     self.rotation_command += np.array([-0.02, 0.0, 0.0])
-                elif key.char == 'l':
+                elif key.char == "l":
                     self.rotation_command += np.array([0.02, 0.0, 0.0])
-                elif key.char == 'i':
+                elif key.char == "i":
                     self.rotation_command += np.array([0.0, 0.02, 0.0])
-                elif key.char == 'k':
+                elif key.char == "k":
                     self.rotation_command += np.array([0.0, -0.02, 0.0])
-                elif key.char == 'u':
+                elif key.char == "u":
                     self.rotation_command += np.array([0.0, 0.0, 0.02])
-                elif key.char == 'o':
+                elif key.char == "o":
                     self.rotation_command += np.array([0.0, 0.0, -0.02])
-                elif key.char == 'c':
+                elif key.char == "c":
                     if keyboard.Key.ctrl in self.pressed_keys:
                         self.gripper_command = "open"
                     else:
                         self.gripper_command = "close"
-                elif key.char == 'r':
+                elif key.char == "r":
                     self.reset_flg = True
             except AttributeError:
                 self.pressed_keys.add(key)
@@ -181,25 +195,20 @@ class TeleOp(object):
         listener.start()
 
     def parse_joint_pose(self, precision=3):
-        l_arm, l_arm_name, r_arm, r_arm_name, ori_pos = [], [], [], [], []
-        joint_pos = self.env.robot.get_joint_pose()
-        for jp in joint_pos.states:
-            name = jp.name
-            angle = jp.position
-            if "Joint" in name:
-                if "_l" in name:
-                    l_arm.append(angle)
-                    l_arm_name.append(name)
-                elif "_r" in name:
-                    r_arm.append(angle)
-                    r_arm_name.append(name)
-            ori_pos.append(angle)
+        l_arm, r_arm, body = [], [], []
+        joint_pos, joint_name = self.get_joint_state()
+        for i in range(7):
+            l_arm.append(joint_pos[i * 2 + 4])
+            r_arm.append(joint_pos[i * 2 + 5])
+        for i in range(4):
+            body.append(joint_pos[i])
+
         return {
             "l_arm": [round(v, precision) for v in l_arm],
             "r_arm": [round(v, precision) for v in r_arm],
-            "l_arm_name": l_arm_name,
-            "r_arm_name": r_arm_name,
-            "ori_pos": [round(v, precision) for v in ori_pos],
+            "ori_pos": [round(v, precision) for v in joint_pos],
+            "joint_name": joint_name,
+            "body": body,
         }
 
     def parse_pico_command(self, content):
@@ -224,7 +233,7 @@ class TeleOp(object):
         ret["l"]["axisX"] = l_sig["axisX"]
         ret["l"]["axisY"] = l_sig["axisY"]
         ret["l"]["gripper"] = 1 - l_sig["indexTrig"]
-        ret["l"]["On"] = l_sig["handTrig"]
+        ret["l"]["On"] = l_sig["handTrig"] > 0.9
         ret["l"]["reset"] = l_sig["keyOne"] == "true"
         ret["l"]["reserved"] = l_sig["keyTwo"] == "true"
 
@@ -243,14 +252,14 @@ class TeleOp(object):
         ret["r"]["axisY"] = r_sig["axisY"]
         ret["r"]["axisMode"] = "head" if r_sig["axisClick"] == "true" else "waist"
         ret["r"]["gripper"] = 1 - r_sig["indexTrig"]
-        ret["r"]["On"] = r_sig["handTrig"]
+        ret["r"]["On"] = r_sig["handTrig"] > 0.9
         ret["r"]["reset"] = r_sig["keyOne"] == "true"
-        ret["r"]["reserved"] = r_sig["keyTwo"] == "true"
+        ret["r"]["resetbh"] = r_sig["keyTwo"] == "true"
         self.pico_command = ret
 
     def parse_head_control(self):
         if self.pico_command["r"]["axisMode"] == "head":
-            delta_angle = 0.05
+            delta_angle = 2e-3
             thresh = 0.5
             head_yaw = self.pico_command["r"]["axisX"]
             head_pitch = self.pico_command["r"]["axisY"]
@@ -265,7 +274,7 @@ class TeleOp(object):
 
     def parse_waist_control(self):
         if self.pico_command["r"]["axisMode"] == "waist":
-            delta_angle = 0.01
+            delta_angle = 1e-4
             thresh = 0.5
             waist_lift = self.pico_command["r"]["axisY"]
             waist_pitch = self.pico_command["r"]["axisX"]
@@ -290,6 +299,7 @@ class TeleOp(object):
         )
         reset_l = self.pico_command["l"]["reset"]
         reset_r = self.pico_command["r"]["reset"]
+        reset_bh = self.pico_command["r"]["resetbh"]
 
         jp_l = self.env.robot.get_joint_from_deltapos(
             xyz=rescaled_pos_l, rpy=rescaled_rpy_l, id="left", isOn=on_l
@@ -297,11 +307,10 @@ class TeleOp(object):
         jp_r = self.env.robot.get_joint_from_deltapos(
             xyz=rescaled_pos_r, rpy=rescaled_rpy_r, id="right", isOn=on_r
         )
-
         if jp_l.any() != 0.0:
-            self.init_pos[4:18:2] = jp_l
+            self.init_pos[4:18:2] = [round(v, 3) for v in jp_l]
         if jp_r.any() != 0.0:
-            self.init_pos[5:19:2] = jp_r
+            self.init_pos[5:19:2] = [round(v, 3) for v in jp_r]
 
         if reset_l:
             logger.info("reset left arm...")
@@ -315,34 +324,34 @@ class TeleOp(object):
             joint_info = self.parse_joint_pose()
             joint_info["r_arm"] = self.init_r_arm
             self.env.robot.initialize_solver(joint_info)
+        if reset_bh:
+            logger.info("reset body and head...")
+            self.init_pos[0:4] = self.init_body
 
     def parse_gripper_control(self):
-        self.init_pos[18] = self.pico_command["l"]["gripper"]
-        self.init_pos[20] = self.pico_command["r"]["gripper"]
+        l_idx, r_idx = self.gripper_active_joint
+        self.init_pos[l_idx] = self.pico_command["l"]["gripper"]
+        self.init_pos[r_idx] = self.pico_command["r"]["gripper"]
 
     def apply_base_control(self):
         x = self.pico_command["l"]["axisY"]
         y = -self.pico_command["l"]["axisX"]
         mode = self.pico_command["l"]["axisMode"]
         if mode == "move":
-            target_x = 0.02 * x
-            target_yaw = 0
+            target_x, target_yaw = 0, 0
+            if x > 0.5:
+                target_x = 0.01 * x
+            if x < -0.5:
+                target_x = 0.01 * x
             if y < -0.5:
-                target_yaw = -0.05
+                target_yaw = -0.1
             if y > 0.5:
-                target_yaw = 0.05
+                target_yaw = 0.1
 
-            base_pos_local = np.array([target_x, 0, 0])
-            base_rot_local = np.array([0, 0, target_yaw])
-            self.env.robot.update_transform()
-            target_base_pos, target_base_rot = (
-                self.env.robot.transform_from_base_to_world(
-                    base_pos_local, base_rot_local
-                )
-            )
-            self.env.robot.set_base_pose(
-                target_pos=target_base_pos, target_rot=target_base_rot
-            )
+            if target_x != 0.0 or target_yaw != 0.0:
+                pos_diff = np.array([target_x, 0, 0])
+                rot_diff = np.array([0, 0, target_yaw])
+                self.env.robot.update_odometry(pos_diff, rot_diff)
         else:
             self.reset_robot_pose()
 
@@ -351,109 +360,163 @@ class TeleOp(object):
         self.init_pos = joint_info["ori_pos"]
         self.init_l_arm = joint_info["l_arm"]
         self.init_r_arm = joint_info["r_arm"]
+        self.init_body = joint_info["body"]
+        self.joint_name = joint_info["joint_name"]
         self.env.robot.initialize_solver(joint_info)
         self.robot_init_pos, self.robot_init_rot = self.env.robot.get_init_pose()
         self.reset_command()
+        self.current_step = 0
+        self.eval_interval = 30
 
     def reset_robot_pose(self):
         self.env.robot.set_base_pose(
             target_pos=self.robot_init_pos, target_rot=self.robot_init_rot
         )
+        self.env.robot.reset_odometry()
+
+    def update_eval_ret(self, task_progress):
+        self.single_evaluate_ret["result"]["progress"] = task_progress
+
+    def run_eval(self):
+        if self.current_step != 0 and self.current_step % self.eval_interval == 0:
+            self.env.action_update()
+            self.update_eval_ret(self.env.task.task_progress)
+        self.current_step += 1
+        if self.env.has_done:
+            summarize_scores(self.single_evaluate_ret)
+            self.eval_result.append(self.single_evaluate_ret)
+            logger.info("Episode done...")
+            return True
+        return False
 
     def run_pico_control(self, with_physics=True):
         self.initialize()
         coef_pos = 0.8
         coef_quat = 0.8
-        try:
-            while True:
-                pico_cmd = self.vr_server.on_update()
-                if pico_cmd:
-                    self.parse_pico_command(pico_cmd)
-                    self.parse_arm_control(coef_pos, coef_quat)
-                    self.parse_gripper_control()
-                    self.parse_head_control()
-                    self.parse_waist_control()
-                    self.apply_base_control()
-                    self.env.robot.set_joint_pose(
-                        target_joint_position=self.init_pos, is_trajectory=with_physics
-                    )
-
-        except KeyboardInterrupt:
-            logger.warning("keyboard interrupt")
+        self.env.do_eval_action()
+        while True:
+            pico_cmd = self.vr_server.on_update()
+            if pico_cmd:
+                logger.info(f"Episode status {self.env.has_done}")
+                self.parse_pico_command(pico_cmd)
+                self.parse_arm_control(coef_pos, coef_quat)
+                self.parse_gripper_control()
+                self.parse_head_control()
+                self.parse_waist_control()
+                self.apply_base_control()
+                self.set_joint_state(self.joint_name, self.init_pos)
+                has_done = self.run_eval()
+                if has_done:
+                    break
+            else:
+                logger.info("waiting for pico cmd")
 
     def run_keyboard_control(self, with_physics=True):
         self.initialize()
         self.sub_keyboard_event()
-
-        try:
-            while True:
-                with self.lock:
-                    if self.reset_flg:
-                        self.reset_command()
-                        self.reset_robot_pose()
-                        self.reset_flg = False
-                    if self.switch_flg:
-                        idx = 0 if self.current_arm_type == "left" else 1
-                        self.command_ = self.last_command[idx]["pos"]
-                        self.rotation_command = self.last_command[idx]["rot"]
-                        self.switch_flg = False
-                    if self.current_arm_type == "right":
-                        jp = self.env.robot.get_joint_from_deltapos(
-                            xyz=self.command_,
-                            rpy=self.rotation_command,
-                            id="right",
-                            isOn=True,
-                        )
-                        if jp.any() != 0.0:
-                            self.init_pos[5:19:2] = jp
-                        self.init_pos[20] = (
-                            0.0 if self.gripper_command == "close" else 1.0
-                        )
-                    else:
-                        jp = self.env.robot.get_joint_from_deltapos(
-                            xyz=self.command_,
-                            rpy=self.rotation_command,
-                            id="left",
-                            isOn=True,
-                        )
-                        if jp.any() != 0.0:
-                            self.init_pos[4:18:2] = jp
-                        self.init_pos[18] = (
-                            0.0 if self.gripper_command == "close" else 1.0
-                        )
-
-                    base_pos_local = self.robot_command
-                    base_rot_local = self.robot_rotation_command
-                    logger.info(
-                        f"Base moving speed: {base_pos_local[0]:.2f}, yaw rate: {base_rot_local[2]:.2f}"
+        self.env.do_eval_action()
+        while True:
+            with self.lock:
+                if self.reset_flg:
+                    self.reset_command()
+                    self.reset_robot_pose()
+                    self.reset_flg = False
+                if self.switch_flg:
+                    idx = 0 if self.current_arm_type == "left" else 1
+                    self.command_ = self.last_command[idx]["pos"]
+                    self.rotation_command = self.last_command[idx]["rot"]
+                    self.switch_flg = False
+                if self.current_arm_type == "right":
+                    jp = self.env.robot.get_joint_from_deltapos(
+                        xyz=self.command_,
+                        rpy=self.rotation_command,
+                        id="right",
+                        isOn=True,
                     )
-                    self.env.robot.update_transform()
-                    target_base_pos, target_base_rot = (
-                        self.env.robot.transform_from_base_to_world(
-                            base_pos_local, base_rot_local
-                        )
+                    if jp.any() != 0.0:
+                        self.init_pos[5:19:2] = jp
+                    self.init_pos[self.gripper_active_joint[1]] = (
+                        0.0 if self.gripper_command == "close" else 1.0
                     )
-                    self.init_pos[0:2] += self.waist_command
-                    self.init_pos[2:4] += self.head_command
-                    self.env.robot.set_base_pose(target_base_pos, target_base_rot)
-                    self.env.robot.set_joint_pose(
-                        target_joint_position=self.init_pos, is_trajectory=with_physics
+                else:
+                    jp = self.env.robot.get_joint_from_deltapos(
+                        xyz=self.command_,
+                        rpy=self.rotation_command,
+                        id="left",
+                        isOn=True,
                     )
-
-        except KeyboardInterrupt:
-            logger.warning("keyboard interrupt, exiting keyboard control")
+                    if jp.any() != 0.0:
+                        self.init_pos[4:18:2] = jp
+                    self.init_pos[self.gripper_active_joint[0]] = (
+                        0.0 if self.gripper_command == "close" else 1.0
+                    )
+                logger.info(
+                    f"Base moving speed: {self.robot_command[0]:.2f}, yaw rate: {self.robot_rotation_command[2]:.2f}"
+                )
+                self.env.robot.update_odometry(
+                    self.robot_command, self.robot_rotation_command
+                )
+                self.init_pos[0:2] += self.waist_command
+                self.init_pos[2:4] += self.head_command
+                self.set_joint_state(self.joint_name, self.init_pos)
+                has_done = self.run_eval()
+                if has_done:
+                    break
 
     def load_task_config(self, task):
-        task_config_file = os.path.join(work_dir, "tasks", task + ".json")
+        task_config_file = os.path.join(WORK_DIR, "tasks", task + ".json")
         logger.info(f"task config file {task_config_file}")
         if not os.path.exists(task_config_file):
             raise ValueError("Task config file not found: {}".format(task_config_file))
         with open(task_config_file) as f:
             self.task_config = json.load(f)
 
+    def spin_ros_node(self):
+        while not self.stop_spin_thread_flag:
+            rclpy.spin_once(self.sim_ros_node, timeout_sec=0.01)
+
+    def start_ros_node(self):
+        rclpy.init()
+        with open(
+            os.path.join(
+                ROOT_DIR, "server/source/genie.sim.lab/robot_cfg/", self.robot_cfg
+            ),
+            "r",
+        ) as f:
+            self.robot_cfg_content = json.load(f)
+        self.sim_ros_node = SimROSNode(robot_cfg=self.robot_cfg_content)
+        self.stop_spin_thread_flag = False
+        self.spin_thread = threading.Thread(target=self.spin_ros_node, daemon=True)
+        self.spin_thread.start()
+        self.lock = threading.Lock()
+
+    def stop_ros_node(self):
+        if self.spin_thread.is_alive():
+            self.stop_spin_thread_flag = True
+            self.spin_thread.join(timeout=1.0)
+        self.sim_ros_node.destroy_node()
+        rclpy.shutdown()
+
+    def get_joint_state(self):
+        js = self.sim_ros_node.get_joint_state()
+        return js.position, js.name
+
+    def set_joint_state(self, name, position):
+        self.sim_ros_node.set_joint_state(name, position)
+
+    def config_gripper(self):
+        if "omnipicker" in self.robot_cfg:
+            self.gripper_active_joint = [19, 21]
+        elif "120s" in self.robot_cfg:
+            self.gripper_active_joint = [19, 21]
+        else:
+            raise ValueError(f"Robot {self.robot_cfg} gripper not supported.")
+
     def run(self):
         self.load_task_config(self.task_name)
-        robot_cfg = "G1_120s_dual_high.json"
+        self.robot_cfg = self.task_config["robot"]["robot_cfg"]
+        self.start_ros_node()
+        self.config_gripper()
 
         # init robot and scene
         scene_info = self.task_config["scene"]
@@ -466,11 +529,12 @@ class TeleOp(object):
 
         logger.info(f"scene_usd {self.task_config['scene']['scene_usd']}")
         robot = IsaacSimRpcRobot(
-            robot_cfg=robot_cfg,
+            robot_cfg=self.robot_cfg,
             scene_usd=self.task_config["scene"]["scene_usd"],
             client_host=self.args.client_host,
             position=robot_init_pose["position"],
             rotation=robot_init_pose["quaternion"],
+            gripper_control_type=1,
         )
 
         # init state
@@ -486,18 +550,27 @@ class TeleOp(object):
         self.task_config["robot"]["robot_init_pose"]["position"] = robot_position
         self.task_config["robot"]["robot_init_pose"]["quaternion"] = robot_rotation
         specific_task_files = glob.glob(task_folder + "/*.json")
+        self.eval_result = []
         for episode_id in range(self.episodes_per_instance):
             episode_file_path = specific_task_files[episode_id]
-            env = DemoEnv(robot, episode_file_path, self.task_config)
-            env.load(episode_file_path)
+            env = DummyEnv(robot, episode_file_path, self.task_config)
             self.env = env
+            init_pose = self.task_config["robot"].get("init_arm_pose")
+            recording_objects_prim = self.task_config.get("recording_setting").get(
+                "objects_prim"
+            )
+            if init_pose:
+                robot.set_init_pose(init_pose)
+
+            env.reset()
+
             if self.record:
                 self.env.start_recording(
                     task_name=self.task_name,
                     camera_prim_list=[],
                     fps=self.fps,
+                    extra_objects_prim=recording_objects_prim,
                 )
-
             if self.mode == "pico":
                 self.run_pico_control()
             elif self.mode == "keyboard":
@@ -505,9 +578,12 @@ class TeleOp(object):
             else:
                 raise ValueError("Invalid mode: {}".format(self.mode))
 
-            if self.record:
-                self.env.stop_recording(True)
+    def post_process(self):
+        if self.record:
+            self.env.stop_recording(True)
+        dump_eval_result(self.eval_out_dir, self.eval_result)
         self.env.robot.client.Exit()
+        self.stop_ros_node()
 
 
 def main():
@@ -515,15 +591,23 @@ def main():
     # fmt: off
     parser.add_argument("--client_host", type=str, default="localhost:50051", help="The client")
     parser.add_argument("--fps", type=int, default=30, help="Set fps of the recording")
-    parser.add_argument("--task_name", default="genie_task_supermarket", type=str, help="Selected task to run")
+    parser.add_argument("--task_name", default="iros_stamp_the_seal", type=str, help="Selected task to run")
     parser.add_argument("--mode", type=str, default="pico", help="Choose teleop mode: pico or keyboard")
     parser.add_argument("--record", action="store_true", help="Enable data recording")
-    parser.add_argument("--host_ip", type=str, default="192.168.111.177", help="Set vr host ip")
+    parser.add_argument("--host_ip", type=str, default="172.19.33.248", help="Set vr host ip")
     parser.add_argument("--port", type=int, default=8080, help="Set vr port")
     # fmt: on
     args = parser.parse_args()
     task = TeleOp(args)
-    task.run()
+    try:
+        task.run()
+    except KeyboardInterrupt:
+        logger.info("Keyboard interrupt, teleop stop")
+    finally:
+        try:
+            task.post_process()
+        except Exception as e:
+            logger.error("Error in post process: {}".format(e))
 
 
 if __name__ == "__main__":

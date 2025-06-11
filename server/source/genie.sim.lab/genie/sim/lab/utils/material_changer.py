@@ -1,4 +1,3 @@
-
 # Copyright (c) 2023-2025, AgiBot Inc. All Rights Reserved.
 # Author: Genie Sim Team
 # License: Mozilla Public License Version 2.0
@@ -9,12 +8,9 @@ import omni.usd
 import omni.kit.commands
 from pxr import Sdf, UsdShade, Gf, UsdLux
 
-if os.getenv("ISAACSIM_VERSION") == "v45":
-    from isaacsim.core.prims import SingleXFormPrim
-    from isaacsim.core.utils.prims import get_prim_at_path
-else:
-    from omni.isaac.core.prims import XFormPrim as SingleXFormPrim
-    from omni.isaac.core.utils.prims import get_prim_at_path
+from isaacsim.core.prims import SingleXFormPrim
+from isaacsim.core.utils.prims import get_prim_at_path
+
 
 from pxr import Sdf
 from pathlib import Path

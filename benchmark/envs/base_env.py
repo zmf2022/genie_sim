@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2023-2025, AgiBot Inc. All Rights Reserved.
 # Author: Genie Sim Team
 # License: Mozilla Public License Version 2.0
@@ -9,18 +8,54 @@ import numpy as np
 from scipy.spatial.transform import Rotation as R, Slerp
 
 from robot.genie_robot import IsaacSimRpcRobot
+from ader.action.action_manager import ActionManager
+from ader.action.common_actions import ActionBase
 
 
 class BaseEnv(object):
     def __init__(self, robot: IsaacSimRpcRobot) -> None:
         self.robot = robot
+        self.action_executor = ActionManager()
+        self.last_update_time = time.time()
+        self.has_done = False
+
+    def do_action(self, slot: str, name: str, action: ActionBase):
+        self.action_executor.start(slot, name, action)
+
+    def cancel_action(self, slot):
+        self.action_executor.stop(slot)
+
+    def exist_eval_action(self):
+        return self.action_executor.exist_action("eval")
+
+    def do_eval_action(self):
+        self.do_action("eval", self.init_task_config["task"], self.task.action)
+
+    def cancel_eval(self):
+        self.reset()
+        self.has_done = True
 
     def reset(self):
         self.robot.reset()
 
+    def exist_eval_action(self):
+        return self.action_executor.exist_action("eval")
+
+    def action_update(self):
+        if not self.exist_eval_action():
+            self.has_done = True
+            return
+        delta_time = time.time() - self.last_update_time
+        self.action_executor.update(delta_time)
+        self.last_update_time = time.time()
+        if self.has_done:
+            self.cancel_action("eval")
+
     def add_object(self, object_info: dict):
         name = object_info["object_id"]
-        usd_path = object_info["model_path"]
+        usd_path = object_info.get("model_path")
+        if not usd_path:
+            return
         position = np.array(object_info["position"])
         quaternion = np.array(object_info["quaternion"])
         if "scale" not in object_info:
@@ -46,8 +81,8 @@ class BaseEnv(object):
         material = (
             "general" if "material" not in object_info else object_info["material"]
         )
-        mass = 0.01 if "mass" not in object_info else object_info["mass"]
-        com = [0, 0, 0] if "com" not in object_info else object_info["com"]
+        mass = object_info.get("mass", 0.01)
+        com = object_info.get("com", [0, 0, 0])
         model_type = object_info.get("model_type", "convexDecomposition")
         static_friction = object_info.get("static_friction", 0.5)
         dynamic_friction = object_info.get("dynamic_friction", 0.5)
@@ -127,7 +162,7 @@ class BaseEnv(object):
                     "render_depth": False,
                     "render_semantic": False,
                 },
-                "pose": ["/World/G1/gripper_center"],
+                "pose": [],
                 "joint_position": True,
                 "gripper": True,
             },
@@ -135,7 +170,6 @@ class BaseEnv(object):
 
     def stop_recording(self, success):
         self.robot.client.stop_recording()
-        self.robot.client.SendTaskStatus(success, [])
 
     def grasp(
         self,

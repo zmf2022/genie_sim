@@ -267,6 +267,19 @@ message OmniCmdChangePropertyReq {
 message OmniCmdChangePropertyRsp {
   string msg = 1;
 }
+message GetPartiPointNumInbboxReq {
+  string prim_path = 1;
+  repeated float bbox = 2;
+}
+message GetPartiPointNumInbboxRsp {
+  int32 num = 1;
+}
+message GetObjectAABBReq {
+  string prim_path = 1;
+}
+message GetObjectAABBRsp {
+  repeated float bbox = 1;
+}
 
 service SimObservationService {
   rpc GetObservation(GetObservationReq) returns (GetObservationRsp);
@@ -287,4 +300,6 @@ service SimObservationService {
   rpc SetLight(SetLightReq) returns (SetLightRsp);
   rpc ClearLine(ClearLineReq) returns (ClearLineRsp);
   rpc OmniCmdChangeProperty(OmniCmdChangePropertyReq) returns (OmniCmdChangePropertyRsp);
+  rpc GetPartiPointNumInbbox(GetPartiPointNumInbboxReq) returns (GetPartiPointNumInbboxRsp);
+  rpc GetObjectAABB(GetObjectAABBReq) returns (GetObjectAABBRsp);
 }

@@ -17,32 +17,27 @@ from base_utils.logger import Logger
 logger = Logger()  # Create singleton instance
 
 
-if os.getenv("ISAACSIM_VERSION") == "v45":
-    from isaacsim.core.prims import SingleArticulation
-    from isaacsim.core.api.materials import PhysicsMaterial, OmniPBR, OmniGlass
-    from isaacsim.core.api.objects import cuboid, cylinder
-    from isaacsim.core.prims import SingleXFormPrim, SingleGeometryPrim, SingleRigidPrim
-    from isaacsim.core.utils.prims import get_prim_at_path, get_prim_object_type
-    from isaacsim.core.utils.stage import add_reference_to_stage
-    from isaacsim.robot.manipulators.grippers.surface_gripper import SurfaceGripper
-    from isaacsim.core.utils.stage import get_current_stage
-    from isaacsim.sensors.camera import Camera
-    from isaacsim.sensors.physics import ContactSensor
-else:
-    from omni.isaac.manipulators.grippers.surface_gripper import SurfaceGripper
-    from omni.isaac.core.utils.prims import get_prim_at_path, get_prim_object_type
-    from omni.isaac.core.prims import (
-        XFormPrim as SingleXFormPrim,
-        GeometryPrim as SingleGeometryPrim,
-        RigidPrim as SingleRigidPrim,
-    )
-    from omni.isaac.core.utils.stage import add_reference_to_stage
-    from omni.isaac.core.articulations import Articulation as SingleArticulation
-    from omni.isaac.core.materials import PhysicsMaterial, OmniPBR, OmniGlass
-    from omni.isaac.core.objects import cuboid, cylinder
-    from omni.isaac.core.utils.stage import get_current_stage
-    from omni.isaac.sensor import Camera
-    from omni.isaac.sensor import ContactSensor
+from isaacsim.core.prims import SingleArticulation
+from isaacsim.core.api.materials import PhysicsMaterial, OmniPBR, OmniGlass
+from isaacsim.core.api.objects import cuboid, cylinder
+from isaacsim.core.prims import SingleXFormPrim, SingleGeometryPrim, SingleRigidPrim
+from isaacsim.core.utils.prims import get_prim_at_path, get_prim_object_type
+from isaacsim.core.utils.bounds import compute_aabb, create_bbox_cache
+from isaacsim.core.utils.stage import add_reference_to_stage
+from isaacsim.robot.manipulators.grippers.surface_gripper import SurfaceGripper
+from isaacsim.core.utils.stage import get_current_stage
+from isaacsim.sensors.camera import Camera
+from isaacsim.sensors.physics import ContactSensor
+from omni.kit.viewport.utility import (
+    create_viewport_window,
+    get_active_viewport,
+    get_active_viewport_window,
+    get_num_viewports,
+    get_active_viewport_and_window,
+)
+
+import omni.ui as ui
+
 
 import omni.replicator.core as rep
 import omni.timeline
@@ -64,10 +59,18 @@ from genie.sim.lab.utils.utils import (
     rotation_matrix_to_quaternion,
 )
 
+# from isaacsim.debug_draw import _debug_draw
 import subprocess
 import signal
 
+from pprint import pprint
+
+# from omni.isaac.debug_draw import _debug_draw
 from genie.sim.lab.ros_publisher.base import USDBase
+from base_utils.usd_utils import (
+    get_rigidbody_collider_prims,
+    get_camera_prims,
+)
 
 tracer = trace.get_tracer(__name__)
 
@@ -78,9 +81,11 @@ class CommandController:
         ui_builder,
         enable_physics=False,
         enable_curobo=False,
+        reset_fallen=False,
         rendering_step=60,
         publish_ros=True,
         record_images=False,
+        record_video=False,
     ):
         self.ui_builder = ui_builder
         self.data = None
@@ -97,18 +102,22 @@ class CommandController:
         self.target_position = np.array([0, 0, 0])
         self.target_rotation = np.array([0, 0, 0])
         self.target_joints_pose = None
-        self.Start_Recording = False
+        self.recording_started = False
         self.task_name = None
         self.cameras = {}
         self.step = 0
         self.step_server = 0
         self.path_to_save = None
         self.exit = False
-        self.object_prims = []
+        self.object_prims = {
+            "object_prims": [],
+            "articulated_object_prims": [],
+        }
         self.usd_objects = {}
         self.articulat_objects = {}
         self.enable_physics = enable_physics
         self.enable_curobo = enable_curobo
+        self.reset_fallen = reset_fallen
         self.trajectory_list = None
         self.trajectory_index = 0
         self.trajectory_reached = False
@@ -123,6 +132,101 @@ class CommandController:
         self.timeline = omni.timeline.get_timeline_interface()
         self.publish_ros = publish_ros
         self.record_images = record_images
+        self.record_video = record_video
+        self.gripper_cmd_r = None
+        self._lock = threading.Lock()
+
+        # init omnigraph
+        self.sensor_base = USDBase()
+        self.sensor_base_initialized = False
+
+    def process_recording_path(self):
+        main_dir = os.getenv("SIM_REPO_ROOT")
+        root_path = os.path.join(main_dir, "output/recording_data/")
+        recording_path = os.path.join(root_path, self.task_name)
+        if os.path.isdir(recording_path):
+            folder_index = 1
+            while os.path.isdir(os.path.join(recording_path, str(folder_index))):
+                folder_index += 1
+            recording_path = os.path.join(recording_path, str(folder_index))
+        self.path_to_save = recording_path
+
+    def process_camera_info_list(self):
+        self.camera_info_list = {}
+        self.camera_prim_list = [
+            "/G1/head_link2/Head_Camera",
+            "/G1/gripper_l_base_link/Left_Camera",
+            "/G1/gripper_r_base_link/Right_Camera",
+        ]
+        for prim in self.camera_prim_list:
+            image = self._capture_camera(
+                prim_path=prim,
+                isRGB=False,
+                isDepth=False,
+                isSemantic=False,
+                isGN=False,
+            )
+            prim_name = prim.split("/")[-1]
+            if "G1" in self.robot_name:
+                if "Fisheye_Camera" in prim_name:
+                    prim_name = "head_right_fisheye"
+                elif "Fisheye_Camera" in prim_name:
+                    prim_name = "head_left_fisheye"
+                elif "Fisheye_Back" in prim_name:
+                    prim_name = "back_left_fisheye"
+                elif "Fisheye_Back" in prim_name:
+                    prim_name = "back_right_fisheye"
+                elif "Head" in prim_name:
+                    prim_name = "head"
+                elif "Right" in prim_name:
+                    prim_name = "hand_right"
+                elif "Left" in prim_name:
+                    prim_name = "hand_left"
+                elif "Top" in prim_name:
+                    prim_name = "head_front_fisheye"
+            self.camera_info_list[prim_name] = {
+                "intrinsic": image["camera_info"],
+                "output": {
+                    "rgb": "camera/" + "{frame_num}/" + f"{prim_name}.jpg",
+                    "video": f"{prim_name}.mp4",
+                },
+            }
+            if "fisheye" not in prim_name:
+                self.camera_info_list[prim_name]["output"]["depth"] = (
+                    "camera/" + "{frame_num}/" + f"{prim_name}_depth.png"
+                )
+
+            if self.data["render_semantic"]:
+                self.camera_info_list[prim_name]["output"]["semantic"] = (
+                    "camera/" + "{frame_num}/" + f"{prim_name}_semantic.png"
+                )
+
+    def record_rosbag(self):
+        if self.publish_ros:
+            command = [
+                "ros2",
+                "bag",
+                "record",
+                "-o",
+                self.path_to_save,
+                "-a",
+            ]
+            process = subprocess.Popen(command)
+            self.process_pid.append(process.pid)
+
+    def _init_gripper_contact_end(self):
+        if "omnipicker" in self.robot_cfg.robot_usd:
+            self.gripper_contact_ends = [
+                "/G1/gripper_r_inner_link4",
+                "/G1/gripper_r_outer_link4",
+            ]
+        elif "120s" in self.robot_cfg.robot_usd:
+            self.gripper_contact_ends = [
+                "/G1/gripper_r_inner_link5",
+                "/G1/gripper_r_outer_link5",
+            ]
+        else:
+            raise ("Undefined robot")
 
     def _init_robot_cfg(
         self,
@@ -146,6 +250,7 @@ class CommandController:
         self.batch_num = batch_num
         add_reference_to_stage(robot_usd_path, robot.robot_prim_path)
         add_reference_to_stage(scene_usd_path, "/World")
+        # SingleXFormPrim(prim_path="/World", position=[1,1,0])
         self.usd_objects["robot"] = SingleXFormPrim(
             prim_path=robot.robot_prim_path,
             position=init_position,
@@ -154,6 +259,9 @@ class CommandController:
         self.robot_init_position = init_position
         self.robot_init_rotation = init_rotation
         self.scene_usd = scene_usd
+        self.scene_glb = os.path.join(
+            os.path.dirname(scene_usd), "compressed_simplified.glb"
+        )
         if "multispace" in scene_usd:
             self.scene_name = scene_usd.split("/")[-3] + "/" + scene_usd.split("/")[-2]
         else:
@@ -162,7 +270,7 @@ class CommandController:
         self.material_changer = material_changer()
         camera_state = ViewportCameraState("/OmniverseKit_Persp")
         camera_state.set_position_world(
-            Gf.Vec3d(init_position[0]+0.3, init_position[1]+0.5, init_position[2]+2.3), True
+            Gf.Vec3d(1.9634841037804776, 0.9488467163528935, 2.1182000480154555), True
         )
         camera_state.set_target_world(
             Gf.Vec3d(init_position[0], init_position[1], init_position[2]), True
@@ -178,18 +286,34 @@ class CommandController:
             rep.modify.semantics([("class", "robot")])
 
         stage = omni.usd.get_context().get_stage()
-
-        def enable_collsion_api(prim_str):
-            collision_prim = stage.GetPrimAtPath(prim_str)
-            UsdPhysics.CollisionAPI.Apply(collision_prim)
-
-        for p in [
-            "/G1/right_Right_Pad_Link/collisions",
-            "/G1/right_Left_Pad_Link/collisions",
-        ]:
-            enable_collsion_api(p)
+        viewport, window = get_active_viewport_and_window()
+        window.destroy()
+        window1 = create_viewport_window(
+            name="Left_Camera",
+            camera_path="/G1/gripper_l_base_link/Left_Camera",
+            width=300,
+            height=200,
+        )
+        window2 = create_viewport_window(
+            name="Head_Camera", camera_path="/G1/head_link2/Head_Camera"
+        )
+        window3 = create_viewport_window(
+            name="Right_Camera",
+            camera_path="/G1/gripper_r_base_link/Right_Camera",
+            width=300,
+            height=200,
+        )
 
         self._play()
+        window2.dock_in(
+            ui.Workspace.get_window("Viewport"), ui.DockPosition.LEFT, ratio=0.6
+        )
+        window3.dock_in(
+            ui.Workspace.get_window("Viewport"), ui.DockPosition.BOTTOM, ratio=0.5
+        )
+        window1.dock_in(
+            ui.Workspace.get_window("Viewport"), ui.DockPosition.RIGHT, ratio=0.5
+        )
 
     def _play(self):
         self.ui_builder.my_world.play()
@@ -204,7 +328,7 @@ class CommandController:
         self.end_effector_name = robot.end_effector_name
 
         self.finger_names = robot.finger_names
-        self.gripper_controll_joint = robot.gripper_controll_joint
+        self.gripper_control_joint = robot.gripper_control_joint
         self.opened_positions = robot.opened_positions
         self.closed_velocities = robot.closed_velocities
         self.cameras = robot.cameras
@@ -216,8 +340,55 @@ class CommandController:
         self.goal_position, self.goal_rotation = self._get_ee_pose(True)
         self.past_position = [0, 0, 0]
         self.past_rotation = [1, 0, 0, 0]
-        if self.publish_ros:
-            self.sensor_base = USDBase()
+
+        def _init_omni_graph():
+            # cams
+            self.omnigraph_path_cams = []
+            for camera in self.robot_cfg.cameras:
+                camera_param = {
+                    "path": camera,
+                    "frequency": int(5),
+                    "resolution": {
+                        "width": self.robot_cfg.cameras[camera][0],
+                        "height": self.robot_cfg.cameras[camera][1],
+                    },
+                    "publish": [
+                        "rgb:/" + camera.split("/")[-1] + "_rgb",
+                        "depth:/" + camera.split("/")[-1] + "_depth",
+                    ],
+                }
+
+                if "Fisheye" in camera or "Top" in camera:
+                    camera_param["publish"] = [
+                        "rgb:/" + camera.split("/")[-1] + "_rgb",
+                    ]
+                else:
+                    camera_param["publish"] = [
+                        "rgb:/" + camera.split("/")[-1] + "_rgb",
+                        "depth:/" + camera.split("/")[-1] + "_depth",
+                    ]
+                # if self.robot_cfg.cameras["render_semantic"]:
+                #     camera_param["publish"].append(
+                #         "semantic:/" + camera.split("/")[-1] + "_semantic"
+                #     )
+                pprint(camera_param)
+                camera_graph = self.sensor_base._init_camera(
+                    self.ui_builder.my_world.get_rendering_dt(),
+                    camera_param,
+                )
+            self.omnigraph_path_cams.append(self.robot_cfg.cameras[camera])
+
+            # sensors
+            logger.info(f"sensor_base._init_sensor()")
+            sensors_graph = self.sensor_base._init_sensor()
+
+            # joint_states
+            logger.info(f"sensor_base.publish_joint {self.robot_prim_path}")
+            self.sensor_base.publish_joint(robot_prim=self.robot_prim_path)
+
+        if not self.sensor_base_initialized:
+            _init_omni_graph()
+            self.sensor_base_initialized = True
 
     def _set_trajectory_list(self):
         if self.trajectory_list:
@@ -231,6 +402,43 @@ class CommandController:
                 self.trajectory_list = None
 
     def on_physics_step(self):
+        if (
+            self.Command == 2
+            or self.Command == 3
+            or self.Command == 24
+            or self.Command == 27
+        ):
+            if "G1" in self.robot_name and self.target_point is not None:
+
+                def align_camera_to_target(camera_position, target_point):
+                    direction = target_point - camera_position
+                    direction_xz = np.array(
+                        [np.abs(direction[0]), 0, np.abs(direction[2])]
+                    )
+                    pitch_angle = np.arctan2(direction_xz[0], direction_xz[2])
+                    Rx = np.array(
+                        [
+                            [1, 0, 0],
+                            [0, np.cos(pitch_angle), -np.sin(pitch_angle)],
+                            [0, np.sin(pitch_angle), np.cos(pitch_angle)],
+                        ]
+                    )
+                    return pitch_angle
+
+                camera_position = SingleXFormPrim(
+                    "/G1/link_pitch_head"
+                ).get_world_pose()[0]
+                # target_objects = list(self.usd_objects.values())[0]
+                target_point = self.target_point
+                target_angel = np.pi / 2 - align_camera_to_target(
+                    camera_position, target_point
+                )
+                if target_angel > 1.5:
+                    target_angel = target_angel - self.init_joint_position[1]
+                else:
+                    target_angel = target_angel
+                if "fix" not in self.robot_name:
+                    self.ui_builder._on_time_head_plan(target_angel)
         self.ui_builder._on_every_frame_trajectory_list()
         # curobo step
         if self.ui_builder.curoboMotion:
@@ -239,13 +447,88 @@ class CommandController:
         self.on_command_step()
         # trajectory step
         self._set_trajectory_list()
-        if self.Start_Recording:
+        if self.recording_started:
             self._on_recording_step()
+        # check fallen
+        if self.reset_fallen:
+            init_state = None
+            for path, obj in self.usd_objects.items():
+                if path != "robot":
+                    init_state = obj.get_default_state()
+                    break
+            if init_state:
+                for path, obj in self.usd_objects.items():
+                    if path != "robot":
+                        position, _ = obj.get_world_pose()
+                        if position[2] < 0.2:
+                            obj.set_world_pose(
+                                init_state.position, init_state.orientation
+                            )
 
     def command_thread(self):
         step = 0
         while True:
             self.on_command_step()
+
+    def precess_gripper(self):
+        target_joint_indices = self.data["target_joints_indices"]
+        if 19 not in target_joint_indices:
+            return
+
+        joint_states = self._get_joint_states()
+        print(
+            "joint_states",
+            self.gripper_control_joint["right"].split("/")[-1],
+        )
+        print(
+            self.data["target_joints_position"][19],
+            joint_states[self.gripper_control_joint["right"].split("/")[-1]],
+        )
+        if joint_states:
+            joint_states_p = joint_states[
+                self.gripper_control_joint["right"].split("/")[-1]
+            ][0]
+            joint_states_e = joint_states[
+                self.gripper_control_joint["right"].split("/")[-1]
+            ][0]
+
+        joint_positions = self._get_joint_positions()
+        sts_gripper_rl = max(
+            0.0,
+            joint_positions[self.gripper_control_joint["right"].split("/")[-1]],
+        )
+        cmd_gripper_rl = max(0.0, self.data["target_joints_position"][19])
+
+        contacedRL, contacedRR = False, False
+        MAX_FORCE_THRESHOLD = 10
+        if hasattr(self, "csensor_rl"):
+            valuerl = self.csensor_rl.get_current_frame()
+            valuerr = self.csensor_rr.get_current_frame()
+            print(valuerl)
+            print(valuerr)
+            contacedRL, contacedRR = (
+                valuerl["in_contact"],
+                valuerr["in_contact"],
+            )
+            contactForce = max(valuerl["force"], valuerr["force"])
+            if contacedRL and contacedRR:
+                if contactForce < MAX_FORCE_THRESHOLD:
+                    self.gripper_cmd_r = min(cmd_gripper_rl + 1e-2, sts_gripper_rl)
+                    print(
+                        "On contact, update gripper sts!!!",
+                        self.gripper_cmd_r,
+                        sts_gripper_rl,
+                    )
+                else:
+                    print(
+                        f"Contact force exceeds maximum {MAX_FORCE_THRESHOLD}, stop closing!!!"
+                    )
+                self.data["target_joints_position"][19] = max(
+                    self.gripper_cmd_r, cmd_gripper_rl
+                )
+            else:
+                print("Off contact, reset gripper sts!!!")
+                self.gripper_cmd_r = cmd_gripper_rl
 
     # update
     def on_command_step(self):
@@ -255,6 +538,9 @@ class CommandController:
             with tracer.start_as_current_span(
                 f"rpc_server.step_command_{self.Command}"
             ) as span:
+                # logger.info(f"self.Command {self.Command}")
+                # print(self.data)
+
                 if self.Command == 1:
                     prim_path = self.data["Cam_prim_path"]
                     isRGB = self.data["isRGB"]
@@ -290,6 +576,7 @@ class CommandController:
                         ):
                             self.target_position = target_position
                             self.target_rotation = target_rotation
+                            # self._reset_stiffness()
                             self._hand_moveto(
                                 position=target_position,
                                 rotation=target_rotation,
@@ -343,7 +630,10 @@ class CommandController:
                             self.data_to_send = "move_joints"
                             self.target_joints_pose = []
                 # GetObjectPose Get the position of an object
-                elif self.Command == 5:
+                elif self.Command == 5:  # DEPRECATED_AND_IT_IS_REPLACED_BY_ROS_TOPIC
+                    logger.debug(
+                        "this command 5 will be deprecated once grpc framework is removed"
+                    )
                     prim_path = self.data["object_prim_path"]
                     self.data_to_send = self._get_object_pose(prim_path)
                 # AddUsdObject Add usd object
@@ -387,230 +677,100 @@ class CommandController:
                 elif self.Command == 8:
                     self.data_to_send = self._get_joint_positions()
                 elif self.Command == 9:
+                    logger.debug(
+                        "this command 9 will be deprecated once grpc framework is removed"
+                    )
+
                     state = self.data["gripper_state"]
                     isRight = self.data["is_gripper_right"]
                     width = self.data["opened_width"]
-                    if self.gripper_state != state:
-                        self._set_gripper_state(
-                            state=state, isRight=isRight, width=width
-                        )
-                        self.gripper_state = state
-                    if self.gripper_type == "surface":
-                        is_reached = True
-                    else:
-                        if isRight:
-                            is_reached = self.gripper_R.is_reached
-                        else:
-                            is_reached = self.gripper_L.is_reached
-                    if is_reached:
-                        self.gripper_state = ""
-                        self.data_to_send = "gripper moving"
 
+                    self.gripper_state = state
+                    self.data_to_send = "gripper moving"
                 elif self.Command == 11:
                     if self.data["startRecording"]:
-                        self.task_name = self.data["task_name"]
+                        logger.info("Start recording")
                         self.fps = self.data["fps"]
-                        main_dir = os.getenv("SIM_REPO_ROOT")
-                        root_path = os.path.join(main_dir, "output/recording_data/")
-                        recording_path = os.path.join(root_path, self.task_name)
-                        if os.path.isdir(recording_path):
-                            folder_index = 1
-                            while os.path.isdir(
-                                os.path.join(recording_path, str(folder_index))
-                            ):
-                                folder_index += 1
-                            recording_path = os.path.join(
-                                recording_path, str(folder_index)
-                            )
-                        self.path_to_save = recording_path
-                        self.camera_info_list = {}
-                        tf_target = []
-                        for prim in self.data["camera_prim_list"]:
-                            image = self._capture_camera(
-                                prim_path=prim,
-                                isRGB=False,
-                                isDepth=False,
-                                isSemantic=False,
-                                isGN=False,
-                            )
-                            prim_name = prim.split("/")[-1]
-                            self.camera_info_list[prim_name] = {
-                                "intrinsic": image["camera_info"],
-                                "output": {
-                                    "rgb": "camera/"
-                                    + "{frame_num}/"
-                                    + f"{prim_name}.jpg",
-                                    "video": f"{prim_name}.mp4",
-                                },
-                            }
-                            if "fisheye" not in prim_name:
-                                if "G1" in self.robot_name:
-                                    self.camera_info_list[prim_name]["output"][
-                                        "depth"
-                                    ] = (
-                                        "camera/" + "{frame_num}/" + f"{prim_name}.png"
-                                    )
-                                else:
-                                    self.camera_info_list[prim_name]["output"][
-                                        "depth"
-                                    ] = (
-                                        "camera/"
-                                        + "{frame_num}/"
-                                        + f"{prim_name}_depth.png"
+                        self.task_name = self.data["task_name"]
+                        self.process_recording_path()
+                        self.process_camera_info_list()
+                        self.record_rosbag()
+
+                        # enable tf pub
+                        tf_to_record = [self.robot_prim_path]
+                        rigidbody_collider_prims = get_rigidbody_collider_prims(
+                            robot_name=(
+                                self.robot_name if hasattr(self, "robot_name") else None
+                            ),
+                            extra_prim_paths=self.data["object_prim"],
+                        )
+                        logger.info(
+                            f"record {len(rigidbody_collider_prims)} prim(s) TF with RigidBody and Collider:"
+                        )
+                        for prim in rigidbody_collider_prims:
+                            tf_to_record.append(prim.GetPath())
+                            obj_id = str(prim.GetPath()).split("/")[-1]
+                            prim_path = f"/World/Objects/{obj_id}"
+                            if prim_path not in self.usd_objects.keys():
+                                stage = omni.usd.get_context().get_stage()
+                                prim = stage.GetPrimAtPath(prim_path)
+                                if prim.IsValid():
+                                    xform = omni.usd.get_world_transform_matrix(prim)
+                                    position = list(xform.ExtractTranslation())
+                                    quat = xform.ExtractRotation().GetQuat()
+                                    qx = quat.imaginary[0]
+                                    qy = quat.imaginary[1]
+                                    qz = quat.imaginary[2]
+                                    qw = quat.real
+                                    rotation = [qw, qx, qy, qz]
+                                    usd_object = SingleXFormPrim(prim_path=prim_path)
+                                    self.usd_objects[prim_path] = usd_object
+                                    logger.info(
+                                        f"add rigidbody collider obj {prim_path} to usd_object"
                                     )
 
-                            if self.data["render_semantic"]:
-                                self.camera_info_list[prim_name]["output"][
-                                    "semantic"
-                                ] = (
-                                    "camera/"
-                                    + "{frame_num}/"
-                                    + f"{prim_name}_semantic.png"
-                                )
-                            tf_target.append(prim)
-                        if self.publish_ros:
-                            command = [
-                                "ros2",
-                                "bag",
-                                "record",
-                                "-o",
-                                recording_path,
-                                "--exclude",
-                                ".*rgb",
-                                "-a",
-                            ]
-                            process = subprocess.Popen(command)
-                            self.process_pid.append(process.pid)
-                            frequency = (int)(60 / self.data["fps"])
-                            self.sensor_base._init_sensor(self.loop_count)
-                            for prim in self.object_prims:
-                                if prim not in tf_target:
-                                    tf_target.append(prim)
-                            for prim in self.end_effector_prim_path.values():
-                                if prim not in tf_target:
-                                    tf_target.append(prim)
-                            delta_time = 1 / (2 * self.rendering_step)
-                            logger.info(self.end_effector_prim_path)
-                            tf_target.append(f"{self.robot_prim_path}/base_link")
-                            self.sensor_base.publish_tf(
-                                robot_prim=self.robot_prim_path,
-                                targets=tf_target,
-                                approx_freq=frequency,
-                                delta_time=delta_time,
+                            logger.info(f"- {prim.GetPath()}")
+                        logger.info(
+                            f"record {len(self.articulat_objects)} articulated prim(s) TF:"
+                        )
+                        for idx, key in enumerate(self.articulat_objects):
+                            self.sensor_base.publish_articulated_joint(key)
+                            self.object_prims["articulated_object_prims"].append(key)
+                            # if key not in tf_to_record:
+                            #     tf_to_record.append(Sdf.Path(key))
+
+                        camera_prims = get_camera_prims(
+                            robot_name=(
+                                self.robot_name if hasattr(self, "robot_name") else None
                             )
-                            for prim in self.articulat_objects.keys():
-                                self.sensor_base.publish_joint(
-                                    robot_prim=prim,
-                                    approx_freq=frequency,
-                                    delta_time=delta_time,
-                                    topic_name=prim,
-                                )
-                            self.fps = self.data["fps"]
-                            self.graph_path = [
-                                "/World/RobotTFActionGraph",
-                                "/World/RobotJointActionGraph",
-                                "/ClockActionGraph",
-                            ]
+                        )
+                        logger.info(
+                            f"record {len(camera_prims)} prim(s) TF with Camera:"
+                        )
+                        for prim in camera_prims:
+                            tf_to_record.append(prim.GetPath())
+                            logger.info(f"- {prim.GetPath()}")
+                        logger.info(f"sensor_base.publish_tf {self.robot_prim_path}")
+                        self.sensor_base.publish_tf(
+                            robot_prim=self.robot_prim_path,
+                            targets=tf_to_record,
+                        )
 
-                            if not self.camera_graph_path:
-                                for camera in self.data["camera_prim_list"]:
-
-                                    camera_param = {
-                                        "path": camera,
-                                        "frequency": frequency,
-                                        "resolution": {
-                                            "width": self.cameras[camera][0],
-                                            "height": self.cameras[camera][1],
-                                        },
-                                        "publish": [
-                                            "rgb:/" + camera.split("/")[-1] + "_rgb",
-                                            "depth:/" + camera.split("/")[-1],
-                                        ],
-                                    }
-
-                                    if "Fisheye" in camera or "Top" in camera:
-                                        camera_param["publish"] = [
-                                            "rgb:/" + camera.split("/")[-1] + "_rgb"
-                                        ]
-                                    else:
-                                        camera_param["publish"] = [
-                                            "rgb:/" + camera.split("/")[-1] + "_rgb",
-                                            "depth:/" + camera.split("/")[-1],
-                                        ]
-                                    if self.data["render_semantic"]:
-                                        camera_param["publish"].append(
-                                            "semantic:/"
-                                            + camera.split("/")[-1]
-                                            + "_semantic"
-                                        )
-                                    camera_graph = self.sensor_base._init_camera(
-                                        camera_param
-                                    )
-                                    topic_name = "/" + camera.split("/")[-1] + "_rgb"
-                                    compressed_name = topic_name + "_compressed"
-                                    command = [
-                                        "ros2",
-                                        "run",
-                                        "image_transport",
-                                        "republish",
-                                        "raw",
-                                        "compressed",
-                                        "--ros-args",
-                                        "--remap",
-                                        f"/in:={topic_name}",
-                                        "--remap",
-                                        f"/out:={compressed_name}",
-                                    ]
-                                    subpro = subprocess.Popen(command)
-                                    self.process_pid.append(subpro.pid)
-                                self.camera_graph_path.append(
-                                    self.data["camera_prim_list"]
-                                )
-                            self.data_to_send = "Start"
-                        else:
-                            os.makedirs(recording_path, exist_ok=True)
-                            self.recorder_req = {
-                                "fps": self.data["fps"],
-                                "isCam": self.data["isCam"],
-                                "isJoint": self.data["isJoint"],
-                                "isPose": self.data["isPose"],
-                                "isGripper": self.data["isGripper"],
-                                "camera_prim_list": self.data["camera_prim_list"],
-                                "render_depth": self.data["render_depth"],
-                                "render_semantic": self.data["render_semantic"],
-                                "object_prim": self.data["object_prim"],
-                            }
-                            self.step = 0
-                            self.state_info = {
-                                "robot_base_pose": [],
-                                "camera_pose": [],
-                                "joint_position": [],
-                                "ee_pose": [],
-                                "object_pose": [],
-                                "action": [],
-                                "gripper_state": [],
-                                "camera_image": [],
-                                "record_duration": "",
-                                "origin_steps_num": "",
-                                "synced_steps_num": "",
-                            }
-                            self.Start_Recording = True
-                            self.data_to_send = "Start"
+                        self.recording_started = True
+                        self.data_to_send = "Start"
                     elif self.data["stopRecording"]:
-                        self.Start_Recording = False
+                        logger.info("Stop recording")
+                        self.recording_started = False
                         if self.publish_ros:
                             for process_pid in self.process_pid:
                                 os.kill(process_pid, signal.SIGTERM)
 
+                            # self.ui_builder.remove_graph(self.graph_path)
                             async def store_info():
-                                if self.record_images:
-                                    from genie.sim.lab.controllers.extract_ros_bag import (
-                                        Ros_Extrater,
-                                    )
-                                else:
-                                    from genie.sim.lab.controllers.extract_state_json import (
-                                        Ros_Extrater,
-                                    )
+                                from genie.sim.lab.controllers.extract_ros_bag import (
+                                    Ros_Extrater,
+                                )
+
                                 extract_ros = Ros_Extrater(
                                     bag_file=self.path_to_save,
                                     output_dir=self.path_to_save,
@@ -619,10 +779,13 @@ class CommandController:
                                     camera_info=self.camera_info_list,
                                     scene_name=self.scene_name,
                                     scene_usd=self.scene_usd,
+                                    scene_glb=self.scene_glb,
                                     object_names=self.object_prims,
                                     fps=self.fps,
                                     robot_name=self.robot_name,
                                     frame_status=self.frame_status,
+                                    with_img=self.record_images,
+                                    with_video=self.record_video,
                                 )
                                 while True:
                                     await asyncio.sleep(1)
@@ -635,7 +798,7 @@ class CommandController:
                             asyncio.run(store_info())
                             self.process_pid = []
                         self.data_to_send = "Stopped"
-                    else:
+                    else:  # DEPRECATED_AND_IT_IS_REPLACED_BY_ROS_TOPIC
                         isCam = self.data["isCam"]
                         isJoint = self.data["isJoint"]
                         isPose = self.data["isPose"]
@@ -643,7 +806,7 @@ class CommandController:
                         data_to_send = {}
 
                         cam_datas = []
-                        joint_datas = None
+                        joint_datas = {}
                         object_datas = []
                         gripper_datas = {}
                         if isCam:
@@ -696,6 +859,9 @@ class CommandController:
                     result = self.ui_builder.attach_objs(items, is_right)
                     self.data_to_send = "attaching"
                 elif self.Command == 14:
+                    logger.debug(
+                        "this command 14 will be deprecated once grpc framework is removed"
+                    )
                     self.ui_builder.detach_objs()
                     self.data_to_send = "detaching"
                 elif self.Command == 15:
@@ -714,7 +880,10 @@ class CommandController:
                             self.data_to_send = self.ui_builder.curoboMotion.success
                 elif self.Command == 16:
                     isSuccess = self.data["isSuccess"]
-                    self.object_prims = []
+                    self.object_prims = {
+                        "object_prims": [],
+                        "articulated_object_prims": [],
+                    }
                     if self.task_name is not None:
                         result = {
                             "task_name": self.task_name,
@@ -735,11 +904,24 @@ class CommandController:
                             encoding="utf-8",
                         ) as f:
                             json.dump(self.frame_status, f, indent=4)
+                    # if not isSuccess:
+                    #     shutil.rmtree(self.path_to_save)
                     self.data_to_send = str(isSuccess)
                 elif self.Command == 17:
+                    logger.info("On Exit...")
                     self.exit = self.data["exit"]
                     self.data_to_send = "exit"
-                elif self.Command == 18:
+                    if self.task_name is not None:
+                        output_path = os.path.join(
+                            os.getenv("SIM_REPO_ROOT"), "output", self.task_name
+                        )
+                        # logger.info(f"Move data from {self.path_to_save} {output_path}")
+                        # os.makedirs(output_path, exist_ok=True)
+                        # os.system(f"mv {self.path_to_save}/* {output_path}")
+                elif self.Command == 18:  # DEPRECATED_AND_IT_IS_REPLACED_BY_ROS_TOPIC
+                    logger.debug(
+                        "this command 18 will be deprecated once grpc framework is removed"
+                    )
                     cmd = "get_ee_pose"
                     is_right = self.data["isRight"]
                     self.data_to_send = self._get_ee_pose(is_right)
@@ -817,12 +999,16 @@ class CommandController:
                             self.data_to_send = "success"
                     if self.trajectory_index >= len(self.trajectory_list):
                         self.data_to_send = "success"
+                    # for idx, point in enumerate(self.trajectory_list):
+                    #     cuboid.VisualCuboid("/World/pos_cube_{}".format(idx), position=point[0], orientation=point[1], size=0.02, color=np.array([0,0,1]))
                 elif self.Command == 26:
                     self.data_to_send = self._get_object_joint(
                         self.data["object_prim_path"]
                     )
                 elif self.Command == 27:
                     self.target_point = self.data["target_position"]
+                    # SingleXFormPrim("/test", position=self.target_point)
+                    # cuboid.VisualCuboid("/test", position=self.target_point, size=0.05, color=np.array([1,0,1]))
                     self.data_to_send = "success"
                 elif self.Command == 28:
                     time_stamp = self.timeline.get_current_time()
@@ -864,100 +1050,21 @@ class CommandController:
                         prev=None,
                     )
                     self.data_to_send = "success"
+                elif self.Command == 33:
+                    num = self.get_particle_pt_num_inbbox(
+                        self.data["prim_path"], self.data["bbox_3d"]
+                    )
+                    self.data_to_send = {"num": num}
+                elif self.Command == 34:
+                    cache = create_bbox_cache()
+                    aabb = compute_aabb(cache, prim_path=self.data["prim_path"])
+                    self.data_to_send = {"points": aabb}
         if self.Command:
             with self.condition:
                 self.condition.notify_all()
 
     def _on_recording_step(self):
-        def get_pose(xyz: np.ndarray, quat_wxyz: np.ndarray) -> np.ndarray:
-            pose = np.eye(4)
-            pose[:3, :3] = get_rotation_matrix_from_quaternion(quat_wxyz)
-            pose[:3, 3] = xyz
-            return pose
-
-        def write_rgb_image(data, path, box):
-            rgb_image = Image.fromarray(data, mode="RGBA")
-            region = rgb_image.crop(box)
-            region.save(path + ".png")
-
-        self.step += 1
-        fps = self.recorder_req["fps"]
-        physics_dt = 30
-        if self.enable_physics:
-            physics_dt = 120
-        num_step = max(1, int(physics_dt / fps))
-        self.image_path = {}
-        if self.step % num_step == 0:
-            isCam = self.recorder_req["isCam"]
-            idx = (int)(self.step / num_step) - 1
-            step_folder = os.path.join(self.path_to_save, str(idx))
-            os.makedirs(step_folder, exist_ok=True)
-            if isCam:
-                prim_list = self.recorder_req["camera_prim_list"]
-                prim_index = 0
-                for prim in prim_list:
-                    prim_index += 1
-                    image = self._capture_camera(
-                        prim_path=prim,
-                        isRGB=True,
-                        isDepth=True,
-                        isSemantic=False,
-                        isGN=False,
-                    )
-                    file_name = prim.split("/")[-1]
-                    box = (0, 0, self.cameras[prim][0], self.cameras[prim][1])
-                    if box in self.cameras:
-                        box = (0, 0, self.cameras[prim][0], self.cameras[prim][1])
-                    write_rgb_image(
-                        data=image["rgb"],
-                        path=f"{step_folder}/{file_name}_color",
-                        box=box,
-                    )
-                    np.savez_compressed(
-                        step_folder + "/" + file_name + "_depth.npz", image["depth"]
-                    )
-                    if file_name not in self.image_path:
-                        self.image_path[file_name] = {
-                            "rgb": f"{file_name}_color.png",
-                            "depth": f"{file_name}_depth.npz",
-                        }
-            robot_base_pose = get_pose(
-                *self._get_object_pose("/World/G1/base_link")
-            ).tolist()
-            joint_position = self._get_joint_positions()
-            camera_pose = {}
-            rotation_x_180 = np.array(
-                [
-                    [1.0, 0.0, 0.0, 0],
-                    [0.0, -1.0, 0.0, 0],
-                    [0.0, 0.0, -1.0, 0],
-                    [0, 0, 0, 1],
-                ]
-            )
-            for cam_prim in self.recorder_req["camera_prim_list"]:
-                camera_pose[cam_prim] = (
-                    get_pose(*self._get_object_pose(cam_prim)) @ rotation_x_180
-                ).tolist()
-            object_pose = {}
-            for prim in self.object_prims:
-                object_pose[prim] = (get_pose(*self._get_object_pose(prim))).tolist()
-            ee_pose = (get_pose(*self._get_ee_pose(True))).tolist()
-            state_info = {
-                "time_stamp": self.step / 30,
-                "robot_base_pose": robot_base_pose,
-                "joint_position": joint_position,
-                "ee_pose": ee_pose,
-                "camera_pose": camera_pose,
-                "object_pose": object_pose,
-            }
-            self.state_info["robot_base_pose"].append(robot_base_pose)
-            self.state_info["camera_pose"].append(camera_pose)
-            self.state_info["joint_position"].append(joint_position)
-            self.state_info["ee_pose"].append(ee_pose)
-            self.state_info["object_pose"].append(object_pose)
-            self.state_info["camera_image"].append(self.image_path)
-            with open(step_folder + "/state.json", "w", encoding="utf-8") as f:
-                json.dump(state_info, f, indent=4)
+        return
 
     def _generate_materials(self):
         self.materials = {}
@@ -977,12 +1084,13 @@ class CommandController:
             self._capture_camera(
                 prim_path=camera,
                 isRGB=True,
-                isDepth=False,
+                isDepth=True,
                 isSemantic=False,
                 isGN=False,
             )
 
     def _on_reset(self):
+        logger.warning("reset")
         self._reset_stiffness()
         self.ui_builder._on_reset()
         self.usd_objects = {}
@@ -1003,10 +1111,11 @@ class CommandController:
             self.result_queue.put(result)
 
     def blocking_start_server(self, data, Command):
-        self._on_blocking_thread(data, Command)
-        if not self.result_queue.empty():
-            result = self.result_queue.get()
-            return result
+        with self._lock:
+            self._on_blocking_thread(data, Command)
+            if not self.result_queue.empty():
+                result = self.result_queue.get()
+                return result
 
     # debug_draw_line
     def draw_lines(self, point_list_1, point_list_2, colors, sizes, name):
@@ -1020,8 +1129,6 @@ class CommandController:
 
     # 1. Photo capturing function, prim path of Input camera in isaac side scene and whether to use Gaussian Noise, return
     def _capture_camera(self, prim_path: str, isRGB, isDepth, isSemantic, isGN: bool):
-        isDepth = False
-        isSemantic = False
         self.ui_builder._currentCamera = prim_path
         self.ui_builder._on_capture_cam(isRGB, isDepth, isSemantic)
         currentImage = self.ui_builder.currentImg
@@ -1031,7 +1138,7 @@ class CommandController:
     def _hand_moveto(self, position, rotation, isRight=True):
         self.ui_builder._followingPos = position
         self.ui_builder._followingOrientation = rotation
-        self._initialize_articulation()
+        self._get_articulation()
         self.ui_builder._follow_target(isRight)
 
     def _reset_stiffness(self):
@@ -1049,12 +1156,12 @@ class CommandController:
             position, rotation, is_right, ee_interpolation, distance_frame
         )
 
-    def _initialize_articulation(self):
+    def _get_articulation(self):
         return self.ui_builder.articulation
 
     # 3. The whole body joints move to the specified angle, Input:np.array([None])*28
     def _joint_moveto(self, joint_position, is_trajectory, target_joint_indices):
-        self._initialize_articulation()
+        self._get_articulation()
         self.ui_builder._move_to(joint_position, target_joint_indices, is_trajectory)
 
     def _add_camera(
@@ -1075,7 +1182,7 @@ class CommandController:
         self._capture_camera(
             prim_path=camera_prim,
             isRGB=True,
-            isDepth=False,
+            isDepth=True,
             isSemantic=False,
             isGN=False,
         )
@@ -1112,16 +1219,35 @@ class CommandController:
         self.articulat_objects[prim_path].initialize()
         self.articulat_objects[prim_path].set_joint_positions(target_positions)
 
+    def get_particle_pt_num_inbbox(self, prim_path, bbox_3d):
+        stage = get_current_stage()
+        point_set_prim = stage.GetPrimAtPath(prim_path)
+        points = UsdGeom.Points(point_set_prim).GetPointsAttr().Get()
+        points_position = np.array(points)
+        # points_num = len(points_position)
+
+        # Determine whether the point set is in a bounding box
+        def points_in_bbox(points, bbox):
+            # Define bounding box
+            xmin, ymin, zmin, xmax, ymax, zmax = bbox
+            # Use boolean index to determine whether the point is in the bounding box
+            inside = np.all(
+                (points >= [xmin, ymin, zmin]) & (points <= [xmax, ymax, zmax]), axis=1
+            )
+            return points[inside]
+
+        points_in_bbox_3d = points_in_bbox(points_position, bbox_3d)
+        return len(points_in_bbox_3d)
+
     def _add_particle(self, position, size):
         stage = get_current_stage()
         particle_system_path = Sdf.Path("/World/Objects/part/particleSystem")
-        if stage.GetPrimAtPath(particle_system_path) != None:
-            omni.kit.commands.execute(
-                "DeletePrims", paths=[particle_system_path], destructive=False
-            )
+        if stage.GetPrimAtPath(particle_system_path):
+            return
+
         # create a scene with gravity and up axis:
         scene = self.scene
-        Particle_Contact_Offset = 0.0045
+        Particle_Contact_Offset = 0.004
         Sample_Volume = 1
         particle_system = particleUtils.add_physx_particle_system(
             stage,
@@ -1129,18 +1255,18 @@ class CommandController:
             particle_system_enabled=True,
             simulation_owner=scene.GetPath(),
             particle_contact_offset=Particle_Contact_Offset,
-            max_velocity=0.5,
+            max_velocity=0.3,
         )
         # create particle material and assign it to the system:
         particle_material_path = Sdf.Path("/World/Objects/part/particleMaterial")
         particleUtils.add_pbd_particle_material(
             stage,
             particle_material_path,
-            friction=0,
+            friction=0.0,
             density=1000.0,
-            viscosity=0,
-            cohesion=0.0,
-            surface_tension=0.0,
+            viscosity=0.0091,
+            cohesion=0.01,
+            surface_tension=0.0074,
             drag=0.0,
             lift=0.0,
         )  # Set the viscosity.
@@ -1234,7 +1360,6 @@ class CommandController:
                 prim = get_prim_at_path(path)
                 if prim.IsA(UsdGeom.Mesh):
                     items.append(path)
-        self.object_prims.append(prim_path)
         object_rep = rep.get.prims(path_pattern=prim_path, prim_types=["Xform"])
 
         with object_rep:
@@ -1252,6 +1377,7 @@ class CommandController:
             self.usd_objects[prim_path] = usd_object
         else:
             self.usd_objects[prim_path] = usd_object
+            self.object_prims["object_prims"].append(prim_path)
             for _prim in items:
                 geometry_prim = SingleGeometryPrim(prim_path=_prim)
                 obj_physics_prim_path = f"{_prim}/object_physics"
@@ -1277,7 +1403,7 @@ class CommandController:
 
                 if object_material != "general":
                     if object_material == "Glass":
-                        material_prim = "/World/Materials/OmniGlass"
+                        material_prim = "/World/G1_video/Looks_01/OmniGlass"
                         material = OmniGlass(prim_path=material_prim)
                         geometry_prim.apply_visual_material(material)
                     elif object_material not in self.materials:
@@ -1295,11 +1421,15 @@ class CommandController:
                         UsdShade.MaterialBindingAPI(prim).Bind(Material)
             if self.enable_physics:
                 prim = stage.GetPrimAtPath(prim_path)
-                utils.setRigidBody(prim, model_type, False)
+                if model_type != "None":
+                    utils.setRigidBody(prim, model_type, False)
                 rigid_prim = SingleRigidPrim(prim_path=prim_path)
+                # rigid_prim.set_mass(10) // deprecated
                 # Get Physics API
                 physics_api = UsdPhysics.MassAPI.Apply(rigid_prim.prim)
                 physics_api.CreateMassAttr().Set(object_mass)
+                # Set center of gravity offset (unit: meters)
+                # physics_api.CreateCenterOfMassAttr().Set(Gf.Vec3f(object_com[0], object_com[1],object_com[2]))
 
             for _prim in items:
                 # disable kettle lid collision
@@ -1378,8 +1508,24 @@ class CommandController:
         )
         light.initialize()
 
+    def _get_joint_states(self):
+        articulation = self._get_articulation()
+        joint_position = articulation.get_joint_positions()
+        joint_velocity = articulation.get_joint_velocities()
+        joint_effort = articulation.get_measured_joint_efforts()
+
+        joint_states = {}
+        for idx in range(len(articulation.dof_names)):
+            name = articulation.dof_names[idx]
+            joint_states[name] = (
+                float(joint_position[idx]),
+                float(joint_velocity[idx]),
+                float(joint_effort[idx]),
+            )
+        return joint_states
+
     def _get_joint_positions(self):
-        self._initialize_articulation()
+        self._get_articulation()
         articulation = self.ui_builder.articulation
         joint_positions = articulation.get_joint_positions()
         ids = {}
@@ -1400,7 +1546,7 @@ class CommandController:
         return items
 
     def _init_grippers(self):
-        robot = self._initialize_articulation()
+        robot = self._get_articulation()
         num_dof = self.ui_builder.articulation.num_dof
         if self.gripper_type == "surface":
             self.gripper_L = SurfaceGripper(
@@ -1428,7 +1574,7 @@ class CommandController:
             joint_prim_names=self.finger_names["left"],
             joint_closed_velocities=self.closed_velocities["left"],
             joint_opened_positions=self.opened_positions["left"],
-            joint_controll_prim=self.gripper_controll_joint["left"],
+            joint_control_prim=self.gripper_control_joint["left"],
             gripper_type=self.gripper_type,
             gripper_max_force=self.gripper_max_force,
         )
@@ -1443,7 +1589,7 @@ class CommandController:
             joint_prim_names=self.finger_names["right"],
             joint_closed_velocities=self.closed_velocities["right"],
             joint_opened_positions=self.opened_positions["right"],
-            joint_controll_prim=self.gripper_controll_joint["right"],
+            joint_control_prim=self.gripper_control_joint["right"],
             gripper_type=self.gripper_type,
             gripper_max_force=self.gripper_max_force,
         )
@@ -1454,7 +1600,47 @@ class CommandController:
             dof_names=robot.dof_names,
         )
 
+        self._init_gripper_contact_end()
+
+        self.csensor_rl = ContactSensor(
+            prim_path=f"{self.gripper_contact_ends[0]}/collisions/Contact_Sensor",
+            name="Contact_Sensor_RL",
+            frequency=60,
+            translation=np.array([0, 0, 0]),
+            min_threshold=0,
+            max_threshold=10000000,
+            radius=-1,
+        )
+        self.csensor_rr = ContactSensor(
+            prim_path=f"{self.gripper_contact_ends[1]}/collisions/Contact_Sensor",
+            name="Contact_Sensor_RR",
+            frequency=60,
+            translation=np.array([0, 0, 0]),
+            min_threshold=0,
+            max_threshold=10000000,
+            radius=-1,
+        )
+
+        stage = omni.usd.get_context().get_stage()
+
+        def enable_collsion_api(prim_str):
+            collision_prim = stage.GetPrimAtPath(prim_str)
+            # collision_prim.CreateAttribute("physx:collisionEnabled", Sdf.ValueTypeNames.Bool).Set(True)
+            UsdPhysics.CollisionAPI.Apply(collision_prim)
+
+        # physx = omni.physx.get_physx_interface()
+
+        for p in [
+            f"{self.gripper_contact_ends[0]}/collisions",
+            f"{self.gripper_contact_ends[1]}/collisions",
+        ]:
+            logger.info("enable collision api for {p}")
+            enable_collsion_api(p)
+        self.csensor_rl.initialize()
+        self.csensor_rr.initialize()
         self.gripper_initialized = True
+        self.ui_builder.my_world.stop()
+        self._play()
 
         return robot
 
@@ -1509,11 +1695,8 @@ class CommandController:
         return position, rotation
 
     def _get_ik_status(self, target_position, target_rotation, isRight, ObsAvoid=False):
-        joint_positions = {}
-        if self.ui_builder.curoboMotion == None:
-            return False, joint_positions
-
         SingleXFormPrim("/ik_pos", position=target_position)
+        joint_positions = {}
         if not ObsAvoid:
             is_success, joint_state = self.ui_builder._get_ik_status(
                 target_position, target_rotation, isRight

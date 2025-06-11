@@ -48,17 +48,7 @@ class TaskHook(HookBase):
 
     def start_callback(self, env, _):
         init_joint_state = self.policy.reset()
-        if init_joint_state != None:
-            env.robot.client.set_joint_positions(init_joint_state, False)
-
-            env.robot.open_gripper(id="right")
-            env.robot.open_gripper(id="left")
-
-            env.robot.reset_pose = {
-                "right": env.robot.get_ee_pose(ee_type="gripper", id="right"),
-                "left": env.robot.get_ee_pose(ee_type="gripper", id="left"),
-            }
-            time.sleep(2)
+        print("SET INIT POS", init_joint_state)
 
     def step_callback(self, env, action):
         pass

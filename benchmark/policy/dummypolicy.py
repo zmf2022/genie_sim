@@ -38,7 +38,7 @@ def xyzrpy2mat(xyzrpy):
 
 class DummyPolicy(BasePolicy):
     def __init__(self, task_name, action_step=30, save_res=False):
-        super().__init__()
+        super().__init__(task_name)
 
         # init DummyInfer
         self.task_name = task_name

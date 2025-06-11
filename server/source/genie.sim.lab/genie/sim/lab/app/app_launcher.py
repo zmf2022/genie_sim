@@ -25,10 +25,7 @@ logger = Logger()  # Create singleton instance
 with contextlib.suppress(ModuleNotFoundError):
     import isaacsim
 
-if os.getenv("ISAACSIM_VERSION") == "v45":
-    from isaacsim import SimulationApp
-else:
-    from omni.isaac.kit import SimulationApp
+from isaacsim import SimulationApp
 
 
 class AppLauncher:

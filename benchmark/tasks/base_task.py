@@ -2,20 +2,24 @@
 # Author: Genie Sim Team
 # License: Mozilla Public License Version 2.0
 
-from abc import ABCMeta, abstractmethod
+from abc import abstractmethod
+from ader.action.action_parsing import do_parsing
 
 
 class BaseTask:
-    """
-    Base Task class.
-    Task-specific reset_scene, reset_agent, get_task_obs, step methods are implemented in subclasses
-    Subclasses are expected to populate self.reward_functions and self.termination_conditions
-    """
 
     def __init__(self, env):
         self.config = env.task_info
-        self.reward_functions = []
-        self.termination_conditions = []
+
+        self.problem_name, self.objects, self.action, self.task_progress = do_parsing(
+            env.specific_task_name, env
+        )
+
+    def update_progress(self, id, progress):
+        for item in self.task_progress:
+            if item["id"] == id:
+                item["progress"] = progress
+                break
 
     @abstractmethod
     def reset_scene(self, env):
@@ -45,51 +49,6 @@ class BaseTask:
 
     def reset(self, env):
         self.reset_variables(env)
-        for termination_condition in self.termination_conditions:
-            termination_condition.reset(self, env)
-
-    def get_reward(self, env, info={}):
-        """
-        Aggreate reward functions
-
-        :param env: environment instance
-        :param collision_links: collision links after executing action
-        :param action: the executed action
-        :param info: additional info
-        :return reward: total reward of the current timestep
-        :return info: additional info
-        """
-        reward = 0.0
-        for reward_function in self.reward_functions:
-            reward += reward_function.get_reward(self, env)
-
-        return reward, info
-
-    def get_termination(self, env, info={}):
-        """
-        Aggreate termination conditions
-
-        :param env: environment instance
-        :param collision_links: collision links after executing action
-        :param action: the executed action
-        :param info: additional info
-        :return done: whether the episode has terminated
-        :return info: additional info
-        """
-        done = False
-        success = False
-        for condition in self.termination_conditions:
-            d, s = condition.get_termination(self, env)
-            done = done or d
-            success = success or s
-            if d:
-                info["done_cond_name"] = type(condition).__name__
-                break
-
-        info["done"] = done
-        info["success"] = success
-
-        return done, info
 
     @abstractmethod
     def get_task_obs(self, env):

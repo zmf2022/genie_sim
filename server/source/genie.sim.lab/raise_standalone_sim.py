@@ -16,11 +16,17 @@ parser.add_argument("--physics_step", type=int, default=120)
 parser.add_argument("--isaacsim_version", type=str, default="v45")
 parser.add_argument("--rendering_step", type=int, default=30)
 parser.add_argument("--enable_curobo", type=bool, default=False)
-parser.add_argument("--rospub", action="store_true", help="start rospub")
-parser.add_argument("--record_img", action="store_true", help="start recording images")
+parser.add_argument("--reset_fallen", type=bool, default=False)
+parser.add_argument("--rospub", action="store_true", help="start rospub", default=True)
+parser.add_argument("--record_img", action="store_true", default=False)
+parser.add_argument("--record_video", action="store_true", default=False)
 parser.add_argument("--render_mode", type=str, default="RaytracedLighting")
+parser.add_argument("--disable_physics", action="store_true", default=False)
 parser.add_argument(
-    "--disable_physics", action="store_true", default=False, help="disable physics"
+    "--enable_gpu_dynamics",
+    action="store_true",
+    default=False,
+    help="enable_gpu_dynamics",
 )
 
 import base_utils
@@ -44,24 +50,16 @@ simulation_app = app_launcher.app
 
 import omni
 
-if os.getenv("ISAACSIM_VERSION") == "v45":
-    from isaacsim.core.api import World
-else:
-    from omni.isaac.core import World
+from isaacsim.core.api import World
 
 from genie.sim.lab.controllers import CommandController
 from robot.isaac_sim.grpc_server import GrpcServer
 from genie.sim.lab.app.ui_builder import UIBuilder
 
 if args_cli.rospub:
-    if os.getenv("ISAACSIM_VERSION") == "v45":
-        from isaacsim.core.utils import extensions
+    from isaacsim.core.utils import extensions
 
-        extensions.enable_extension("isaacsim.ros2.bridge")
-    else:
-        from omni.isaac.core.utils import extensions
-
-        extensions.enable_extension("omni.isaac.ros2_bridge")
+    extensions.enable_extension("isaacsim.ros2.bridge")
 
 
 def main():
@@ -74,18 +72,21 @@ def main():
         rendering_dt=1.0 / args_cli.rendering_step,
     )
     # Override CPU setting to use GPU
-    physx_interface = omni.physx.get_physx_interface()
-    physx_interface.overwrite_gpu_setting(1)
-    world._physics_context.enable_gpu_dynamics(flag=True)
-    world._physics_context.enable_ccd(flag=True)
+    if args_cli.enable_gpu_dynamics:
+        physx_interface = omni.physx.get_physx_interface()
+        physx_interface.overwrite_gpu_setting(1)
+        world._physics_context.enable_gpu_dynamics(flag=True)
+        world._physics_context.enable_ccd(flag=True)
     ui_builder = UIBuilder(world=world)
     server_function = CommandController(
         ui_builder=ui_builder,
         enable_physics=not args_cli.disable_physics,
         enable_curobo=args_cli.enable_curobo,
+        reset_fallen=args_cli.reset_fallen,
         rendering_step=args_cli.rendering_step,
         publish_ros=args_cli.rospub,
         record_images=args_cli.record_img,
+        record_video=args_cli.record_video,
     )
     rpc_server = GrpcServer(server_function=server_function)
     rpc_server.start()

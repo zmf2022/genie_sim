@@ -1,7 +1,8 @@
 build/
 build_/
-.vscode/
+
 saved_task/*
+saved_task/
 
 assets/
 assets
@@ -13,7 +14,6 @@ assets
 *.tmp/
 *.whl
 output/
-**/*/saved_task/
 record*/
 *.hdf5
 
@@ -21,4 +21,6 @@ record*/
 *.tar.gz
 *.zip
 *.7z
+3rdparty
 !3rdparty/**
+server/source/genie.sim.lab/robot_cfg/*_recording.json

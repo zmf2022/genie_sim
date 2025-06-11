@@ -13,6 +13,7 @@ from rosbags.highlevel import AnyReader
 from rosbags.image import message_to_cvimage
 
 from base_utils.logger import Logger
+from PIL import Image
 
 logger = Logger()  # Create singleton instance
 
@@ -31,9 +32,12 @@ class Ros_Extrater:
         robot_name="G1",
         scene_name="test",
         scene_usd="",
+        scene_glb="",
         object_names={},
         frame_status=[],
         fps=30,
+        with_img=False,
+        with_video=False,
     ):
         self.bag_file = bag_file
         self.output_dir = output_dir
@@ -43,19 +47,33 @@ class Ros_Extrater:
         self.robot_name = robot_name
         self.scene_name = scene_name
         self.scene_usd = scene_usd
+        self.scene_glb = scene_glb
         self.object_names = []
-        for name in object_names:
+        self.articulated_object_names = []
+        for name in object_names["object_prims"]:
             if name not in self.object_names:
                 self.object_names.append(name)
+
+        for name in object_names["articulated_object_prims"]:
+            self.articulated_object_names.append(name)
         self.frame_status = frame_status
         self.fps = fps
+        self.with_img = with_img
+        self.with_video = with_video
 
     def post_process_file_name(self, file_name, extra_name="", remove_name=False):
-        if remove_name:
-            index = file_name.rfind("_")
-            file_name = file_name[:index] + extra_name
-        else:
-            file_name = file_name + extra_name
+        if "G1" in self.robot_name:
+            if "Head" in file_name:
+                file_name = "head" + extra_name
+            elif "Right" in file_name:
+                file_name = "hand_right" + extra_name
+            elif "Left" in file_name:
+                file_name = "hand_left" + extra_name
+            elif "Top" in file_name:
+                file_name = "head_front_fisheye" + extra_name
+            elif remove_name:
+                index = file_name.rfind("_")
+                file_name = file_name[:index] + extra_name
         return file_name
 
     def extract(self):
@@ -72,11 +90,14 @@ class Ros_Extrater:
                     image_topics[connection.topic] = []
                     if connection.msgcount < message_step:
                         message_step = connection.msgcount
-                elif connection.msgtype == "sensor_msgs/msg/JointState":
+                elif connection.msgtype == "sensor_msgs/msg/JointState" and (
+                    connection.topic == "/joint_states"
+                    or str(connection.topic).startswith("/articulated/")
+                ):
                     joint_topics[connection.topic] = []
                     if connection.msgcount < physics_message_step:
                         physics_message_step = connection.msgcount
-                elif connection.topic == "/obj_tf":
+                elif connection.topic == "/tf":
                     tf_topics[connection.topic] = []
                     if connection.msgcount < physics_message_step:
                         physics_message_step = connection.msgcount
@@ -86,9 +107,16 @@ class Ros_Extrater:
             for connection, timestamp, msg in reader.messages():
                 if connection.msgtype == "sensor_msgs/msg/Image":
                     image_topics[connection.topic].append(msg)
-                elif connection.msgtype == "sensor_msgs/msg/JointState":
+                    rgb_msg = reader.deserialize(msg, "sensor_msgs/msg/Image")
+                    file_name = rgb_msg.header.frame_id
+                    file_name = self.post_process_file_name(file_name)
+                    self.imag_file_name.append(file_name)
+                elif connection.msgtype == "sensor_msgs/msg/JointState" and (
+                    connection.topic == "/joint_states"
+                    or str(connection.topic).startswith("/articulated/")
+                ):
                     joint_topics[connection.topic].append(msg)
-                elif connection.topic == "/obj_tf":
+                elif connection.topic == "/tf":
                     tf_topics[connection.topic].append(msg)
                 elif connection.msgtype == "std_msgs/msg/String":
                     lable_msg = reader.deserialize(msg, "std_msgs/msg/String").data
@@ -109,28 +137,33 @@ class Ros_Extrater:
                             rgb_topics[file_name].append(msg)
                             init_time[file_name] = current_time
 
+            self.imag_file_name = list(set(self.imag_file_name))
             # init_start_time
             physics_start_time = 0
-            for key in image_topics:
-                if len(image_topics[key]) < 1:
-                    return
-                msg = reader.deserialize(image_topics[key][0], "sensor_msgs/msg/Image")
-                image_time_stamp = (float)(msg.header.stamp.sec) + (float)(
-                    msg.header.stamp.nanosec
-                ) * np.power(10.0, -9)
-                if image_time_stamp > physics_start_time:
-                    physics_start_time = image_time_stamp
-            for key in rgb_topics:
-                if len(rgb_topics[key]) < 1:
-                    return
-                msg = reader.deserialize(
-                    rgb_topics[key][0], "sensor_msgs/msg/CompressedImage"
-                )
-                image_time_stamp = (float)(msg.header.stamp.sec) + (float)(
-                    msg.header.stamp.nanosec
-                ) * np.power(10.0, -9)
-                if image_time_stamp > physics_start_time:
-                    physics_start_time = image_time_stamp
+            if self.with_img:
+                for key in image_topics:
+                    if len(image_topics[key]) < 1:
+                        logger.error("Recording failed, no image data:", key)
+                        return
+                    msg = reader.deserialize(
+                        image_topics[key][0], "sensor_msgs/msg/Image"
+                    )
+                    image_time_stamp = (float)(msg.header.stamp.sec) + (float)(
+                        msg.header.stamp.nanosec
+                    ) * np.power(10.0, -9)
+                    if image_time_stamp > physics_start_time:
+                        physics_start_time = image_time_stamp
+                for key in rgb_topics:
+                    if len(rgb_topics[key]) < 1:
+                        return
+                    msg = reader.deserialize(
+                        rgb_topics[key][0], "sensor_msgs/msg/CompressedImage"
+                    )
+                    image_time_stamp = (float)(msg.header.stamp.sec) + (float)(
+                        msg.header.stamp.nanosec
+                    ) * np.power(10.0, -9)
+                    if image_time_stamp > physics_start_time:
+                        physics_start_time = image_time_stamp
             for key in joint_topics:
                 if len(joint_topics[key]) < 1:
                     return
@@ -153,42 +186,45 @@ class Ros_Extrater:
                     physics_start_time = tf_time_stamp
 
             # alignment
-            for key in image_topics:
-                msg = reader.deserialize(image_topics[key][0], "sensor_msgs/msg/Image")
-                image_time_stamp = (float)(msg.header.stamp.sec) + (float)(
-                    msg.header.stamp.nanosec
-                ) * np.power(10.0, -9)
-                while image_time_stamp < physics_start_time:
-                    del image_topics[key][0]
-                    if len(image_topics[key]) < 1:
-                        return
+            if self.with_img:
+                for key in image_topics:
                     msg = reader.deserialize(
                         image_topics[key][0], "sensor_msgs/msg/Image"
                     )
                     image_time_stamp = (float)(msg.header.stamp.sec) + (float)(
                         msg.header.stamp.nanosec
                     ) * np.power(10.0, -9)
-                if len(image_topics[key]) < message_step:
-                    message_step = len(image_topics[key])
-            for key in rgb_topics:
-                msg = reader.deserialize(
-                    rgb_topics[key][0], "sensor_msgs/msg/CompressedImage"
-                )
-                image_time_stamp = (float)(msg.header.stamp.sec) + (float)(
-                    msg.header.stamp.nanosec
-                ) * np.power(10.0, -9)
-                while image_time_stamp < physics_start_time:
-                    del rgb_topics[key][0]
-                    if len(rgb_topics[key]) < 1:
-                        return
+                    while image_time_stamp < physics_start_time:
+                        del image_topics[key][0]
+                        if len(image_topics[key]) < 1:
+                            return
+                        msg = reader.deserialize(
+                            image_topics[key][0], "sensor_msgs/msg/Image"
+                        )
+                        image_time_stamp = (float)(msg.header.stamp.sec) + (float)(
+                            msg.header.stamp.nanosec
+                        ) * np.power(10.0, -9)
+                    if len(image_topics[key]) < message_step:
+                        message_step = len(image_topics[key])
+                for key in rgb_topics:
                     msg = reader.deserialize(
                         rgb_topics[key][0], "sensor_msgs/msg/CompressedImage"
                     )
                     image_time_stamp = (float)(msg.header.stamp.sec) + (float)(
                         msg.header.stamp.nanosec
                     ) * np.power(10.0, -9)
-                if len(rgb_topics[key]) < message_step:
-                    message_step = len(rgb_topics[key])
+                    while image_time_stamp < physics_start_time:
+                        del rgb_topics[key][0]
+                        if len(rgb_topics[key]) < 1:
+                            return
+                        msg = reader.deserialize(
+                            rgb_topics[key][0], "sensor_msgs/msg/CompressedImage"
+                        )
+                        image_time_stamp = (float)(msg.header.stamp.sec) + (float)(
+                            msg.header.stamp.nanosec
+                        ) * np.power(10.0, -9)
+                    if len(rgb_topics[key]) < message_step:
+                        message_step = len(rgb_topics[key])
             for key in joint_topics:
                 while joint_time_stamp < physics_start_time:
                     del joint_topics[key][0]
@@ -212,59 +248,56 @@ class Ros_Extrater:
                 if len(tf_topics[key]) < physics_message_step:
                     physics_message_step = len(tf_topics[key])
 
-            render_time_step = []
-            if message_step > 0 and message_step < 1000000:
-                for idx in range(message_step):
-                    depth_dir = self.output_dir + "/camera/{}".format(idx)
-                    rgb_dir = self.output_dir + "/camera/{}".format(idx)
-                    os.makedirs(depth_dir, exist_ok=True)
-                    os.makedirs(rgb_dir, exist_ok=True)
-                    stamp = {}
-                    for key in image_topics:
-                        msg = reader.deserialize(
-                            image_topics[key][idx], "sensor_msgs/msg/Image"
-                        )
-                        file_name = key.split("/")[-1]
-                        stamp[file_name] = (float)(msg.header.stamp.sec) + (float)(
-                            msg.header.stamp.nanosec
-                        ) * np.power(10.0, -9)
-                        if "depth" in file_name:
-                            img = message_to_cvimage(msg, "32FC1") * 1000
-                            file_name = self.post_process_file_name(
-                                file_name, remove_name=True
+            if self.with_img:
+                render_time_step = []
+                if message_step > 0 and message_step < 1000000:
+                    for idx in range(message_step):
+                        img_dir = self.output_dir + "/camera/{}".format(idx)
+                        os.makedirs(img_dir, exist_ok=True)
+                        stamp = {}
+                        for key in image_topics:
+                            msg = reader.deserialize(
+                                image_topics[key][idx], "sensor_msgs/msg/Image"
                             )
-                            cv2.imwrite(
-                                depth_dir + "/{}.png".format(file_name),
-                                img.astype(np.uint16),
+                            file_name = key.split("/")[-1]
+                            stamp[file_name] = (float)(msg.header.stamp.sec) + (float)(
+                                msg.header.stamp.nanosec
+                            ) * np.power(10.0, -9)
+                            if "genie_sim" in key:
+                                if "depth" in file_name:
+                                    img = message_to_cvimage(msg, "32FC1") * 1000
+                                    file_name = self.post_process_file_name(
+                                        file_name, remove_name=True
+                                    )
+                                    cv2.imwrite(
+                                        f"{img_dir}/{file_name}_depth.png",
+                                        img.astype(np.uint16),
+                                    )
+                                else:
+                                    img = message_to_cvimage(msg, "bgr8")
+                                    file_name = self.post_process_file_name(file_name)
+                                    cv2.imwrite(f"{img_dir}/{file_name}.jpg", img)
+                        for key in rgb_topics:
+                            msg = reader.deserialize(
+                                rgb_topics[key][idx], "sensor_msgs/msg/CompressedImage"
                             )
-                        elif "semantic" in file_name:
-                            img = message_to_cvimage(msg, "32FC1")
-                            img = np.where((img == 0) | (img == 1), 0, img - 1)
-                            file_name = self.post_process_file_name(
-                                file_name, "_semantic"
-                            )
-                            cv2.imwrite(depth_dir + "/{}.png".format(file_name), img)
-                    for key in rgb_topics:
-                        msg = reader.deserialize(
-                            rgb_topics[key][idx], "sensor_msgs/msg/CompressedImage"
-                        )
-                        file_name = key.split("/")[-1]
-                        stamp[file_name] = (float)(msg.header.stamp.sec) + (float)(
-                            msg.header.stamp.nanosec
-                        ) * np.power(10.0, -9)
-                        img = message_to_cvimage(
-                            msg, "bgr8"
-                        )  # change encoding type if needed
-                        file_name = self.post_process_file_name(file_name)
-                        cv2.imwrite(rgb_dir + "/{}.jpg".format(file_name), img)
-                    min_value = min(stamp.values())
-                    for key in stamp:
-                        stamp[key] = min_value
-                    with open(
-                        depth_dir + "/time_stamp.json", "w", encoding="utf-8"
-                    ) as f:
-                        json.dump(stamp, f, indent=4)
-                    render_time_step.append(str(list(stamp.values())[0]))
+                            file_name = key.split("/")[-1]
+                            stamp[file_name] = (float)(msg.header.stamp.sec) + (float)(
+                                msg.header.stamp.nanosec
+                            ) * np.power(10.0, -9)
+                            img = message_to_cvimage(
+                                msg, "bgr8"
+                            )  # change encoding type if needed
+                            file_name = self.post_process_file_name(file_name)
+                            cv2.imwrite(img_dir + "/{}.jpg".format(file_name), img)
+                        min_value = min(stamp.values())
+                        for key in stamp:
+                            stamp[key] = min_value
+                        with open(
+                            img_dir + "/time_stamp.json", "w", encoding="utf-8"
+                        ) as f:
+                            json.dump(stamp, f, indent=4)
+                        render_time_step.append(str(list(stamp.values())[0]))
 
             def get_pose(xyz: np.ndarray, quat_wxyz: np.ndarray) -> np.ndarray:
                 def get_rotation_matrix_from_quaternion(quat: np.ndarray) -> np.ndarray:
@@ -296,12 +329,15 @@ class Ros_Extrater:
                 return pose
 
             result = {
+                "schema": "simubotix.agibot.com/episode/v6",
                 "scene": {
                     "name": self.scene_name,
                     "metadata": None,
                     "scene_usd": self.scene_usd,
+                    "scene_glb": self.scene_glb,
                 },
                 "objects": [],
+                "articulated_objects": [],
                 "cameras": self.camera_info,
                 "robot": {"name": self.robot_name, "metadata": None},
                 "frames": [],
@@ -309,6 +345,10 @@ class Ros_Extrater:
             }
             for name in self.object_names:
                 result["objects"].append(
+                    {"name": name.split("/")[-1], "metadata": None}
+                )
+            for name in self.articulated_object_names:
+                result["articulated_objects"].append(
                     {"name": name.split("/")[-1], "metadata": None}
                 )
             state_info = {"timestamp": []}
@@ -342,6 +382,9 @@ class Ros_Extrater:
                 "velocity": [],
             }
             for idx in range(physics_message_step):
+                # single_state_info= {
+                #     "object_position": {}
+                # }
                 single_frame_state = {
                     "objects": {},
                     "articulated_object": {},
@@ -349,7 +392,6 @@ class Ros_Extrater:
                     "ee": {},
                     "robot": {},
                 }
-                art_key = ""
                 for key in joint_topics:
                     if key == "/joint_states":
                         msg = reader.deserialize(
@@ -379,7 +421,6 @@ class Ros_Extrater:
                                 "joint_effort": msg.effort.tolist(),
                             }
                         }
-                        art_key = key.split("/")[-1]
                 single_frame_state["time_stamp"] = joint_timestamp
                 frame_idx = -1
                 if len(self.frame_status) > 0:
@@ -407,7 +448,6 @@ class Ros_Extrater:
                     msg = reader.deserialize(
                         tf_topics[key][idx], "tf2_msgs/msg/TFMessage"
                     )
-                    single_object_info = {}
                     for transform in msg.transforms:
                         position = np.array(
                             [
@@ -424,7 +464,7 @@ class Ros_Extrater:
                                 transform.transform.rotation.z,
                             ]
                         )
-                        if "right_gripper_center" in transform.child_frame_id:
+                        if "gripper_r_center_link" in transform.child_frame_id:
                             single_ee_info_r = {
                                 "time_stamp": (float)(transform.header.stamp.sec)
                                 + (float)(transform.header.stamp.nanosec)
@@ -435,7 +475,7 @@ class Ros_Extrater:
                             single_frame_state["ee"]["right"] = {
                                 "pose": (get_pose(*(position, rotation)).tolist())
                             }
-                        elif "gripper_center" in transform.child_frame_id:
+                        elif "gripper_l_center_link" in transform.child_frame_id:
                             single_ee_info_l = {
                                 "time_stamp": (float)(transform.header.stamp.sec)
                                 + (float)(transform.header.stamp.nanosec)
@@ -446,10 +486,6 @@ class Ros_Extrater:
                             single_frame_state["ee"]["left"] = {
                                 "pose": (get_pose(*(position, rotation)).tolist())
                             }
-                        elif "base_link" in transform.child_frame_id:
-                            single_frame_state["robot"][
-                                "pose"
-                            ] = get_pose(*(position, rotation)).tolist()
                         elif (
                             "Camera" in transform.child_frame_id
                             or "Fisheye" in transform.child_frame_id
@@ -470,19 +506,24 @@ class Ros_Extrater:
                                     get_pose(*(position, rotation)) @ rotation_x_180
                                 ).tolist()
                             }
-                        elif "selfModeling_table_001_Base" in transform.child_frame_id:
-                            single_frame_state["articulated_object"][art_key][
-                                "pose"
-                            ] = get_pose(*(position, rotation)).tolist()
                         else:
-                            if (
-                                "selfModeling_table" not in transform.child_frame_id
-                                and "Handle" not in transform.child_frame_id
-                            ):
+                            if "link" not in transform.child_frame_id:
                                 single_frame_state["objects"][
                                     transform.child_frame_id
                                 ] = {"pose": get_pose(*(position, rotation)).tolist()}
-                if str(joint_timestamp) in render_time_step:
+                            if (
+                                "world" == transform.header.frame_id
+                                and "base_link" == transform.child_frame_id
+                            ):
+
+                                single_frame_state["robot"]["pose"] = get_pose(
+                                    *(position, rotation)
+                                ).tolist()
+                            # single_object_info[transform.child_frame_id] ={
+                            #                     "position": [transform.transform.translation.x, transform.transform.translation.y, transform.transform.translation.z],
+                            #                     "rotation": [transform.transform.rotation.w, transform.transform.rotation.x, transform.transform.rotation.y, transform.transform.rotation.z]}
+                # if str(joint_timestamp) in render_time_step:
+                if True:  # To be optimized to align
                     result["frames"].append(single_frame_state)
                     # align hdf5
                     state_info["timestamp"].append(joint_timestamp)
@@ -503,7 +544,6 @@ class Ros_Extrater:
                     episode_state["end"]["orientation"].append(
                         [single_ee_info_l["rotation"], single_ee_info_r["rotation"]]
                     )
-                    # better joint_position to width
                     if len(single_joint_info["joint_position"]) > 18:
                         episode_state["effector"]["position"].append(
                             [
@@ -603,39 +643,54 @@ class Ros_Extrater:
                         value["id"] = idx
                         lable_result.append(value)
                 result["semantic_lables"] = lable_result
-            with open(self.output_dir + "/state.json", "w", encoding="utf-8") as f:
-                json.dump(result, f, indent=4)
-            os.makedirs(self.output_dir + "/parameters/camera", exist_ok=True)
-            with open(
-                self.output_dir + "/parameters/camera/state.json", "w", encoding="utf-8"
-            ) as f:
-                json.dump(result, f, indent=4)
 
-            try:
-                logger.info(self.output_dir)
-                file_name = self.output_dir.split("/")[-1] + "_0"
-                for image_file in self.imag_file_name:
-                    subprocess.run(
-                        [
-                            "ffmpeg",
-                            "-framerate",
-                            "30",
-                            "-i",
-                            f"{self.output_dir}/camera/%d/{image_file}.jpg",
-                            "-c:v",
-                            "libx265",
-                            "-b:v",
-                            "3000k",
-                            "-preset",
-                            "slow",
-                            "-crf",
-                            "18",
-                            f"{self.output_dir}/{image_file}.mp4",
-                        ]
-                    )
-                logger.info(f"Video file saved to {self.output_dir}")
-                subprocess.run(["rm", "-Rf", f"{self.output_dir}/{file_name}.db3"])
-                logger.info(f"Successfully transfer h265")
-            except subprocess.CalledProcessError as e:
-                logger.error(f"Error removing file: {e}")
-                sys.exit(1)
+            state_out_dir = self.output_dir + "/state.json"
+            with open(state_out_dir, "w", encoding="utf-8") as f:
+                json.dump(result, f, indent=4)
+            logger.info(f"State file saved to {state_out_dir}")
+
+            os.makedirs(self.output_dir + "/parameters/camera", exist_ok=True)
+            # with open(
+            #     self.output_dir + "/parameters/camera/state.json", "w", encoding="utf-8"
+            # ) as f:
+            #     json.dump(result, f, indent=4)
+
+            def delete_db3_files(directory):
+                for file in Path(directory).rglob("*.db3"):
+                    try:
+                        file.unlink()
+                        logger.warning(f"Delete file: {file}")
+                    except OSError as e:
+                        logger.error(f"Delete file failed: {file}: {e}")
+
+            delete_db3_files(self.output_dir)
+
+            if self.with_video:
+                try:
+                    logger.info(self.output_dir)
+                    file_name = self.output_dir.split("/")[-1] + "_0"
+                    for image_file in self.imag_file_name:
+                        subprocess.run(
+                            [
+                                "ffmpeg",
+                                "-framerate",
+                                "30",
+                                "-i",
+                                f"{self.output_dir}/camera/%d/{image_file}.jpg",
+                                "-c:v",
+                                "libx265",
+                                "-b:v",
+                                "3000k",
+                                "-preset",
+                                "slow",
+                                "-crf",
+                                "18",
+                                f"{self.output_dir}/{image_file}.mp4",
+                            ]
+                        )
+                    logger.info(f"Video file saved to {self.output_dir}")
+                    subprocess.run(["rm", "-Rf", f"{self.output_dir}/{file_name}.db3"])
+                    logger.info(f"Successfully transfer h265")
+                except subprocess.CalledProcessError as e:
+                    logger.error(f"Error removing file: {e}")
+                    sys.exit(1)

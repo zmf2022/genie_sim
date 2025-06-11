@@ -1,4 +1,3 @@
-
 # Copyright (c) 2023-2025, AgiBot Inc. All Rights Reserved.
 # Author: Genie Sim Team
 # License: Mozilla Public License Version 2.0
@@ -52,7 +51,7 @@ class RobotCfg(Robot):
             self.end_effector_name = robot_cfg["gripper"]["end_effector_name"]["left"]
         self.end_effector_prim_path = robot_cfg["gripper"]["end_effector_prim_path"]
         self.finger_names = robot_cfg["gripper"]["finger_names"]
-        self.gripper_controll_joint = robot_cfg["gripper"]["gripper_controll_joint"]
+        self.gripper_control_joint = robot_cfg["gripper"]["gripper_control_joint"]
         self.opened_positions = robot_cfg["gripper"]["opened_positions"]
         self.closed_velocities = robot_cfg["gripper"]["closed_velocities"]
         self.action_deltas = np.array([-0.1, -0.1])

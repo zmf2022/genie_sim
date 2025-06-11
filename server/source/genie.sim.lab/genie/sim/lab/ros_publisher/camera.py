@@ -2,21 +2,24 @@
 # Author: Genie Sim Team
 # License: Mozilla Public License Version 2.0
 
+import os
+
 import omni
 import omni.graph.core as og
 import omni.replicator.core as rep
 import omni.syntheticdata
 import omni.syntheticdata._syntheticdata as sd
-from omni.isaac.sensor import Camera
-import os
+
+from isaacsim.sensors.camera import Camera
+
+NODE_NAMESPACE = "genie_sim"
 
 
-def publish_boundingbox2d_loose(camera: Camera, freq: int, topic=""):
+def publish_boundingbox2d_loose(camera: Camera, step_size: int, topic=""):
     render_product = camera._render_product_path
-    step_size = int(60 / freq)
     topic_name = camera.prim_path + "_bbox2_loose" if topic == "" else topic
-    queue_size = 10
-    node_namespace = ""
+    queue_size = 1
+    node_namespace = NODE_NAMESPACE
     frame_id = camera.prim_path.split("/")[-1]
 
     rv = omni.syntheticdata.SyntheticData.convert_sensor_type_to_rendervar(
@@ -36,14 +39,12 @@ def publish_boundingbox2d_loose(camera: Camera, freq: int, topic=""):
     og.Controller.attribute(gate_path + ".inputs:step").set(step_size)
 
 
-def publish_semantic_segmant(camera: Camera, freq: int, topic=""):
+def publish_semantic_segmant(camera: Camera, step_size: int, topic=""):
     render_product = camera._render_product_path
-    step_size = freq - 1
     topic_name = camera.prim_path + "_semantic" if topic == "" else topic
-    queue_size = 10
-    node_namespace = ""
+    queue_size = 1
+    node_namespace = NODE_NAMESPACE
     frame_id = camera.prim_path.split("/")[-1]
-    version_45 = os.getenv("ISAACSIM_VERSION") == "v45"
 
     og.Controller.edit(
         {
@@ -54,20 +55,15 @@ def publish_semantic_segmant(camera: Camera, freq: int, topic=""):
             og.Controller.Keys.CREATE_NODES: [
                 (
                     "publish_semantic",
-                    (
-                        "isaacsim.ros2.bridge.ROS2CameraHelper"
-                        if version_45
-                        else "omni.isaac.ros2_bridge.ROS2CameraHelper"
-                    ),
+                    "isaacsim.ros2.bridge.ROS2CameraHelper",
                 ),
-                ("OnPlaybackTick", "omni.graph.action.OnPlaybackTick"),
+                (
+                    "OnPlaybackTick",
+                    "omni.graph.action.OnPlaybackTick",
+                ),
                 (
                     "RosContext",
-                    (
-                        "isaacsim.ros2.bridge.ROS2Context"
-                        if version_45
-                        else "omni.isaac.ros2_bridge.ROS2Context"
-                    ),
+                    "isaacsim.ros2.bridge.ROS2Context",
                 ),
             ],
             og.Controller.Keys.SET_VALUES: [
@@ -90,12 +86,11 @@ def publish_semantic_segmant(camera: Camera, freq: int, topic=""):
     )
 
 
-def publish_boundingbox2d_tight(camera: Camera, freq: int, topic=""):
+def publish_boundingbox2d_tight(camera: Camera, step_size: int, topic=""):
     render_product = camera._render_product_path
-    step_size = int(60 / freq)
     topic_name = camera.prim_path + "_bbox2_tight" if topic == "" else topic
-    queue_size = 10
-    node_namespace = ""
+    queue_size = 1
+    node_namespace = NODE_NAMESPACE
     frame_id = camera.prim_path.split("/")[-1]
 
     rv = omni.syntheticdata.SyntheticData.convert_sensor_type_to_rendervar(
@@ -115,12 +110,11 @@ def publish_boundingbox2d_tight(camera: Camera, freq: int, topic=""):
     og.Controller.attribute(gate_path + ".inputs:step").set(step_size)
 
 
-def publish_boundingbox3d(camera: Camera, freq: int, topic=""):
+def publish_boundingbox3d(camera: Camera, step_size: int, topic=""):
     render_product = camera._render_product_path
-    step_size = int(60 / freq)
     topic_name = camera.prim_path + "_bbox3" if topic == "" else topic
-    queue_size = 10
-    node_namespace = ""
+    queue_size = 1
+    node_namespace = NODE_NAMESPACE
     frame_id = camera.prim_path.split("/")[-1]
 
     rv = omni.syntheticdata.SyntheticData.convert_sensor_type_to_rendervar(
@@ -140,14 +134,11 @@ def publish_boundingbox3d(camera: Camera, freq: int, topic=""):
     og.Controller.attribute(gate_path + ".inputs:step").set(step_size)
 
 
-def publish_rgb(camera: Camera, freq: int, topic=""):
+def publish_rgb(camera: Camera, step_size: int, topic=""):
     render_product = camera._render_product_path
-    step_size = freq
-    topic_name = (
-        "/" + camera.prim_path.split("/")[-1] + "_rgb" if topic == "" else topic
-    )
-    queue_size = 50
-    node_namespace = ""
+    topic_name = camera.prim_path.split("/")[-1] + "_rgb" if topic == "" else topic
+    queue_size = 1
+    node_namespace = NODE_NAMESPACE
     frame_id = camera.prim_path.split("/")[-1]
 
     rv = omni.syntheticdata.SyntheticData.convert_sensor_type_to_rendervar(
@@ -170,18 +161,17 @@ def publish_rgb(camera: Camera, freq: int, topic=""):
     return gate_path
 
 
-def publish_camera_info(camera: Camera, freq: int, topic=""):
+def publish_camera_info(camera: Camera, step_size: int, topic=""):
     from .camera_info import (
         read_camera_info,
     )  # isaacsim.ros2.bridge -> read_camera_info has bug in computing cx, cy
 
     render_product = camera._render_product_path
-    step_size = int(60 / freq)
     topic_name = (
         camera.prim_path.split("/")[-1] + "_camera_info" if topic == "" else topic
     )
-    queue_size = 30
-    node_namespace = ""
+    queue_size = 1
+    node_namespace = NODE_NAMESPACE
     frame_id = camera.prim_path.split("/")[-1]
 
     writer = rep.writers.get("ROS2PublishCameraInfo")
@@ -206,12 +196,11 @@ def publish_camera_info(camera: Camera, freq: int, topic=""):
     return gate_path
 
 
-def publish_pointcloud_from_depth(camera: Camera, freq: int, topic=""):
+def publish_pointcloud_from_depth(camera: Camera, step_size: int, topic=""):
     render_product = camera._render_product_path
-    step_size = int(60 / freq)
     topic_name = camera.prim_path if topic == "" else topic
-    queue_size = 10
-    node_namespace = ""
+    queue_size = 1
+    node_namespace = NODE_NAMESPACE
     frame_id = camera.prim_path.split("/")[-1]
 
     rv = omni.syntheticdata.SyntheticData.convert_sensor_type_to_rendervar(
@@ -233,14 +222,11 @@ def publish_pointcloud_from_depth(camera: Camera, freq: int, topic=""):
     og.Controller.attribute(gate_path + ".inputs:step").set(step_size)
 
 
-def publish_depth(camera: Camera, freq: int, topic=""):
+def publish_depth(camera: Camera, step_size: int, topic=""):
     render_product = camera._render_product_path
-    step_size = freq
-    topic_name = (
-        "/" + camera.prim_path.split("/")[-1] + "_depth" if topic == "" else topic
-    )
-    queue_size = 50
-    node_namespace = ""
+    topic_name = camera.prim_path.split("/")[-1] + "_depth" if topic == "" else topic
+    queue_size = 1
+    node_namespace = NODE_NAMESPACE
     frame_id = camera.prim_path.split("/")[-1]
 
     rv = omni.syntheticdata.SyntheticData.convert_sensor_type_to_rendervar(

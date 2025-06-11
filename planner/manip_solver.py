@@ -324,7 +324,7 @@ def select_obj(objects, stages, robot):
 
         # filter with IK-checking
 
-        ik_success, jacobian_score = robot.solve_ik(
+        ik_success, _ = robot.solve_ik(
             grasp_poses, ee_type="gripper", arm=arm, type="Simple"
         )
         grasp_poses_canonical, grasp_poses = (

@@ -128,6 +128,16 @@ class SimObservationServiceStub(object):
                 request_serializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.OmniCmdChangePropertyReq.SerializeToString,
                 response_deserializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.OmniCmdChangePropertyRsp.FromString,
                 _registered_method=True)
+        self.GetPartiPointNumInbbox = channel.unary_unary(
+                '/aimdk.protocol.SimObservationService/GetPartiPointNumInbbox',
+                request_serializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetPartiPointNumInbboxReq.SerializeToString,
+                response_deserializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetPartiPointNumInbboxRsp.FromString,
+                _registered_method=True)
+        self.GetObjectAABB = channel.unary_unary(
+                '/aimdk.protocol.SimObservationService/GetObjectAABB',
+                request_serializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetObjectAABBReq.SerializeToString,
+                response_deserializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetObjectAABBRsp.FromString,
+                _registered_method=True)
 
 
 class SimObservationServiceServicer(object):
@@ -241,6 +251,18 @@ class SimObservationServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetPartiPointNumInbbox(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetObjectAABB(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_SimObservationServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -333,6 +355,16 @@ def add_SimObservationServiceServicer_to_server(servicer, server):
                     servicer.OmniCmdChangeProperty,
                     request_deserializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.OmniCmdChangePropertyReq.FromString,
                     response_serializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.OmniCmdChangePropertyRsp.SerializeToString,
+            ),
+            'GetPartiPointNumInbbox': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPartiPointNumInbbox,
+                    request_deserializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetPartiPointNumInbboxReq.FromString,
+                    response_serializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetPartiPointNumInbboxRsp.SerializeToString,
+            ),
+            'GetObjectAABB': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetObjectAABB,
+                    request_deserializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetObjectAABBReq.FromString,
+                    response_serializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetObjectAABBRsp.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -821,6 +853,60 @@ class SimObservationService(object):
             '/aimdk.protocol.SimObservationService/OmniCmdChangeProperty',
             aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.OmniCmdChangePropertyReq.SerializeToString,
             aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.OmniCmdChangePropertyRsp.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetPartiPointNumInbbox(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/aimdk.protocol.SimObservationService/GetPartiPointNumInbbox',
+            aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetPartiPointNumInbboxReq.SerializeToString,
+            aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetPartiPointNumInbboxRsp.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetObjectAABB(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/aimdk.protocol.SimObservationService/GetObjectAABB',
+            aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetObjectAABBReq.SerializeToString,
+            aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetObjectAABBRsp.FromString,
             options,
             channel_credentials,
             insecure,

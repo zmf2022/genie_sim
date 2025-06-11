@@ -32,4 +32,3 @@ message HandCommand {
   SingleHandCommand left = 2;//Left-hand command
   SingleHandCommand right = 3;//Right-hand command
 }
-

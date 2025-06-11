@@ -1,22 +1,14 @@
-
 # Copyright (c) 2023-2025, AgiBot Inc. All Rights Reserved.
 # Author: Genie Sim Team
 # License: Mozilla Public License Version 2.0
 
 import os
 
-if os.getenv("ISAACSIM_VERSION") == "v45":
-    from isaacsim.robot_motion.motion_generation import (
-        ArticulationKinematicsSolver,
-        LulaKinematicsSolver,
-    )
-    from isaacsim.core.utils.extensions import get_extension_path_from_name
-else:
-    from omni.isaac.motion_generation import (
-        ArticulationKinematicsSolver,
-        LulaKinematicsSolver,
-    )
-    from omni.isaac.core.utils.extensions import get_extension_path_from_name
+from isaacsim.robot_motion.motion_generation import (
+    ArticulationKinematicsSolver,
+    LulaKinematicsSolver,
+)
+from isaacsim.core.utils.extensions import get_extension_path_from_name
 
 import yaml
 import os

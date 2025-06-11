@@ -6,6 +6,7 @@
 # and any modifications thereto.  Any use, reproduction, disclosure or
 # distribution of this software and related documentation without an express
 # license agreement from NVIDIA CORPORATION is strictly prohibited.
+#
 
 import omni
 import asyncio, os
@@ -14,33 +15,22 @@ from base_utils.logger import Logger
 
 logger = Logger()  # Create singleton instance
 
-if os.getenv("ISAACSIM_VERSION") == "v45":
-    from isaacsim.core.api import World
-    from isaacsim.core.prims import SingleXFormPrim
-    from isaacsim.core.utils.prims import (
-        get_prim_at_path,
-        get_prim_children,
-        delete_prim,
-        get_prim_object_type,
-    )
-    from isaacsim.core.prims import SingleArticulation
-    from isaacsim.core.utils.types import ArticulationAction
-    from isaacsim.sensors.camera import (
-        get_all_camera_objects,
-    )
-else:
-    from omni.isaac.core import World
-    from omni.isaac.core.prims import XFormPrim as SingleXFormPrim
-    from omni.isaac.core.utils.prims import (
-        get_prim_at_path,
-        get_prim_children,
-        delete_prim,
-        get_prim_object_type,
-    )
-    from omni.isaac.core.articulations import Articulation as SingleArticulation
-    from omni.isaac.core.utils.types import ArticulationAction
-    from omni.isaac.sensor.scripts.camera import get_all_camera_objects
+from isaacsim.core.api import World
+from isaacsim.core.prims import SingleXFormPrim
+from isaacsim.core.utils.prims import (
+    get_prim_at_path,
+    get_prim_children,
+    delete_prim,
+    get_prim_object_type,
+)
+from isaacsim.core.prims import SingleArticulation
+from isaacsim.core.utils.types import ArticulationAction
+from isaacsim.sensors.camera import (
+    get_all_camera_objects,
+)  # from omni.isaac.sensor import Camera
 
+# import omni.kit.commands
+# import omni.syntheticdata
 import numpy as np
 from genie.sim.lab.controllers.kinematics_solver import Kinematics_Solver
 from genie.sim.lab.controllers.ruckig_move import Ruckig_Controller
@@ -49,6 +39,8 @@ from typing import Optional
 from pxr import Usd
 
 import omni.replicator.core as rep
+
+from pprint import pprint
 
 
 class UIBuilder:
@@ -124,7 +116,7 @@ class UIBuilder:
             sensor_cam._render_product_path = render_rp.path
 
             rep_registry = {}
-            for name in ["rgb"]:
+            for name in ["rgb", "distance_to_image_plane"]:
                 # create annotator
                 rep_annotator = rep.AnnotatorRegistry.get_annotator(name, device="cpu")
                 rep_annotator.attach(render_rp)
@@ -361,6 +353,9 @@ class UIBuilder:
         actions = ArticulationAction(
             joint_positions=target_positions, joint_indices=target_joint_indices
         )
+        # print(self.articulation.dof_properties)
+        # pprint(self.articulation.dof_names)
+        # print(actions)
         if not is_trajectory:
             self.articulation.set_joint_positions(
                 target_positions, joint_indices=target_joint_indices
@@ -411,6 +406,7 @@ class UIBuilder:
         current_position, rotation_matrix = self._get_ee_pose(is_right)
 
         current_rotation = rotation_matrix_to_quaternion(rotation_matrix)
+        # current_arm_positions = self._get_ik_status(current_position, current_rotation, is_right)[1].joint_positions
         if not self._get_ik_status(target_position, target_orientation, is_right)[0]:
             self.cmd_list = None
             self.reached = True
@@ -464,6 +460,7 @@ class UIBuilder:
                         arm_position.joint_positions - current_arm_positions
                     )
                     if joint_distance < 1:
+                        # trajectory =self.ruckig_controller.caculate_trajectory(current_arm_positions, arm_position.joint_positions)
                         self.cmd_list.append(arm_position.joint_positions)
                         current_arm_positions = arm_position.joint_positions
         else:
@@ -471,12 +468,13 @@ class UIBuilder:
                 current_arm_positions, target_arm_positions
             )
             distance = np.linalg.norm(target_position - current_position)
-            for position in cmd_list:
-                joint_distance = np.linalg.norm(
-                    np.array(current_arm_positions) - np.array(position)
-                )
-                current_arm_positions = position
-                self.cmd_list.append(position)
+            if len(cmd_list) < 100:
+                for position in cmd_list:
+                    joint_distance = np.linalg.norm(
+                        np.array(current_arm_positions) - np.array(position)
+                    )
+                    current_arm_positions = position
+                    self.cmd_list.append(position)
         self.cmd_idx = 0
         self.reached = False
         self.time_index = 0
@@ -581,13 +579,13 @@ class UIBuilder:
         scene = self.my_world.scene
         if scene._scene_registry.name_exists(self.robot_name):
             self.articulation = scene.get_object(self.robot_name)
-            self.articulation.initialize()
         else:
             self.articulation = SingleArticulation(
                 prim_path=self.robot_prim_path, name=self.robot_name
             )
-            self.articulation.initialize()
             scene.add(self.articulation)
+        self.articulation.initialize()
+
         self.ruckig_controller = Ruckig_Controller(self.dof_nums, self.joint_delta_time)
         robot_list = []
         for idx in range(batch_num):
@@ -598,7 +596,7 @@ class UIBuilder:
             articulation.initialize()
             robot_list.append(articulation)
             self.art_controllers = [r.get_articulation_controller() for r in robot_list]
-        self.articulation.set_joint_positions(self.init_joint_position)
+
         if self.enable_curobo:
             if not self.curoboMotion:
                 self._init_curobo()
