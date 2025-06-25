@@ -30,11 +30,13 @@ Genie Sim Benchmark, as the open-source evaluation version of Genie Sim, is dedi
 - Support UniVLA baseline model in simulation evaluation
 
 # 3. Updates
-- [6/11/2025] v2.0
-  - Add 10 more manipulation tasks for Agibot World Challenge 2025
-  - Open-source 30+ simulation environment and assets including scenes like supermarket, office , restaurant, factory and home
+- [6/11/2025] v2.1
+  - Add 10 more manipulation tasks for Agibot World Challenge 2025 including all simulation assets
+  - Open-source synthetic datasets for 10 manipulation tasks on Huggingface
+  https://huggingface.co/datasets/agibot-world/AgiBotWorldChallenge-2025/tree/main/Manipulation-SimData
+  - Integrate UniVLA policy and support model inference simulation evaluation
+  - Update IK solver sdk which supports cross-embodiment IK solving for other robots
   - Optimize communication framework and improve simulation running speed by 2x
-  - Integrate UniVLA and support model inference simulation evaluation
   - Update automatic evaluation framework for more complicated long-range tasks
 
 # 4. Contents
@@ -49,8 +51,9 @@ Please refer to [this page](http://agibot-world.com/sim-evaluation/docs) for ins
 <img src="./docs/wechat.JPEG" width="30%"/>
 
 ## 4.4 TODO List
-- [ ] Release more long-horizon benchmark mainuplation tasks
-- [ ] More scenes and assets for each benchmark task
+- [x] Release more long-horizon benchmark mainuplation tasks
+- [x] More scenes and assets for each benchmark task
+- [x] Support Agibot World Challenge baseline model
 - [ ] Scenario layout and manipulation trajectory generalization toolkit
 
 ## 4.5 FAQ
