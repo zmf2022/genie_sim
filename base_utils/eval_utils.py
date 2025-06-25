@@ -29,11 +29,30 @@ EVAL_TEMPLATE = {
     "end_time": "",
 }
 
+TASK_STEPS = {
+    "iros_clear_the_countertop_waste": 6,
+    "iros_open_drawer_and_store_items": 5,
+    "iros_heat_the_food_in_the_microwave": 6,
+    "iros_pack_moving_objects_from_conveyor": 4,
+    "iros_pickup_items_from_the_freezer": 5,
+    "iros_restock_supermarket_items": 4,
+    "iros_pack_in_the_supermarket": 4,
+    "iros_make_a_sandwich": 12,
+    "iros_clear_table_in_the_restaurant": 4,
+    "iros_stamp_the_seal": 5,
+}
 
-def summarize_scores(single_evaluate_ret):
+
+def summarize_scores(single_evaluate_ret, task_name):
+    if not task_name.startswith("iros_"):
+        return
+
     eval_result = single_evaluate_ret["result"]
     episode_progress = eval_result.get("progress", [])
+
     eval_result["scores"] = {"STEPS": {}, "E2E": 0}
+    for i in range(TASK_STEPS[task_name]):
+        eval_result["scores"]["STEPS"][f"STEP{i}"] = 0.0
     if episode_progress == []:
         pass
     else:

@@ -318,7 +318,6 @@ class SimROSNode(Node):
 
         with self.lock_joint_state:
             self.obs_joint_state = msg_remap
-        # self.pub_joint_state.publish(msg_remap)
 
     def callback_tf(self, msg):
         self.tf_msg = msg
@@ -327,8 +326,6 @@ class SimROSNode(Node):
         with self.lock_tf:
             for t in self.tf_msg.transforms:
                 if "base_link" == t.child_frame_id:
-                    # print("ROS x", t.transform.translation.x)
-
                     position = np.array(
                         [
                             t.transform.translation.x,
@@ -354,102 +351,15 @@ class SimROSNode(Node):
         # pub joint_state
         self.publish_observation_msgs()
 
-        return
-        # fmt: off
-        timestamp = self.get_clock().now().to_msg()
-        # pub rgb msg
-        self.msg_head_img = self.bridge.cv2_to_compressed_imgmsg(img_data_list[0])
-        self.msg_head_img.header.stamp = timestamp
-        self.pub_head_img.publish(self.msg_head_img)
-        self.msg_left_wrist_img = self.bridge.cv2_to_compressed_imgmsg(img_data_list[1])
-        self.msg_left_wrist_img.header.stamp = timestamp
-        self.pub_left_wrist_img.publish(self.msg_left_wrist_img)
-        self.msg_right_wrist_img = self.bridge.cv2_to_compressed_imgmsg(img_data_list[2])
-        self.msg_right_wrist_img.header.stamp = timestamp
-        self.pub_right_wrist_img.publish(self.msg_right_wrist_img)
-
-        # pub depth msg
-        if depth_image_data_list != None:
-            self.msg_head_depth_img = self.bridge.cv2_to_compressed_imgmsg(depth_image_data_list[0], dst_format="png",)
-            self.msg_head_depth_img.header.stamp = timestamp
-            self.pub_head_depth_img.publish(self.msg_head_depth_img)
-            self.msg_left_wrist_depth_img = self.bridge.cv2_to_compressed_imgmsg(depth_image_data_list[1], dst_format="png",)
-            self.msg_left_wrist_depth_img.header.stamp = timestamp
-            self.pub_left_wrist_depth_img.publish(self.msg_left_wrist_depth_img)
-            self.msg_right_wrist_depth_img = self.bridge.cv2_to_compressed_imgmsg(depth_image_data_list[2], dst_format="png",)
-            self.msg_right_wrist_depth_img.header.stamp = timestamp
-            self.pub_right_wrist_depth_img.publish(self.msg_right_wrist_depth_img)
-
-        # pub joint msg
-        self.joint_msg = JointState()
-        self.joint_msg.position = joint_data
-        self.joint_msg.header.stamp = timestamp
-        self.pub_joint_state.publish(self.joint_msg)
-        self.get_logger().info(f"Published sim observation at {timestamp}")
-        # fmt: on
-        self.message_buffer = deque(maxlen=30)
-
     def publish_perf_cb_msg(self, perf_cb_status):
         self.publisher_perf_cb_status.publish(perf_cb_status)
 
     def callback_joint_command(self, msg):
-        cmd_msg = JointState()
-        cmd_msg.header = msg.header
-        cmd_msg.header.stamp = self.get_clock().now().to_msg()
-        cmd_msg.name = [
-            "idx21_arm_l_joint1",
-            "idx22_arm_l_joint2",
-            "idx23_arm_l_joint3",
-            "idx24_arm_l_joint4",
-            "idx25_arm_l_joint5",
-            "idx26_arm_l_joint6",
-            "idx27_arm_l_joint7",
-            "idx61_arm_r_joint1",
-            "idx62_arm_r_joint2",
-            "idx63_arm_r_joint3",
-            "idx64_arm_r_joint4",
-            "idx65_arm_r_joint5",
-            "idx66_arm_r_joint6",
-            "idx67_arm_r_joint7",
-            "idx41_gripper_l_outer_joint1",
-            "idx81_gripper_r_outer_joint1",
-            "idx11_head_joint1",
-            "idx12_head_joint2",
-            "idx02_body_joint2",
-            "idx01_body_joint1",
-        ]
-        # cmd_msg.velocity = [float("nan")] * 20
-        # cmd_msg.effort = [float("nan")] * 20
-        cmd_msg.position = [0.0] * 20
-        cmd_msg.position[0] = msg.position[0]
-        cmd_msg.position[1] = msg.position[1]
-        cmd_msg.position[2] = msg.position[2]
-        cmd_msg.position[3] = msg.position[3]
-        cmd_msg.position[4] = msg.position[4]
-        cmd_msg.position[5] = msg.position[5]
-        cmd_msg.position[6] = msg.position[6]
-        cmd_msg.position[7] = msg.position[7]
-        cmd_msg.position[8] = msg.position[8]
-        cmd_msg.position[9] = msg.position[9]
-        cmd_msg.position[10] = msg.position[10]
-        cmd_msg.position[11] = msg.position[11]
-        cmd_msg.position[12] = msg.position[12]
-        cmd_msg.position[13] = msg.position[13]
-        cmd_msg.position[14] = min(1.0, max(0, msg.position[14]))
-        cmd_msg.position[15] = min(1.0, max(0, msg.position[15]))
-        cmd_msg.position[16] = self.init_pose["body_state"][0]
-        cmd_msg.position[17] = self.init_pose["body_state"][1]
-        cmd_msg.position[18] = self.init_pose["body_state"][2]
-        cmd_msg.position[19] = self.init_pose["body_state"][3]
-
         with self.lock:
-            self.message_buffer.append(cmd_msg)
-
-        # self.pub_joint_command.publish(cmd_msg)
+            self.message_buffer.append(msg)
 
     def pub_init_pose_command(self):
         cmd_msg = JointState()
-        # cmd_msg.header = msg.header
         cmd_msg.name = [
             "idx21_arm_l_joint1",
             "idx22_arm_l_joint2",
@@ -509,85 +419,10 @@ class SimROSNode(Node):
     def parse_joint_command(self):
         with self.lock:
             if len(self.message_buffer) != 0:
-                # self.get_logger().info(f"msg buffer length {len(self.message_buffer)}")
                 msg = self.message_buffer.popleft()
-                pos = msg.position
-                timestamp = msg.header.stamp.sec + msg.header.stamp.nanosec * 1e-9
-                joint_info = {
-                    "timestamp": timestamp,
-                    "left_arm": pos[0:7],
-                    "right_arm": pos[7:14],
-                    "gripper": pos[14:16],
-                    "head": [-v for v in pos[16:18]][::-1],  # yaw, pitch
-                    "waist": pos[18:20][::-1],  # lift, pitch
-                    "base_velocity": pos[20:22],
-                }
+                self.pub_joint_command.publish(msg)
 
-                # for idx, name in enumerate(self.cur_joint_state.name):
-                #     if name == "idx81_gripper_r_outer_joint1":
-                #         print(
-                #             "R  js: ",
-                #             self.cur_joint_state.position[idx],
-                #             self.cur_joint_state.velocity[idx],
-                #             self.cur_joint_state.effort[idx],
-                #         )
-                #         print(
-                #             "  cmd: ",
-                #             msg.position[15],
-                #         )
-
-                cmd_msg = JointState()
-                cmd_msg.header = msg.header
-                cmd_msg.header.stamp = self.get_clock().now().to_msg()
-                cmd_msg.name = [
-                    "idx21_arm_l_joint1",
-                    "idx22_arm_l_joint2",
-                    "idx23_arm_l_joint3",
-                    "idx24_arm_l_joint4",
-                    "idx25_arm_l_joint5",
-                    "idx26_arm_l_joint6",
-                    "idx27_arm_l_joint7",
-                    "idx61_arm_r_joint1",
-                    "idx62_arm_r_joint2",
-                    "idx63_arm_r_joint3",
-                    "idx64_arm_r_joint4",
-                    "idx65_arm_r_joint5",
-                    "idx66_arm_r_joint6",
-                    "idx67_arm_r_joint7",
-                    "idx41_gripper_l_outer_joint1",
-                    "idx81_gripper_r_outer_joint1",
-                    "idx11_head_joint1",
-                    "idx12_head_joint2",
-                    "idx02_body_joint2",
-                    "idx01_body_joint1",
-                ]
-                # cmd_msg.velocity = [float("nan")] * 20
-                # cmd_msg.effort = [float("nan")] * 20
-                cmd_msg.position = [0.0] * 20
-                cmd_msg.position[0] = msg.position[0]
-                cmd_msg.position[1] = msg.position[1]
-                cmd_msg.position[2] = msg.position[2]
-                cmd_msg.position[3] = msg.position[3]
-                cmd_msg.position[4] = msg.position[4]
-                cmd_msg.position[5] = msg.position[5]
-                cmd_msg.position[6] = msg.position[6]
-                cmd_msg.position[7] = msg.position[7]
-                cmd_msg.position[8] = msg.position[8]
-                cmd_msg.position[9] = msg.position[9]
-                cmd_msg.position[10] = msg.position[10]
-                cmd_msg.position[11] = msg.position[11]
-                cmd_msg.position[12] = msg.position[12]
-                cmd_msg.position[13] = msg.position[13]
-                cmd_msg.position[14] = min(1.0, max(0, msg.position[14]))
-                cmd_msg.position[15] = min(1.0, max(0, msg.position[15]))
-                cmd_msg.position[16] = self.init_pose["body_state"][0]
-                cmd_msg.position[17] = self.init_pose["body_state"][1]
-                cmd_msg.position[18] = self.init_pose["body_state"][2]
-                cmd_msg.position[19] = self.init_pose["body_state"][3]
-
-                self.pub_joint_command.publish(cmd_msg)
-
-                return joint_info
+            return None
 
     def get_joint_state(self):
         with self.lock:

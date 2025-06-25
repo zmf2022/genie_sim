@@ -3,6 +3,7 @@
 # License: Mozilla Public License Version 2.0
 
 from .base import BasePolicy
+import time
 
 
 class DemoPolicy(BasePolicy):
@@ -10,7 +11,12 @@ class DemoPolicy(BasePolicy):
         super().__init__(task_name)
 
     def act(self, observations, **kwargs):
-        return None
+        step_num = kwargs.get("step_num", None)
+        while self.sim_ros_node.buffer_empty():
+            time.sleep(0.1)
+
+        self.sim_ros_node.parse_joint_command()
+        return
 
     def reset(self):
         target_position = [

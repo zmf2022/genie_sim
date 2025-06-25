@@ -104,7 +104,6 @@ class DummyEnv(BaseEnv):
 
     def step(self, actions):
         observaion = None
-        self.robot.move(actions)
         self.current_step += 1
         need_update = False
         if self.current_step != 1 and self.current_step % 30 == 0:

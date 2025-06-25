@@ -6,35 +6,37 @@ from benchmark.ader.action.common_actions import EvaluateAction, ActionBase, Act
 import numpy as np
 
 from base_utils.logger import Logger
+import ast
 
 logger = Logger()
 
 
 class OnShelf(EvaluateAction):
-    def __init__(self, env, obj_name):
+    def __init__(self, env, obj_name, target_name, bbox, height):
         super().__init__(env)
         self.obj_name = obj_name
+        self.target_name = target_name
+        self.height = float(height)
         self._done_flag = False
         self.success_frame = 0
         self.success_time = 5
+        self.bbox = ast.literal_eval(bbox)
 
     def update(self, delta_time: float) -> float:
         [x, y, z] = self.get_obj_pose(self.obj_name)[0:3, 3]
-        if "004" in self.obj_name:
-            if abs(x + 4.42) < 0.04 and abs(y - 0.03) < 0.04 and abs(z - 1.13) < 0.05:
-                self.success_frame += 1
-        if "001" in self.obj_name:
-            if abs(x + 4.42) < 0.03 and abs(y - 0.08) < 0.007 and abs(z - 1.13) < 0.05:
-                self.success_frame += 1
+        [x_t, y_t, z_t] = self.get_obj_pose(self.target_name)[0:3, 3]
 
-        if "003" in self.obj_name:
-            if abs(x + 4.42) < 0.03 and abs(y + 0.155) < 0.015 and abs(z - 1.13) < 0.05:
-                self.success_frame += 1
+        x_min, x_max = self.bbox[0:2]
+        y_min, y_max = self.bbox[2:4]
+        z_min, z_max = self.bbox[4:6]
+        if (
+            z_min < z - self.height < z_max
+            and x_min < x - x_t < x_max
+            and y_min < y - y_t < y_max
+        ):
+            self.success_frame += 1
         if self.success_frame > self.success_time:
             self.success_frame = 0
-            logger.info(
-                "\n======================\n\n\nTask Success!!!\n\n\n======================"
-            )
             self._done_flag = True
         return super().update(delta_time)
 
@@ -55,4 +57,4 @@ class OnShelf(EvaluateAction):
         elif event == ActionEvent.CANCELED:
             pass
         elif event == ActionEvent.FINISHED:
-            pass
+            self.progress_info["SCORE"] = 1

@@ -12,3 +12,5 @@ from .cover import Cover
 from .check_particle_in_bbox import CheckParticleInBBox
 from .push_pull import PushPull
 from .follow import Follow
+from .trigger_action import TriggerAction
+from .onshelf_curobo import OnShelfCurobo

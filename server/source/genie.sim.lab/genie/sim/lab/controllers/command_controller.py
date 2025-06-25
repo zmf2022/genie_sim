@@ -58,6 +58,7 @@ from genie.sim.lab.utils.utils import (
     matrix_to_euler_angles,
     rotation_matrix_to_quaternion,
 )
+import omni.graph.core as og
 
 # from isaacsim.debug_draw import _debug_draw
 import subprocess
@@ -250,7 +251,6 @@ class CommandController:
         self.batch_num = batch_num
         add_reference_to_stage(robot_usd_path, robot.robot_prim_path)
         add_reference_to_stage(scene_usd_path, "/World")
-        # SingleXFormPrim(prim_path="/World", position=[1,1,0])
         self.usd_objects["robot"] = SingleXFormPrim(
             prim_path=robot.robot_prim_path,
             position=init_position,
@@ -367,10 +367,6 @@ class CommandController:
                         "rgb:/" + camera.split("/")[-1] + "_rgb",
                         "depth:/" + camera.split("/")[-1] + "_depth",
                     ]
-                # if self.robot_cfg.cameras["render_semantic"]:
-                #     camera_param["publish"].append(
-                #         "semantic:/" + camera.split("/")[-1] + "_semantic"
-                #     )
                 pprint(camera_param)
                 camera_graph = self.sensor_base._init_camera(
                     self.ui_builder.my_world.get_rendering_dt(),
@@ -538,8 +534,6 @@ class CommandController:
             with tracer.start_as_current_span(
                 f"rpc_server.step_command_{self.Command}"
             ) as span:
-                # logger.info(f"self.Command {self.Command}")
-                # print(self.data)
 
                 if self.Command == 1:
                     prim_path = self.data["Cam_prim_path"]
@@ -576,7 +570,6 @@ class CommandController:
                         ):
                             self.target_position = target_position
                             self.target_rotation = target_rotation
-                            # self._reset_stiffness()
                             self._hand_moveto(
                                 position=target_position,
                                 rotation=target_rotation,
@@ -715,14 +708,6 @@ class CommandController:
                                 stage = omni.usd.get_context().get_stage()
                                 prim = stage.GetPrimAtPath(prim_path)
                                 if prim.IsValid():
-                                    xform = omni.usd.get_world_transform_matrix(prim)
-                                    position = list(xform.ExtractTranslation())
-                                    quat = xform.ExtractRotation().GetQuat()
-                                    qx = quat.imaginary[0]
-                                    qy = quat.imaginary[1]
-                                    qz = quat.imaginary[2]
-                                    qw = quat.real
-                                    rotation = [qw, qx, qy, qz]
                                     usd_object = SingleXFormPrim(prim_path=prim_path)
                                     self.usd_objects[prim_path] = usd_object
                                     logger.info(
@@ -736,8 +721,6 @@ class CommandController:
                         for idx, key in enumerate(self.articulat_objects):
                             self.sensor_base.publish_articulated_joint(key)
                             self.object_prims["articulated_object_prims"].append(key)
-                            # if key not in tf_to_record:
-                            #     tf_to_record.append(Sdf.Path(key))
 
                         camera_prims = get_camera_prims(
                             robot_name=(
@@ -765,7 +748,6 @@ class CommandController:
                             for process_pid in self.process_pid:
                                 os.kill(process_pid, signal.SIGTERM)
 
-                            # self.ui_builder.remove_graph(self.graph_path)
                             async def store_info():
                                 from genie.sim.lab.controllers.extract_ros_bag import (
                                     Ros_Extrater,
@@ -911,13 +893,6 @@ class CommandController:
                     logger.info("On Exit...")
                     self.exit = self.data["exit"]
                     self.data_to_send = "exit"
-                    if self.task_name is not None:
-                        output_path = os.path.join(
-                            os.getenv("SIM_REPO_ROOT"), "output", self.task_name
-                        )
-                        # logger.info(f"Move data from {self.path_to_save} {output_path}")
-                        # os.makedirs(output_path, exist_ok=True)
-                        # os.system(f"mv {self.path_to_save}/* {output_path}")
                 elif self.Command == 18:  # DEPRECATED_AND_IT_IS_REPLACED_BY_ROS_TOPIC
                     logger.debug(
                         "this command 18 will be deprecated once grpc framework is removed"
@@ -999,16 +974,12 @@ class CommandController:
                             self.data_to_send = "success"
                     if self.trajectory_index >= len(self.trajectory_list):
                         self.data_to_send = "success"
-                    # for idx, point in enumerate(self.trajectory_list):
-                    #     cuboid.VisualCuboid("/World/pos_cube_{}".format(idx), position=point[0], orientation=point[1], size=0.02, color=np.array([0,0,1]))
                 elif self.Command == 26:
                     self.data_to_send = self._get_object_joint(
                         self.data["object_prim_path"]
                     )
                 elif self.Command == 27:
                     self.target_point = self.data["target_position"]
-                    # SingleXFormPrim("/test", position=self.target_point)
-                    # cuboid.VisualCuboid("/test", position=self.target_point, size=0.05, color=np.array([1,0,1]))
                     self.data_to_send = "success"
                 elif self.Command == 28:
                     time_stamp = self.timeline.get_current_time()
@@ -1043,13 +1014,21 @@ class CommandController:
                     self.clear_lines(self.data["name"])
                     self.data_to_send = "success"
                 elif self.Command == 32:
-                    omni.kit.commands.execute(
-                        "ChangeProperty",
-                        prop_path=Sdf.Path(self.data["prop_path"]),
-                        value=self.data["value"],
-                        prev=None,
-                    )
-                    self.data_to_send = "success"
+                    if isinstance(self.data["value"], bool):
+                        omni.kit.commands.execute(
+                            "ChangeProperty",
+                            prop_path=Sdf.Path(self.data["prop_path"]),
+                            value=self.data["value"],
+                            prev=None,
+                        )
+                        self.data_to_send = "success"
+                    elif (
+                        isinstance(self.data["value"], str)
+                        and self.data["value"] == "trigger_action"
+                    ):
+                        self.data_to_send = str(
+                            og.Controller.attribute(self.data["prop_path"]).get()
+                        )
                 elif self.Command == 33:
                     num = self.get_particle_pt_num_inbbox(
                         self.data["prim_path"], self.data["bbox_3d"]
@@ -1059,6 +1038,10 @@ class CommandController:
                     cache = create_bbox_cache()
                     aabb = compute_aabb(cache, prim_path=self.data["prim_path"])
                     self.data_to_send = {"points": aabb}
+                elif self.Command == 35:
+                    x_target = SingleXFormPrim(self.data["prim_path"])
+                    pos, quat = x_target.get_world_pose()
+                    self.data_to_send = {"pos": pos, "quat": quat}
         if self.Command:
             with self.condition:
                 self.condition.notify_all()
@@ -1224,7 +1207,6 @@ class CommandController:
         point_set_prim = stage.GetPrimAtPath(prim_path)
         points = UsdGeom.Points(point_set_prim).GetPointsAttr().Get()
         points_position = np.array(points)
-        # points_num = len(points_position)
 
         # Determine whether the point set is in a bounding box
         def points_in_bbox(points, bbox):
@@ -1386,7 +1368,7 @@ class CommandController:
                         prim_path=obj_physics_prim_path,
                         static_friction=static_friction,
                         dynamic_friction=dynamic_friction,
-                        restitution=None,
+                        restitution=0.1,
                     )
                 )
                 # set friction combine mode to max to enable stable grasp
@@ -1424,12 +1406,9 @@ class CommandController:
                 if model_type != "None":
                     utils.setRigidBody(prim, model_type, False)
                 rigid_prim = SingleRigidPrim(prim_path=prim_path)
-                # rigid_prim.set_mass(10) // deprecated
                 # Get Physics API
                 physics_api = UsdPhysics.MassAPI.Apply(rigid_prim.prim)
                 physics_api.CreateMassAttr().Set(object_mass)
-                # Set center of gravity offset (unit: meters)
-                # physics_api.CreateCenterOfMassAttr().Set(Gf.Vec3f(object_com[0], object_com[1],object_com[2]))
 
             for _prim in items:
                 # disable kettle lid collision
@@ -1625,10 +1604,7 @@ class CommandController:
 
         def enable_collsion_api(prim_str):
             collision_prim = stage.GetPrimAtPath(prim_str)
-            # collision_prim.CreateAttribute("physx:collisionEnabled", Sdf.ValueTypeNames.Bool).Set(True)
             UsdPhysics.CollisionAPI.Apply(collision_prim)
-
-        # physx = omni.physx.get_physx_interface()
 
         for p in [
             f"{self.gripper_contact_ends[0]}/collisions",

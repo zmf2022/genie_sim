@@ -31,7 +31,7 @@ class PickStage(StageTemplate):
         self.generate_substage(grasp_pose)
 
     def generate_substage(self, grasp_pose):
-        pick_up_distance = self.extra_params.get("pick_up_distance", 0.12)
+        pick_up_distance = self.extra_params.get("pick_up_distance", 0.15)
         pick_up_type = self.extra_params.get("pick_up_type", "Simple")
 
         if self.use_pre_grasp:

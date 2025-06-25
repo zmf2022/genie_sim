@@ -120,7 +120,6 @@ class Ros_Extrater:
                     tf_topics[connection.topic].append(msg)
                 elif connection.msgtype == "std_msgs/msg/String":
                     lable_msg = reader.deserialize(msg, "std_msgs/msg/String").data
-                    # label_dict = json.loads(lable_msg)
                 elif connection.msgtype == "sensor_msgs/msg/CompressedImage":
                     rgb_msg = reader.deserialize(msg, "sensor_msgs/msg/CompressedImage")
                     current_time = (float)(rgb_msg.header.stamp.sec) + (float)(
@@ -382,9 +381,6 @@ class Ros_Extrater:
                 "velocity": [],
             }
             for idx in range(physics_message_step):
-                # single_state_info= {
-                #     "object_position": {}
-                # }
                 single_frame_state = {
                     "objects": {},
                     "articulated_object": {},
@@ -519,10 +515,6 @@ class Ros_Extrater:
                                 single_frame_state["robot"]["pose"] = get_pose(
                                     *(position, rotation)
                                 ).tolist()
-                            # single_object_info[transform.child_frame_id] ={
-                            #                     "position": [transform.transform.translation.x, transform.transform.translation.y, transform.transform.translation.z],
-                            #                     "rotation": [transform.transform.rotation.w, transform.transform.rotation.x, transform.transform.rotation.y, transform.transform.rotation.z]}
-                # if str(joint_timestamp) in render_time_step:
                 if True:  # To be optimized to align
                     result["frames"].append(single_frame_state)
                     # align hdf5
@@ -650,10 +642,6 @@ class Ros_Extrater:
             logger.info(f"State file saved to {state_out_dir}")
 
             os.makedirs(self.output_dir + "/parameters/camera", exist_ok=True)
-            # with open(
-            #     self.output_dir + "/parameters/camera/state.json", "w", encoding="utf-8"
-            # ) as f:
-            #     json.dump(result, f, indent=4)
 
             def delete_db3_files(directory):
                 for file in Path(directory).rglob("*.db3"):

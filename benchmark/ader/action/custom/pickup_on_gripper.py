@@ -56,7 +56,6 @@ class PickUpOnGripper(EvaluateAction):
         self.pose_history.append((gripper_pose.copy(), obj_pose.copy()))
 
         if len(self.pose_history) < 2:
-            logger.info("history short")
             return False
 
         # Calculate the differences between consecutive frames
@@ -83,25 +82,24 @@ class PickUpOnGripper(EvaluateAction):
         )
 
     def update(self, delta_time: float) -> float:
-        current_gripper_pose = self.env.robot.get_ee_pose(
-            ee_type="gripper", id=self.gripper_id
+        link_prim_path = (
+            "/G1/gripper_r_center_link"
+            if self.gripper_id == "right"
+            else "/G1/gripper_l_center_link"
         )
+        current_gripper_pose = self.get_world_pose_matrix(link_prim_path)
         current_obj_pose = self.get_obj_pose(self.obj_name)
 
         if self.stage == 1:
             if self.check_stage_1(current_obj_pose):
-                logger.info("Stage 1 passes: The object has been lifted")
                 self.stage = 2
                 self.progress.append("stage1")
-            else:
-                logger.info("Stage 1 failed")
+
         if self.stage == 2:
             if self.check_stage_2(current_gripper_pose, current_obj_pose):
-                logger.info("Stage 2 passes: stable crawl confirmation")
                 self._done_flag = True
                 self.progress.append("stage2")
             else:
-                logger.info("Phase 2 failed: Redetect the lift height")
                 self.stage = 1
 
         return super().update(delta_time)

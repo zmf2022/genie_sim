@@ -382,14 +382,13 @@ class TeleOp(object):
             self.env.action_update()
             self.update_eval_ret(self.env.task.task_progress)
         self.current_step += 1
-        if self.env.has_done:
-            summarize_scores(self.single_evaluate_ret)
-            self.eval_result.append(self.single_evaluate_ret)
-            logger.info("Episode done...")
-            return True
-        return False
 
     def run_pico_control(self, with_physics=True):
+        now_t = self.sim_ros_node.get_clock().now().nanoseconds * 1e-9
+        while now_t <= 3.0:
+            print("wait server for %.3fs" % now_t)
+            now_t = self.sim_ros_node.get_clock().now().nanoseconds * 1e-9
+            time.sleep(0.1)
         self.initialize()
         coef_pos = 0.8
         coef_quat = 0.8
@@ -405,8 +404,8 @@ class TeleOp(object):
                 self.parse_waist_control()
                 self.apply_base_control()
                 self.set_joint_state(self.joint_name, self.init_pos)
-                has_done = self.run_eval()
-                if has_done:
+                self.run_eval()
+                if self.env.has_done:
                     break
             else:
                 logger.info("waiting for pico cmd")
@@ -459,8 +458,8 @@ class TeleOp(object):
                 self.init_pos[0:2] += self.waist_command
                 self.init_pos[2:4] += self.head_command
                 self.set_joint_state(self.joint_name, self.init_pos)
-                has_done = self.run_eval()
-                if has_done:
+                self.run_eval()
+                if self.env.has_done:
                     break
 
     def load_task_config(self, task):
@@ -581,7 +580,11 @@ class TeleOp(object):
     def post_process(self):
         if self.record:
             self.env.stop_recording(True)
+
+        summarize_scores(self.single_evaluate_ret, self.task_name)
+        self.eval_result.append(self.single_evaluate_ret)
         dump_eval_result(self.eval_out_dir, self.eval_result)
+        logger.info("Episode done...")
         self.env.robot.client.Exit()
         self.stop_ros_node()
 

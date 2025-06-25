@@ -268,7 +268,7 @@ def select_obj(objects, stages, robot):
     extra_params = stages[0].get("extra_params", {})
     arm = extra_params.get("arm", "right")
     current_gripper_pose = robot.get_ee_pose("gripper", arm=arm)
-    grasp_offset = extra_params.get("grasp_offset", 0.03)
+    grasp_offset = extra_params.get("grasp_offset", 0.0)
 
     """ Initial screening to grab poses, get grasp_poses_canonical, grasp_poses """
     grasp_stage_id = None
@@ -324,7 +324,7 @@ def select_obj(objects, stages, robot):
 
         # filter with IK-checking
 
-        ik_success, _ = robot.solve_ik(
+        ik_success, jacobian_score = robot.solve_ik(
             grasp_poses, ee_type="gripper", arm=arm, type="Simple"
         )
         grasp_poses_canonical, grasp_poses = (
@@ -447,63 +447,86 @@ def select_obj(objects, stages, robot):
 
             grasp_ik_score = grasp_pose_ik_score[best_element_id]
 
-            _mask = grasp_ik_score >= np.median(grasp_ik_score) / 2
+            _mask = grasp_ik_score >= max(np.median(grasp_ik_score) / 2, 1)
             best_grasp_poses = grasp_poses[_mask]
             best_grasp_widths = grasp_widths[_mask]
-            downsample_num = 100
-            if best_grasp_poses.shape[0] > downsample_num:
-                best_grasp_poses = best_grasp_poses[:downsample_num]
-            if (
-                best_grasp_poses.shape[0] > 1
-            ):  # further select the best grasp pose with the smallest pose difference
-
-                joint_names = robot.joint_names[arm]
-
-                ik_success, ik_info = robot.solve_ik(
-                    best_grasp_poses, ee_type="gripper", type="AvoidObs", arm=arm
+            print(
+                "%s, %s, Filtered grasp pose with next action IK: %d/%d"
+                % (
+                    action,
+                    passive_obj_id,
+                    best_grasp_poses.shape[0],
+                    grasp_ik_score.shape[0],
                 )
-                mask = best_grasp_poses[:, 2, 0] < 0.0
-                ik_success[mask] = False
-                best_grasp_poses = best_grasp_poses[ik_success]
-                ik_joint_positions = ik_info["joint_positions"][ik_success]
-                ik_joint_names = ik_info["joint_names"][ik_success]
-                if len(best_grasp_poses) == 0:
-                    return []
-                target_joint_positions = []
-                for ik_joint_position, ik_joint_name in zip(
-                    ik_joint_positions, ik_joint_names
-                ):
-                    temp_target_joint_positions = []
-                    for joint_name in joint_names:
-                        temp_target_joint_positions.append(
-                            ik_joint_position[list(ik_joint_name).index(joint_name)]
-                        )
-                    target_joint_positions.append(np.array(temp_target_joint_positions))
-                target_joint_positions = np.array(target_joint_positions)
-                cur_joint_states = robot.client.get_joint_positions().states
-                cur_joint_positions = []
-                for key in cur_joint_states:
-                    if key.name in joint_names:
-                        cur_joint_positions.append(key.position)
-                cur_joint_positions = np.array(cur_joint_positions)
-                joint_pos_dist = np.linalg.norm(
-                    target_joint_positions - cur_joint_positions[np.newaxis, :], axis=1
-                )
-                dist_mean = np.mean(joint_pos_dist)
-                dist_std = np.std(joint_pos_dist)
-                joint_pos_dist = (joint_pos_dist - dist_mean) / dist_std
-                cost = joint_pos_dist
-                idx_sorted = np.argsort(cost)
-                best_grasp_pose = best_grasp_poses[idx_sorted][0]
-            else:
-                best_grasp_pose = best_grasp_poses[0]
-                best_grasp_widths = best_grasp_widths[0]
-            best_grasp_pose_canonical = (
-                np.linalg.inv(objects[grasp_obj_id].obj_pose) @ best_grasp_pose
             )
-            gripper2obj = best_grasp_pose_canonical
         else:
-            gripper2obj = grasp_poses_canonical[0]
+            best_grasp_poses = grasp_poses
+        if best_grasp_poses.shape[0] == 0:
+            print("No grasp pose can pass next action IK")
+            return []
+
+        downsample_num = 100
+        if best_grasp_poses.shape[0] > downsample_num:
+            best_grasp_poses = best_grasp_poses[:downsample_num]
+        if (
+            best_grasp_poses.shape[0] > 1
+        ):  # further select the best grasp pose with the smallest pose difference
+
+            joint_names = robot.joint_names[arm]
+
+            ik_success, ik_info = robot.solve_ik(
+                best_grasp_poses, ee_type="gripper", type="AvoidObs", arm=arm
+            )
+            mask = best_grasp_poses[:, 2, 0] < 0.0
+            ik_success[mask] = False
+            best_grasp_poses = best_grasp_poses[ik_success]
+            print(
+                "%s, %s, Filtered grasp pose with curobo IK: %d/%d"
+                % (
+                    action,
+                    passive_obj_id,
+                    best_grasp_poses.shape[0],
+                    ik_success.shape[0],
+                )
+            )
+
+            ik_joint_positions = ik_info["joint_positions"][ik_success]
+            ik_joint_names = ik_info["joint_names"][ik_success]
+            if len(best_grasp_poses) == 0:
+                return []
+            target_joint_positions = []
+            for ik_joint_position, ik_joint_name in zip(
+                ik_joint_positions, ik_joint_names
+            ):
+                temp_target_joint_positions = []
+                for joint_name in joint_names:
+                    temp_target_joint_positions.append(
+                        ik_joint_position[list(ik_joint_name).index(joint_name)]
+                    )
+                target_joint_positions.append(np.array(temp_target_joint_positions))
+            target_joint_positions = np.array(target_joint_positions)
+            cur_joint_states = robot.client.get_joint_positions().states
+            cur_joint_positions = []
+            for key in cur_joint_states:
+                if key.name in joint_names:
+                    cur_joint_positions.append(key.position)
+            cur_joint_positions = np.array(cur_joint_positions)
+            joint_pos_dist = np.linalg.norm(
+                target_joint_positions - cur_joint_positions[np.newaxis, :], axis=1
+            )
+            dist_mean = np.mean(joint_pos_dist)
+            dist_std = np.std(joint_pos_dist)
+            joint_pos_dist = (joint_pos_dist - dist_mean) / dist_std
+            cost = joint_pos_dist
+            idx_sorted = np.argsort(cost)
+            best_grasp_pose = best_grasp_poses[idx_sorted][0]
+        else:
+            best_grasp_pose = best_grasp_poses[0]
+            best_grasp_widths = best_grasp_widths[0]
+        best_grasp_pose_canonical = (
+            np.linalg.inv(objects[grasp_obj_id].obj_pose) @ best_grasp_pose
+        )
+        gripper2obj = best_grasp_pose_canonical
     return gripper2obj
 
 
@@ -536,7 +559,6 @@ def generate_action_stages(objects, all_stages, robot):
         gripper2obj = select_obj(objects, stages, robot)
         if gripper2obj is None or len(gripper2obj) == 0:
             logger.error("No gripper2obj pose can pass IK")
-            gripper2obj = select_obj(objects, stages, robot)
             return []
         for stage in stages:
             extra_params = stage.get("extra_params", {})
@@ -573,6 +595,7 @@ def generate_action_stages(objects, all_stages, robot):
                     active_elements = [active_elements]
 
                 for active_element in active_elements:
+                    target_gripper_poses = np.zeros((0, 4, 4))
                     joint_names = robot.joint_names[arm]
                     # interaction between two rigid objects
                     obj_pose = active_obj.obj_pose
@@ -582,26 +605,32 @@ def generate_action_stages(objects, all_stages, robot):
                         active_element["xyz"],
                         active_element["direction"],
                     )
-                    passive_obj.xyz, passive_obj.direction = (
-                        passive_element["xyz"],
-                        passive_element["direction"],
-                    )
-                    if active_obj.name == "gripper":
-                        gripper2obj = np.eye(4)
-
-                    if passive_obj_id == "fix_pose":
-                        target_obj_poses = get_aligned_fix_pose(
-                            active_obj, passive_obj, N=18
+                    for passive_element in passive_elements:
+                        passive_obj.xyz, passive_obj.direction = (
+                            passive_element["xyz"],
+                            passive_element["direction"],
                         )
-                    else:
-                        target_obj_poses = get_aligned_pose(
-                            active_obj, passive_obj, N=18
+                        if active_obj.name == "gripper":
+                            gripper2obj = np.eye(4)
+
+                        if "fix_pose" == passive_obj_id:
+                            target_obj_poses = get_aligned_fix_pose(
+                                active_obj, passive_obj, N=36
+                            )
+                        else:
+                            target_obj_poses = get_aligned_pose(
+                                active_obj, passive_obj, N=36
+                            )
+                        #
+                        target_gripper_poses = np.concatenate(
+                            (
+                                target_gripper_poses,
+                                target_obj_poses @ gripper2obj[np.newaxis, ...],
+                            ),
+                            axis=0,
                         )
 
-                    target_gripper_poses = (
-                        target_obj_poses @ gripper2obj[np.newaxis, ...]
-                    )
-                    downsample_num = 100
+                    downsample_num = 50
                     if target_gripper_poses.shape[0] > downsample_num:
                         target_gripper_poses = target_gripper_poses[:downsample_num]
                     ik_success, ik_info = robot.solve_ik(

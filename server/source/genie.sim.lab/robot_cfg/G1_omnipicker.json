@@ -81,7 +81,7 @@
   "robot": {
     "arm": "right",
     "base_prim_path": "/G1",
-    "dof_nums": 9,
+    "dof_nums": 7,
     "init_joint_position": [
       0.4,
       0,

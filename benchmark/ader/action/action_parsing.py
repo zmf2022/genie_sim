@@ -15,6 +15,9 @@ from benchmark.ader.action.custom import (
     CheckParticleInBBox,
     PushPull,
     Follow,
+    OnShelf,
+    OnShelfCurobo,
+    TriggerAction,
 )
 
 import base_utils
@@ -24,10 +27,18 @@ EVAL_CONFIGS_PATH = base_utils.benchmark_task_definitions_path()
 
 
 def get_definition_filename(behavior_activity, instance):
-    return os.path.join(
+    ori_path = os.path.join(
         EVAL_CONFIGS_PATH,
         behavior_activity,
         f"problem{instance}.json",
+    )
+
+    if os.path.exists(ori_path):
+        return ori_path
+
+    return os.path.join(
+        EVAL_CONFIGS_PATH,
+        "default_problem.json",
     )
 
 
@@ -103,7 +114,7 @@ def parse_action(obj: dict, init_progress, env) -> ActionBase:
             return act
         elif key == "Inside":
             params = value.split("|")
-            act = Inside(env, params[0], params[1])
+            act = Inside(env, params[0], params[1], params[2])
             record_act_obj(act, init_progress)
             return act
         elif key == "FluidInside":
@@ -155,6 +166,33 @@ def parse_action(obj: dict, init_progress, env) -> ActionBase:
                     float(values[5]),
                 ],
             )
+            record_act_obj(act, init_progress)
+            return act
+        elif key == "OnShelf":
+            params = value.split("|")
+            act = OnShelf(
+                env,
+                params[0],
+                params[1],
+                params[2],
+                params[3],
+            )
+            record_act_obj(act, init_progress)
+            return act
+        elif key == "OnShelfCurobo":
+            params = value.split("|")
+            act = OnShelfCurobo(
+                env,
+                params[0],
+                params[1],
+                params[2],
+                params[3],
+            )
+            record_act_obj(act, init_progress)
+            return act
+        elif key == "TriggerAction":
+            params = value.split("|")
+            act = TriggerAction(env, params[0], params[1])
             record_act_obj(act, init_progress)
             return act
         else:

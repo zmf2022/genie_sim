@@ -106,7 +106,7 @@ class CuroboMotion:
             trajopt_tsteps=step,
             num_trajopt_noisy_seeds=1,
             num_batch_trajopt_seeds=2,
-            collision_activation_distance=0.005,
+            collision_activation_distance=0.0005,
         )
 
         self.tensor_args = tensor_args
@@ -119,7 +119,7 @@ class CuroboMotion:
             max_attempts=10,
             enable_finetune_trajopt=True,
             parallel_finetune=True,
-            time_dilation_factor=1,
+            time_dilation_factor=0.6,
         )
         self.target = SingleXFormPrim(
             "/World/target",
@@ -181,12 +181,9 @@ class CuroboMotion:
         obstacle = self.usd_help.get_obstacles_from_stage(
             reference_prim_path=self.robot_prim_path,
             ignore_substring=[
-                self.robot_prim_path,
-                "/World/Market001",
-                "/World/extra_assets",
-                "/World/assets",
-                "/World/with_phy/tuiche/body2",
-                "/World/GroundPlane",
+                "/World/background",
+                "/World/huojia/Xform_01",
+                "/G1",
                 "/curobo",
             ],
         ).get_collision_check_world()
@@ -476,6 +473,47 @@ class CuroboMotion:
     def detach_obj(self):
         self.motion_gen.detach_object_from_robot()
         self.set_obstacles()
+
+    def visualize_spheres(
+        self,
+        sph_list,
+        prim_prefix="/curobo/robot_sphere_",
+        color=np.array([0, 0.8, 0.2]),
+    ):
+        if self.spheres is None:
+            self.spheres = []
+            for si, s in enumerate(sph_list[0]):
+                sp = sphere.VisualSphere(
+                    prim_path=prim_prefix + str(si),
+                    position=np.array([s.position[0], s.position[1], s.position[2]]),
+                    radius=float(s.radius),
+                    color=color,
+                )
+                self.spheres.append(sp)
+        else:
+            for si, s in enumerate(sph_list[0]):
+                if not np.isnan(s.position[0]):
+                    self.spheres[si].set_world_pose(
+                        position=np.array(
+                            [s.position[0] - 0.4, s.position[1], s.position[2] - 0.55]
+                        )
+                    )
+                    self.spheres[si].set_radius(float(s.radius))
+
+    def visualize_robot_spheres(self):
+        sim_js = self.robot.get_joints_state()
+        sim_js_names = self.robot.dof_names
+        cu_js = JointState(
+            position=self.tensor_args.to_device(sim_js.positions),
+            velocity=self.tensor_args.to_device(sim_js.velocities),
+            acceleration=self.tensor_args.to_device(sim_js.velocities) * 0.0,
+            jerk=self.tensor_args.to_device(sim_js.velocities) * 0.0,
+            joint_names=sim_js_names,
+        )
+        cu_js.acceleration *= 0.0
+        cu_js = cu_js.get_ordered_joint_state(self.motion_gen.kinematics.joint_names)
+        sph_list = self.motion_gen.kinematics.get_robot_as_spheres(cu_js.position)
+        self.visualize_spheres(sph_list, prim_prefix="/curobo/robot_sphere_")
 
     def attach_obj(
         self,

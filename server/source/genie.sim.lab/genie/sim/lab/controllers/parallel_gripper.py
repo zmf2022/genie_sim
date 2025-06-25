@@ -65,10 +65,16 @@ class ParallelGripper(Gripper):
         self._action_deltas = np.array([-0.0628, 0.0628])  # action_deltas
         self._articulation_num_dofs = None
         self.physics_material = PhysicsMaterial(
-            prim_path="/World/gripper_physics", static_friction=1, dynamic_friction=1
+            prim_path="/World/gripper_physics",
+            static_friction=1,
+            dynamic_friction=1,
+            restitution=0.1,
         )
         self.object_material = PhysicsMaterial(
-            prim_path="/World/object_physics", static_friction=1, dynamic_friction=1
+            prim_path="/World/object_physics",
+            static_friction=1,
+            dynamic_friction=1,
+            restitution=0.1,
         )
         self.modify_friction_mode("/World/gripper_physics")
         self.modify_friction_mode("/World/object_physics")
@@ -319,23 +325,6 @@ class ParallelGripper(Gripper):
             # position mode
             self.is_reached = False
             target_joint_positions = [None] * self._articulation_num_dofs
-            # max_force = np.abs(self._joint_opened_positions[0]*20)
-            # max_force = 180
-            # if prim:
-            #     drive.GetMaxForceAttr().Set(max_force)
-            #     if "left_Left" in self._joint_control_prim:
-            #         # drive.GetDampingAttr().Set(5e1)
-            #         # drive.GetStiffnessAttr().Set(5e2)
-            #         drive.GetDampingAttr().Set(5e4)
-            #         drive.GetStiffnessAttr().Set(5e6)
-            #     else:
-            #         # drive.GetDampingAttr().Set(5e1)
-            #         # drive.GetStiffnessAttr().Set(5e2)
-            #         drive.GetDampingAttr().Set(5e4)
-            #         drive.GetStiffnessAttr().Set(5e6)
-
-            # link_drive_1.GetStiffnessAttr().Set(0)
-            # link_drive_2.GetStiffnessAttr().Set(0)
             target_joint_positions[self._joint_dof_indicies[0]] = (
                 self._joint_opened_positions[0]
             )
@@ -354,10 +343,7 @@ class ParallelGripper(Gripper):
                 current_drive_finger_position
             )
             if prim:
-                # drive.GetStiffnessAttr().Set(0)
                 drive.GetMaxForceAttr().Set(target_force)
-            # link_drive_1.GetStiffnessAttr().Set(0.0005)
-            # link_drive_2.GetStiffnessAttr().Set(0.0005)
             target_joint_velocities = [None] * self._articulation_num_dofs
             target_joint_velocities[self._joint_dof_indicies[0]] = (
                 self._joint_closed_velocities[0]
@@ -382,16 +368,10 @@ class ParallelGripper(Gripper):
                 current_finger_position = current_joint_positions[
                     self._joint_dof_indicies[0]
                 ]
-                distance = np.abs(current_finger_position - pre_drive_finger_position)
-                # if distance<=0.01 or n>50:
-                #     self.is_reached = True
-                #     break
                 pre_drive_finger_position = current_finger_position
                 await asyncio.sleep(0.1)
 
-        # asyncio.ensure_future(check_gripper_state())
         self.is_reached = True
-        # return ArticulationAction(joint_positions=target_joint_positions)
         return target_action
 
     def apply_action(self, control_actions: ArticulationAction) -> None:

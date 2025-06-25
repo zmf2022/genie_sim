@@ -280,6 +280,13 @@ message GetObjectAABBReq {
 message GetObjectAABBRsp {
   repeated float bbox = 1;
 }
+message GetWorldPoseReq {
+  string prim_path = 1;
+}
+message GetWorldPoseRsp {
+  repeated float pos = 1;
+  repeated float quat = 2;
+}
 
 service SimObservationService {
   rpc GetObservation(GetObservationReq) returns (GetObservationRsp);
@@ -302,4 +309,5 @@ service SimObservationService {
   rpc OmniCmdChangeProperty(OmniCmdChangePropertyReq) returns (OmniCmdChangePropertyRsp);
   rpc GetPartiPointNumInbbox(GetPartiPointNumInbboxReq) returns (GetPartiPointNumInbboxRsp);
   rpc GetObjectAABB(GetObjectAABBReq) returns (GetObjectAABBRsp);
+  rpc GetWorldPose(GetWorldPoseReq) returns (GetWorldPoseRsp);
 }

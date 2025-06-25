@@ -24,10 +24,14 @@ class Follow(EvaluateAction):
         if not self.is_running():
             return 0.0
         aa, bb = self.get_obj_aabb(self.obj_name, self.bbox)
-        g_pose = self.env.robot.get_ee_pose(ee_type="gripper", id=self.gripper_id)
-        g_pos = g_pose[:3, 3].reshape(-1)
+
+        link_prim_path = (
+            "/G1/gripper_r_center_link"
+            if self.gripper_id == "right"
+            else "/G1/gripper_l_center_link"
+        )
+        g_pos, _ = self.get_world_pose(link_prim_path)
         if self.aabb_contains_point(g_pos, (aa, bb)):
-            logger.info(f"Follow obj {self.obj_name}")
             self._done_flag = True
         return super().update(delta_time)
 
@@ -45,6 +49,6 @@ class Follow(EvaluateAction):
         elif event == ActionEvent.PAUSED:
             pass
         elif event == ActionEvent.CANCELED:
-            self.progress_info["SCORE"] = 0
+            pass
         elif event == ActionEvent.FINISHED:
             self.progress_info["SCORE"] = 1

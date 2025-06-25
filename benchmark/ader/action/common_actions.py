@@ -8,6 +8,7 @@ from typing import Callable, List
 import numpy as np
 import os
 import json
+from base_utils.fix_rotation import quat_wxyz_to_rotation_matrix
 
 
 class ActionEvent(Enum):
@@ -200,6 +201,19 @@ class EvaluateAction(ActionBase):
     def aabb_contains_point(self, point, container):
         lower, upper = container
         return np.less_equal(lower, point).all() and np.less_equal(point, upper).all()
+
+    def get_world_pose(self, prim_path):
+        rsp = self.rpc_robot.client.GetWorldPose(prim_path)
+        return rsp.pos, rsp.quat
+
+    def get_world_pose_matrix(self, prim_path):
+        rsp = self.rpc_robot.client.GetWorldPose(prim_path)
+        R = quat_wxyz_to_rotation_matrix(rsp.quat)
+        matrix = np.eye(4)
+        matrix[:3, :3] = R
+        matrix[:3, 3] = rsp.pos
+
+        return matrix
 
 
 class DebugAction(EvaluateAction):
@@ -496,6 +510,7 @@ class TimeOut(EvalExitAction):
 class StepOut(EvalExitAction):
     def __init__(self, env, max_step):
         super().__init__(env)
+        self.ref_step = self.env.current_step
         self.max_step = max_step
         self._done_flag = False
 
@@ -503,7 +518,7 @@ class StepOut(EvalExitAction):
         if not self.is_running():
             return 0.0
 
-        if self.env.current_step > self.max_step:
+        if self.env.current_step - self.ref_step > self.max_step:
             self._done_flag = True
             self.progress_info["SCORE"] = 0
 

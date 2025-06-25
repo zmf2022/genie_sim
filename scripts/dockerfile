@@ -72,14 +72,14 @@ RUN cd /tmp/curobo && /isaac-sim/python.sh -m pip install --no-build-isolation .
 # copy curobo genie robot config
 COPY ./server/source/genie.sim.lab/robot_cfg \
     /isaac-sim/kit/python/lib/python3.10/site-packages/curobo/content/assets/robot
-COPY ./server/source/genie.sim.lab/robot_cfg/G1_omnipicker/G1_omnipicker.yml \
+COPY server/source/genie.sim.lab/curobo/configs/robot/G1_omnipicker.yml \
     /isaac-sim/kit/python/lib/python3.10/site-packages/curobo/content/configs/robot
 COPY ./server/source/genie.sim.lab/robot_cfg/G1_120s/G1_120s.yml \
     /isaac-sim/kit/python/lib/python3.10/site-packages/curobo/content/configs/robot
 
 # pip install ik_solver
-COPY 3rdparty/ik_solver-0.3.0-cp310-cp310-linux_x86_64.whl /tmp
+COPY 3rdparty/ik_solver-0.4.3-cp310-cp310-linux_x86_64.whl /tmp
 RUN /isaac-sim/python.sh -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple \
-    /tmp/ik_solver-0.3.0-cp310-cp310-linux_x86_64.whl
+    /tmp/ik_solver-0.4.3-cp310-cp310-linux_x86_64.whl
 
 CMD ["bash"]

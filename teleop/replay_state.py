@@ -300,8 +300,6 @@ class Recording:
                         [],
                     )
                     target_joint_positions = [0] * joint_num
-                    joint_state = list()
-                    # self.robot_pose = robot_pose_mat
 
             robot_position_last = robot_position
             robot_rotation_last = robot_rotation

@@ -33,7 +33,7 @@ class CheckParticleInBBox(EvaluateAction):
             self.progress_info["STATUS"] = "SUCCESS"
 
     def handle_action_event(self, action: ActionBase, event: ActionEvent) -> None:
-        logger.info("Action [FluidInside] evt: %d" % (event.value))
+        logger.info("Action [CheckParticleInBBox] evt: %d" % (event.value))
 
         if event == ActionEvent.STARTED:
             pass

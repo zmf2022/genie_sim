@@ -193,7 +193,7 @@
     },
     "scene_id": "iros_scenes/workspace_00",
     "scene_info_dir": "scenes/iros/",
-    "scene_usd": "scenes/iros/iros_make_a_sandwich.usda"
+    "scene_usd": "scenes/iros/iros_make_a_sandwich_rigid.usda"
   },
   "stages": [],
   "task": "iros_make_a_sandwich"

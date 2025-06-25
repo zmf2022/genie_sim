@@ -35,6 +35,14 @@ class BasePolicy:
         )
         self.spin_thread.start()
 
+    def shutdown(self):
+        if rclpy.ok():
+            self.sim_ros_node.destroy_node()
+            rclpy.shutdown()
+
+        if self.spin_thread.is_alive():
+            self.spin_thread.join(timeout=5)
+
     def reset(self):
         """Called at the beginning of an episode."""
         pass

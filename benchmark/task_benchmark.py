@@ -39,9 +39,6 @@ base_utils.check_and_fix_env()
 
 def get_hook_callbacks(policy):
     hooks = [
-        # LogicalDisarrangement(),
-        # RobotMetric(),
-        # TaskMetric(),
         TaskHook(policy),
     ]
 
@@ -51,18 +48,6 @@ def get_hook_callbacks(policy):
         [hk.end_callback for hk in hooks],
         [hk.gather_results for hk in hooks],
     )
-
-
-EVAL_TEMPLATE = {
-    "task_type": "benchmark",
-    "model_path": "",
-    "task_uid": str(uuid.uuid4()),
-    "task_name": "",
-    "stage": "",
-    "result": {"code": int(ErrorCode.INIT_VALUE.value), "step": 0, "msg": ""},
-    "start_time": "",
-    "end_time": "",
-}
 
 
 class TaskBenchmark(object):
@@ -90,7 +75,6 @@ class TaskBenchmark(object):
                 for item in os.listdir(
                     os.path.join(base_utils.benchmark_ader_path(), "task_definitions")
                 )
-                if item != "domain_igibson.bddl"
             ]
         )
         if self.task_name == "all":
@@ -152,14 +136,12 @@ class TaskBenchmark(object):
                     episode_file = specific_task_files[episode_id]
                     per_episode_metrics[episode] = self.evaluate_episode(episode_file)
                     episode += 1
-                    summarize_scores(self.single_evaluate_ret)
+                    summarize_scores(self.single_evaluate_ret, self.task_name)
                     evaluate_results.append(self.single_evaluate_ret)
 
             # output evaluate_results
             with open(evaluate_ret_file, "w+") as f:
                 json.dump(evaluate_results, f)
-
-            # self.other_output(log_file, summary_log_file, per_episode_metrics)
 
     def evaluate_episode(self, episode_file):
         # Create agent to be evaluated
@@ -178,7 +160,7 @@ class TaskBenchmark(object):
         )
 
         if self.args.env_class == "DemoEnv":
-            env = DemoEnv(robot, episode_file, self.task_config)
+            env = DemoEnv(robot, episode_file, self.task_config, self.policy)
         else:
             env = DummyEnv(robot, episode_file, self.task_config)
         init_pose = self.task_config["robot"].get("init_arm_pose")
@@ -214,6 +196,7 @@ class TaskBenchmark(object):
                 for callback in step_callbacks:  # during task
                     callback(env, action)
                 observaion, done, need_update, task_progress = env.step(action)
+                logger.info(f"STEP {env.current_step}")
                 if need_update:
                     self.update_eval_ret(task_progress)
 
@@ -385,6 +368,7 @@ def main():
 
     benchmark = TaskBenchmark(policy, args)
     benchmark.evaluate_policy()  # Evaluate agent on the benchmark
+    policy.shutdown()
 
 
 if __name__ == "__main__":

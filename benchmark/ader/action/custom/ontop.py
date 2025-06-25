@@ -74,6 +74,6 @@ class Ontop(EvaluateAction):
         elif event == ActionEvent.PAUSED:
             pass
         elif event == ActionEvent.CANCELED:
-            self.progress_info["SCORE"] = 0
+            pass
         elif event == ActionEvent.FINISHED:
             self.progress_info["SCORE"] = 1

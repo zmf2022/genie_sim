@@ -29,7 +29,9 @@ class PushPull(EvaluateAction):
             if self.thresh_min == 0.0:
                 condition_met = all(v <= self.thresh_max for v in prismatic_joint)
             else:
-                condition_met = any(self.thresh_min <= v <= self.thresh_max for v in prismatic_joint)
+                condition_met = any(
+                    self.thresh_min <= v <= self.thresh_max for v in prismatic_joint
+                )
 
             if condition_met:
                 self._pass_frame += 1
@@ -54,6 +56,6 @@ class PushPull(EvaluateAction):
         elif event == ActionEvent.PAUSED:
             pass
         elif event == ActionEvent.CANCELED:
-            self.progress_info["SCORE"] = 0
+            pass
         elif event == ActionEvent.FINISHED:
             self.progress_info["SCORE"] = 1

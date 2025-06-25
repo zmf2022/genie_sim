@@ -1,4 +1,3 @@
-
 # Copyright (c) 2023-2025, AgiBot Inc. All Rights Reserved.
 # Author: Genie Sim Team
 # License: Mozilla Public License Version 2.0
@@ -28,7 +27,7 @@ class PlaceStage(StageTemplate):
         self.pre_transform_up = 0.12
         self.place_transform_up = np.array([0, 0, 0.01])
         self.extra_params = {} if extra_params is None else extra_params
-        self.use_pre_place = extra_params.get("use_pre_place", True)
+        self.use_pre_place = extra_params.get("use_pre_place", False)
         self.generate_substage(target_pose)
 
     def generate_substage(self, target_pose):

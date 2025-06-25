@@ -9,7 +9,7 @@ echo "================================="
 CONTAINER_NAME="genie_sim_benchmark"
 START_SCRIPT="$PWD/scripts/start_gui.sh"
 TERMINAL_ENV="autorun"
-PROCESS_CLIENT="task_benchmark|teleop|replay"
+PROCESS_CLIENT="task_benchmark|teleop|replay|infer"
 PROCESS_SERVER="isaac-sim|omni|omni_python|raise|ros"
 
 SERVER_CONFIG=""
@@ -19,6 +19,7 @@ if [ "$TASK_NAME" = "clean" ]; then
     echo -e "\n\nEnter clean mode...\n\n"
     docker exec -it $CONTAINER_NAME bash -c "pkill -9 -f '$PROCESS_CLIENT\|$PROCESS_SERVER'" || true
     echo -e "Finish cleaning env..."
+    docker exec -it $CONTAINER_NAME bash -c "find output -type f -name "*.db3" -exec rm -v {} \;" || true
     reset
     exit 0
 fi
@@ -29,10 +30,6 @@ elif [ "$TASK_NAME" = "genie_task_home_wipe_dirt" ]; then
     SERVER_CONFIG="--enable_gpu_dynamics --render_mode RealTimePathTracing"
 elif [ "$TASK_NAME" = "iros_pack_moving_objects_from_conveyor" ]; then
     SERVER_CONFIG="--reset_fallen=True"
-# elif [ "$TASK_NAME" = "iros_pickup_items_from_the_freezer" ]; then
-#     SERVER_CONFIG="--render_mode RealTimePathTracing"
-elif [ "$TASK_NAME" = "iros_make_a_sandwich" ]; then
-    SERVER_CONFIG="--enable_gpu_dynamics"
 fi
 
 echo "Run with server config: $SERVER_CONFIG"
@@ -81,9 +78,9 @@ elif [ "$MODE" = "infer" ]; then
     declare -a COMMANDS=(
         "docker exec -it $CONTAINER_NAME bash -ic 'run_server $SERVER_CONFIG'"
         "docker exec -it $CONTAINER_NAME bash -ic 'run_client $TASK_NAME'"
-        "docker exec -it $CONTAINER_NAME bash -ic 'cd AgiBot-World && omni_python scripts/infer.py'"
+        "docker exec -it $CONTAINER_NAME bash -ic 'cd AgiBot-World && omni_python scripts/infer.py --task_name $TASK_NAME'"
     )
-    declare -a DELAYS=(0 0 3)
+    declare -a DELAYS=(0 3 10)
 elif [ "$MODE" = "replay" ]; then
     echo -e "\n\nEnter replay mode...\n\n"
     declare -a COMMANDS=(

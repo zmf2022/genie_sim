@@ -10,24 +10,30 @@ logger = Logger()
 
 
 class Inside(EvaluateAction):
-    def __init__(self, env, active_obj, passive_obj):
+    def __init__(self, env, active_obj, passive_obj, scale):
         super().__init__(env)
         self.active_obj = active_obj
         self.passive_obj = passive_obj
         self._done_flag = False
         self._pass_frame = 0
+        self.scale = float(scale)
 
     def update(self, delta_time: float) -> float:
         pose_A = self.get_obj_pose(self.active_obj)
         pos_A = pose_A[:3, 3].reshape(
             -1,
         )
-        aa_B, bb_B = self.get_obj_aabb_new(self.passive_obj)
-        if self.aabb_contains_point(pos_A, (aa_B, bb_B)):
+        self.aa_B, self.bb_B = self.get_obj_aabb_new(self.passive_obj)
+
+        mid = (self.aa_B + self.bb_B) / 2
+        rescaled_size = (self.bb_B - self.aa_B) * self.scale
+        aa_new = mid - rescaled_size / 2
+        bb_new = mid + rescaled_size / 2
+        if self.aabb_contains_point(pos_A, (aa_new, bb_new)):
             self._pass_frame += 1
         else:
             self._pass_frame = 0
-        if self._pass_frame > 2:
+        if self._pass_frame > 5:
             self._done_flag = True
         return super().update(delta_time)
 
@@ -46,6 +52,6 @@ class Inside(EvaluateAction):
         elif event == ActionEvent.PAUSED:
             pass
         elif event == ActionEvent.CANCELED:
-            self.progress_info["SCORE"] = 0
+            pass
         elif event == ActionEvent.FINISHED:
             self.progress_info["SCORE"] = 1

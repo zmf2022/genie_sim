@@ -91,6 +91,11 @@ class IsaacSimRpcRobot(Robot):
     ):
         robot_urdf = robot_cfg.split(".")[0] + ".urdf"
         self.robot_cfg = robot_cfg
+        if "G1" in self.robot_cfg:
+            self.ik_cfg = "G1_NO_GRIPPER.urdf"
+            self.ik_solver_cfg = "g1_solver.yaml"
+        else:
+            raise ValueError(f"robot_cfg is not valid {self.robot_cfg}")
         self.client = Rpc_Client(client_host, robot_urdf)
         self.client.InitRobot(
             robot_cfg=robot_cfg,
@@ -121,13 +126,19 @@ class IsaacSimRpcRobot(Robot):
         }
 
         self.cam_info = None
-        self.robot_gripper_2_grasp_gripper = np.array(
-            [[0.0, 0.0, 1.0], [0.0, 1.0, 0.0], [-1.0, 0.0, 0.0]]
-        )
+        if "omnipicker" in robot_cfg:
+            self.robot_gripper_2_grasp_gripper = np.array(
+                [[0.0, 0.0, 1.0], [-1.0, 0.0, 0.0], [0.0, -1.0, 0.0]]
+            )
+        else:
+            self.robot_gripper_2_grasp_gripper = np.array(
+                [[0.0, 0.0, 1.0], [0.0, 1.0, 0.0], [-1.0, 0.0, 0.0]]
+            )
+
         self.init_position = position
         self.init_rotation = rotation
         self.gripper_control_type = gripper_control_type
-        self.last_eef_pos = [(), ()]
+        self.last_eef_pos = [None, None]
         self.setup()
         self.left_grasp_close = False
         self.right_grasp_close = False
@@ -169,14 +180,22 @@ class IsaacSimRpcRobot(Robot):
 
     def setup(self):
         self.target_object = None
-        self.ik_solver = ik_solver.Solver(
-            urdf_path=f"{SIM_REPO_ROOT}/base_utils/IK-SDK/G1_NO_GRIPPER.urdf",
+        self.left_solver = ik_solver.Solver(
+            part=ik_solver.RobotPart.LEFT_ARM,
+            urdf_path=f"{SIM_REPO_ROOT}/base_utils/IK-SDK/{self.ik_cfg}",
             config_path=str(
-                os.path.join(f"{SIM_REPO_ROOT}/base_utils/IK-SDK", "solver.yaml")
+                os.path.join(f"{SIM_REPO_ROOT}/base_utils/IK-SDK", self.ik_solver_cfg)
             ),
-            use_relaxed_ik=True,
-            use_elbow=False,
         )
+        self.right_solver = ik_solver.Solver(
+            part=ik_solver.RobotPart.RIGHT_ARM,
+            urdf_path=f"{SIM_REPO_ROOT}/base_utils/IK-SDK/{self.ik_cfg}",
+            config_path=str(
+                os.path.join(f"{SIM_REPO_ROOT}/base_utils/IK-SDK", self.ik_solver_cfg)
+            ),
+        )
+        self.left_solver.set_debug_mode(False)
+        self.right_solver.set_debug_mode(False)
 
         # set robot init state
 
@@ -299,7 +318,6 @@ class IsaacSimRpcRobot(Robot):
             self.client.AttachObj(prim_paths=["/World/Objects/" + self.target_object])
 
     def move_pose(self, target_pose, type, arm="right", **kwargs):
-        # import ipdb;ipdb.set_trace()
         if type.lower() == "trajectory":
             content = {
                 "type": "trajectory_4x4_pose",
@@ -320,7 +338,6 @@ class IsaacSimRpcRobot(Robot):
         return self.move(content)
 
     def set_gripper_action(self, action, arm="right"):
-        # self.gripper_server.set_gripper_action(action)
         assert arm in ["left", "right"]
         time.sleep(0.3)
         if action is None:
@@ -379,10 +396,6 @@ class IsaacSimRpcRobot(Robot):
 
                 logger.info(f"target_position is{target_position}")
                 logger.info(f"target_rotation is{target_rotation}")
-                # import ipdb;ipdb.set_trace()
-                # inverse_local_orientation = [self.init_rotation[0], -1*self.init_rotation[1], -1*self.init_rotation[2], -1*self.init_rotation[3]]
-                # local_position = quat_multiplication(inverse_local_orientation,T-self.init_position)
-                # target_position = local_position
             state = (
                 self.client.moveto(
                     target_position=target_position,
@@ -414,7 +427,7 @@ class IsaacSimRpcRobot(Robot):
         elif type == "joint":
             # base control
             tgt_base_velocity = content["base_velocity"]
-            PHYSICS_DT = 1 / 120  # To be optimized2
+            PHYSICS_DT = 1 / 120
             if any(tgt_base_velocity) != 0:
                 delta_pos = np.array([tgt_base_velocity[0] * PHYSICS_DT, 0.0, 0.0])
                 delta_rpy = np.array([0.0, 0.0, tgt_base_velocity[1] * PHYSICS_DT])
@@ -520,16 +533,12 @@ class IsaacSimRpcRobot(Robot):
                 pose = list(xyz_tgt), list(quat_tgt)
                 traj.append(pose)
 
-            # logger.debug("traj", traj)
             start_time = time.time()
             self.client.SetTrajectoryList(traj)
 
             xyz_curr = self.get_ee_pose()[:3, 3]
-            # logger.debug(xyz_curr, xyz_tgt)
             logger.info("xyz dist {np.linalg.norm(xyz_curr - xyz_tgt)}")
             logger.info("move", time.time() - start_time)
-
-            # time.sleep(100)
 
         elif type.lower() == "trajectory_4x4_pose":
             waypoint_list = content["data"]
@@ -543,8 +552,6 @@ class IsaacSimRpcRobot(Robot):
 
             logger.info("Set Trajectory!")
             self.client.SetTrajectoryList(traj, is_block=True)
-
-            # self.client.SetTrajectoryList(traj)           # err: not block
             state = True
 
         else:
@@ -682,50 +689,46 @@ class IsaacSimRpcRobot(Robot):
         )
 
     def initialize_solver(self, joint_info):
-        head_init_position = joint_info["ori_pos"][:2]
-        waist_init_position = joint_info["ori_pos"][2:4]
         l_arm = joint_info["l_arm"]
         r_arm = joint_info["r_arm"]
-        self.ik_solver.initialize_states(
-            left_arm_init=np.array(l_arm, dtype=np.float32),
-            right_arm_init=np.array(r_arm, dtype=np.float32),
-            head_init=np.array(head_init_position, dtype=np.float32),
-        )
-        q_full = np.zeros(18)
-        q_full[0] = waist_init_position[1]
-        q_full[1] = waist_init_position[0]
-        self.center_T_base = self.ik_solver.compute_fk(
-            q=q_full, start_link="base_link", end_link="arm_base_link"
-        )
-        self.base_T_center = np.linalg.inv(self.center_T_base)
+        self.left_solver.sync_target_with_joints(l_arm)
+        self.right_solver.sync_target_with_joints(r_arm)
+
+    def from_transform_to_pose(self, transform):
+        pos = transform[:3, 3]
+        rot = transform[:3, :3]
+        return pos, rot
 
     def get_joint_from_deltapos(self, xyz, rpy, id, isOn):
         idx = 0 if id == "left" else 1
-        part = (
-            ik_solver.RobotPart.LEFT_ARM
-            if id == "left"
-            else ik_solver.RobotPart.RIGHT_ARM
-        )
-        if isOn and self.last_eef_pos[idx]:
+        if isOn and self.last_eef_pos[idx] is not None:
             pos, rot = deepcopy(self.last_eef_pos[idx])
         else:
-            self.last_eef_pos[idx] = self.ik_solver.get_current_target(part)
+            pose = (
+                self.from_transform_to_pose(self.left_solver.get_current_target()[0])
+                if id == "left"
+                else self.from_transform_to_pose(
+                    self.right_solver.get_current_target()[0]
+                )
+            )
+            self.last_eef_pos[idx] = pose
             return np.array([])
-
         pos += xyz
-        rot_new = Rotation.from_euler(
+        quat = Rotation.from_euler(
             "xyz", matrix_to_euler_angles(rot) + rpy, degrees=False
-        ).as_matrix()
-
-        self.ik_solver.update_target_mat(
-            part=part,
-            target_pos=pos,
-            target_rot=rot_new,
-        )
+        ).as_quat()
         if id == "left":
-            ret = self.ik_solver.solve_left_arm()
+            self.left_solver.update_target_quat(
+                target_pos=pos,
+                target_quat=quat,
+            )
+            ret = self.left_solver.solve()
         else:
-            ret = self.ik_solver.solve_right_arm()
+            self.right_solver.update_target_quat(
+                target_pos=pos,
+                target_quat=quat,
+            )
+            ret = self.right_solver.solve()
         return np.array(ret.tolist())
 
     def check_ik(self, pose, id="right", **kwargs):
@@ -761,7 +764,6 @@ class IsaacSimRpcRobot(Robot):
             jacobian_score.append(state["Jacobian"])
             joint_positions.append(state["joint_positions"])
             joint_names.append(state["joint_names"])
-        # result = np.array(result)
         if single_mode:
             ik_result = ik_result[0]
             jacobian_score = jacobian_score[0]

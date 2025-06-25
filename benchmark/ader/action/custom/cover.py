@@ -27,11 +27,7 @@ class Cover(EvaluateAction):
         active_cg = (aa_A[2] + bb_A[2]) / 2
         passive_top = bb_B[2]
 
-        logger.info(
-            "[Cover]: active: %s, passive: %s, diff: %.4f"
-            % (self.active_obj, self.passive_obj, active_cg - passive_top)
-        )
-        if active_cg - passive_top > 0.001:
+        if active_cg - passive_top > 0.002:
             return super().update(delta_time)
 
         # Calculate projection intersection of X-Y planes
@@ -55,8 +51,6 @@ class Cover(EvaluateAction):
             dx * dy, dx * dz, dy * dz
         )  # Take the largest area of ​​the three faces
         # Calculate the base area of ​​an active object
-        # area_A = (bb_A[0] - aa_A[0]) * (bb_A[1] - aa_A[1])
-
         dx = bb_B[0] - aa_B[0]
         dy = bb_B[1] - aa_B[1]
         dz = bb_B[2] - aa_B[2]
@@ -64,10 +58,6 @@ class Cover(EvaluateAction):
         area = min(area_A, area_B)
 
         # If the area ratio exceeds the threshold, the mark is completed
-        logger.info(
-            "[Cover]: active: %s, passive: %s, radio: %.2f"
-            % (self.active_obj, self.passive_obj, inter_area / area)
-        )
         if area > 0 and inter_area / area >= self.threshold:
             self._done_flag = True
 
@@ -88,6 +78,6 @@ class Cover(EvaluateAction):
         elif event == ActionEvent.PAUSED:
             pass
         elif event == ActionEvent.CANCELED:
-            self.progress_info["SCORE"] = 0
+            pass
         elif event == ActionEvent.FINISHED:
             self.progress_info["SCORE"] = 1

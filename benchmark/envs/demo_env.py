@@ -27,8 +27,9 @@ logger = Logger()  # Create singleton instance
 
 
 class DemoEnv(BaseEnv):
-    def __init__(self, robot: Robot, task_file: str, init_task_config):
+    def __init__(self, robot: Robot, task_file: str, init_task_config, policy=None):
         super().__init__(robot)
+        self.policy = policy
         self.attached_obj_id = None
         self.current_episode = 0
         self.current_step = 0
@@ -217,7 +218,18 @@ class DemoEnv(BaseEnv):
                         passive_id,
                         self.attached_obj_id is not None,
                     )
-                    self.robot.set_gripper_action(gripper_action, arm=arm)
+
+                    if gripper_action is not None:
+                        name = ["idx81_gripper_r_outer_joint1"]
+                        pos = [0.0] if gripper_action == "close" else [0.8]
+                        self.policy.sim_ros_node.set_joint_state(name, pos)
+                        self.robot.client.DetachObj()
+                        if gripper_action == "close":
+                            time.sleep(1)
+                            self.robot.client.AttachObj(
+                                prim_paths=["/World/Objects/" + passive_id]
+                            )
+
                     time.sleep(1)
 
                     self.robot.client.set_frame_state(
@@ -358,15 +370,15 @@ class DemoEnv(BaseEnv):
         for obj_id in objects:
             if obj_id == "gripper":
                 continue
-            if obj_id == "fix_pose":
-                if len(objects["fix_pose"].obj_pose) == 3:
-                    position = objects["fix_pose"].obj_pose
+            if "fix_pose" == obj_id:
+                if len(objects[obj_id].obj_pose) == 3:
+                    position = objects[obj_id].obj_pose
                     rotation_matrix = calculate_rotation_matrix(
-                        objects["fix_pose"].direction, [0, 0, 1]
+                        objects[obj_id].direction, [0, 0, 1]
                     )
-                    objects["fix_pose"].obj_pose = np.eye(4)
-                    objects["fix_pose"].obj_pose[:3, 3] = position.flatten()
-                    objects["fix_pose"].obj_pose[:3, :3] = rotation_matrix
+                    objects[obj_id].obj_pose = np.eye(4)
+                    objects[obj_id].obj_pose[:3, 3] = position.flatten()
+                    objects[obj_id].obj_pose[:3, :3] = rotation_matrix
                 continue
 
             if "/" in obj_id:

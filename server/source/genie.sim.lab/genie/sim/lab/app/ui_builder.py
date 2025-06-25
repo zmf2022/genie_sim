@@ -353,9 +353,6 @@ class UIBuilder:
         actions = ArticulationAction(
             joint_positions=target_positions, joint_indices=target_joint_indices
         )
-        # print(self.articulation.dof_properties)
-        # pprint(self.articulation.dof_names)
-        # print(actions)
         if not is_trajectory:
             self.articulation.set_joint_positions(
                 target_positions, joint_indices=target_joint_indices
@@ -406,7 +403,6 @@ class UIBuilder:
         current_position, rotation_matrix = self._get_ee_pose(is_right)
 
         current_rotation = rotation_matrix_to_quaternion(rotation_matrix)
-        # current_arm_positions = self._get_ik_status(current_position, current_rotation, is_right)[1].joint_positions
         if not self._get_ik_status(target_position, target_orientation, is_right)[0]:
             self.cmd_list = None
             self.reached = True
@@ -460,7 +456,6 @@ class UIBuilder:
                         arm_position.joint_positions - current_arm_positions
                     )
                     if joint_distance < 1:
-                        # trajectory =self.ruckig_controller.caculate_trajectory(current_arm_positions, arm_position.joint_positions)
                         self.cmd_list.append(arm_position.joint_positions)
                         current_arm_positions = arm_position.joint_positions
         else:
@@ -662,7 +657,7 @@ class UIBuilder:
                 self.curobo_config_file,
                 self.robot_prim_path,
                 self.art_controllers,
-                step=32,
+                step=100,
             )
             self.curoboMotion.set_obstacles()
 

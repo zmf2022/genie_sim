@@ -734,6 +734,8 @@ class Rpc_Client:
         req.prop_path = prop_path
         if isinstance(value, bool):
             req.bool_value = value
+        if isinstance(value, str):
+            req.str_value = value
         response = stub.OmniCmdChangeProperty(req)
         return response
 
@@ -753,6 +755,14 @@ class Rpc_Client:
         req.prim_path = prim_path
 
         response = stub.GetObjectAABB(req)
+        return response
+
+    def GetWorldPose(self, prim_path):
+        stub = sim_observation_service_pb2_grpc.SimObservationServiceStub(self.channel)
+        req = sim_observation_service_pb2.GetWorldPoseReq()
+        req.prim_path = prim_path
+
+        response = stub.GetWorldPose(req)
         return response
 
 

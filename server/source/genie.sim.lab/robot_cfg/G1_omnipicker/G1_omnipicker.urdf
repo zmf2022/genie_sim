@@ -4,11 +4,6 @@
 <!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
 <!-- =================================================================================== -->
 <robot name="genie">
-  <!-- Index -->
-  <!-- body: [G1, G2] -->
-  <!-- gripper: [dummy_hand, omnipicker, 120s, roh, skillhands6] -->
-  <!-- <xacro:arg name="robot_model" default="G1" />
-  <xacro:arg name="robot_model" default="G1" /> -->
   <!-- robot -->
   <!-- Material Definition -->
   <material name="black">
@@ -1180,6 +1175,4 @@
     <link2 link="gripper_r_inner_link4" rpy="0 0 0" xyz="0 -0.010280428 0"/>
     <axis xyz="0 0 1"/>
   </loop_joint>
-  <!-- Eastern Eggs -->
-  <!-- All Together -->
 </robot>

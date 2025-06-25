@@ -138,6 +138,11 @@ class SimObservationServiceStub(object):
                 request_serializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetObjectAABBReq.SerializeToString,
                 response_deserializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetObjectAABBRsp.FromString,
                 _registered_method=True)
+        self.GetWorldPose = channel.unary_unary(
+                '/aimdk.protocol.SimObservationService/GetWorldPose',
+                request_serializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetWorldPoseReq.SerializeToString,
+                response_deserializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetWorldPoseRsp.FromString,
+                _registered_method=True)
 
 
 class SimObservationServiceServicer(object):
@@ -263,6 +268,12 @@ class SimObservationServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetWorldPose(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_SimObservationServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -365,6 +376,11 @@ def add_SimObservationServiceServicer_to_server(servicer, server):
                     servicer.GetObjectAABB,
                     request_deserializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetObjectAABBReq.FromString,
                     response_serializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetObjectAABBRsp.SerializeToString,
+            ),
+            'GetWorldPose': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetWorldPose,
+                    request_deserializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetWorldPoseReq.FromString,
+                    response_serializer=aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetWorldPoseRsp.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -907,6 +923,33 @@ class SimObservationService(object):
             '/aimdk.protocol.SimObservationService/GetObjectAABB',
             aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetObjectAABBReq.SerializeToString,
             aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetObjectAABBRsp.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetWorldPose(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/aimdk.protocol.SimObservationService/GetWorldPose',
+            aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetWorldPoseReq.SerializeToString,
+            aimdk_dot_protocol_dot_sim_dot_sim__observation__service__pb2.GetWorldPoseRsp.FromString,
             options,
             channel_credentials,
             insecure,

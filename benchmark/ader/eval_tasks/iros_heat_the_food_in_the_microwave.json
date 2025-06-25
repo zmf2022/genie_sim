@@ -27,7 +27,9 @@
       },
       {
         "data_info_dir": "objects/iros/plate/iros_plate_003",
+        "dynamic_friction": 1,
         "model_path": "objects/iros/plate/iros_plate_003/Aligned.usd",
+        "model_type": "sdf",
         "object_id": "iros_plate_003",
         "position": [
           -4.442,
@@ -39,7 +41,8 @@
           0.0,
           0.707107,
           0.707107
-        ]
+        ],
+        "static_friction": 1
       }
     ],
     "task_related_objects": []

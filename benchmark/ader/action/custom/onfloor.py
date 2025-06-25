@@ -19,8 +19,14 @@ class Onfloor(EvalExitAction):
         self.z_threshold = 0.3
         self.env = env
 
+    def _analyze_obj_name(self, obj_name):
+        if obj_name.startswith("/World"):
+            return obj_name
+
+        return "/World/Objects/" + obj_name
+
     def get_obj_pose(self, obj_name):
-        pose = self.env.robot.get_prim_world_pose("/World/Objects/%s" % obj_name)
+        pose = self.env.robot.get_prim_world_pose(self._analyze_obj_name(obj_name))
         return np.array(pose)
 
     def update(self, delta_time: float) -> float:

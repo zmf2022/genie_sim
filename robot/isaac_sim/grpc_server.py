@@ -607,12 +607,7 @@ class ObservationService(sim_observation_service_pb2_grpc.SimObservationService)
         plan = req.cmd_plan
 
         result = self.server_function.blocking_start_server(
-            data={
-                "isArmRight": isArmRight,
-                "poses": target_poses,
-                "isPlan": is_plan,
-                "plan_index": plan_index,
-            },
+            data={"isArmRight": isArmRight, "poses": target_poses, "isPlan": is_plan},
             Command=15,
         )
         for plan in result["cmd_plans"]:
@@ -872,6 +867,8 @@ class ObservationService(sim_observation_service_pb2_grpc.SimObservationService)
         cmd["prop_path"] = req.prop_path
         if req.WhichOneof("value") == "bool_value":
             cmd["value"] = req.bool_value
+        if req.WhichOneof("value") == "str_value":
+            cmd["value"] = req.str_value
 
         rsp.msg = self.server_function.blocking_start_server(data=cmd, Command=32)
         return rsp
@@ -896,6 +893,18 @@ class ObservationService(sim_observation_service_pb2_grpc.SimObservationService)
         ret = self.server_function.blocking_start_server(data=cmd, Command=34)
         for val in ret["points"]:
             rsp.bbox.append(val)
+        return rsp
+
+    def GetWorldPose(self, req, rsp):
+        rsp = sim_observation_service_pb2.GetWorldPoseRsp()
+        cmd = {}
+        cmd["prim_path"] = req.prim_path
+
+        ret = self.server_function.blocking_start_server(data=cmd, Command=35)
+        for val in ret["pos"]:
+            rsp.pos.append(val)
+        for val in ret["quat"]:
+            rsp.quat.append(val)
         return rsp
 
 
