@@ -71,9 +71,9 @@ class TaskBenchmark(object):
             raise ValueError("Invalid task_name")
         tasks = sorted(
             [
-                item
+                os.path.splitext(item)[0]
                 for item in os.listdir(
-                    os.path.join(base_utils.benchmark_ader_path(), "task_definitions")
+                    os.path.join(base_utils.benchmark_ader_path(), "eval_tasks")
                 )
             ]
         )
