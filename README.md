@@ -30,7 +30,7 @@ Genie Sim Benchmark, as the open-source evaluation version of Genie Sim, is dedi
 - Support UniVLA baseline model in simulation evaluation
 
 # 3. Updates
-- [6/11/2025] v2.1
+- [6/25/2025] v2.1
   - Add 10 more manipulation tasks for Agibot World Challenge 2025 including all simulation assets
   - Open-source synthetic datasets for 10 manipulation tasks on Huggingface
   https://huggingface.co/datasets/agibot-world/AgiBotWorldChallenge-2025/tree/main/Manipulation-SimData
@@ -45,7 +45,7 @@ Genie Sim Benchmark, as the open-source evaluation version of Genie Sim, is dedi
 Embodied intelligence simulation benchmarks in Genie Sim are designed to evaluate and advance the development of embodied AI models. These benchmarks provide realistic environments, diverse tasks and standardized metrics to measure the performance of robotic AI systems, which reduce the requirement of expensive physical hardware and real-world testing, avoid risky and dangerous testing scenarios and accelerate training and evaluaiton process of AI agents.
 
 ## 4.2 Getting Started
-Please refer to [this page](http://agibot-world.com/sim-evaluation/docs) for installation, user guide and API reference
+Please refer to [this page](https://agibot-world.com/sim-evaluation/docs/#/v2) for installation, user guide and API reference
 
 ## 4.3 Support
 <img src="./docs/wechat.JPEG" width="30%"/>
