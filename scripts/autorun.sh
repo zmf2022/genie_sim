@@ -77,7 +77,7 @@ elif [ "$MODE" = "infer" ]; then
     echo -e "\n\nEnter model infer mode...\n\n"
     declare -a COMMANDS=(
         "docker exec -it $CONTAINER_NAME bash -ic 'run_server $SERVER_CONFIG'"
-        "docker exec -it $CONTAINER_NAME bash -ic 'run_client $TASK_NAME'"
+        "docker exec -it $CONTAINER_NAME bash -ic 'run_client $TASK_NAME --policy_class=BaselinePolicy'"
         "docker exec -it $CONTAINER_NAME bash -ic 'cd AgiBot-World && omni_python scripts/infer.py --task_name $TASK_NAME'"
     )
     declare -a DELAYS=(0 3 10)

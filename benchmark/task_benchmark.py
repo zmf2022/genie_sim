@@ -22,6 +22,7 @@ from benchmark.envs.dummy_env import DummyEnv
 from robot.genie_robot import IsaacSimRpcRobot
 from policy.base import BasePolicy
 from benchmark.policy.demopolicy import DemoPolicy
+from benchmark.policy.baselinepolicy import BaselinePolicy
 import ader
 
 from layout.task_generate import TaskGenerator
@@ -320,7 +321,7 @@ def main():
         "--policy_class",
         type=str,
         default="DemoPolicy",
-        choices=["DemoPolicy", "DummyPolicy"],
+        choices=["DemoPolicy", "BaselinePolicy"],
         help="Choose the policy class",
     )
     parser.add_argument(
@@ -360,9 +361,8 @@ def main():
 
     if args.policy_class == "DemoPolicy":
         policy = DemoPolicy(task_name=args.task_name)
-    elif False:
-        # placeholder, customize your own policy here
-        pass
+    elif args.policy_class == "BaselinePolicy":
+        policy = BaselinePolicy(task_name=args.task_name)
     else:
         raise ValueError("Invalid policy class: {}".format(args.policy_class))
 
