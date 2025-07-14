@@ -167,7 +167,7 @@ class SimROSNode(Node):
 
     def callback_rgb_image_head(self, msg):
         try:
-            cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
+            cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="rgb8")
 
             success, compressed_data = cv2.imencode(".png", cv_image)
             if success:
@@ -185,7 +185,7 @@ class SimROSNode(Node):
 
     def callback_rgb_image_l(self, msg):
         try:
-            cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
+            cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="rgb8")
 
             success, compressed_data = cv2.imencode(".png", cv_image)
             if success:
@@ -203,7 +203,7 @@ class SimROSNode(Node):
 
     def callback_rgb_image_r(self, msg):
         try:
-            cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
+            cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="rgb8")
 
             success, compressed_data = cv2.imencode(".png", cv_image)
             if success:

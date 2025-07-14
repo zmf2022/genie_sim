@@ -133,7 +133,7 @@ def parse_action(obj: dict, init_progress, env) -> ActionBase:
             return act
         elif key == "Ontop":
             params = value.split("|")
-            act = Ontop(env, params[0], params[1])
+            act = Ontop(env, params[0], params[1], float(params[2]), float(params[3]))
             record_act_obj(act, init_progress)
             return act
         elif key == "Cover":

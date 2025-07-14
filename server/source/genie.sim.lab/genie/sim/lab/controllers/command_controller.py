@@ -13,6 +13,7 @@ from genie.sim.lab.utils import RobotCfg
 
 
 from base_utils.logger import Logger
+from base_utils.system_utils import *
 
 logger = Logger()  # Create singleton instance
 
@@ -202,7 +203,7 @@ class CommandController:
                     "camera/" + "{frame_num}/" + f"{prim_name}_semantic.png"
                 )
 
-    def record_rosbag(self):
+    def record_rosbag(self, record_images):
         if self.publish_ros:
             command = [
                 "ros2",
@@ -212,6 +213,9 @@ class CommandController:
                 self.path_to_save,
                 "-a",
             ]
+
+            if not record_images:
+                command.extend(["--exclude", "/.*_rgb$|/.*_depth$|/.*_png$"])
             process = subprocess.Popen(command)
             self.process_pid.append(process.pid)
 
@@ -287,33 +291,8 @@ class CommandController:
 
         stage = omni.usd.get_context().get_stage()
         viewport, window = get_active_viewport_and_window()
-        window.destroy()
-        window1 = create_viewport_window(
-            name="Left_Camera",
-            camera_path="/G1/gripper_l_base_link/Left_Camera",
-            width=300,
-            height=200,
-        )
-        window2 = create_viewport_window(
-            name="Head_Camera", camera_path="/G1/head_link2/Head_Camera"
-        )
-        window3 = create_viewport_window(
-            name="Right_Camera",
-            camera_path="/G1/gripper_r_base_link/Right_Camera",
-            width=300,
-            height=200,
-        )
-
+        viewport.set_active_camera("/G1/head_link2/Head_Camera")
         self._play()
-        window2.dock_in(
-            ui.Workspace.get_window("Viewport"), ui.DockPosition.LEFT, ratio=0.6
-        )
-        window3.dock_in(
-            ui.Workspace.get_window("Viewport"), ui.DockPosition.BOTTOM, ratio=0.5
-        )
-        window1.dock_in(
-            ui.Workspace.get_window("Viewport"), ui.DockPosition.RIGHT, ratio=0.5
-        )
 
     def _play(self):
         self.ui_builder.my_world.play()
@@ -687,7 +666,7 @@ class CommandController:
                         self.task_name = self.data["task_name"]
                         self.process_recording_path()
                         self.process_camera_info_list()
-                        self.record_rosbag()
+                        self.record_rosbag(self.record_images)
 
                         # enable tf pub
                         tf_to_record = [self.robot_prim_path]
@@ -893,6 +872,15 @@ class CommandController:
                     logger.info("On Exit...")
                     self.exit = self.data["exit"]
                     self.data_to_send = "exit"
+                    if self.task_name is not None:
+                        output_path = os.path.join(
+                            benchmark_root_path(), "output", self.task_name
+                        )
+                        logger.info(
+                            f"Copy state json from {self.path_to_save} to {output_path}"
+                        )
+                        os.system(f"cp {self.path_to_save}/state.json {output_path}")
+
                 elif self.Command == 18:  # DEPRECATED_AND_IT_IS_REPLACED_BY_ROS_TOPIC
                     logger.debug(
                         "this command 18 will be deprecated once grpc framework is removed"

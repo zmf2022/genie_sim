@@ -6,6 +6,7 @@ from enum import Enum
 import uuid
 import os, json
 from .logger import Logger
+from collections import deque
 
 logger = Logger()
 
@@ -30,16 +31,81 @@ EVAL_TEMPLATE = {
 }
 
 TASK_STEPS = {
-    "iros_clear_the_countertop_waste": 6,
-    "iros_open_drawer_and_store_items": 5,
-    "iros_heat_the_food_in_the_microwave": 6,
-    "iros_pack_moving_objects_from_conveyor": 4,
-    "iros_pickup_items_from_the_freezer": 5,
-    "iros_restock_supermarket_items": 4,
-    "iros_pack_in_the_supermarket": 4,
-    "iros_make_a_sandwich": 12,
-    "iros_clear_table_in_the_restaurant": 4,
-    "iros_stamp_the_seal": 5,
+    "iros_clear_the_countertop_waste": [
+        "Follow",
+        "PickUpOnGripper",
+        "Inside",
+        "Follow",
+        "PickUpOnGripper",
+        "Inside",
+    ],
+    "iros_open_drawer_and_store_items": [
+        "PushPull",
+        "Follow",
+        "PickUpOnGripper",
+        "Inside",
+        "PushPull",
+    ],
+    "iros_heat_the_food_in_the_microwave": [
+        "PushPull",
+        "Follow",
+        "PickUpOnGripper",
+        "Inside",
+        "PushPull",
+        "TriggerAction",
+    ],
+    "iros_pack_moving_objects_from_conveyor": [
+        "Follow",
+        "PickUpOnGripper",
+        "Follow",
+        "Inside",
+    ],
+    "iros_pickup_items_from_the_freezer": [
+        "PushPull",
+        "Follow",
+        "PickUpOnGripper",
+        "Inside",
+        "PushPull",
+    ],
+    "iros_restock_supermarket_items": [
+        "Follow",
+        "PickUpOnGripper",
+        "Follow",
+        "OnShelf",
+    ],
+    "iros_pack_in_the_supermarket": [
+        "Follow",
+        "PickUpOnGripper",
+        "Follow",
+        "Inside",
+    ],
+    "iros_make_a_sandwich": [
+        "Follow",
+        "PickUpOnGripper",
+        "Cover",
+        "Follow",
+        "PickUpOnGripper",
+        "Cover",
+        "Follow",
+        "PickUpOnGripper",
+        "Cover",
+        "Follow",
+        "PickUpOnGripper",
+        "Cover",
+    ],
+    "iros_clear_table_in_the_restaurant": [
+        "Follow",
+        "PickUpOnGripper",
+        "Follow",
+        "Ontop",
+    ],
+    "iros_stamp_the_seal": [
+        "Follow",
+        "PickUpOnGripper",
+        "TriggerAction",
+        "Follow",
+        "Ontop",
+    ],
 }
 
 
@@ -51,25 +117,30 @@ def summarize_scores(single_evaluate_ret, task_name):
     episode_progress = eval_result.get("progress", [])
 
     eval_result["scores"] = {"STEPS": {}, "E2E": 0}
-    for i in range(TASK_STEPS[task_name]):
+    for i in range(len(TASK_STEPS[task_name])):
         eval_result["scores"]["STEPS"][f"STEP{i}"] = 0.0
     if episode_progress == []:
         pass
     else:
         step_idx = 0
+        substeps = deque(TASK_STEPS[task_name])
         for p in episode_progress:
             progress = p.get("progress")
             if not isinstance(progress, dict):
                 continue
-            if "SCORE" in progress.keys():
-                step = f"STEP{step_idx}"
-                eval_result["scores"]["STEPS"][step] = float(progress["SCORE"])
-                step_idx += 1
+            if not progress.get("SCORE"):
+                continue
+            if substeps:
+                if substeps[0] == p.get("class_name"):
+                    substeps.popleft()
+                    step = f"STEP{step_idx}"
+                    eval_result["scores"]["STEPS"][step] = float(progress["SCORE"])
+                    step_idx += 1
         step_keys = list(eval_result["scores"]["STEPS"].keys())
         if len(step_keys):
             last_step = step_keys[-1]
-            logger.info(f"last_step {last_step}")
             if eval_result["scores"]["STEPS"][last_step] == 1:
+                logger.info(f"E2E Succeed!!!")
                 eval_result["scores"]["E2E"] = 1
 
 

@@ -30,6 +30,9 @@ Genie Sim Benchmark, as the open-source evaluation version of Genie Sim, is dedi
 - Support UniVLA baseline model in simulation evaluation
 
 # 3. Updates
+- [7/14/2025] v2.2
+  - Provide detailed evaluation metrics for all Agibot World Challenge tasks
+  - Add automatic evaluation script to run each task multiple times and record score of all steps
 - [6/25/2025] v2.1
   - Add 10 more manipulation tasks for Agibot World Challenge 2025 including all simulation assets
   - Open-source synthetic datasets for 10 manipulation tasks on Huggingface

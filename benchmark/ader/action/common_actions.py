@@ -9,6 +9,9 @@ import numpy as np
 import os
 import json
 from base_utils.fix_rotation import quat_wxyz_to_rotation_matrix
+from base_utils.logger import Logger
+
+logger = Logger()
 
 
 class ActionEvent(Enum):
@@ -510,7 +513,7 @@ class TimeOut(EvalExitAction):
 class StepOut(EvalExitAction):
     def __init__(self, env, max_step):
         super().__init__(env)
-        self.ref_step = self.env.current_step
+        self.ref_step = 0
         self.max_step = max_step
         self._done_flag = False
 
@@ -526,3 +529,11 @@ class StepOut(EvalExitAction):
 
     def _is_done(self) -> bool:
         return self._done_flag
+
+    def handle_action_event(self, action: ActionBase, event: ActionEvent) -> None:
+        logger.info("Action [StepOut] evt: %d" % (event.value))
+
+        super().handle_action_event(action, event)
+
+        if event == ActionEvent.STARTED:
+            self.ref_step = self.env.current_step

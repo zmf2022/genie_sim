@@ -37,7 +37,7 @@ class PushPull(EvaluateAction):
                 self._pass_frame += 1
                 break
 
-        if self._pass_frame > 2:
+        if self._pass_frame > 1:
             self._done_flag = True
         return super().update(delta_time)
 

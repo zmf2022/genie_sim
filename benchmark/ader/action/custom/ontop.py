@@ -11,12 +11,16 @@ logger = Logger()
 
 
 class Ontop(EvaluateAction):
-    def __init__(self, env, active_obj, passive_obj):
+    def __init__(
+        self, env, active_obj, passive_obj, diff_z_thrd=0.02, overlap_thrd=0.5
+    ):
         super().__init__(env)
         self.active_obj = active_obj
         self.passive_obj = passive_obj
         self._done_flag = False
-        self.threshold = 0.5
+        self.diff_z_thrd = diff_z_thrd
+        self.threshold = overlap_thrd
+        self._pass_frame = 0
 
     def update(self, delta_time: float) -> float:
         # Get the AABB bounding box of two objects
@@ -27,7 +31,7 @@ class Ontop(EvaluateAction):
         active_bottom = aa_A[2]
         passive_top = bb_B[2]
 
-        if abs(active_bottom - passive_top) > 0.02:
+        if abs(active_bottom - passive_top) > self.diff_z_thrd:
             return super().update(delta_time)
 
         # Calculate projection intersection of X-Y planes
@@ -55,6 +59,10 @@ class Ontop(EvaluateAction):
 
         # If the area ratio exceeds the threshold, the mark is completed
         if area_A > 0 and inter_area / area_A >= self.threshold:
+            self._pass_frame += 1
+        else:
+            self._pass_frame = 0
+        if self._pass_frame > 3:
             self._done_flag = True
 
         return super().update(delta_time)

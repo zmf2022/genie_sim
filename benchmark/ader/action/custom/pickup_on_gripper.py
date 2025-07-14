@@ -18,7 +18,7 @@ class PickUpOnGripper(EvaluateAction):
         self.gripper_id = gripper_id
 
         # Threshold Parameters
-        self.z_threshold = 0.05
+        self.z_threshold = 0.01
         self.pos_threshold = 0.06
         self.rot_threshold = 10
 
@@ -26,7 +26,6 @@ class PickUpOnGripper(EvaluateAction):
         self.initial_z = None
         self.stage = 1
         self.pose_history = deque(maxlen=3)  # Pose History Queue
-        self.progress = []
 
     def calculate_rot_diff(self, R1, R2):
         """Calculate the angle difference (degree) between two rotation matrices"""
@@ -48,7 +47,7 @@ class PickUpOnGripper(EvaluateAction):
         return z_diff > self.z_threshold
 
     def check_stage_2(self, gripper_pose, obj_pose):
-        """Stage 2 Detection: Three-frame stability"""
+        """Stage 2 Detection: Two-frame stability"""
         # Record current frame data
         if len(self.pose_history) == 2:
             self.pose_history.popleft()
@@ -93,12 +92,10 @@ class PickUpOnGripper(EvaluateAction):
         if self.stage == 1:
             if self.check_stage_1(current_obj_pose):
                 self.stage = 2
-                self.progress.append("stage1")
 
         if self.stage == 2:
             if self.check_stage_2(current_gripper_pose, current_obj_pose):
                 self._done_flag = True
-                self.progress.append("stage2")
             else:
                 self.stage = 1
 
@@ -109,7 +106,6 @@ class PickUpOnGripper(EvaluateAction):
 
     def update_progress(self):
         if self._done_flag:
-            self.progress.append("finished")
             self.progress_info["STATUS"] = "SUCCESS"
 
     def handle_action_event(self, action: ActionBase, event: ActionEvent) -> None:
@@ -122,9 +118,4 @@ class PickUpOnGripper(EvaluateAction):
         elif event == ActionEvent.CANCELED:
             pass
         elif event == ActionEvent.FINISHED:
-            if "stage2" in self.progress:
-                self.progress_info["SCORE"] = 1
-            elif "stage1" in self.progress:
-                self.progress_info["SCORE"] = 0.5
-            else:
-                self.progress_info["SCORE"] = 0
+            self.progress_info["SCORE"] = 1

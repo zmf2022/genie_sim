@@ -101,10 +101,6 @@ class TaskBenchmark(object):
             if not os.path.exists(out_dir):
                 os.makedirs(out_dir)
             evaluate_results = []
-            evaluate_ret_file = base_utils.generate_new_file_path(
-                out_dir, "evaluate_ret"
-            )
-
             episode = 0
             per_episode_metrics = {}
             scene_instance_ids = [0]
@@ -141,8 +137,7 @@ class TaskBenchmark(object):
                     evaluate_results.append(self.single_evaluate_ret)
 
             # output evaluate_results
-            with open(evaluate_ret_file, "w+") as f:
-                json.dump(evaluate_results, f)
+            dump_eval_result(out_dir, evaluate_results)
 
     def evaluate_episode(self, episode_file):
         # Create agent to be evaluated

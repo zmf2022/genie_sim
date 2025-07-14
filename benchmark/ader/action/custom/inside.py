@@ -5,6 +5,7 @@
 from benchmark.ader.action.common_actions import EvaluateAction, ActionBase, ActionEvent
 import numpy as np
 from base_utils.logger import Logger
+import ast
 
 logger = Logger()
 
@@ -16,7 +17,7 @@ class Inside(EvaluateAction):
         self.passive_obj = passive_obj
         self._done_flag = False
         self._pass_frame = 0
-        self.scale = float(scale)
+        self.scale = np.array(ast.literal_eval(scale))
 
     def update(self, delta_time: float) -> float:
         pose_A = self.get_obj_pose(self.active_obj)
@@ -33,7 +34,7 @@ class Inside(EvaluateAction):
             self._pass_frame += 1
         else:
             self._pass_frame = 0
-        if self._pass_frame > 5:
+        if self._pass_frame > 1:
             self._done_flag = True
         return super().update(delta_time)
 
