@@ -19,12 +19,11 @@ repos:
           - "--use-current-year"
         exclude: |
           (?x)^(
-              server/source/genie.sim.lab/genie/sim/lab/app/app_launcher.py|
-              server/source/genie.sim.lab/genie/sim/lab/app/ui_builder.py|
-              server/source/genie.sim.lab/genie/sim/lab/controllers/parallel_gripper.py|
-              robot/isaac_sim/aimdk/
+              source/geniesim/app/workflow/app_launcher.py|
+              source/geniesim/app/workflow/ui_builder.py|
+              source/geniesim/app/controllers/parallel_gripper.py|
+              source/geniesim/robot/isaac_sim/aimdk/
           )$
-
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0 # Use the ref you want to point at

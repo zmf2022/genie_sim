@@ -27,4 +27,5 @@ record*/
 checkpoint
 checkpoints
 
-server/source/genie.sim.lab/robot_cfg/*_recording.json
+source/geniesim/app/robot_cfg/*_recording.json
+.vscode/

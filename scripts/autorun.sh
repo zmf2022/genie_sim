@@ -90,16 +90,16 @@ elif [ "$MODE" = "infer" ]; then
     printf "Model path: $MODEL_PATH \n"
 
     declare -a COMMANDS=(
+        "docker exec -it $CONTAINER_NAME bash -ic 'cd $MODEL_PATH && python3 scripts/infer.py --task_name $TASK_NAME'"
         "docker exec -it $CONTAINER_NAME bash -ic 'run_server $SERVER_CONFIG'"
         "docker exec -it $CONTAINER_NAME bash -ic 'run_client $TASK_NAME --policy_class=BaselinePolicy > client.log'"
-        "docker exec -it $CONTAINER_NAME bash -ic 'cd $MODEL_PATH && omni_python scripts/infer.py --task_name $TASK_NAME'"
     )
-    declare -a DELAYS=(0 3 10)
+    declare -a DELAYS=(0 10 13)
 elif [ "$MODE" = "replay" ]; then
     printf "\n\nEnter replay mode...\n\n"
     declare -a COMMANDS=(
         "docker exec -it $CONTAINER_NAME bash -ic 'run_server --record_img --disable_physics --record_video $SERVER_CONFIG'"
-        "docker exec -it $CONTAINER_NAME bash -ic 'run_replay --task_file /root/workspace/main/benchmark/ader/eval_tasks/$TASK_NAME.json --state_file /root/workspace/main/$EXTRA_ARG --record'"
+        "docker exec -it $CONTAINER_NAME bash -ic 'run_replay --task_file /root/workspace/main/source/geniesim/benchmark/ader/eval_tasks/$TASK_NAME.json --state_file /root/workspace/main/$EXTRA_ARG --record'"
     )
     declare -a DELAYS=(0 3)
 else

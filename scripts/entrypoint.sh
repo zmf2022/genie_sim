@@ -7,10 +7,10 @@ export ROS_DISTRO=humble
 
 # bashrc
 echo "alias omni_python='/isaac-sim/python.sh'" >>~/.bashrc
-echo "alias run_server='omni_python server/source/genie.sim.lab/raise_standalone_sim.py'" >>~/.bashrc
-echo "alias run_client='omni_python benchmark/task_benchmark.py --task_name'" >>~/.bashrc
-echo "alias run_teleop='omni_python teleop/teleop.py --task_name'" >>~/.bashrc
-echo "alias run_replay='omni_python teleop/replay_state.py'" >>~/.bashrc
+echo "alias run_server='omni_python source/geniesim/app/raise_standalone_sim.py'" >>~/.bashrc
+echo "alias run_client='omni_python source/geniesim/benchmark/task_benchmark.py --task_name'" >>~/.bashrc
+echo "alias run_teleop='omni_python source/geniesim/teleop/teleop.py --task_name'" >>~/.bashrc
+echo "alias run_replay='omni_python source/geniesim/teleop/replay_state.py'" >>~/.bashrc
 
 echo "source /opt/ros/$ROS_DISTRO/setup.bash" >>~/.bashrc
 

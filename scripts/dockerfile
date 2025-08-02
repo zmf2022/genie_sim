@@ -44,6 +44,7 @@ RUN apt-get update && apt-get -y upgrade && \
     ros-humble-compressed-image-transport \
     console-data \
     git-lfs \
+    python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
 # pip install benchmark deps
@@ -51,6 +52,10 @@ COPY ./requirements.txt /tmp
 RUN /isaac-sim/kit/python/bin/python3 -m pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple
 RUN /isaac-sim/python.sh -m pip install -r /tmp/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 RUN /isaac-sim/python.sh -m pip install tomli wheel ninja -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+# pip install infer deps
+COPY ./requirements_infer.txt /tmp
+RUN pip3 install -r /tmp/requirements_infer.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # pip install curobo [default to option1]
 # OPTION 1: install from source, which can be slow, please refer to https://curobo.org/get_started/1_install_instructions.html
@@ -70,16 +75,24 @@ RUN cd /tmp/curobo && /isaac-sim/python.sh -m pip install --no-build-isolation .
 #     /tmp/nvidia_curobo-0.7.6-cp310-cp310-linux_x86_64.whl
 
 # copy curobo genie robot config
-COPY ./server/source/genie.sim.lab/robot_cfg \
+COPY source/geniesim/app/robot_cfg \
     /isaac-sim/kit/python/lib/python3.10/site-packages/curobo/content/assets/robot
-COPY server/source/genie.sim.lab/curobo/configs/robot/G1_omnipicker.yml \
+COPY source/geniesim/app/curobo/configs/robot/G1_omnipicker.yml \
     /isaac-sim/kit/python/lib/python3.10/site-packages/curobo/content/configs/robot
-COPY ./server/source/genie.sim.lab/robot_cfg/G1_120s/G1_120s.yml \
+COPY source/geniesim/app/robot_cfg/G1_120s/G1_120s.yml \
     /isaac-sim/kit/python/lib/python3.10/site-packages/curobo/content/configs/robot
 
 # pip install ik_solver
 COPY 3rdparty/ik_solver-0.4.3-cp310-cp310-linux_x86_64.whl /tmp
 RUN /isaac-sim/python.sh -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple \
     /tmp/ik_solver-0.4.3-cp310-cp310-linux_x86_64.whl
+
+COPY 3rdparty/ik_solver-0.3.0-cp310-cp310-linux_x86_64.whl /tmp
+RUN python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple \
+    /tmp/ik_solver-0.3.0-cp310-cp310-linux_x86_64.whl
+
+# COPY 3rdparty/flash_attn-2.8.2+cu12torch2.5cxx11abiFALSE-cp310-cp310-linux_x86_64.whl /tmp
+# RUN python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple \
+#     /tmp/flash_attn-2.8.2+cu12torch2.5cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
 
 CMD ["bash"]
