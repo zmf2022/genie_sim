@@ -24,8 +24,12 @@ from sensor_msgs.msg import (
     CompressedImage,
     JointState,
 )
+from std_msgs.msg import Bool
 from collections import deque
+import threading
 
+import numpy as np
+import torch
 
 QOS_PROFILE_LATEST = QoSProfile(
     history=QoSHistoryPolicy.KEEP_LAST,
@@ -33,6 +37,10 @@ QOS_PROFILE_LATEST = QoSProfile(
     reliability=QoSReliabilityPolicy.RELIABLE,
     durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
 )
+
+def set_seed(seed):
+    torch.manual_seed(seed)
+    np.random.seed(seed)
 
 
 class SimROSNode(Node):
@@ -78,6 +86,13 @@ class SimROSNode(Node):
             1,
         )
 
+        self.sub_infer_start = self.create_subscription(
+            Bool,
+            "/sim/infer_start",
+            self.callback_infer_start,
+            1,
+        )
+
         # msg
         self.lock_img_head = threading.Lock()
         self.lock_img_left_wrist = threading.Lock()
@@ -87,6 +102,7 @@ class SimROSNode(Node):
         self.lock_joint_state = threading.Lock()
         self.obs_joint_state = JointState()
         self.cur_joint_state = JointState()
+        self.infer_start = False
 
         # loop
         self.loop_rate = self.create_rate(30.0)
@@ -122,9 +138,11 @@ class SimROSNode(Node):
         with self.lock_img_right_wrist:
             return self.img_right_wrist
 
-    def publish_joint_command(self, action):
-
+    def publish_joint_command(self, action, is_end=False):
         cmd_msg = JointState()
+        if is_end:
+            cmd_msg.header.frame_id = "-1"
+
         cmd_msg.name = [
             "idx21_arm_l_joint1",
             "idx22_arm_l_joint2",
@@ -183,10 +201,7 @@ class SimROSNode(Node):
         msg_remap.position.append(joint_name_state_dict["idx25_arm_l_joint5"])
         msg_remap.position.append(joint_name_state_dict["idx26_arm_l_joint6"])
         msg_remap.position.append(joint_name_state_dict["idx27_arm_l_joint7"])
-        left_gripper_pos = min(
-            1,
-            max(0.0, (0.85 - (joint_name_state_dict["idx41_gripper_l_outer_joint1"]))),
-        )
+        left_gripper_pos = min(1, max(0.0, (0.8 - (joint_name_state_dict["idx41_gripper_l_outer_joint1"]))))
         msg_remap.position.append(left_gripper_pos)
 
         msg_remap.position.append(joint_name_state_dict["idx61_arm_r_joint1"])
@@ -196,11 +211,10 @@ class SimROSNode(Node):
         msg_remap.position.append(joint_name_state_dict["idx65_arm_r_joint5"])
         msg_remap.position.append(joint_name_state_dict["idx66_arm_r_joint6"])
         msg_remap.position.append(joint_name_state_dict["idx67_arm_r_joint7"])
-        right_gripper_pos = min(
-            1,
-            max(0.0, (0.85 - (joint_name_state_dict["idx81_gripper_r_outer_joint1"]))),
-        )
+        right_gripper_pos = min(1, max(0.0, (0.8 - (joint_name_state_dict["idx81_gripper_r_outer_joint1"]))))
         msg_remap.position.append(right_gripper_pos)
+        msg_remap.position.append(joint_name_state_dict["idx01_body_joint1"])
+        msg_remap.position.append(joint_name_state_dict["idx02_body_joint2"])
 
         with self.lock_joint_state:
             self.obs_joint_state = msg_remap
@@ -209,6 +223,13 @@ class SimROSNode(Node):
         with self.lock_joint_state:
             return self.obs_joint_state
 
+    def callback_infer_start(self, msg):
+        self.infer_start = msg.data
+
+    def is_infer_start(self):
+        return self.infer_start
+
+
 
 def get_sim_time(sim_ros_node):
     sim_time = sim_ros_node.get_clock().now().nanoseconds * 1e-9
@@ -216,60 +237,61 @@ def get_sim_time(sim_ros_node):
 
 
 def infer(policy, cfg):
+
     rclpy.init()
     sim_ros_node = SimROSNode()
     spin_thread = threading.Thread(target=rclpy.spin, args=(sim_ros_node,))
     spin_thread.start()
+    init_frame = True
     bridge = CvBridge()
-    SIM_INIT_TIME = 10
     count = 0
+    SIM_INIT_TIME = 10
+    action_queue = None
+    instruction = None
+
     while rclpy.ok():
-        # Get images
-        img_h_raw = sim_ros_node.get_img_head()
-        img_l_raw = sim_ros_node.get_img_left_wrist()
-        img_r_raw = sim_ros_node.get_img_right_wrist()
-        act_raw = sim_ros_node.get_joint_state()
+        if action_queue:
+            is_end = True if len(action_queue) == 1 else False
+            sim_ros_node.publish_joint_command(action_queue.popleft(), is_end)
 
-        if (
-            img_h_raw
-            and img_l_raw
-            and img_r_raw
-            and act_raw
-            and img_h_raw.header.stamp
-            == img_l_raw.header.stamp
-            == img_r_raw.header.stamp
-        ):
-            sim_time = get_sim_time(sim_ros_node)
-            if sim_time > SIM_INIT_TIME:
-                count += 1
-                img_h = bridge.compressed_imgmsg_to_cv2(
-                    img_h_raw, desired_encoding="rgb8"
-                )
-                img_l = bridge.compressed_imgmsg_to_cv2(
-                    img_l_raw, desired_encoding="rgb8"
-                )
-                img_r = bridge.compressed_imgmsg_to_cv2(
-                    img_r_raw, desired_encoding="rgb8"
-                )
-                instruction = ""
-                state = np.array(act_raw.position)
-                payload = {
-                    "img_h": img_h,
-                    "img_l": img_l,
-                    "img_r": img_r,
-                    "instruction": instruction,
-                    "state": state,
-                }
-
-                # Model infer
-                action = policy.step(payload)
-
-                # Send joint command
-                sim_ros_node.publish_joint_command(action)
-            else:
-                print("wait sim init")
         else:
-            print("skip")
+            img_h_raw = sim_ros_node.get_img_head()
+            img_l_raw = sim_ros_node.get_img_left_wrist()
+            img_r_raw = sim_ros_node.get_img_right_wrist()
+            act_raw = sim_ros_node.get_joint_state()
+            infer_start = sim_ros_node.is_infer_start()
+
+            if (init_frame or infer_start) and (
+                img_h_raw
+                and img_l_raw
+                and img_r_raw
+                and act_raw
+                and img_h_raw.header.stamp
+                == img_l_raw.header.stamp
+                == img_r_raw.header.stamp
+            ):
+                sim_time = get_sim_time(sim_ros_node)
+                if sim_time > SIM_INIT_TIME:
+                    init_frame = False
+                    count = count + 1
+
+                    img_h = bridge.compressed_imgmsg_to_cv2(
+                        img_h_raw, desired_encoding="rgb8"
+                    )
+
+                    img_l = bridge.compressed_imgmsg_to_cv2(
+                        img_l_raw, desired_encoding="rgb8"
+                    )
+
+                    img_r = bridge.compressed_imgmsg_to_cv2(
+                        img_r_raw, desired_encoding="rgb8"
+                    )
+
+                    state = np.array(act_raw.position)
+
+                    action_queue = policy.step(img_h, img_l, img_r, instruction, state)
+
+
         sim_ros_node.loop_rate.sleep()
 
 
