@@ -154,7 +154,7 @@ Please refer to these links to install Genie Sim and download assets and dataset
 
 ## 4.3 Support
 
-<img src="./docs/wechat.JPEG" width="30%"/>
+<img src="./docs/feishu.png" width="30%"/>
 
 ## 4.2 Roadmap
 - [x] Release more long-horizon benchmark mainuplation tasks
