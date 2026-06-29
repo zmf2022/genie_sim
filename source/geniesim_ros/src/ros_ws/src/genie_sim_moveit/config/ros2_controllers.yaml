@@ -1,0 +1,515 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    simple_arm_l_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    simple_arm_r_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    simple_waist_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    simple_torso_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    simple_body_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    simple_head_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    wbc_fixed_arm_l_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    wbc_fixed_arm_r_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    wbc_fixed_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    wbc_fixed_headless_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    wbc_fixed_arms_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    wbc_arm_l_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    wbc_arm_r_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    wbc_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    wbc_headless_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    wbc_arms_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    gripper_l_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    gripper_r_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    chassis_controller:
+      type: genie_sim_control/PlanarBaseController
+
+    chassis_servo_controller:
+      type: genie_sim_controllers/ChassisServoController
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+joint_state_broadcaster:
+  ros__parameters:
+    use_local_topics: true
+    joints:
+      - idx01_body_joint1
+      - idx02_body_joint2
+      - idx03_body_joint3
+      - idx04_body_joint4
+      - idx05_body_joint5
+      - idx11_head_joint1
+      - idx12_head_joint2
+      - idx13_head_joint3
+      - idx21_arm_l_joint1
+      - idx22_arm_l_joint2
+      - idx23_arm_l_joint3
+      - idx24_arm_l_joint4
+      - idx25_arm_l_joint5
+      - idx26_arm_l_joint6
+      - idx27_arm_l_joint7
+      - idx31_gripper_l_inner_joint1
+      - idx61_arm_r_joint1
+      - idx62_arm_r_joint2
+      - idx63_arm_r_joint3
+      - idx64_arm_r_joint4
+      - idx65_arm_r_joint5
+      - idx66_arm_r_joint6
+      - idx67_arm_r_joint7
+      - idx71_gripper_r_inner_joint1
+    interfaces:
+      - position
+      - velocity
+
+simple_arm_l_controller:
+  ros__parameters:
+    joints:
+      - idx21_arm_l_joint1
+      - idx22_arm_l_joint2
+      - idx23_arm_l_joint3
+      - idx24_arm_l_joint4
+      - idx25_arm_l_joint5
+      - idx26_arm_l_joint6
+      - idx27_arm_l_joint7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+simple_arm_r_controller:
+  ros__parameters:
+    joints:
+      - idx61_arm_r_joint1
+      - idx62_arm_r_joint2
+      - idx63_arm_r_joint3
+      - idx64_arm_r_joint4
+      - idx65_arm_r_joint5
+      - idx66_arm_r_joint6
+      - idx67_arm_r_joint7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+
+chassis_controller:
+  ros__parameters:
+    joint_name: planar_joint
+    cmd_twist_topic: /cmd_twist
+    odom_topic: /odom
+    use_odom_state: true
+    odom_timeout: 0.5
+    map_frame: map
+    base_frame: base_link
+    # PD gains for the world-frame regulator. kp pulls toward the setpoint;
+    # kd damps measured velocity (read from /odom) so the base does not
+    # carry residual momentum past the trajectory end -> overshoot.
+    kp_xy: 2.0
+    kp_yaw: 3.0
+    kd_xy: 0.5
+    kd_yaw: 0.6
+    # Decel-window: when |pos_err| is inside this radius of the live setpoint,
+    # the commanded twist magnitude is tapered linearly to zero. Prevents the
+    # P term from saturating the chassis right up to the goal, which is the
+    # root cause of overshoot in a feedforward+P scheme. Set to 0 to disable.
+    decel_window_xy: 0.15      # meters
+    decel_window_yaw: 0.20     # radians
+    # Saturation must match joint_limits.yaml -> planar_joint/{trans_x,trans_y,rot_z}
+    # (the active sub-DoFs of the floating virtual_joint; trans_z, rot_x, rot_y
+    # are pinned -- see genie.srdf comment).  If they disagree, MoveIt plans a profile the executor cannot follow
+    # and the base trails the RViz preview by `(planned - executable) * t`.
+    max_linear_speed: 0.5
+    max_angular_speed: 1.0
+    # Goal tolerances were 0.05 each; with the new PD law the regulator
+    # actually settles cleanly inside 2 cm / ~1.4 deg, so we tighten them
+    # to make "did the base stop where I dragged the marker" obvious.
+    goal_tolerance_xy: 0.02
+    goal_tolerance_yaw: 0.025
+    goal_time_tolerance: 2.0
+    # Stop-band: forces an exact zero twist when both position error and
+    # measured velocity are below these thresholds (only past trajectory end).
+    # Avoids streaming sub-cm twitches to the wheel servos near the goal.
+    stop_band_v: 0.02          # m/s
+    stop_band_w: 0.05          # rad/s
+wbc_arm_l_controller:
+  ros__parameters:
+    joints:
+      - idx01_body_joint1
+      - idx02_body_joint2
+      - idx03_body_joint3
+      - idx04_body_joint4
+      - idx05_body_joint5
+      - idx21_arm_l_joint1
+      - idx22_arm_l_joint2
+      - idx23_arm_l_joint3
+      - idx24_arm_l_joint4
+      - idx25_arm_l_joint5
+      - idx26_arm_l_joint6
+      - idx27_arm_l_joint7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+wbc_arm_r_controller:
+  ros__parameters:
+    joints:
+      - idx01_body_joint1
+      - idx02_body_joint2
+      - idx03_body_joint3
+      - idx04_body_joint4
+      - idx05_body_joint5
+      - idx61_arm_r_joint1
+      - idx62_arm_r_joint2
+      - idx63_arm_r_joint3
+      - idx64_arm_r_joint4
+      - idx65_arm_r_joint5
+      - idx66_arm_r_joint6
+      - idx67_arm_r_joint7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+wbc_controller:
+  ros__parameters:
+    joints:
+      - idx01_body_joint1
+      - idx02_body_joint2
+      - idx03_body_joint3
+      - idx04_body_joint4
+      - idx05_body_joint5
+      - idx11_head_joint1
+      - idx12_head_joint2
+      - idx13_head_joint3
+      - idx21_arm_l_joint1
+      - idx22_arm_l_joint2
+      - idx23_arm_l_joint3
+      - idx24_arm_l_joint4
+      - idx25_arm_l_joint5
+      - idx26_arm_l_joint6
+      - idx27_arm_l_joint7
+      - idx61_arm_r_joint1
+      - idx62_arm_r_joint2
+      - idx63_arm_r_joint3
+      - idx64_arm_r_joint4
+      - idx65_arm_r_joint5
+      - idx66_arm_r_joint6
+      - idx67_arm_r_joint7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+wbc_headless_controller:
+  ros__parameters:
+    joints:
+      - idx01_body_joint1
+      - idx02_body_joint2
+      - idx03_body_joint3
+      - idx04_body_joint4
+      - idx05_body_joint5
+      - idx21_arm_l_joint1
+      - idx22_arm_l_joint2
+      - idx23_arm_l_joint3
+      - idx24_arm_l_joint4
+      - idx25_arm_l_joint5
+      - idx26_arm_l_joint6
+      - idx27_arm_l_joint7
+      - idx61_arm_r_joint1
+      - idx62_arm_r_joint2
+      - idx63_arm_r_joint3
+      - idx64_arm_r_joint4
+      - idx65_arm_r_joint5
+      - idx66_arm_r_joint6
+      - idx67_arm_r_joint7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+# wbc_arms_controller: dual-arm only fused trajectory controller for the
+# wbc_arms planning group (chassis + both arms, no torso DOFs). Chassis is
+# driven separately by chassis_controller; this controller only owns the
+# 14 arm joints. Used for direct trajectory publication on complex bimanual
+# jobs (coordinated reaching, constrained dual-arm, sequential tip switching).
+wbc_arms_controller:
+  ros__parameters:
+    joints:
+      - idx21_arm_l_joint1
+      - idx22_arm_l_joint2
+      - idx23_arm_l_joint3
+      - idx24_arm_l_joint4
+      - idx25_arm_l_joint5
+      - idx26_arm_l_joint6
+      - idx27_arm_l_joint7
+      - idx61_arm_r_joint1
+      - idx62_arm_r_joint2
+      - idx63_arm_r_joint3
+      - idx64_arm_r_joint4
+      - idx65_arm_r_joint5
+      - idx66_arm_r_joint6
+      - idx67_arm_r_joint7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+simple_waist_controller:
+  ros__parameters:
+    joints:
+      - idx01_body_joint1
+      - idx02_body_joint2
+      - idx03_body_joint3
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+simple_torso_controller:
+  ros__parameters:
+    joints:
+      - idx04_body_joint4
+      - idx05_body_joint5
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+simple_body_controller:
+  ros__parameters:
+    joints:
+      - idx01_body_joint1
+      - idx02_body_joint2
+      - idx03_body_joint3
+      - idx04_body_joint4
+      - idx05_body_joint5
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+simple_head_controller:
+  ros__parameters:
+    joints:
+      - idx11_head_joint1
+      - idx12_head_joint2
+      - idx13_head_joint3
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+gripper_l_controller:
+  ros__parameters:
+    joints:
+      - idx31_gripper_l_inner_joint1
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+gripper_r_controller:
+  ros__parameters:
+    joints:
+      - idx71_gripper_r_inner_joint1
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+wbc_fixed_arm_l_controller:
+  ros__parameters:
+    joints:
+      - idx01_body_joint1
+      - idx02_body_joint2
+      - idx03_body_joint3
+      - idx04_body_joint4
+      - idx05_body_joint5
+      - idx21_arm_l_joint1
+      - idx22_arm_l_joint2
+      - idx23_arm_l_joint3
+      - idx24_arm_l_joint4
+      - idx25_arm_l_joint5
+      - idx26_arm_l_joint6
+      - idx27_arm_l_joint7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+wbc_fixed_arm_r_controller:
+  ros__parameters:
+    joints:
+      - idx01_body_joint1
+      - idx02_body_joint2
+      - idx03_body_joint3
+      - idx04_body_joint4
+      - idx05_body_joint5
+      - idx61_arm_r_joint1
+      - idx62_arm_r_joint2
+      - idx63_arm_r_joint3
+      - idx64_arm_r_joint4
+      - idx65_arm_r_joint5
+      - idx66_arm_r_joint6
+      - idx67_arm_r_joint7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+wbc_fixed_controller:
+  ros__parameters:
+    joints:
+      - idx01_body_joint1
+      - idx02_body_joint2
+      - idx03_body_joint3
+      - idx04_body_joint4
+      - idx05_body_joint5
+      - idx11_head_joint1
+      - idx12_head_joint2
+      - idx13_head_joint3
+      - idx21_arm_l_joint1
+      - idx22_arm_l_joint2
+      - idx23_arm_l_joint3
+      - idx24_arm_l_joint4
+      - idx25_arm_l_joint5
+      - idx26_arm_l_joint6
+      - idx27_arm_l_joint7
+      - idx61_arm_r_joint1
+      - idx62_arm_r_joint2
+      - idx63_arm_r_joint3
+      - idx64_arm_r_joint4
+      - idx65_arm_r_joint5
+      - idx66_arm_r_joint6
+      - idx67_arm_r_joint7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+wbc_fixed_headless_controller:
+  ros__parameters:
+    joints:
+      - idx01_body_joint1
+      - idx02_body_joint2
+      - idx03_body_joint3
+      - idx04_body_joint4
+      - idx05_body_joint5
+      - idx21_arm_l_joint1
+      - idx22_arm_l_joint2
+      - idx23_arm_l_joint3
+      - idx24_arm_l_joint4
+      - idx25_arm_l_joint5
+      - idx26_arm_l_joint6
+      - idx27_arm_l_joint7
+      - idx61_arm_r_joint1
+      - idx62_arm_r_joint2
+      - idx63_arm_r_joint3
+      - idx64_arm_r_joint4
+      - idx65_arm_r_joint5
+      - idx66_arm_r_joint6
+      - idx67_arm_r_joint7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+# wbc_fixed_arms_controller: dual-arm only fused trajectory controller for
+# the wbc_fixed_arms planning group (both arms, no torso, no chassis). 14
+# arm joints. Used for direct trajectory publication on complex bimanual
+# jobs from a parked / stationary stance.
+wbc_fixed_arms_controller:
+  ros__parameters:
+    joints:
+      - idx21_arm_l_joint1
+      - idx22_arm_l_joint2
+      - idx23_arm_l_joint3
+      - idx24_arm_l_joint4
+      - idx25_arm_l_joint5
+      - idx26_arm_l_joint6
+      - idx27_arm_l_joint7
+      - idx61_arm_r_joint1
+      - idx62_arm_r_joint2
+      - idx63_arm_r_joint3
+      - idx64_arm_r_joint4
+      - idx65_arm_r_joint5
+      - idx66_arm_r_joint6
+      - idx67_arm_r_joint7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+
+chassis_servo_controller:
+  ros__parameters:
+    control_rate: 100.0
+    wheel_distance: 0.44
+    axis_distance: 0.46
+    wheel_radius: 0.07
+    max_steer_angle: 1.5708
+    max_steer_speed: 12.0
+    max_drive_speed: 1.0
+    max_drive_accel: 20.0
+
+    init_wait_time_ms: 1000.0
+    set_cmd_timeout_ms: 5000.0
+    twist_timeout_ms: 1000.0
+    state_timeout_ms: 1000.0
+    check_state_cmd_diff: false
+    max_steer_state_cmd_diff: 0.1
+
+    use_steer_ltd: false
+    steer_ltd_r: 30.0
+    use_drive_ltd: false
+    drive_ltd_r: 30.0
+
+    default_servo: "OptimalServo"
+
+    steer_joint_names:
+      - idx111_chassis_lwheel_front_joint1
+      - idx131_chassis_rwheel_front_joint1
+      - idx121_chassis_lwheel_rear_joint1
+      - idx141_chassis_rwheel_rear_joint1
+    drive_joint_names:
+      - idx112_chassis_lwheel_front_joint2
+      - idx132_chassis_rwheel_front_joint2
+      - idx122_chassis_lwheel_rear_joint2
+      - idx142_chassis_rwheel_rear_joint2

@@ -1,0 +1,8 @@
+{
+  "instructions": [
+    {
+      "instruction": "place the green apple to the top of the tape measure"
+    }
+  ],
+  "task_id": "place_object_relative_position_2"
+}

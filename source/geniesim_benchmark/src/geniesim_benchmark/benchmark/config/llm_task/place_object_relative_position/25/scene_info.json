@@ -1,0 +1,315 @@
+{
+  "layout": {
+    "benchmark_cup_7cafa370": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "octagonal",
+          "ceramic",
+          "modern",
+          "functional",
+          "minimalist"
+        ],
+        "dimensions": [
+          0.12438757717609406,
+          0.06310572847723961,
+          0.09321336448192596
+        ],
+        "full_description": [
+          "A white, geometrically faceted cup with a single handle and octagonal profile."
+        ],
+        "materials": [
+          "ceramic"
+        ],
+        "object_category": [
+          "kitchen",
+          "cup"
+        ],
+        "semantic_name": [
+          "cup"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "mug",
+        "benchmark_cup_043",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_ae69e379",
+        "table_with_random_objects_2786067c",
+        "place_random_objects_on_desk_602b8c92",
+        "benchmark_cup_7cafa370"
+      ],
+      "usd": "benchmark_cup_043",
+      "xyz": [
+        -0.063,
+        -0.071,
+        0.927
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.104961,
+        0.994476
+      ]
+    },
+    "benchmark_mouse_51ab2aa8": {
+      "description": {
+        "color": "gray",
+        "descriptive_terms": [
+          "rounded",
+          "smooth",
+          "compact",
+          "ergonomic",
+          "modern"
+        ],
+        "dimensions": [
+          0.08789288997650146,
+          0.029345117509365082,
+          0.059461820870637894
+        ],
+        "full_description": [
+          "A dark gray, ergonomically shaped computer mouse with a textured side grip and visible 'Logitech' branding."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "electronic device",
+          "computer peripheral"
+        ],
+        "semantic_name": [
+          "computer mouse"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "mouse",
+        "benchmark_mouse_000",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_ae69e379",
+        "table_with_random_objects_2786067c",
+        "place_random_objects_on_desk_602b8c92",
+        "benchmark_mouse_51ab2aa8"
+      ],
+      "usd": "benchmark_mouse_000",
+      "xyz": [
+        0.107,
+        -0.011,
+        0.889
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.048008,
+        0.998847
+      ]
+    },
+    "benchmark_peach_1b37ae83": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "round",
+          "ripe",
+          "juicy",
+          "fuzzy",
+          "organic"
+        ],
+        "dimensions": [
+          0.0926,
+          0.0916,
+          0.0869
+        ],
+        "full_description": [
+          "A round, fuzzy peach with a gradient of red and yellow skin."
+        ],
+        "materials": [
+          "flesh",
+          "skin"
+        ],
+        "object_category": [
+          "fruit",
+          "stone fruit"
+        ],
+        "semantic_name": [
+          "peach"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "peach",
+        "benchmark_peach_021",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_ae69e379",
+        "table_with_random_objects_2786067c",
+        "place_random_objects_on_desk_602b8c92",
+        "benchmark_peach_1b37ae83"
+      ],
+      "usd": "benchmark_peach_021",
+      "xyz": [
+        -0.195,
+        0.097,
+        0.952
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.024141,
+        0.999709
+      ]
+    },
+    "table_81863430": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_ae69e379",
+        "table_with_random_objects_2786067c",
+        "place_random_objects_on_desk_602b8c92",
+        "table_81863430"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_ae69e379",
+          "target": "table_with_random_objects_2786067c"
+        },
+        {
+          "source": "table_with_random_objects_2786067c",
+          "target": "place_random_objects_on_desk_602b8c92"
+        },
+        {
+          "source": "place_random_objects_on_desk_602b8c92",
+          "target": "table_81863430"
+        },
+        {
+          "source": "place_random_objects_on_desk_602b8c92",
+          "target": "benchmark_mouse_51ab2aa8"
+        },
+        {
+          "source": "place_random_objects_on_desk_602b8c92",
+          "target": "benchmark_peach_1b37ae83"
+        },
+        {
+          "source": "place_random_objects_on_desk_602b8c92",
+          "target": "benchmark_cup_7cafa370"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_ae69e379"
+        },
+        {
+          "id": "table_with_random_objects_2786067c"
+        },
+        {
+          "id": "place_random_objects_on_desk_602b8c92"
+        },
+        {
+          "id": "table_81863430",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_mouse_51ab2aa8",
+          "tags": [
+            "mouse",
+            "benchmark_mouse_000",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_peach_1b37ae83",
+          "tags": [
+            "peach",
+            "benchmark_peach_021",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_cup_7cafa370",
+          "tags": [
+            "mug",
+            "benchmark_cup_043",
+            "on_desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 4264834244
+}

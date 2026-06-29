@@ -1,0 +1,12 @@
+app:
+  enable_rate_limit: true
+  enable_ros: false
+benchmark:
+  num_episode: 1
+  task_name: table_task_1_g2_op_instructgen
+  platform: g2_op
+  sub_task_name: pick_billiards_color
+  seed: 1
+  model_arc: corobot
+  record: false
+  num_instances: 10

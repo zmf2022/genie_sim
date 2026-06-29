@@ -1,0 +1,150 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "benchmark_beverage_bottle_f73254c5|[0.1,0.2,0.1]|left_gripper"
+              },
+              {
+                "Follow": "benchmark_beverage_bottle_f73254c5|[0.1,0.2,0.1]|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "PickUpOnGripper": "benchmark_beverage_bottle_f73254c5|left_gripper"
+              },
+              {
+                "PickUpOnGripper": "benchmark_beverage_bottle_f73254c5|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "pick_common_sense"
+  },
+  "problem2": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "benchmark_lemon_850548dd|[0.1,0.2,0.1]|left_gripper"
+              },
+              {
+                "Follow": "benchmark_lemon_850548dd|[0.1,0.2,0.1]|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "PickUpOnGripper": "benchmark_lemon_850548dd|left_gripper"
+              },
+              {
+                "PickUpOnGripper": "benchmark_lemon_850548dd|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "pick_common_sense"
+  },
+  "problem3": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "benchmark_pen_5d8e8b23|[0.1,0.2,0.1]|left_gripper"
+              },
+              {
+                "Follow": "benchmark_pen_5d8e8b23|[0.1,0.2,0.1]|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "PickUpOnGripper": "benchmark_pen_5d8e8b23|left_gripper"
+              },
+              {
+                "PickUpOnGripper": "benchmark_pen_5d8e8b23|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "pick_common_sense"
+  },
+  "problem4": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "benchmark_toy_plane_e5e75cce|[0.1,0.2,0.1]|left_gripper"
+              },
+              {
+                "Follow": "benchmark_toy_plane_e5e75cce|[0.1,0.2,0.1]|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "PickUpOnGripper": "benchmark_toy_plane_e5e75cce|left_gripper"
+              },
+              {
+                "PickUpOnGripper": "benchmark_toy_plane_e5e75cce|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "pick_common_sense"
+  }
+}

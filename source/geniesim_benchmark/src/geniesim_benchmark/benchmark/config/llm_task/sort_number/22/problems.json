@@ -1,0 +1,53 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "MixedRules": {
+                  "check_interval": 1,
+                  "mode": "and",
+                  "rules": [
+                    {
+                      "name": "RelativePosition",
+                      "params": "benchmark_building_blocks_a6c1123a|benchmark_building_blocks_dc9f6ec3|rightof"
+                    },
+                    {
+                      "name": "RelativePosition",
+                      "params": "benchmark_building_blocks_a67ee332|benchmark_building_blocks_a6c1123a|rightof"
+                    },
+                    {
+                      "name": "RelativePosition",
+                      "params": "benchmark_building_blocks_a6c1123a|benchmark_building_blocks_dc9f6ec3|aligned_x"
+                    },
+                    {
+                      "name": "RelativePosition",
+                      "params": "benchmark_building_blocks_a67ee332|benchmark_building_blocks_dc9f6ec3|aligned_x"
+                    }
+                  ]
+                }
+              },
+              {
+                "Onfloor": "benchmark_building_blocks_a67ee332|0"
+              },
+              {
+                "Onfloor": "benchmark_building_blocks_a6c1123a|0"
+              },
+              {
+                "Onfloor": "benchmark_building_blocks_dc9f6ec3|0"
+              },
+              {
+                "StepOut": 1200
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "sort_number"
+  }
+}

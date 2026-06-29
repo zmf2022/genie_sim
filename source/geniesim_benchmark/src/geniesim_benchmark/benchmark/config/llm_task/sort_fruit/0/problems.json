@@ -1,0 +1,26 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Inside": "benchmark_lemon_14af8085|benchmark_storage_box_f0fcda6f|1"
+              },
+              {
+                "Onfloor": "benchmark_lemon_14af8085|0"
+              },
+              {
+                "StepOut": 600
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "sort_fruit"
+  }
+}

@@ -59,10 +59,13 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Check if SIM_ASSETS is set
-if [ -z "$SIM_ASSETS" ]; then
-    echo "Error: SIM_ASSETS environment variable is not set"
-    echo "Please set it, e.g., export SIM_ASSETS=~/assets"
+# geniesim_assets source root: the CLI passes the editable-installed host path
+# via GENIESIM_ASSETS_SRC; it is bind-mounted to /geniesim_assets below and
+# editable-installed by the entrypoint.
+ASSETS_SRC="${GENIESIM_ASSETS_SRC:-}"
+if [ -z "$ASSETS_SRC" ] || [ ! -f "$ASSETS_SRC/pyproject.toml" ]; then
+    echo "Error: geniesim_assets is not pip-installed (editable) on the host."
+    echo "Install it first, e.g.: pip install -e /path/to/geniesim_assets"
     exit 1
 fi
 
@@ -70,10 +73,22 @@ fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CURRENT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-sudo setfacl -m u:1234:rwX $CURRENT_DIR/scripts
-sudo mkdir -p $CURRENT_DIR/saved_task && sudo setfacl -m u:1234:rwX -R $CURRENT_DIR/saved_task
-sudo mkdir -p $CURRENT_DIR/recording_data && sudo setfacl -m u:1234:rwX -R $CURRENT_DIR/recording_data
-[ -d $CURRENT_DIR/config ] && sudo setfacl -m u:1234:rwX -R $CURRENT_DIR/config
+# Grant the container user (uid 1234) write access to bind-mounted dirs.
+# Prefer sudo+setfacl (original behavior); degrade to plain mkdir + chmod when
+# sudo isn't usable (e.g. unattended / no-tty, where sudo can't cache its
+# tty-keyed timestamp) so the run doesn't hard-fail under `set -e`.
+grant_access() {  # $1 = target dir
+    mkdir -p "$1" 2>/dev/null || sudo mkdir -p "$1" 2>/dev/null || true
+    if sudo -n true 2>/dev/null; then
+        sudo setfacl -m u:1234:rwX -R "$1" 2>/dev/null || true
+    else
+        chmod -R a+rwX "$1" 2>/dev/null || true
+    fi
+}
+grant_access "$CURRENT_DIR/scripts"
+grant_access "$CURRENT_DIR/saved_task"
+grant_access "$CURRENT_DIR/recording_data"
+[ -d "$CURRENT_DIR/config" ] && grant_access "$CURRENT_DIR/config"
 # Extract task name from task path or JSON file
 TASK_NAME=""
 if [ -f "$TASK" ]; then
@@ -194,7 +209,7 @@ CONTAINER_ID=$(docker run -d --name $CONTAINER_NAME \
     -e "OMNI_USER=geniesim" \
     -e "OMNI_PASS=geniesim" \
     -e "LOG_DIR=/geniesim/main/data_collection/logs/${TASK_NAME}" \
-    -e "SIM_ASSETS=/geniesim/main/source/geniesim/assets" \
+    -e "SIM_ASSETS=/geniesim_assets" \
     -v ~/docker/isaac-sim/cache/main:/isaac-sim/.cache:rw \
     -v ~/docker/isaac-sim/cache/computecache:/isaac-sim/.nv/ComputeCache:rw \
     -v ~/docker/isaac-sim/logs:/isaac-sim/.nvidia-omniverse/logs:rw \
@@ -202,11 +217,11 @@ CONTAINER_ID=$(docker run -d --name $CONTAINER_NAME \
     -v ~/docker/isaac-sim/data:/isaac-sim/.local/share/ov/data:rw \
     -v ~/docker/isaac-sim/pkg:/isaac-sim/.local/share/ov/pkg:rw \
     -v /dev/input:/dev/input:rw \
-    -v $SIM_ASSETS:/geniesim/main/source/geniesim/assets:rw \
+    -v $ASSETS_SRC:/geniesim_assets:rw \
     -v $CURRENT_DIR:/geniesim/main/data_collection:rw \
     -v $LOG_DIR:/geniesim/main/data_collection/logs/${TASK_NAME}:rw \
     -w /geniesim/main/data_collection \
-    registry.agibot.com/genie-sim/open_source-data-collection:latest \
+    registry.agibot.com/genie-sim/geniesim3-data-collection:latest \
     $ENTRYPOINT_ARGS)
 
 if [ -z "$CONTAINER_ID" ]; then

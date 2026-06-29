@@ -1,0 +1,317 @@
+{
+  "layout": {
+    "benchmark_green_apple_ab05e734": {
+      "description": {
+        "color": "green",
+        "descriptive_terms": [
+          "round",
+          "green",
+          "fresh",
+          "ripe",
+          "small"
+        ],
+        "dimensions": [
+          0.0708455890417099,
+          0.0702173262834549,
+          0.07104996591806412
+        ],
+        "full_description": [
+          "A shiny, light green apple with a short brown stem and smooth, rounded shape."
+        ],
+        "materials": [
+          "fruit flesh",
+          "skin"
+        ],
+        "object_category": [
+          "fruit",
+          "pome"
+        ],
+        "semantic_name": [
+          "green_apple"
+        ],
+        "shape": "spherical",
+        "unit": "m"
+      },
+      "keywords": [
+        "green apple",
+        "benchmark_green_apple_001",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_a0793e45",
+        "table_with_random_objects_3105442a",
+        "place_random_objects_on_desk_099228e0",
+        "benchmark_green_apple_ab05e734"
+      ],
+      "usd": "benchmark_green_apple_001",
+      "xyz": [
+        -0.075,
+        -0.127,
+        0.93
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.064393,
+        0.997925
+      ]
+    },
+    "benchmark_orange_662afc57": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "round",
+          "smooth",
+          "vibrant",
+          "juicy",
+          "fresh"
+        ],
+        "dimensions": [
+          0.0740404799580574,
+          0.07486499100923538,
+          0.07437027990818024
+        ],
+        "full_description": [
+          "A round, orange-colored fruit with a textured peel and small dimples visible on its surface."
+        ],
+        "materials": [
+          "organic",
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "orange"
+        ],
+        "shape": "spherical",
+        "unit": "m"
+      },
+      "keywords": [
+        "orange",
+        "benchmark_orange_004",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_a0793e45",
+        "table_with_random_objects_3105442a",
+        "place_random_objects_on_desk_099228e0",
+        "benchmark_orange_662afc57"
+      ],
+      "usd": "benchmark_orange_004",
+      "xyz": [
+        -0.064,
+        0.172,
+        0.935
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.129574,
+        0.99157
+      ]
+    },
+    "benchmark_peach_dfdd5e30": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "round",
+          "ripe",
+          "juicy",
+          "fuzzy",
+          "organic"
+        ],
+        "dimensions": [
+          0.0926,
+          0.0916,
+          0.0869
+        ],
+        "full_description": [
+          "A round, fuzzy peach with a gradient of red and yellow skin."
+        ],
+        "materials": [
+          "flesh",
+          "skin"
+        ],
+        "object_category": [
+          "fruit",
+          "stone fruit"
+        ],
+        "semantic_name": [
+          "peach"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "peach",
+        "benchmark_peach_021",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_a0793e45",
+        "table_with_random_objects_3105442a",
+        "place_random_objects_on_desk_099228e0",
+        "benchmark_peach_dfdd5e30"
+      ],
+      "usd": "benchmark_peach_021",
+      "xyz": [
+        0.134,
+        -0.238,
+        0.952
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.105473,
+        0.994422
+      ]
+    },
+    "table_6c6261a2": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_a0793e45",
+        "table_with_random_objects_3105442a",
+        "place_random_objects_on_desk_099228e0",
+        "table_6c6261a2"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_a0793e45",
+          "target": "table_with_random_objects_3105442a"
+        },
+        {
+          "source": "table_with_random_objects_3105442a",
+          "target": "place_random_objects_on_desk_099228e0"
+        },
+        {
+          "source": "place_random_objects_on_desk_099228e0",
+          "target": "table_6c6261a2"
+        },
+        {
+          "source": "place_random_objects_on_desk_099228e0",
+          "target": "benchmark_orange_662afc57"
+        },
+        {
+          "source": "place_random_objects_on_desk_099228e0",
+          "target": "benchmark_peach_dfdd5e30"
+        },
+        {
+          "source": "place_random_objects_on_desk_099228e0",
+          "target": "benchmark_green_apple_ab05e734"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_a0793e45"
+        },
+        {
+          "id": "table_with_random_objects_3105442a"
+        },
+        {
+          "id": "place_random_objects_on_desk_099228e0"
+        },
+        {
+          "id": "table_6c6261a2",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_orange_662afc57",
+          "tags": [
+            "orange",
+            "benchmark_orange_004",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_peach_dfdd5e30",
+          "tags": [
+            "peach",
+            "benchmark_peach_021",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_green_apple_ab05e734",
+          "tags": [
+            "green apple",
+            "benchmark_green_apple_001",
+            "on_desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 4031767401
+}

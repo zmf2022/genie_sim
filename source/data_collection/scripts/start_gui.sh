@@ -39,11 +39,13 @@ if [ "$ACTION" == "run" ]; then
     set -eo pipefail
 
     echo "using SIM_REPO_ROOT='$CURRENT_DIR'"
-    if [ -z "$SIM_ASSETS" ]; then
-        echo "You need to set \$SIM_ASSETS eg. SIM_ASSETS=~/assets"
+    ASSETS_SRC="${GENIESIM_ASSETS_SRC:-}"
+    if [ -z "$ASSETS_SRC" ] || [ ! -f "$ASSETS_SRC/pyproject.toml" ]; then
+        echo "Error: geniesim_assets is not pip-installed (editable) on the host."
+        echo "Install it first, e.g.: pip install -e /path/to/geniesim_assets"
         exit 1
     else
-        echo "using SIM_ASSETS='$SIM_ASSETS'"
+        echo "using geniesim_assets='$ASSETS_SRC' -> /geniesim_assets"
     fi
 
     mkdir -p ~/docker/isaac-sim/cache/main/ov
@@ -73,7 +75,7 @@ if [ "$ACTION" == "run" ]; then
         -e "PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python" \
         -e "OMNI_USER=geniesim" \
         -e "OMNI_PASS=geniesim" \
-        -e "SIM_ASSETS=/geniesim/main/source/geniesim/assets" \
+        -e "SIM_ASSETS=/geniesim_assets" \
         -e DISPLAY \
         -v ~/docker/isaac-sim/cache/main:/isaac-sim/.cache:rw \
         -v ~/docker/isaac-sim/cache/computecache:/isaac-sim/.nv/ComputeCache:rw \
@@ -82,10 +84,10 @@ if [ "$ACTION" == "run" ]; then
         -v ~/docker/isaac-sim/data:/isaac-sim/.local/share/ov/data:rw \
         -v ~/docker/isaac-sim/pkg:/isaac-sim/.local/share/ov/pkg:rw \
         -v /dev/input:/dev/input:rw \
-        -v $SIM_ASSETS:/geniesim/main/source/geniesim/assets:rw \
+        -v $ASSETS_SRC:/geniesim_assets:rw \
         -v $CURRENT_DIR:/geniesim/main/data_collection:rw \
         -w /geniesim/main/data_collection \
-        registry.agibot.com/genie-sim/open_source-data-collection:latest \
+        registry.agibot.com/genie-sim/geniesim3-data-collection:latest \
         bash
 fi
 

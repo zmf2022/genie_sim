@@ -1,0 +1,67 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def "World"
+{
+    def "Objects"
+    {
+        def Xform "table_3c9f9366" (
+            prepend payload = @/geniesim_assets/objects/benchmark/table/benchmark_table_019/Aligned.usda@
+        )
+        {
+            over "entity"
+            {
+                bool physics:kinematicEnabled = 1
+            }
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 0, 0.265)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "benchmark_bottle_b7ac1433" (
+            prepend payload = @/geniesim_assets/objects/benchmark/bottle/benchmark_bottle_017/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.999018, 0, 0, 0.044304)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-0.136, -0.041, 1.023)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "benchmark_cup_60973f42" (
+            prepend payload = @/geniesim_assets/objects/benchmark/cup/benchmark_cup_043/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.999806, 0, 0, -0.019689)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0.043, -0.1, 0.927)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "benchmark_rubik_cube_d4e443f5" (
+            prepend payload = @/geniesim_assets/objects/benchmark/rubik_cube/benchmark_rubik_cube_001/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.999959, 0, 0, -0.00901)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-0.056, 0.193, 0.917)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "benchmark_apple_2b0ad11f" (
+            prepend payload = @/geniesim_assets/objects/benchmark/apple/benchmark_apple_002/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.999099, 0, 0, 0.042436)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0.103, 0.08, 0.955)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+    }
+}

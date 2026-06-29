@@ -1,0 +1,500 @@
+{
+  "layout": {
+    "benchmark_bowl_sponge_b449dbfc": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "porous",
+          "flexible",
+          "absorbent",
+          "textured",
+          "rectangular"
+        ],
+        "dimensions": [
+          0.08157370984554291,
+          0.02987557463347912,
+          0.05640790797770023
+        ],
+        "full_description": [
+          "A rectangular sponge with a yellow porous base and a green abrasive top layer."
+        ],
+        "materials": [
+          "plastic",
+          "foam"
+        ],
+        "object_category": [
+          "kitchen",
+          "cleaning"
+        ],
+        "semantic_name": [
+          "sponge"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "bowl_sponge",
+        "object",
+        "bowl sponge",
+        "\u6d17\u7897\u6d77\u7ef5"
+      ],
+      "tags": [
+        "root_scene_a4824810",
+        "pick_object_relative_position_f2a92dda",
+        "place_objects_on_table_ea007793",
+        "create_tabletop_object_1a54e0d7",
+        "benchmark_bowl_sponge_b449dbfc"
+      ],
+      "usd": "benchmark_bowl_sponge_000",
+      "xyz": [
+        -0.163,
+        -0.181,
+        0.747
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.928954,
+        -0.370196
+      ]
+    },
+    "benchmark_bowl_sponge_f23b137b": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "porous",
+          "flexible",
+          "absorbent",
+          "textured",
+          "rectangular"
+        ],
+        "dimensions": [
+          0.08157370984554291,
+          0.02987557463347912,
+          0.05640790797770023
+        ],
+        "full_description": [
+          "A rectangular sponge with a yellow porous base and a green abrasive top layer."
+        ],
+        "materials": [
+          "plastic",
+          "foam"
+        ],
+        "object_category": [
+          "kitchen",
+          "cleaning"
+        ],
+        "semantic_name": [
+          "sponge"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "bowl_sponge",
+        "object",
+        "bowl sponge",
+        "\u6d17\u7897\u6d77\u7ef5"
+      ],
+      "tags": [
+        "root_scene_a4824810",
+        "pick_object_relative_position_f2a92dda",
+        "place_objects_on_table_ea007793",
+        "create_tabletop_object_1bc7d8f3",
+        "benchmark_bowl_sponge_f23b137b"
+      ],
+      "usd": "benchmark_bowl_sponge_000",
+      "xyz": [
+        0.117,
+        -0.121,
+        0.747
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.166389,
+        0.98606
+      ]
+    },
+    "benchmark_mouse_5b9db499": {
+      "description": {
+        "color": "gray",
+        "descriptive_terms": [
+          "rounded",
+          "smooth",
+          "compact",
+          "ergonomic",
+          "modern"
+        ],
+        "dimensions": [
+          0.08789288997650146,
+          0.029345117509365082,
+          0.059461820870637894
+        ],
+        "full_description": [
+          "A dark gray, ergonomically shaped computer mouse with a textured side grip and visible 'Logitech' branding."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "electronic device",
+          "computer peripheral"
+        ],
+        "semantic_name": [
+          "computer mouse"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "mouse",
+        "object",
+        "mouse",
+        "\u9f20\u6807"
+      ],
+      "tags": [
+        "root_scene_a4824810",
+        "pick_object_relative_position_f2a92dda",
+        "place_objects_on_table_ea007793",
+        "create_tabletop_object_7818aa2a",
+        "benchmark_mouse_5b9db499"
+      ],
+      "usd": "benchmark_mouse_000",
+      "xyz": [
+        -0.103,
+        0.246,
+        0.746
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.368275,
+        0.929717
+      ]
+    },
+    "benchmark_tape_measure_b7df6de0": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "compact",
+          "durable",
+          "portable",
+          "functional",
+          "robust"
+        ],
+        "dimensions": [
+          0.0889030990600586,
+          0.08185286712646485,
+          0.04844463539123535
+        ],
+        "full_description": [
+          "A compact tape measure with a black and bright yellow plastic casing, featuring a visible '7.5m' label on its side."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "tool",
+          "measurement"
+        ],
+        "semantic_name": [
+          "tape_measure"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "tape_measure",
+        "object",
+        "tape measure",
+        "\u5377\u5c3a",
+        "target"
+      ],
+      "tags": [
+        "root_scene_a4824810",
+        "pick_object_relative_position_f2a92dda",
+        "place_objects_on_table_ea007793",
+        "create_tabletop_object_3c47c086",
+        "benchmark_tape_measure_b7df6de0"
+      ],
+      "usd": "benchmark_tape_measure_007",
+      "xyz": [
+        -0.187,
+        0.083,
+        0.773
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.997067,
+        0.076538
+      ]
+    },
+    "benchmark_tape_measure_b99e197a": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "compact",
+          "durable",
+          "portable",
+          "functional",
+          "robust"
+        ],
+        "dimensions": [
+          0.0889030990600586,
+          0.08185286712646485,
+          0.04844463539123535
+        ],
+        "full_description": [
+          "A compact tape measure with a black and bright yellow plastic casing, featuring a visible '7.5m' label on its side."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "tool",
+          "measurement"
+        ],
+        "semantic_name": [
+          "tape_measure"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "tape_measure",
+        "object",
+        "tape measure",
+        "\u5377\u5c3a",
+        "target"
+      ],
+      "tags": [
+        "root_scene_a4824810",
+        "pick_object_relative_position_f2a92dda",
+        "place_objects_on_table_ea007793",
+        "create_tabletop_object_0c7560a1",
+        "benchmark_tape_measure_b99e197a"
+      ],
+      "usd": "benchmark_tape_measure_007",
+      "xyz": [
+        0.155,
+        0.029,
+        0.773
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.86917,
+        -0.494514
+      ]
+    },
+    "table_7f1f0f82": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_a4824810",
+        "pick_object_relative_position_f2a92dda",
+        "place_objects_on_table_ea007793",
+        "table_7f1f0f82"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_a4824810",
+          "target": "pick_object_relative_position_f2a92dda"
+        },
+        {
+          "source": "pick_object_relative_position_f2a92dda",
+          "target": "place_objects_on_table_ea007793"
+        },
+        {
+          "source": "place_objects_on_table_ea007793",
+          "target": "table_7f1f0f82"
+        },
+        {
+          "source": "place_objects_on_table_ea007793",
+          "target": "create_tabletop_object_3c47c086"
+        },
+        {
+          "source": "place_objects_on_table_ea007793",
+          "target": "create_tabletop_object_0c7560a1"
+        },
+        {
+          "source": "place_objects_on_table_ea007793",
+          "target": "create_tabletop_object_1bc7d8f3"
+        },
+        {
+          "source": "place_objects_on_table_ea007793",
+          "target": "create_tabletop_object_7818aa2a"
+        },
+        {
+          "source": "place_objects_on_table_ea007793",
+          "target": "create_tabletop_object_1a54e0d7"
+        },
+        {
+          "source": "create_tabletop_object_3c47c086",
+          "target": "benchmark_tape_measure_b7df6de0"
+        },
+        {
+          "source": "create_tabletop_object_0c7560a1",
+          "target": "benchmark_tape_measure_b99e197a"
+        },
+        {
+          "source": "create_tabletop_object_1bc7d8f3",
+          "target": "benchmark_bowl_sponge_f23b137b"
+        },
+        {
+          "source": "create_tabletop_object_7818aa2a",
+          "target": "benchmark_mouse_5b9db499"
+        },
+        {
+          "source": "create_tabletop_object_1a54e0d7",
+          "target": "benchmark_bowl_sponge_b449dbfc"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_a4824810"
+        },
+        {
+          "id": "pick_object_relative_position_f2a92dda"
+        },
+        {
+          "id": "place_objects_on_table_ea007793"
+        },
+        {
+          "id": "table_7f1f0f82",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_3c47c086"
+        },
+        {
+          "id": "benchmark_tape_measure_b7df6de0",
+          "tags": [
+            "tape_measure",
+            "object",
+            "tape measure",
+            "\u5377\u5c3a",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_0c7560a1"
+        },
+        {
+          "id": "benchmark_tape_measure_b99e197a",
+          "tags": [
+            "tape_measure",
+            "object",
+            "tape measure",
+            "\u5377\u5c3a",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_1bc7d8f3"
+        },
+        {
+          "id": "benchmark_bowl_sponge_f23b137b",
+          "tags": [
+            "bowl_sponge",
+            "object",
+            "bowl sponge",
+            "\u6d17\u7897\u6d77\u7ef5"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_7818aa2a"
+        },
+        {
+          "id": "benchmark_mouse_5b9db499",
+          "tags": [
+            "mouse",
+            "object",
+            "mouse",
+            "\u9f20\u6807"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_1a54e0d7"
+        },
+        {
+          "id": "benchmark_bowl_sponge_b449dbfc",
+          "tags": [
+            "bowl_sponge",
+            "object",
+            "bowl sponge",
+            "\u6d17\u7897\u6d77\u7ef5"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 3015087446
+}

@@ -1,0 +1,423 @@
+{
+  "layout": {
+    "benchmark_medicine_bottle_d1859cb2": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "cylindrical",
+          "white",
+          "yellow",
+          "packaged",
+          "small"
+        ],
+        "dimensions": [
+          0.06152497100830078,
+          0.11030638122558593,
+          0.06207268714904785
+        ],
+        "full_description": [
+          "A white plastic bottle with a bright yellow label featuring black text, including 'Glucosamine HCl Mega', and a white cap."
+        ],
+        "materials": [
+          "plastic",
+          "paper"
+        ],
+        "object_category": [
+          "container",
+          "medicine"
+        ],
+        "semantic_name": [
+          "medicine_bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "medicine_bottle",
+        "object",
+        "medicine bottle",
+        "\u836f\u74f6"
+      ],
+      "tags": [
+        "root_scene_aecdcb80",
+        "pick_object_relative_position_95580678",
+        "place_objects_on_table_fa70e8bc",
+        "create_tabletop_object_3b36ca97",
+        "benchmark_medicine_bottle_d1859cb2"
+      ],
+      "usd": "benchmark_medicine_bottle_000",
+      "xyz": [
+        0.118,
+        -0.181,
+        0.787
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.992418,
+        -0.122908
+      ]
+    },
+    "benchmark_mouse_28f0f995": {
+      "description": {
+        "color": "gray",
+        "descriptive_terms": [
+          "rounded",
+          "smooth",
+          "compact",
+          "ergonomic",
+          "modern"
+        ],
+        "dimensions": [
+          0.08789288997650146,
+          0.029345117509365082,
+          0.059461820870637894
+        ],
+        "full_description": [
+          "A dark gray, ergonomically shaped computer mouse with a textured side grip and visible 'Logitech' branding."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "electronic device",
+          "computer peripheral"
+        ],
+        "semantic_name": [
+          "computer mouse"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "mouse",
+        "object",
+        "mouse",
+        "\u9f20\u6807",
+        "target"
+      ],
+      "tags": [
+        "root_scene_aecdcb80",
+        "pick_object_relative_position_95580678",
+        "place_objects_on_table_fa70e8bc",
+        "create_tabletop_object_623277c6",
+        "benchmark_mouse_28f0f995"
+      ],
+      "usd": "benchmark_mouse_000",
+      "xyz": [
+        -0.199,
+        0.18,
+        0.746
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.891056,
+        0.453894
+      ]
+    },
+    "benchmark_mouse_6f06577c": {
+      "description": {
+        "color": "gray",
+        "descriptive_terms": [
+          "rounded",
+          "smooth",
+          "compact",
+          "ergonomic",
+          "modern"
+        ],
+        "dimensions": [
+          0.08789288997650146,
+          0.029345117509365082,
+          0.059461820870637894
+        ],
+        "full_description": [
+          "A dark gray, ergonomically shaped computer mouse with a textured side grip and visible 'Logitech' branding."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "electronic device",
+          "computer peripheral"
+        ],
+        "semantic_name": [
+          "computer mouse"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "mouse",
+        "object",
+        "mouse",
+        "\u9f20\u6807",
+        "target"
+      ],
+      "tags": [
+        "root_scene_aecdcb80",
+        "pick_object_relative_position_95580678",
+        "place_objects_on_table_fa70e8bc",
+        "create_tabletop_object_0e2a694d",
+        "benchmark_mouse_6f06577c"
+      ],
+      "usd": "benchmark_mouse_000",
+      "xyz": [
+        -0.122,
+        -0.067,
+        0.746
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.737216,
+        -0.675657
+      ]
+    },
+    "benchmark_orange_d306072f": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "round",
+          "smooth",
+          "vibrant",
+          "juicy",
+          "fresh"
+        ],
+        "dimensions": [
+          0.0740404799580574,
+          0.07486499100923538,
+          0.07437027990818024
+        ],
+        "full_description": [
+          "A round, orange-colored fruit with a textured peel and small dimples visible on its surface."
+        ],
+        "materials": [
+          "organic",
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "orange"
+        ],
+        "shape": "spherical",
+        "unit": "m"
+      },
+      "keywords": [
+        "orange",
+        "object",
+        "orange",
+        "\u6a59\u5b50"
+      ],
+      "tags": [
+        "root_scene_aecdcb80",
+        "pick_object_relative_position_95580678",
+        "place_objects_on_table_fa70e8bc",
+        "create_tabletop_object_2e2aa902",
+        "benchmark_orange_d306072f"
+      ],
+      "usd": "benchmark_orange_004",
+      "xyz": [
+        0.171,
+        0.07,
+        0.769
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.994504,
+        -0.104697
+      ]
+    },
+    "table_35f53d91": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_aecdcb80",
+        "pick_object_relative_position_95580678",
+        "place_objects_on_table_fa70e8bc",
+        "table_35f53d91"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_aecdcb80",
+          "target": "pick_object_relative_position_95580678"
+        },
+        {
+          "source": "pick_object_relative_position_95580678",
+          "target": "place_objects_on_table_fa70e8bc"
+        },
+        {
+          "source": "place_objects_on_table_fa70e8bc",
+          "target": "table_35f53d91"
+        },
+        {
+          "source": "place_objects_on_table_fa70e8bc",
+          "target": "create_tabletop_object_623277c6"
+        },
+        {
+          "source": "place_objects_on_table_fa70e8bc",
+          "target": "create_tabletop_object_0e2a694d"
+        },
+        {
+          "source": "place_objects_on_table_fa70e8bc",
+          "target": "create_tabletop_object_3b36ca97"
+        },
+        {
+          "source": "place_objects_on_table_fa70e8bc",
+          "target": "create_tabletop_object_2e2aa902"
+        },
+        {
+          "source": "create_tabletop_object_623277c6",
+          "target": "benchmark_mouse_28f0f995"
+        },
+        {
+          "source": "create_tabletop_object_0e2a694d",
+          "target": "benchmark_mouse_6f06577c"
+        },
+        {
+          "source": "create_tabletop_object_3b36ca97",
+          "target": "benchmark_medicine_bottle_d1859cb2"
+        },
+        {
+          "source": "create_tabletop_object_2e2aa902",
+          "target": "benchmark_orange_d306072f"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_aecdcb80"
+        },
+        {
+          "id": "pick_object_relative_position_95580678"
+        },
+        {
+          "id": "place_objects_on_table_fa70e8bc"
+        },
+        {
+          "id": "table_35f53d91",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_623277c6"
+        },
+        {
+          "id": "benchmark_mouse_28f0f995",
+          "tags": [
+            "mouse",
+            "object",
+            "mouse",
+            "\u9f20\u6807",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_0e2a694d"
+        },
+        {
+          "id": "benchmark_mouse_6f06577c",
+          "tags": [
+            "mouse",
+            "object",
+            "mouse",
+            "\u9f20\u6807",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_3b36ca97"
+        },
+        {
+          "id": "benchmark_medicine_bottle_d1859cb2",
+          "tags": [
+            "medicine_bottle",
+            "object",
+            "medicine bottle",
+            "\u836f\u74f6"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_2e2aa902"
+        },
+        {
+          "id": "benchmark_orange_d306072f",
+          "tags": [
+            "orange",
+            "object",
+            "orange",
+            "\u6a59\u5b50"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 3749730864
+}

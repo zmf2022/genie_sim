@@ -1,0 +1,36 @@
+{
+  "instruction_category": "place_object_into_box_color",
+  "instructions": [
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 1,
+      "instruction": "Left arm picks up the apple on the table, Place the object into the green storage box",
+      "target": {
+        "id1": "apple_ce07bc21",
+        "id2": "benchmark_storage_box_7709dfbf"
+      },
+      "template_key": "place_object_into_box_color"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 2,
+      "instruction": "Left arm picks up the apple on the table, Place the object into the black storage box",
+      "target": {
+        "id1": "apple_ce07bc21",
+        "id2": "benchmark_storage_box_decc5e3d"
+      },
+      "template_key": "place_object_into_box_color"
+    }
+  ],
+  "scene_id": "desktop_items"
+}

@@ -1,0 +1,385 @@
+{
+  "layout": {
+    "benchmark_apple_52a124e1": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "round",
+          "red",
+          "ripe",
+          "smooth",
+          "natural"
+        ],
+        "dimensions": [
+          0.093,
+          0.0945,
+          0.0917
+        ],
+        "full_description": [
+          "A red and yellow apple with a glossy surface and a short brown stem."
+        ],
+        "materials": [
+          "fruit flesh",
+          "skin"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "apple"
+        ],
+        "shape": "round",
+        "unit": "m"
+      },
+      "keywords": [
+        "apple",
+        "benchmark_apple_002",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_f2840282",
+        "table_with_random_objects_9ae3b86d",
+        "place_random_objects_on_desk_7d83afc3",
+        "benchmark_apple_52a124e1"
+      ],
+      "usd": "benchmark_apple_002",
+      "xyz": [
+        0.147,
+        0.115,
+        0.955
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.011489,
+        0.999934
+      ]
+    },
+    "benchmark_bottle_3031fcfc": {
+      "description": {
+        "color": "light-green",
+        "descriptive_terms": [
+          "cylindrical",
+          "smooth",
+          "translucent",
+          "rounded",
+          "portable"
+        ],
+        "dimensions": [
+          0.07978935241699218,
+          0.1634049835205078,
+          0.07737431716918945
+        ],
+        "full_description": [
+          "A light green, cylindrical bottle with a black lid and band, featuring a glossy finish and minor surface markings."
+        ],
+        "materials": [
+          "plastic",
+          "glass"
+        ],
+        "object_category": [
+          "container",
+          "bottle"
+        ],
+        "semantic_name": [
+          "bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "water bottle",
+        "benchmark_bottle_017",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_f2840282",
+        "table_with_random_objects_9ae3b86d",
+        "place_random_objects_on_desk_7d83afc3",
+        "benchmark_bottle_3031fcfc"
+      ],
+      "usd": "benchmark_bottle_017",
+      "xyz": [
+        -0.013,
+        0.233,
+        1.023
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.020243,
+        0.999795
+      ]
+    },
+    "benchmark_rubik_cube_528be69f": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "colorful",
+          "complex",
+          "geometric",
+          "small",
+          "plastic"
+        ],
+        "dimensions": [
+          0.057,
+          0.057,
+          0.057
+        ],
+        "full_description": [
+          "A 3x3 Rubik's cube with pastel-colored faces including yellow, pink, and cyan on a black background."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "puzzle",
+          "toy"
+        ],
+        "semantic_name": [
+          "rubik_cube"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "rubik cube",
+        "benchmark_rubik_cube_001",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_f2840282",
+        "table_with_random_objects_9ae3b86d",
+        "place_random_objects_on_desk_7d83afc3",
+        "benchmark_rubik_cube_528be69f"
+      ],
+      "usd": "benchmark_rubik_cube_001",
+      "xyz": [
+        0.013,
+        -0.167,
+        0.917
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.035594,
+        0.999366
+      ]
+    },
+    "benchmark_toy_car_d9d58082": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy car",
+        "benchmark_toy_car_018",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_f2840282",
+        "table_with_random_objects_9ae3b86d",
+        "place_random_objects_on_desk_7d83afc3",
+        "benchmark_toy_car_d9d58082"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        0.017,
+        0.031,
+        0.893
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.077224,
+        0.997014
+      ]
+    },
+    "table_6ce49b19": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_f2840282",
+        "table_with_random_objects_9ae3b86d",
+        "place_random_objects_on_desk_7d83afc3",
+        "table_6ce49b19"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_f2840282",
+          "target": "table_with_random_objects_9ae3b86d"
+        },
+        {
+          "source": "table_with_random_objects_9ae3b86d",
+          "target": "place_random_objects_on_desk_7d83afc3"
+        },
+        {
+          "source": "place_random_objects_on_desk_7d83afc3",
+          "target": "table_6ce49b19"
+        },
+        {
+          "source": "place_random_objects_on_desk_7d83afc3",
+          "target": "benchmark_rubik_cube_528be69f"
+        },
+        {
+          "source": "place_random_objects_on_desk_7d83afc3",
+          "target": "benchmark_toy_car_d9d58082"
+        },
+        {
+          "source": "place_random_objects_on_desk_7d83afc3",
+          "target": "benchmark_apple_52a124e1"
+        },
+        {
+          "source": "place_random_objects_on_desk_7d83afc3",
+          "target": "benchmark_bottle_3031fcfc"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_f2840282"
+        },
+        {
+          "id": "table_with_random_objects_9ae3b86d"
+        },
+        {
+          "id": "place_random_objects_on_desk_7d83afc3"
+        },
+        {
+          "id": "table_6ce49b19",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_rubik_cube_528be69f",
+          "tags": [
+            "rubik cube",
+            "benchmark_rubik_cube_001",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_toy_car_d9d58082",
+          "tags": [
+            "toy car",
+            "benchmark_toy_car_018",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_apple_52a124e1",
+          "tags": [
+            "apple",
+            "benchmark_apple_002",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_bottle_3031fcfc",
+          "tags": [
+            "water bottle",
+            "benchmark_bottle_017",
+            "on_desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 3614141462
+}

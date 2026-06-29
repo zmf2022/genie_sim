@@ -1,0 +1,374 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_52275814": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "cylindrical",
+          "red",
+          "plastic",
+          "bottled",
+          "liquid"
+        ],
+        "dimensions": [
+          0.06153380125761032,
+          0.14993929862976074,
+          0.06153379566967487
+        ],
+        "full_description": "This is a cylindrical beverage bottle with a red and white label. It appears to be made of plastic and contains a dark brown liquid.",
+        "materials": [
+          "plastic",
+          "glass"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "benchmark_beverage_bottle_004",
+        "beverage",
+        "on desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_040648ef",
+        "place_random_objects_on_desk_1fbda02f",
+        "benchmark_beverage_bottle_52275814"
+      ],
+      "usd": "benchmark_beverage_bottle_004",
+      "xyz": [
+        -0.086908,
+        -0.253136,
+        0.865
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.889274,
+        0.457375
+      ]
+    },
+    "benchmark_orange_213f065a": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "round",
+          "smooth",
+          "vibrant",
+          "juicy",
+          "tangy"
+        ],
+        "dimensions": [
+          0.0740404799580574,
+          0.07486499100923538,
+          0.07437027990818024
+        ],
+        "full_description": "This is a small, round orange with a vibrant orange color and a smooth peel. It appears juicy and tangy, typical of citrus fruits.",
+        "materials": [
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "fruit",
+          "citrus"
+        ],
+        "semantic_name": [
+          "orange"
+        ],
+        "shape": "spherical",
+        "unit": "m"
+      },
+      "keywords": [
+        "benchmark_orange_004",
+        "fruit",
+        "on desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_040648ef",
+        "place_random_objects_on_desk_1fbda02f",
+        "benchmark_orange_213f065a"
+      ],
+      "usd": "benchmark_orange_004",
+      "xyz": [
+        -0.111081,
+        0.136539,
+        0.838
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.336293,
+        -0.941758
+      ]
+    },
+    "benchmark_pen_95491125": {
+      "description": {
+        "color": "blue",
+        "descriptive_terms": [
+          "cylindrical",
+          "blue",
+          "writing",
+          "smooth",
+          "portable"
+        ],
+        "dimensions": [
+          0.019767053425312042,
+          0.14499999582767487,
+          0.018000000156462193
+        ],
+        "full_description": "This is a blue, cylindrical pen designed for writing. It is portable and smooth to use, with dimensions of 0.0198m x 0.145m x 0.018m.",
+        "materials": [
+          "plastic",
+          "ink"
+        ],
+        "object_category": [
+          "writing utensil",
+          "pen"
+        ],
+        "semantic_name": [
+          "pen"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "benchmark_pen_001",
+        "stationery",
+        "on desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_040648ef",
+        "place_random_objects_on_desk_1fbda02f",
+        "benchmark_pen_95491125"
+      ],
+      "usd": "benchmark_pen_001",
+      "xyz": [
+        0.07432,
+        0.200041,
+        0.81
+      ],
+      "xyzw": [
+        -0.001112,
+        0.000463,
+        -0.860561,
+        0.509346
+      ]
+    },
+    "benchmark_toy_car_be0abb22": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "detailed",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": "This is a miniature, colorful toy car with a complex shape and detailed design. It is compact and playful, suitable for children's play.",
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "benchmark_toy_car_018",
+        "toy",
+        "on desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_040648ef",
+        "place_random_objects_on_desk_1fbda02f",
+        "benchmark_toy_car_be0abb22"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        0.061498,
+        -0.047232,
+        0.836
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.500205,
+        0.865907
+      ]
+    },
+    "table_0b9d06d8": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "white",
+          "rectangular",
+          "minimalist",
+          "smooth",
+          "lightweight",
+          "modern",
+          "flat-top",
+          "t-shaped-legs"
+        ],
+        "dimensions": [
+          0.06685049831867218,
+          0.16871178895235062,
+          0.06685040146112442
+        ],
+        "full_description": [
+          "A white rectangular minimalist table with smooth plastic surface and metal T-shaped legs, lightweight and modern in design."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "desk"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "table_000",
+        "desk",
+        "table"
+      ],
+      "tags": [
+        "root_scene_040648ef",
+        "create_desk_4a769699",
+        "table_0b9d06d8"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.365
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_040648ef",
+          "target": "create_desk_4a769699"
+        },
+        {
+          "source": "root_scene_040648ef",
+          "target": "place_random_objects_on_desk_1fbda02f"
+        },
+        {
+          "source": "create_desk_4a769699",
+          "target": "table_0b9d06d8"
+        },
+        {
+          "source": "place_random_objects_on_desk_1fbda02f",
+          "target": "benchmark_beverage_bottle_52275814"
+        },
+        {
+          "source": "place_random_objects_on_desk_1fbda02f",
+          "target": "benchmark_orange_213f065a"
+        },
+        {
+          "source": "place_random_objects_on_desk_1fbda02f",
+          "target": "benchmark_pen_95491125"
+        },
+        {
+          "source": "place_random_objects_on_desk_1fbda02f",
+          "target": "benchmark_toy_car_be0abb22"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_040648ef"
+        },
+        {
+          "id": "create_desk_4a769699"
+        },
+        {
+          "id": "table_0b9d06d8",
+          "tags": [
+            "table_000",
+            "desk",
+            "table"
+          ]
+        },
+        {
+          "id": "place_random_objects_on_desk_1fbda02f"
+        },
+        {
+          "id": "benchmark_beverage_bottle_52275814",
+          "tags": [
+            "benchmark_beverage_bottle_004",
+            "beverage",
+            "on desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_orange_213f065a",
+          "tags": [
+            "benchmark_orange_004",
+            "fruit",
+            "on desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_pen_95491125",
+          "tags": [
+            "benchmark_pen_001",
+            "stationery",
+            "on desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_toy_car_be0abb22",
+          "tags": [
+            "benchmark_toy_car_018",
+            "toy",
+            "on desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "place_random_objects_on_desk",
+  "seed": 1450874168
+}

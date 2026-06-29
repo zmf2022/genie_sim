@@ -1,0 +1,452 @@
+{
+  "layout": {
+    "geniesim_2025_building_blocks_000": {
+      "keywords": [
+        "building_blocks_000",
+        "building blocks",
+        "on desk",
+        "block_box"
+      ],
+      "tags": [
+        "root_scene",
+        "place_random_objects_on_desk",
+        "geniesim_2025_building_blocks_000"
+      ],
+      "usd": "benchmark_building_blocks_000",
+      "xyz": [
+        -0.082274,
+        0.0865,
+        0.820073
+      ],
+      "xyzw": [
+        5.551115123125783e-17,
+        0.0,
+        0.3127495786995461,
+        0.9498356178956737
+      ]
+    },
+    "geniesim_2025_building_blocks_003": {
+      "keywords": [
+        "building_blocks_003",
+        "building blocks",
+        "on desk",
+        "other_block"
+      ],
+      "tags": [
+        "root_scene",
+        "place_random_objects_on_desk",
+        "geniesim_2025_building_blocks_003"
+      ],
+      "usd": "benchmark_building_blocks_003",
+      "xyz": [
+        0.057726,
+        0.3165,
+        0.838975
+      ],
+      "xyzw": [
+        0.0,
+        5.551115123125783e-17,
+        0.9505807048666846,
+        0.310477573320775
+      ]
+    },
+    "geniesim_2025_building_blocks_004": {
+      "keywords": [
+        "building_blocks_004",
+        "building blocks",
+        "on desk",
+        "other_block"
+      ],
+      "tags": [
+        "root_scene",
+        "place_random_objects_on_desk",
+        "geniesim_2025_building_blocks_004"
+      ],
+      "usd": "benchmark_building_blocks_004",
+      "xyz": [
+        -0.152274,
+        0.2265,
+        0.82002
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.5835950497584261,
+        0.8120448373688857
+      ]
+    },
+    "geniesim_2025_building_blocks_006": {
+      "keywords": [
+        "building_blocks_006",
+        "building blocks",
+        "on desk",
+        "other_block"
+      ],
+      "tags": [
+        "root_scene",
+        "place_random_objects_on_desk",
+        "geniesim_2025_building_blocks_006"
+      ],
+      "usd": "benchmark_building_blocks_006",
+      "xyz": [
+        -0.202274,
+        0.4065,
+        0.82002
+      ],
+      "xyzw": [
+        2.220446049250313e-16,
+        0.0,
+        -0.6854445721779946,
+        0.7281248096801305
+      ]
+    },
+    "geniesim_2025_building_blocks_007": {
+      "keywords": [
+        "building_blocks_007",
+        "building blocks",
+        "on desk",
+        "other_block"
+      ],
+      "tags": [
+        "root_scene",
+        "place_random_objects_on_desk",
+        "geniesim_2025_building_blocks_007"
+      ],
+      "usd": "benchmark_building_blocks_007",
+      "xyz": [
+        0.077726,
+        -0.2135,
+        0.82002
+      ],
+      "xyzw": [
+        5.551115123125783e-17,
+        0.0,
+        -0.08294850599728437,
+        0.9965538346485947
+      ]
+    },
+    "geniesim_2025_building_blocks_009": {
+      "keywords": [
+        "building_blocks_009",
+        "building blocks",
+        "on desk",
+        "other_block"
+      ],
+      "tags": [
+        "root_scene",
+        "place_random_objects_on_desk",
+        "geniesim_2025_building_blocks_009"
+      ],
+      "usd": "benchmark_building_blocks_009",
+      "xyz": [
+        0.047726,
+        -0.1235,
+        0.820019
+      ],
+      "xyzw": [
+        0.0,
+        -1.6653345369377348e-16,
+        0.8057911955169694,
+        -0.5921997544978662
+      ]
+    },
+    "geniesim_2025_building_blocks_010": {
+      "keywords": [
+        "building_blocks_010",
+        "building blocks",
+        "on desk",
+        "other_block"
+      ],
+      "tags": [
+        "root_scene",
+        "place_random_objects_on_desk",
+        "geniesim_2025_building_blocks_010"
+      ],
+      "usd": "benchmark_building_blocks_010",
+      "xyz": [
+        0.097726,
+        0.1465,
+        0.82002
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.03238615122896553,
+        0.9994754310179789
+      ]
+    },
+    "geniesim_2025_building_blocks_011": {
+      "keywords": [
+        "building_blocks_011",
+        "building blocks",
+        "on desk",
+        "other_block"
+      ],
+      "tags": [
+        "root_scene",
+        "place_random_objects_on_desk",
+        "geniesim_2025_building_blocks_011"
+      ],
+      "usd": "benchmark_building_blocks_011",
+      "xyz": [
+        -0.212274,
+        -0.1135,
+        0.82002
+      ],
+      "xyzw": [
+        2.7755575615628914e-16,
+        0.0,
+        0.6628104057799182,
+        0.7487872635067054
+      ]
+    },
+    "geniesim_2025_building_blocks_014": {
+      "keywords": [
+        "building_blocks_014",
+        "building blocks",
+        "on desk",
+        "other_block"
+      ],
+      "tags": [
+        "root_scene",
+        "place_random_objects_on_desk",
+        "geniesim_2025_building_blocks_014"
+      ],
+      "usd": "benchmark_building_blocks_014",
+      "xyz": [
+        -0.142274,
+        -0.3135,
+        0.820014
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.07897117285421311,
+        0.9968769000523737
+      ]
+    },
+    "geniesim_2025_target_building_block": {
+      "keywords": [
+        "building_blocks_002",
+        "building blocks",
+        "on desk",
+        "target_block"
+      ],
+      "tags": [
+        "root_scene",
+        "place_random_objects_on_desk",
+        "geniesim_2025_target_building_block"
+      ],
+      "usd": "benchmark_building_blocks_002",
+      "xyz": [
+        0.047726,
+        -0.3135,
+        0.838978
+      ],
+      "xyzw": [
+        2.7755575615628914e-16,
+        2.7755575615628914e-17,
+        -0.1726341116701671,
+        0.9849860219758717
+      ]
+    },
+    "table_74eee47f": {
+      "keywords": [
+        "table_000",
+        "desk",
+        "table"
+      ],
+      "tags": [
+        "root_scene",
+        "create_desk",
+        "table_74eee47f"
+      ],
+      "usd": "benchmark_table_019",
+      "xyz": [
+        0.0,
+        0.0,
+        0.265
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene",
+          "target": "create_desk"
+        },
+        {
+          "source": "root_scene",
+          "target": "place_random_objects_on_desk"
+        },
+        {
+          "source": "create_desk",
+          "target": "table_74eee47f"
+        },
+        {
+          "source": "place_random_objects_on_desk",
+          "target": "geniesim_2025_building_blocks_000"
+        },
+        {
+          "source": "place_random_objects_on_desk",
+          "target": "geniesim_2025_target_building_block"
+        },
+        {
+          "source": "place_random_objects_on_desk",
+          "target": "geniesim_2025_building_blocks_006"
+        },
+        {
+          "source": "place_random_objects_on_desk",
+          "target": "geniesim_2025_building_blocks_014"
+        },
+        {
+          "source": "place_random_objects_on_desk",
+          "target": "geniesim_2025_building_blocks_003"
+        },
+        {
+          "source": "place_random_objects_on_desk",
+          "target": "geniesim_2025_building_blocks_009"
+        },
+        {
+          "source": "place_random_objects_on_desk",
+          "target": "geniesim_2025_building_blocks_011"
+        },
+        {
+          "source": "place_random_objects_on_desk",
+          "target": "geniesim_2025_building_blocks_010"
+        },
+        {
+          "source": "place_random_objects_on_desk",
+          "target": "geniesim_2025_building_blocks_004"
+        },
+        {
+          "source": "place_random_objects_on_desk",
+          "target": "geniesim_2025_building_blocks_007"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene"
+        },
+        {
+          "id": "create_desk"
+        },
+        {
+          "id": "table_74eee47f",
+          "tags": [
+            "table_000",
+            "desk",
+            "table"
+          ]
+        },
+        {
+          "id": "place_random_objects_on_desk"
+        },
+        {
+          "id": "geniesim_2025_building_blocks_000",
+          "tags": [
+            "building_blocks_000",
+            "building blocks",
+            "on desk",
+            "block_box"
+          ]
+        },
+        {
+          "id": "geniesim_2025_target_building_block",
+          "tags": [
+            "building_blocks_002",
+            "building blocks",
+            "on desk",
+            "target_block"
+          ]
+        },
+        {
+          "id": "geniesim_2025_building_blocks_006",
+          "tags": [
+            "building_blocks_006",
+            "building blocks",
+            "on desk",
+            "other_block"
+          ]
+        },
+        {
+          "id": "geniesim_2025_building_blocks_014",
+          "tags": [
+            "building_blocks_014",
+            "building blocks",
+            "on desk",
+            "other_block"
+          ]
+        },
+        {
+          "id": "geniesim_2025_building_blocks_003",
+          "tags": [
+            "building_blocks_003",
+            "building blocks",
+            "on desk",
+            "other_block"
+          ]
+        },
+        {
+          "id": "geniesim_2025_building_blocks_009",
+          "tags": [
+            "building_blocks_009",
+            "building blocks",
+            "on desk",
+            "other_block"
+          ]
+        },
+        {
+          "id": "geniesim_2025_building_blocks_011",
+          "tags": [
+            "building_blocks_011",
+            "building blocks",
+            "on desk",
+            "other_block"
+          ]
+        },
+        {
+          "id": "geniesim_2025_building_blocks_010",
+          "tags": [
+            "building_blocks_010",
+            "building blocks",
+            "on desk",
+            "other_block"
+          ]
+        },
+        {
+          "id": "geniesim_2025_building_blocks_004",
+          "tags": [
+            "building_blocks_004",
+            "building blocks",
+            "on desk",
+            "other_block"
+          ]
+        },
+        {
+          "id": "geniesim_2025_building_blocks_007",
+          "tags": [
+            "building_blocks_007",
+            "building blocks",
+            "on desk",
+            "other_block"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "place_random_objects_on_desk",
+  "seed": 165487454
+}

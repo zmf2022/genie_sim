@@ -1,0 +1,153 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_0fe25dfa": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "cylindrical",
+          "orange",
+          "metallic",
+          "printed",
+          "beverage"
+        ],
+        "dimensions": [
+          0.06648768615722657,
+          0.1158542938232422,
+          0.06647872543334961
+        ],
+        "full_description": [
+          "An orange aluminum soda can with a silver top and bottom, featuring the Fanta logo and branding."
+        ],
+        "materials": [
+          "aluminum",
+          "plastic",
+          "printed label"
+        ],
+        "object_category": [
+          "container",
+          "beverage can"
+        ],
+        "semantic_name": [
+          "can"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "fanta",
+        "beverage",
+        "bottle",
+        "drink",
+        "right"
+      ],
+      "tags": [
+        "root_scene_75b8c32a",
+        "place_random_drink_675e84a5",
+        "benchmark_beverage_bottle_0fe25dfa"
+      ],
+      "usd": "benchmark_beverage_bottle_003",
+      "xyz": [
+        -2.915234,
+        -0.931413,
+        0.88
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.024461,
+        0.999701
+      ]
+    },
+    "genie_sprite_5858b108": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "sprite"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "sprite",
+      "xyz": [
+        -2.93945,
+        -0.638007,
+        0.88
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.015146,
+        0.999885
+      ]
+    },
+    "genie_sprite_6ff57f71": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "sprite"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "sprite",
+      "xyz": [
+        -2.950366,
+        -0.803086,
+        0.88
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.102453,
+        0.994738
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_75b8c32a",
+          "target": "place_random_drink_675e84a5"
+        },
+        {
+          "source": "place_random_drink_675e84a5",
+          "target": "benchmark_beverage_bottle_0fe25dfa"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_75b8c32a"
+        },
+        {
+          "id": "place_random_drink_675e84a5"
+        },
+        {
+          "id": "benchmark_beverage_bottle_0fe25dfa",
+          "tags": [
+            "coke cola",
+            "beverage",
+            "bottle",
+            "drink",
+            "right"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "place_random_drink",
+  "seed": 2708222852
+}

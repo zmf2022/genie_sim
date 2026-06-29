@@ -1,0 +1,178 @@
+# kinematics_vanilla.yaml
+# -----------------------------------------------------------------------------
+# A/B-comparison sibling of kinematics.yaml. Identical plugin selection,
+# identical IK links, identical solver budget (mode/timeout/threads/population).
+# The ONLY difference is that every "human prior" weight is set to 0.0:
+#
+#   - posture_weight        (torso-straight static goal)
+#   - chassis_posture_weight (per-call chassis-pin goal)
+#   - lookat_weight         (per-call head LookAt goal)
+#
+# The GenieBioIK plugin treats `weight <= 0` as "feature off": the static
+# torso JointVariableGoal is never registered, and TransientGoalGuard skips
+# pushing chassis-pin / LookAt goals onto default_goals. The result is the
+# original upstream BioIK behaviour (only center_joints / avoid_limits /
+# minimal_displacement priors stay active, exactly as before this change).
+#
+# IMPORTANT: keep mode/timeout/threads/population_size/elite_count IDENTICAL
+# to kinematics.yaml. If they drift apart, an A/B comparison no longer
+# isolates the human-priors effect from the solver-budget effect.
+#
+# Select this file via the `use_human_priors:=false` launch argument, e.g.:
+#   ros2 launch genie_sim_moveit wbc.launch.py use_human_priors:=false
+# -----------------------------------------------------------------------------
+simple_arm_l:
+  kinematics_solver: genie_sim_moveit_plugins/KDLKinematicsPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+simple_arm_r:
+  kinematics_solver: genie_sim_moveit_plugins/KDLKinematicsPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+simple_arms:
+  kinematics_solver: genie_sim_moveit_plugins/KDLKinematicsPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+simple_waist:
+  kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+simple_torso:
+  kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+simple_body:
+  kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+wbc_arm_l:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  mode: gd_c
+  kinematics_solver_timeout: 0.05
+  threads: 4
+  population_size: 4
+  elite_count: 2
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+  posture_weight: 0.0
+  chassis_posture_weight: 0.0
+wbc_arm_r:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  mode: gd_c
+  kinematics_solver_timeout: 0.05
+  threads: 4
+  population_size: 4
+  elite_count: 2
+  kinematics_solver_ik_links:
+    - arm_r_end_link
+  posture_weight: 0.0
+  chassis_posture_weight: 0.0
+wbc:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+  threads: 8
+  population_size: 6
+  elite_count: 3
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+    - arm_r_end_link
+    - head_link3
+  posture_weight: 0.0
+  chassis_posture_weight: 0.0
+  lookat_target_link: ""
+  lookat_weight: 0.0
+wbc_headless:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+  threads: 8
+  population_size: 6
+  elite_count: 3
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+    - arm_r_end_link
+  posture_weight: 0.0
+  chassis_posture_weight: 0.0
+wbc_arms:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+  threads: 8
+  population_size: 6
+  elite_count: 3
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+    - arm_r_end_link
+  chassis_posture_weight: 0.0
+mobile_base_manipulator:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+  threads: 8
+  population_size: 6
+  elite_count: 3
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+    - arm_r_end_link
+  posture_weight: 0.0
+  chassis_posture_weight: 0.0
+wbc_fixed_arm_l:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  mode: gd_c
+  kinematics_solver_timeout: 0.05
+  threads: 4
+  population_size: 4
+  elite_count: 2
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+  posture_weight: 0.0
+wbc_fixed_arm_r:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  mode: gd_c
+  kinematics_solver_timeout: 0.05
+  threads: 4
+  population_size: 4
+  elite_count: 2
+  kinematics_solver_ik_links:
+    - arm_r_end_link
+  posture_weight: 0.0
+wbc_fixed:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+  threads: 8
+  population_size: 6
+  elite_count: 3
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+    - arm_r_end_link
+    - head_link3
+  posture_weight: 0.0
+  lookat_target_link: ""
+  lookat_weight: 0.0
+wbc_fixed_headless:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+  threads: 8
+  population_size: 6
+  elite_count: 3
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+    - arm_r_end_link
+  posture_weight: 0.0
+wbc_fixed_arms:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+  threads: 8
+  population_size: 6
+  elite_count: 3
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+    - arm_r_end_link

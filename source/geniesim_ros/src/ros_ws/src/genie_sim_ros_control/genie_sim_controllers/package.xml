@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>genie_sim_controllers</name>
+  <version>3.2.0</version>
+  <description>
+    ros2_control controller plugins for GenieSim. Currently ships
+    ChassisServoController — the controller-plugin form of the
+    four-wheel-steering servo logic that previously lived in the
+    standalone servo_node executable. Bundles the supporting ServoBase
+    plugins, the linear-MPC solvers, and the tracking-differentiator
+    smoother that the controller drives.
+  </description>
+  <maintainer email="yangwendisheng@agibot.com" />
+  <license file="LICENSE">Mozilla Public License Version 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>rclcpp_components</depend>
+  <depend>rclcpp_lifecycle</depend>
+  <depend>controller_interface</depend>
+  <depend>pluginlib</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>eigen</depend>
+  <depend>osqp_vendor</depend>
+
+  <exec_depend>rclpy</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

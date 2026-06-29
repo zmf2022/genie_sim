@@ -1,0 +1,86 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def "World"
+{
+    def "Objects"
+    {
+        def Xform "table_e67bcf8a" (
+            prepend payload = @/geniesim_assets/objects/benchmark/table/benchmark_table_019/Aligned.usda@
+        )
+        {
+            over "entity"
+            {
+                bool physics:kinematicEnabled = 1
+            }
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 0, 0.265)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "benchmark_billiards_d45be01c" (
+            prepend payload = @/geniesim_assets/objects/benchmark/billiards/benchmark_billiards_008/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.402113, 0, 0, 0.91559)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0.054068, -0.10446, 0.894)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "benchmark_billiards_fb9dc380" (
+            prepend payload = @/geniesim_assets/objects/benchmark/billiards/benchmark_billiards_010/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.967811, 0, 0, 0.251678)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0.046379, 0.293223, 0.894)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "benchmark_billiards_53acd396" (
+            prepend payload = @/geniesim_assets/objects/benchmark/billiards/benchmark_billiards_013/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.659044, 0, 0, 0.752104)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-0.003579, -0.22094, 0.894)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "benchmark_billiards_f56323d2" (
+            prepend payload = @/geniesim_assets/objects/benchmark/billiards/benchmark_billiards_011/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.982014, 0, 0, 0.188808)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0.023729, 0.050111, 0.894)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "benchmark_billiards_ac32efc0" (
+            prepend payload = @/geniesim_assets/objects/benchmark/billiards/benchmark_billiards_009/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.852312, 0, 0, -0.523033)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-0.115871, -0.139653, 0.894)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "benchmark_billiards_db875a80" (
+            prepend payload = @/geniesim_assets/objects/benchmark/billiards/benchmark_billiards_007/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.868139, 0, 0, -0.496321)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-0.184351, 0.296061, 0.894)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+    }
+}

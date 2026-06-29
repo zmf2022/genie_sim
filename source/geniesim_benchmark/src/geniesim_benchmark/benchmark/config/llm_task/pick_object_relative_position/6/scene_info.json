@@ -1,0 +1,499 @@
+{
+  "layout": {
+    "benchmark_bottle_032a5505": {
+      "description": {
+        "color": "light-green",
+        "descriptive_terms": [
+          "cylindrical",
+          "smooth",
+          "translucent",
+          "rounded",
+          "portable"
+        ],
+        "dimensions": [
+          0.07978935241699218,
+          0.1634049835205078,
+          0.07737431716918945
+        ],
+        "full_description": [
+          "A light green, cylindrical bottle with a black lid and band, featuring a glossy finish and minor surface markings."
+        ],
+        "materials": [
+          "plastic",
+          "glass"
+        ],
+        "object_category": [
+          "container",
+          "bottle"
+        ],
+        "semantic_name": [
+          "bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "water_bottle",
+        "object",
+        "water bottle",
+        "\u4fdd\u6e29\u676f"
+      ],
+      "tags": [
+        "root_scene_b3f466dd",
+        "pick_object_relative_position_a1492501",
+        "place_objects_on_table_30036a34",
+        "create_tabletop_object_44ef3f4c",
+        "benchmark_bottle_032a5505"
+      ],
+      "usd": "benchmark_bottle_017",
+      "xyz": [
+        0.043,
+        -0.12,
+        0.813
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.760491,
+        -0.649348
+      ]
+    },
+    "benchmark_orange_6c4348c0": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "round",
+          "smooth",
+          "vibrant",
+          "juicy",
+          "fresh"
+        ],
+        "dimensions": [
+          0.0740404799580574,
+          0.07486499100923538,
+          0.07437027990818024
+        ],
+        "full_description": [
+          "A round, orange-colored fruit with a textured peel and small dimples visible on its surface."
+        ],
+        "materials": [
+          "organic",
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "orange"
+        ],
+        "shape": "spherical",
+        "unit": "m"
+      },
+      "keywords": [
+        "orange",
+        "object",
+        "orange",
+        "\u6a59\u5b50"
+      ],
+      "tags": [
+        "root_scene_b3f466dd",
+        "pick_object_relative_position_a1492501",
+        "place_objects_on_table_30036a34",
+        "create_tabletop_object_84510d24",
+        "benchmark_orange_6c4348c0"
+      ],
+      "usd": "benchmark_orange_004",
+      "xyz": [
+        0.188,
+        0.162,
+        0.769
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.919708,
+        -0.392603
+      ]
+    },
+    "benchmark_toy_plane_3ab8986c": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "aerodynamic",
+          "detailed",
+          "colorful",
+          "realistic"
+        ],
+        "dimensions": [
+          0.13626107788085937,
+          0.05548237991333008,
+          0.12746756744384766
+        ],
+        "full_description": [
+          "A white toy airplane with blue tail and wingtips, featuring four engines and visible landing gear."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "vehicle",
+          "aircraft"
+        ],
+        "semantic_name": [
+          "toy_plane"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy_plane",
+        "object",
+        "toy plane",
+        "\u73a9\u5177\u98de\u673a",
+        "target"
+      ],
+      "tags": [
+        "root_scene_b3f466dd",
+        "pick_object_relative_position_a1492501",
+        "place_objects_on_table_30036a34",
+        "create_tabletop_object_16603f96",
+        "benchmark_toy_plane_3ab8986c"
+      ],
+      "usd": "benchmark_toy_plane_029",
+      "xyz": [
+        -0.139,
+        -0.138,
+        0.759
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.887749,
+        -0.460328
+      ]
+    },
+    "benchmark_toy_plane_7ae5a5e3": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "aerodynamic",
+          "detailed",
+          "colorful",
+          "realistic"
+        ],
+        "dimensions": [
+          0.13626107788085937,
+          0.05548237991333008,
+          0.12746756744384766
+        ],
+        "full_description": [
+          "A white toy airplane with blue tail and wingtips, featuring four engines and visible landing gear."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "vehicle",
+          "aircraft"
+        ],
+        "semantic_name": [
+          "toy_plane"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy_plane",
+        "object",
+        "toy plane",
+        "\u73a9\u5177\u98de\u673a",
+        "target"
+      ],
+      "tags": [
+        "root_scene_b3f466dd",
+        "pick_object_relative_position_a1492501",
+        "place_objects_on_table_30036a34",
+        "create_tabletop_object_38332fda",
+        "benchmark_toy_plane_7ae5a5e3"
+      ],
+      "usd": "benchmark_toy_plane_029",
+      "xyz": [
+        -0.147,
+        0.112,
+        0.759
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.502228,
+        0.864735
+      ]
+    },
+    "genie_beverage_bottle_1f79dbf1": {
+      "description": {
+        "color": "black",
+        "descriptive_terms": [
+          "cylindrical",
+          "black",
+          "plastic",
+          "packaged",
+          "beverage"
+        ],
+        "dimensions": [
+          0.04871850088238716,
+          0.16691981256008148,
+          0.05984169989824295
+        ],
+        "full_description": [
+          "A black plastic beverage bottle with a white cap and a label featuring red grapes and Chinese text."
+        ],
+        "materials": [
+          "plastic",
+          "label"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "grape_juice",
+        "object",
+        "grape juice",
+        "\u8461\u8404\u6c41"
+      ],
+      "tags": [
+        "root_scene_b3f466dd",
+        "pick_object_relative_position_a1492501",
+        "place_objects_on_table_30036a34",
+        "create_tabletop_object_1dcba167",
+        "genie_beverage_bottle_1f79dbf1"
+      ],
+      "usd": "genie_beverage_bottle_009",
+      "xyz": [
+        0.031,
+        0.178,
+        0.817
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.203647,
+        0.979044
+      ]
+    },
+    "table_3dfd8020": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_b3f466dd",
+        "pick_object_relative_position_a1492501",
+        "place_objects_on_table_30036a34",
+        "table_3dfd8020"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_b3f466dd",
+          "target": "pick_object_relative_position_a1492501"
+        },
+        {
+          "source": "pick_object_relative_position_a1492501",
+          "target": "place_objects_on_table_30036a34"
+        },
+        {
+          "source": "place_objects_on_table_30036a34",
+          "target": "table_3dfd8020"
+        },
+        {
+          "source": "place_objects_on_table_30036a34",
+          "target": "create_tabletop_object_38332fda"
+        },
+        {
+          "source": "place_objects_on_table_30036a34",
+          "target": "create_tabletop_object_16603f96"
+        },
+        {
+          "source": "place_objects_on_table_30036a34",
+          "target": "create_tabletop_object_44ef3f4c"
+        },
+        {
+          "source": "place_objects_on_table_30036a34",
+          "target": "create_tabletop_object_84510d24"
+        },
+        {
+          "source": "place_objects_on_table_30036a34",
+          "target": "create_tabletop_object_1dcba167"
+        },
+        {
+          "source": "create_tabletop_object_38332fda",
+          "target": "benchmark_toy_plane_7ae5a5e3"
+        },
+        {
+          "source": "create_tabletop_object_16603f96",
+          "target": "benchmark_toy_plane_3ab8986c"
+        },
+        {
+          "source": "create_tabletop_object_44ef3f4c",
+          "target": "benchmark_bottle_032a5505"
+        },
+        {
+          "source": "create_tabletop_object_84510d24",
+          "target": "benchmark_orange_6c4348c0"
+        },
+        {
+          "source": "create_tabletop_object_1dcba167",
+          "target": "genie_beverage_bottle_1f79dbf1"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_b3f466dd"
+        },
+        {
+          "id": "pick_object_relative_position_a1492501"
+        },
+        {
+          "id": "place_objects_on_table_30036a34"
+        },
+        {
+          "id": "table_3dfd8020",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_38332fda"
+        },
+        {
+          "id": "benchmark_toy_plane_7ae5a5e3",
+          "tags": [
+            "toy_plane",
+            "object",
+            "toy plane",
+            "\u73a9\u5177\u98de\u673a",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_16603f96"
+        },
+        {
+          "id": "benchmark_toy_plane_3ab8986c",
+          "tags": [
+            "toy_plane",
+            "object",
+            "toy plane",
+            "\u73a9\u5177\u98de\u673a",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_44ef3f4c"
+        },
+        {
+          "id": "benchmark_bottle_032a5505",
+          "tags": [
+            "water_bottle",
+            "object",
+            "water bottle",
+            "\u4fdd\u6e29\u676f"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_84510d24"
+        },
+        {
+          "id": "benchmark_orange_6c4348c0",
+          "tags": [
+            "orange",
+            "object",
+            "orange",
+            "\u6a59\u5b50"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_1dcba167"
+        },
+        {
+          "id": "genie_beverage_bottle_1f79dbf1",
+          "tags": [
+            "grape_juice",
+            "object",
+            "grape juice",
+            "\u8461\u8404\u6c41"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 2359450005
+}

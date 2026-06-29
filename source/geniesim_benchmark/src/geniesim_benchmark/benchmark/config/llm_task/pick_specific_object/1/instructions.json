@@ -1,0 +1,62 @@
+{
+  "instruction_category": "pick_specific_object",
+  "instructions": [
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 1,
+      "instruction": "Left arm picks up the apple on the table",
+      "target": {
+        "id1": "benchmark_apple_67e7c105"
+      },
+      "template_key": "pick_specific_object"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 2,
+      "instruction": "Right arm picks up the dishwashing sponge on the table",
+      "target": {
+        "id1": "sponge_1b5f1043"
+      },
+      "template_key": "pick_specific_object"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 3,
+      "instruction": "Right arm picks up the Sprite on the table",
+      "target": {
+        "id1": "sprite_82944861"
+      },
+      "template_key": "pick_specific_object"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 4,
+      "instruction": "Right arm picks up the paper cup on the table",
+      "target": {
+        "id1": "papercup_7cae84ec"
+      },
+      "template_key": "pick_specific_object"
+    }
+  ],
+  "scene_id": "table_scene"
+}

@@ -1,0 +1,62 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def "World"
+{
+    def "Objects"
+    {
+        def Xform "table_7cd842d6" (
+            prepend payload = @/geniesim_assets/objects/edited/table_000/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 0, 0.367)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "benchmark_peach_9064a3d0" (
+            prepend payload = @/geniesim_assets/objects/benchmark/peach/benchmark_peach_021/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.008186, 0, 0, 0.999966)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-0.176, -0.215, 0.778)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "benchmark_peach_ea5b3692" (
+            prepend payload = @/geniesim_assets/objects/benchmark/peach/benchmark_peach_021/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.648057, 0, 0, 0.761592)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0.182, 0.225, 0.778)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "benchmark_toy_car_027e6b40" (
+            prepend payload = @/geniesim_assets/objects/benchmark/toy_car/benchmark_toy_car_018/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.967892, 0, 0, 0.251366)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-0.197, 0.151, 0.748)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "benchmark_bowl_sponge_b0a40739" (
+            prepend payload = @/geniesim_assets/objects/genie/sponge/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (-0.183005, 0, 0, 0.983112)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0.139, 0.044, 0.747)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+    }
+}

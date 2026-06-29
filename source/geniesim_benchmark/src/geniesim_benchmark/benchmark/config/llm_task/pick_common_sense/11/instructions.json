@@ -1,0 +1,62 @@
+{
+  "instructions": [
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 1,
+      "instruction": "Get me a bottle of carbonated drink",
+      "target": {
+        "idn": "benchmark_beverage_bottle_4652fd8f"
+      },
+      "template_key": "pick_common_sense"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 2,
+      "instruction": "Give me a food that can be eaten directly",
+      "target": {
+        "idn": "benchmark_green_apple_36b753c5"
+      },
+      "template_key": "pick_common_sense"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 3,
+      "instruction": "I need to mark on documents, give me a pen",
+      "target": {
+        "idn": "benchmark_pen_01718e47"
+      },
+      "template_key": "pick_common_sense"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 4,
+      "instruction": "Choose a gift for someone who likes puzzles",
+      "target": {
+        "idn": "benchmark_rubik_cube_aa2f9957"
+      },
+      "template_key": "pick_common_sense"
+    }
+  ],
+  "scene_id": "place_random_objects_on_desk",
+  "task_id": "pick_common_sense"
+}

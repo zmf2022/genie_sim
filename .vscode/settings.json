@@ -33,9 +33,9 @@
   "git.enableSmartCommit": true,
   "python-envs.pythonProjects": [
     {
-      "envManager": "ms-python.python:conda",
-      "packageManager": "ms-python.python:conda",
-      "path": ""
+      "envManager": "ms-python.python:system",
+      "packageManager": "ms-python.python:pip",
+      "path": "."
     }
   ],
   "python.formatting.provider": "black",

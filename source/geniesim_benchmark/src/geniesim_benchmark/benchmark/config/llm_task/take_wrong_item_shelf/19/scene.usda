@@ -1,0 +1,42 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def "World"
+{
+    def "Objects"
+    {
+        def Xform "benchmark_beverage_bottle_35b3d04a" (
+            prepend payload = @/geniesim_assets/objects/benchmark/beverage_bottle/benchmark_beverage_bottle_003/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.999666, 0, 0, 0.025849)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-2.951512, -0.914891, 0.88)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "genie_sprite_aa329464" (
+            prepend payload = @/geniesim_assets/objects/genie/sprite/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.995212, 0, 0, -0.097735)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-2.94969, -0.768459, 0.88)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "genie_sprite_137a3117" (
+            prepend payload = @/geniesim_assets/objects/genie/sprite/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.993546, 0, 0, 0.113428)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-2.968246, -0.637754, 0.88)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+    }
+}

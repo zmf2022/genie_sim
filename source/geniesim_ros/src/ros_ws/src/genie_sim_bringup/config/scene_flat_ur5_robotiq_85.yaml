@@ -1,0 +1,58 @@
+robot:
+  robot_name: ur5_robotiq_85
+  robot_prefix: ur5
+  robot_source:
+    arm: ur5
+    body: ""
+    gripper: robotiq_85
+    robot_model: universal_robots
+    package: genie_sim_robot_model
+    pin_base_to_world: true
+    urdf: {}
+  init_base_pose:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    theta: 0.0
+  init_joint_pos:
+    arm_joint1: 0
+    arm_joint2: -90
+    arm_joint3: 90
+    arm_joint4: -90
+    arm_joint5: -90
+    arm_joint6: 0
+
+# Newton GL viewer / OVRtx FreeCam initial pose.  Z-up world frame; lookat
+# sets the orbit pivot.  UR5 is a tabletop arm (~85 cm reach) at origin
+# -- frame from front-right at arm-mid height.
+viewer_camera:
+  pos:    [1.4, -1.4, 0.9]
+  lookat: [0.3,  0.0, 0.4]
+
+cameras:
+- prim_path: base_link/Head_Camera
+  frame_id: base_link
+  topic:
+    rgb: /genie_sim/head_camera_rgb
+    depth: /genie_sim/head_camera_depth
+  sensor:
+    width: 640
+    height: 400
+    freq: 10.0
+    min_range: 0.01
+    max_range: 10000
+  intrinsic:
+    cx: 318.7979431152
+    cy: 202.4943847656
+    fx: 305.6425170898
+    fy: 305.6007080078
+    k1: 0
+    k2: 0
+    p1: 0
+    p2: 0
+    k3: 0
+  extrinsic:
+    xyz: [0.0, 0.0, 0.0]
+    wxyz: [1.0, 0.0, 0.0, 0.0]
+lidars: []
+scene:

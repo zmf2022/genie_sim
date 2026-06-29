@@ -1,0 +1,11 @@
+app:
+  enable_rate_limit: true
+  enable_ros: false
+benchmark:
+  task_name: table_task_g1_op
+  platform: g1_op
+  sub_task_name: sort_fruit
+  seed: 1
+  model_arc: corobot
+  num_episode: 1
+  record: false

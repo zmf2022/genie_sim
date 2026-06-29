@@ -1,0 +1,62 @@
+{
+  "instruction_category": "pick_object_type",
+  "instructions": [
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 1,
+      "instruction": "Right arm picks up drinks on the table",
+      "target": {
+        "id1": "iros_beverage_bottle_c32425a3"
+      },
+      "template_key": "pick_object_type"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 2,
+      "instruction": "Right arm picks up fruit on the table",
+      "target": {
+        "id1": "benchmark_orange_d9e2b9fd"
+      },
+      "template_key": "pick_object_type"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 3,
+      "instruction": "Left arm picks up stationery on the table",
+      "target": {
+        "id1": "benchmark_pen_2b2bcc6f"
+      },
+      "template_key": "pick_object_type"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 4,
+      "instruction": "Left arm picks up toys on the table",
+      "target": {
+        "id1": "benchmark_toy_plane_05648c88"
+      },
+      "template_key": "pick_object_type"
+    }
+  ],
+  "scene_id": "place_random_objects_on_desk"
+}

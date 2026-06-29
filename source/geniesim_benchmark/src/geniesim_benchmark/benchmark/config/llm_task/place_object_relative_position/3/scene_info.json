@@ -1,0 +1,383 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_2b8117e1": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "cylindrical",
+          "red",
+          "liquid",
+          "bottled",
+          "packaged"
+        ],
+        "dimensions": [
+          0.06153380125761032,
+          0.14993929862976074,
+          0.06153379566967487
+        ],
+        "full_description": [
+          "A plastic bottle with a red label and black cap, containing dark liquid, featuring Chinese text and a Suntory logo."
+        ],
+        "materials": [
+          "plastic",
+          "liquid"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "oolong tea beverage",
+        "benchmark_beverage_bottle_004",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_292ca22f",
+        "table_with_random_objects_46938e76",
+        "place_random_objects_on_desk_cc60398f",
+        "benchmark_beverage_bottle_2b8117e1"
+      ],
+      "usd": "benchmark_beverage_bottle_004",
+      "xyz": [
+        0.15,
+        0.222,
+        1.0
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.102721,
+        0.99471
+      ]
+    },
+    "benchmark_building_blocks_955bef28": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "small",
+          "red",
+          "cubic",
+          "simple",
+          "solid"
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          0.03
+        ],
+        "full_description": [
+          "A small, solid red cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "building_block"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "cube",
+        "unit": "m"
+      },
+      "keywords": [
+        "building blocks",
+        "benchmark_building_blocks_072",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_292ca22f",
+        "table_with_random_objects_46938e76",
+        "place_random_objects_on_desk_cc60398f",
+        "benchmark_building_blocks_955bef28"
+      ],
+      "usd": "benchmark_building_blocks_072",
+      "xyz": [
+        0.007,
+        -0.232,
+        0.89
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.069975,
+        0.997549
+      ]
+    },
+    "benchmark_cup_3782539b": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "cylindrical",
+          "white",
+          "simple",
+          "printed",
+          "small"
+        ],
+        "dimensions": [
+          0.0634383037686348,
+          0.07829996943473816,
+          0.06343957036733627
+        ],
+        "full_description": [
+          "A white paper cup with a black line-drawn pattern and yellow accents depicting household items."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "kitchenware",
+          "drinking vessel"
+        ],
+        "semantic_name": [
+          "cup"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "paper cup",
+        "benchmark_cup_105",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_292ca22f",
+        "table_with_random_objects_46938e76",
+        "place_random_objects_on_desk_cc60398f",
+        "benchmark_cup_3782539b"
+      ],
+      "usd": "benchmark_cup_105",
+      "xyz": [
+        -0.184,
+        0.214,
+        0.938
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.146203,
+        0.989255
+      ]
+    },
+    "benchmark_toy_plane_683d97b6": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "aerodynamic",
+          "detailed",
+          "colorful",
+          "realistic"
+        ],
+        "dimensions": [
+          0.13626107788085937,
+          0.05548237991333008,
+          0.12746756744384766
+        ],
+        "full_description": [
+          "A white toy airplane with blue tail and wingtips, featuring four engines and visible landing gear."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "vehicle",
+          "aircraft"
+        ],
+        "semantic_name": [
+          "toy_plane"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy plane",
+        "benchmark_toy_plane_029",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_292ca22f",
+        "table_with_random_objects_46938e76",
+        "place_random_objects_on_desk_cc60398f",
+        "benchmark_toy_plane_683d97b6"
+      ],
+      "usd": "benchmark_toy_plane_029",
+      "xyz": [
+        0.112,
+        -0.11,
+        0.915
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.115068,
+        0.993358
+      ]
+    },
+    "table_25644864": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_292ca22f",
+        "table_with_random_objects_46938e76",
+        "place_random_objects_on_desk_cc60398f",
+        "table_25644864"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_292ca22f",
+          "target": "table_with_random_objects_46938e76"
+        },
+        {
+          "source": "table_with_random_objects_46938e76",
+          "target": "place_random_objects_on_desk_cc60398f"
+        },
+        {
+          "source": "place_random_objects_on_desk_cc60398f",
+          "target": "table_25644864"
+        },
+        {
+          "source": "place_random_objects_on_desk_cc60398f",
+          "target": "benchmark_cup_3782539b"
+        },
+        {
+          "source": "place_random_objects_on_desk_cc60398f",
+          "target": "benchmark_toy_plane_683d97b6"
+        },
+        {
+          "source": "place_random_objects_on_desk_cc60398f",
+          "target": "benchmark_building_blocks_955bef28"
+        },
+        {
+          "source": "place_random_objects_on_desk_cc60398f",
+          "target": "benchmark_beverage_bottle_2b8117e1"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_292ca22f"
+        },
+        {
+          "id": "table_with_random_objects_46938e76"
+        },
+        {
+          "id": "place_random_objects_on_desk_cc60398f"
+        },
+        {
+          "id": "table_25644864",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_cup_3782539b",
+          "tags": [
+            "paper cup",
+            "benchmark_cup_105",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_toy_plane_683d97b6",
+          "tags": [
+            "toy plane",
+            "benchmark_toy_plane_029",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_building_blocks_955bef28",
+          "tags": [
+            "building blocks",
+            "benchmark_building_blocks_072",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_beverage_bottle_2b8117e1",
+          "tags": [
+            "oolong tea beverage",
+            "benchmark_beverage_bottle_004",
+            "on_desk",
+            "right"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 1774931372
+}

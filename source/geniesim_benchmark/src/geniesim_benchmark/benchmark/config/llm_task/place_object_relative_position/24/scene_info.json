@@ -1,0 +1,386 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_559521a9": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "cylindrical",
+          "orange",
+          "metallic",
+          "printed",
+          "beverage"
+        ],
+        "dimensions": [
+          0.06648768615722657,
+          0.1158542938232422,
+          0.06647872543334961
+        ],
+        "full_description": [
+          "An orange aluminum soda can with a silver top and bottom, featuring the Fanta logo and branding."
+        ],
+        "materials": [
+          "aluminum",
+          "plastic",
+          "printed label"
+        ],
+        "object_category": [
+          "container",
+          "beverage can"
+        ],
+        "semantic_name": [
+          "can"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "fanta",
+        "benchmark_beverage_bottle_003",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_9d531901",
+        "table_with_random_objects_03029c82",
+        "place_random_objects_on_desk_b9251f74",
+        "benchmark_beverage_bottle_559521a9"
+      ],
+      "usd": "benchmark_beverage_bottle_003",
+      "xyz": [
+        -0.056,
+        -0.037,
+        0.976
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.029435,
+        0.999567
+      ]
+    },
+    "benchmark_beverage_bottle_8b09e4e3": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "cylindrical",
+          "red",
+          "liquid",
+          "bottled",
+          "packaged"
+        ],
+        "dimensions": [
+          0.06153380125761032,
+          0.14993929862976074,
+          0.06153379566967487
+        ],
+        "full_description": [
+          "A plastic bottle with a red label and black cap, containing dark liquid, featuring Chinese text and a Suntory logo."
+        ],
+        "materials": [
+          "plastic",
+          "liquid"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "oolong tea beverage",
+        "benchmark_beverage_bottle_004",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_9d531901",
+        "table_with_random_objects_03029c82",
+        "place_random_objects_on_desk_b9251f74",
+        "benchmark_beverage_bottle_8b09e4e3"
+      ],
+      "usd": "benchmark_beverage_bottle_004",
+      "xyz": [
+        0.1,
+        0.124,
+        1.0
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.096942,
+        0.99529
+      ]
+    },
+    "benchmark_clock_697fac54": {
+      "description": {
+        "color": "pink",
+        "descriptive_terms": [
+          "circular",
+          "compact",
+          "decorative",
+          "vintage",
+          "playful"
+        ],
+        "dimensions": [
+          0.08173294067382812,
+          0.13982281494140625,
+          0.13057781982421876
+        ],
+        "full_description": [
+          "A pink, pig-shaped alarm clock with a white face, black numbers, and two small ears on top."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "timepiece",
+          "analog clock"
+        ],
+        "semantic_name": [
+          "clock"
+        ],
+        "shape": "rounded",
+        "unit": "m"
+      },
+      "keywords": [
+        "clock",
+        "benchmark_clock_044",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_9d531901",
+        "table_with_random_objects_03029c82",
+        "place_random_objects_on_desk_b9251f74",
+        "benchmark_clock_697fac54"
+      ],
+      "usd": "benchmark_clock_044",
+      "xyz": [
+        -0.004,
+        -0.206,
+        1.0
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.027048,
+        0.999634
+      ]
+    },
+    "benchmark_tape_measure_89d54a8c": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "compact",
+          "durable",
+          "portable",
+          "functional",
+          "robust"
+        ],
+        "dimensions": [
+          0.0889030990600586,
+          0.08185286712646485,
+          0.04844463539123535
+        ],
+        "full_description": [
+          "A compact tape measure with a black and bright yellow plastic casing, featuring a visible '7.5m' label on its side."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "tool",
+          "measurement"
+        ],
+        "semantic_name": [
+          "tape_measure"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "tape measure",
+        "benchmark_tape_measure_007",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_9d531901",
+        "table_with_random_objects_03029c82",
+        "place_random_objects_on_desk_b9251f74",
+        "benchmark_tape_measure_89d54a8c"
+      ],
+      "usd": "benchmark_tape_measure_007",
+      "xyz": [
+        -0.169,
+        0.092,
+        0.942
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.125534,
+        0.992089
+      ]
+    },
+    "table_901af425": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_9d531901",
+        "table_with_random_objects_03029c82",
+        "place_random_objects_on_desk_b9251f74",
+        "table_901af425"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_9d531901",
+          "target": "table_with_random_objects_03029c82"
+        },
+        {
+          "source": "table_with_random_objects_03029c82",
+          "target": "place_random_objects_on_desk_b9251f74"
+        },
+        {
+          "source": "place_random_objects_on_desk_b9251f74",
+          "target": "table_901af425"
+        },
+        {
+          "source": "place_random_objects_on_desk_b9251f74",
+          "target": "benchmark_beverage_bottle_8b09e4e3"
+        },
+        {
+          "source": "place_random_objects_on_desk_b9251f74",
+          "target": "benchmark_tape_measure_89d54a8c"
+        },
+        {
+          "source": "place_random_objects_on_desk_b9251f74",
+          "target": "benchmark_clock_697fac54"
+        },
+        {
+          "source": "place_random_objects_on_desk_b9251f74",
+          "target": "benchmark_beverage_bottle_559521a9"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_9d531901"
+        },
+        {
+          "id": "table_with_random_objects_03029c82"
+        },
+        {
+          "id": "place_random_objects_on_desk_b9251f74"
+        },
+        {
+          "id": "table_901af425",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_beverage_bottle_8b09e4e3",
+          "tags": [
+            "oolong tea beverage",
+            "benchmark_beverage_bottle_004",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_tape_measure_89d54a8c",
+          "tags": [
+            "tape measure",
+            "benchmark_tape_measure_007",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_clock_697fac54",
+          "tags": [
+            "clock",
+            "benchmark_clock_044",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_beverage_bottle_559521a9",
+          "tags": [
+            "fanta",
+            "benchmark_beverage_bottle_003",
+            "on_desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 4196948570
+}

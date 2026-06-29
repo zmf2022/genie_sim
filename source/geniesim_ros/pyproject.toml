@@ -1,0 +1,77 @@
+[build-system]
+requires = [
+    "setuptools>=68.0",
+    "wheel",
+    "ovrtx>=0.3.0,<0.4.0",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geniesim_ros"
+dynamic = ["version"]
+description = "Genie Sim — ROS 2 workspace bridge: pip-installable Python shim + bundled colcon source workspace under src/ros_ws/."
+requires-python = ">=3.10,<3.13"
+license = {text = "MPL-2.0"}
+authors = [{ name = "Genie Sim Team" }]
+keywords = ["agibot", "genie", "sim", "ros2", "realtime"]
+classifiers = [
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "geniesim_cli",
+    "isaacsim",
+    # ovrtx 0.3.x: required by both genie_sim_render (cross-process) and
+    # genie_sim_engine's inline OVRTX visualizer
+    # (physics_engine_visualizer:=ovrtx).  See
+    # genie_sim_engine/docs/ovrtx_sync.md.
+    "ovrtx>=0.3.0,<0.4.0",
+    "pyglet>=2.0",
+    # Pins to keep Isaac Sim's bundled extensions importable. The
+    # omni.services.pip_archive ships an older typing_extensions that
+    # lacks `Sentinel`, so newer pydantic_core blows up on import; pin
+    # the whole chain to versions compatible with that bundled stack.
+    "pydantic<=2.11.10",
+    "pydantic_core<=2.33.2",
+    "idna<=3.10",
+    "numpy<=2.3.1",
+    "Pillow<=12.1.1",
+    "typing_extensions<=4.12.2",
+    "trimesh<=4.11.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/AgibotTech/genie_sim"
+
+[tool.setuptools.dynamic]
+version = {file = "VERSION"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+# ``src/ros_ws`` is a colcon workspace shipping ament packages
+# (urdf/xacro/meshes/launch). pip / setuptools must NOT descend into it,
+# otherwise it would publish mesh files as Python package_data and
+# possibly choke on the symlinked ament packages. colcon owns that tree;
+# pip owns ``src/geniesim_ros`` only.
+exclude = ["ros_ws*"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+# The colcon ``install/`` tree is staged at
+# ``src/geniesim_ros/_ros_install/`` by ``geniesim ros build release`` or
+# by ``BdistWheelWithColcon`` (see setup.py), then **tarred** into
+# ``_ros_install.tar.gz`` before the wheel is assembled. Only the tarball
+# ships in the wheel — that's how file modes (colcon's ``0o755`` on
+# script entrypoints) survive the install step. ``geniesim_ros._bootstrap``
+# extracts the tarball lazily on first ``import geniesim_ros``.
+# Editable installs (``pip install -e``) skip the colcon stage entirely;
+# devs drive ``geniesim ros build dev`` themselves and ``ensure_ros_install``
+# no-ops because no tarball is present.
+[tool.setuptools.package-data]
+geniesim_ros = ["_ros_install.tar.gz"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["__pycache__", "**/__pycache__", "**/__pycache__/*"]

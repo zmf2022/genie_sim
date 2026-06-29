@@ -1,0 +1,92 @@
+robot:
+  robot_name: fr3_manifold
+  robot_prefix: fr3
+  robot_source:
+    # ---------------------------------------------------------------------
+    # IMPORTANT — this is a dual-arm setup, not a single-arm FR3 desktop.
+    # G2.urdf.xacro lines 143-154 instantiate both `franka.arm_l` AND
+    # `franka.arm_r` whenever ``arm == 'franka'``, with no toggle. Both
+    # arms mount onto ``arm_base_link`` which is authored by the body
+    # xacro (T2 here). For a true single-arm fr3 desktop demo you'd
+    # need either:
+    #   * a new `G2.arm.fr3_single.urdf.xacro` that only emits arm_l, OR
+    #   * a standalone fr3 xacro that bypasses the dual-arm composer.
+    # Today this scene gives you a T2 humanoid chest + two FR3 arms.
+    #
+    # ALSO: ``body`` must be set explicitly. Empty / "t2" falls through
+    # the launch default ``t2`` (lowercase) which doesn't match the
+    # xacro check ``'T2' == body``, the body is silently dropped, the
+    # arm has no parent, and the URDF comes out with zero <link>
+    # elements (the "robot_description empty" startup error).
+    # ---------------------------------------------------------------------
+    arm: fr3
+    body: T2
+    gripper: ""
+    robot_model: franka
+    package: genie_sim_robot_model
+    pin_base_to_world: true
+    urdf: {}
+  init_base_pose:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    theta: 0.0
+  # ---------------------------------------------------------------------
+  # Initial joint pose — matches example_cloth_franka.py:
+  #   builder.joint_q[:6] = [0.0, 0.0, 0.0, -1.59695, 0.0, 2.5307]
+  # converted from radians to degrees (this YAML's convention for
+  # revolute joints; see _isaacsim_params.JointInitSpec):
+  #     -1.59695 rad → -91.5°
+  #      2.5307  rad → 145.0°
+  # joint7 wasn't set in the demo — leave at 0.
+  #
+  # NOTE: keys must match the URDF's joint names exactly. The
+  # robot_model=franka, arm=fr3 build produces a single-arm URDF with
+  # joints ``arm_joint1..arm_joint7`` (no ``_l`` suffix). Earlier
+  # versions of this YAML used ``arm_l_joint*`` — those keys silently
+  # didn't match anything and the robot started at the URDF-default
+  # all-zero pose.
+  # ---------------------------------------------------------------------
+  init_joint_pos:
+    arm_joint1: 0
+    arm_joint2: 0
+    arm_joint3: 0
+    arm_joint4: -91.5
+    arm_joint5: 0
+    arm_joint6: 145.0
+    arm_joint7: 0
+
+# Newton GL viewer / OVRtx FreeCam initial pose.  Z-up world frame; lookat
+# sets the orbit pivot.  FR3 is a tabletop arm (~85 cm reach) at origin
+# -- frame from front-right at arm-mid height.
+viewer_camera:
+  pos:    [1.4, -1.4, 0.9]
+  lookat: [0.4,  0.0, 0.4]
+
+cameras:
+- prim_path: base_link/Head_Camera
+  frame_id: base_link
+  topic:
+    rgb: /genie_sim/head_camera_rgb
+    depth: /genie_sim/head_camera_depth
+  sensor:
+    width: 640
+    height: 400
+    freq: 10.0
+    min_range: 0.01
+    max_range: 10000
+  intrinsic:
+    cx: 318.7979431152
+    cy: 202.4943847656
+    fx: 305.6425170898
+    fy: 305.6007080078
+    k1: 0
+    k2: 0
+    p1: 0
+    p2: 0
+    k3: 0
+  extrinsic:
+    xyz: [0.0, 0.0, 0.0]
+    wxyz: [1.0, 0.0, 0.0, 0.0]
+lidars: []
+scene:

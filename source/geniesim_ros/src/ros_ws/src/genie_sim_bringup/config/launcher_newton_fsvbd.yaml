@@ -1,0 +1,100 @@
+# GenieSim launcher config — Newton standalone, VBD cloth + Featherstone robot.
+#
+# Runs genie_sim_engine_newton.py, which starts Newton physics WITHOUT
+# SimulationApp (no Kit, no OVRTX).  Startup is ~2 s vs ~10 s and uses
+# ~1.2 GB less VRAM.  ROS topics (clock, joint_states, body_tf, odom) are
+# always published regardless of visualizer.
+#
+# VBD (Vertex Block Descent): unconditionally stable cloth solver.
+# Garment stiffness (tri_ke=1e4) works as-is; XPBD would explode above ~0.3 N/m.
+#
+# Visualizer options (physics_engine_visualizer):
+#   none    — pure headless, no window (default)
+#   newton  — Newton ViewerGL OpenGL window; requires $DISPLAY
+#   ovrtx   — In-process OVRTX RTX render (kit-free); publishes
+#             <cam.topic>/image_raw + camera_info via gsi::RosBridge
+#             from a dedicated render thread.  See docs/ovrtx_sync.md.
+#   rerun   — TODO: Rerun gRPC stream (falls back to none)
+#
+# Note: physics_engine_visualizer:=ovrtx still requires headless:=false
+# (treated as a non-headless visualizer for forward compatibility with a
+# future GUI).  The kit visualizer was removed when newton-standalone
+# went Kit-free; use physics_engine:=isaac_newton for the Kit viewport.
+#
+# Usage — headless (default):
+#   ros2 launch genie_sim_bringup app.launch.py \
+#     scene:=<scene> \
+#     launcher_config:=launcher_newton_fsvbd
+#
+# Usage — Newton GL window:
+#   ros2 launch genie_sim_bringup app.launch.py \
+#     scene:=<scene> \
+#     launcher_config:=launcher_newton_fsvbd \
+#     headless:=false \
+#     physics_engine_visualizer:=newton
+#
+# Usage — Inline OVRtx (in-process RTX render, ROS image topics):
+#   ros2 launch genie_sim_bringup app.launch.py \
+#     scene:=<scene> \
+#     launcher_config:=launcher_newton_fsvbd \
+#     headless:=false \
+#     physics_engine_visualizer:=ovrtx
+
+launcher:
+  physics:
+    engine: genie_sim_engine_newton
+    engines:
+      genie_sim_engine_newton:
+        package: genie_sim_engine
+        executable: genie_sim_engine_newton.py
+        name: genie_sim_engine_newton
+    industrial_bridge: ""
+  renders: []
+
+genie_sim_engine_newton:
+  ros__parameters:
+    # Visualizer: none | newton | ovrtx | rerun (todo)
+    # Override per-run: physics_engine_visualizer:=newton on the CLI.
+    physics_engine_visualizer: newton
+
+    physics_solver: fsvbd
+
+    # Physics rate.  60 Hz is the VBD cloth demo working point — cloth
+    # artefacts become visible below 30 Hz; budget runs tight above 100 Hz
+    # with cloth scenes.  Pure-rigid scenes can run at 200 Hz comfortably.
+    realtime_factor: 1.0
+    physics_hz: 60.0
+
+    # Render rate.  Drives:
+    #  * newton GL ViewerGL frame cadence
+    #  * ovrtx visualizer's per-frame target FPS (latest-state-wins —
+    #    slow frames are dropped, not queued; physics never blocks).
+    # Ignored when physics_engine_visualizer: none.
+    render_hz: 10.0
+
+    # RTX submode for kit visualizer only; ignored for newton GL / ovrtx /
+    # none.  (kit removed from newton-standalone; see docs/fabric_sync.md
+    # §12.7.)
+    # raster ~16 ms/frame (RaytracedLighting, default)
+    # pathtrace ~49 ms/frame (RealTimePathTracing)
+    # offline 100-300 ms/frame (PathTracing, for screenshots)
+    render_mode: raster
+
+    # Optional ovrtx settings (only used when physics_engine_visualizer: ovrtx)
+    # ovrtx_root: ""                       # binary package root override
+    # ovrtx_log_path: "/tmp/ovrtx_inline.log"
+    # ovrtx_log_level: "info"
+    # ovrtx_camera_pose_topic: "/genie_sim_engine/viewer/camera_pose"
+    #   FreeCam viewport pose source.  Default matches the RViz plugin
+    #   (genie_sim_rviz_plugins/view_camera_pose_publisher_display) so the
+    #   FreeCam follows the RViz 3D viewport with no extra remap.
+
+    # Newton VBD solver tuning.  0 = engine picks its own default.
+    # Franka cloth demo working point: substep=10, iterations=5.
+    physics_solver_substep: 10
+    physics_solver_iterations: 5
+    # Slow-motion cloth fold: joint velocities stay < 1 rad/s,
+    # so M(q) drift across many frames is negligible.  Skip the
+    # per-frame O(N²) CRBA rebuild — saves ~2-5 ms/frame on G2's
+    # 26-34 DOF tree with fix_base + fix_head + fix_body active.
+    physics_solver_mass_matrix_interval: 100000   # ≈ "never rebuild"

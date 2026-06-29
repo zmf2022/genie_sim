@@ -1,0 +1,420 @@
+{
+  "layout": {
+    "benchmark_clock_f29a05fb": {
+      "description": {
+        "color": "pink",
+        "descriptive_terms": [
+          "circular",
+          "compact",
+          "decorative",
+          "vintage",
+          "playful"
+        ],
+        "dimensions": [
+          0.08173294067382812,
+          0.13982281494140625,
+          0.13057781982421876
+        ],
+        "full_description": [
+          "A pink, pig-shaped alarm clock with a white face, black numbers, and two small ears on top."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "timepiece",
+          "analog clock"
+        ],
+        "semantic_name": [
+          "clock"
+        ],
+        "shape": "rounded",
+        "unit": "m"
+      },
+      "keywords": [
+        "clock",
+        "object",
+        "clock",
+        "\u95f9\u949f"
+      ],
+      "tags": [
+        "root_scene_da3a3d60",
+        "pick_object_relative_position_328400ec",
+        "place_objects_on_table_37639f35",
+        "create_tabletop_object_4aa4f875",
+        "benchmark_clock_f29a05fb"
+      ],
+      "usd": "benchmark_clock_044",
+      "xyz": [
+        0.188,
+        0.166,
+        0.802
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.250456,
+        0.968128
+      ]
+    },
+    "benchmark_rubik_cube_a736598e": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "colorful",
+          "complex",
+          "geometric",
+          "small",
+          "plastic"
+        ],
+        "dimensions": [
+          0.057,
+          0.057,
+          0.057
+        ],
+        "full_description": [
+          "A 3x3 Rubik's cube with pastel-colored faces including yellow, pink, and cyan on a black background."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "puzzle",
+          "toy"
+        ],
+        "semantic_name": [
+          "rubik_cube"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "rubik_cube",
+        "object",
+        "rubik cube",
+        "\u9b54\u65b9"
+      ],
+      "tags": [
+        "root_scene_da3a3d60",
+        "pick_object_relative_position_328400ec",
+        "place_objects_on_table_37639f35",
+        "create_tabletop_object_1e25dca8",
+        "benchmark_rubik_cube_a736598e"
+      ],
+      "usd": "benchmark_rubik_cube_001",
+      "xyz": [
+        -0.194,
+        -0.228,
+        0.768
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.990771,
+        -0.135547
+      ]
+    },
+    "benchmark_toy_car_13d6d572": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy_car",
+        "object",
+        "toy car",
+        "\u73a9\u5177\u8f66",
+        "target"
+      ],
+      "tags": [
+        "root_scene_da3a3d60",
+        "pick_object_relative_position_328400ec",
+        "place_objects_on_table_37639f35",
+        "create_tabletop_object_b0168ada",
+        "benchmark_toy_car_13d6d572"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        -0.034,
+        -0.205,
+        0.748
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.490977,
+        0.871172
+      ]
+    },
+    "benchmark_toy_car_38dd29be": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy_car",
+        "object",
+        "toy car",
+        "\u73a9\u5177\u8f66",
+        "target"
+      ],
+      "tags": [
+        "root_scene_da3a3d60",
+        "pick_object_relative_position_328400ec",
+        "place_objects_on_table_37639f35",
+        "create_tabletop_object_273839c6",
+        "benchmark_toy_car_38dd29be"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        0.144,
+        -0.123,
+        0.748
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.606281,
+        0.795251
+      ]
+    },
+    "table_92d29809": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_da3a3d60",
+        "pick_object_relative_position_328400ec",
+        "place_objects_on_table_37639f35",
+        "table_92d29809"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_da3a3d60",
+          "target": "pick_object_relative_position_328400ec"
+        },
+        {
+          "source": "pick_object_relative_position_328400ec",
+          "target": "place_objects_on_table_37639f35"
+        },
+        {
+          "source": "place_objects_on_table_37639f35",
+          "target": "table_92d29809"
+        },
+        {
+          "source": "place_objects_on_table_37639f35",
+          "target": "create_tabletop_object_273839c6"
+        },
+        {
+          "source": "place_objects_on_table_37639f35",
+          "target": "create_tabletop_object_b0168ada"
+        },
+        {
+          "source": "place_objects_on_table_37639f35",
+          "target": "create_tabletop_object_1e25dca8"
+        },
+        {
+          "source": "place_objects_on_table_37639f35",
+          "target": "create_tabletop_object_4aa4f875"
+        },
+        {
+          "source": "create_tabletop_object_273839c6",
+          "target": "benchmark_toy_car_38dd29be"
+        },
+        {
+          "source": "create_tabletop_object_b0168ada",
+          "target": "benchmark_toy_car_13d6d572"
+        },
+        {
+          "source": "create_tabletop_object_1e25dca8",
+          "target": "benchmark_rubik_cube_a736598e"
+        },
+        {
+          "source": "create_tabletop_object_4aa4f875",
+          "target": "benchmark_clock_f29a05fb"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_da3a3d60"
+        },
+        {
+          "id": "pick_object_relative_position_328400ec"
+        },
+        {
+          "id": "place_objects_on_table_37639f35"
+        },
+        {
+          "id": "table_92d29809",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_273839c6"
+        },
+        {
+          "id": "benchmark_toy_car_38dd29be",
+          "tags": [
+            "toy_car",
+            "object",
+            "toy car",
+            "\u73a9\u5177\u8f66",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_b0168ada"
+        },
+        {
+          "id": "benchmark_toy_car_13d6d572",
+          "tags": [
+            "toy_car",
+            "object",
+            "toy car",
+            "\u73a9\u5177\u8f66",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_1e25dca8"
+        },
+        {
+          "id": "benchmark_rubik_cube_a736598e",
+          "tags": [
+            "rubik_cube",
+            "object",
+            "rubik cube",
+            "\u9b54\u65b9"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_4aa4f875"
+        },
+        {
+          "id": "benchmark_clock_f29a05fb",
+          "tags": [
+            "clock",
+            "object",
+            "clock",
+            "\u95f9\u949f"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 277203363
+}

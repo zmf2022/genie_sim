@@ -88,9 +88,31 @@ python -c "import sharp"
 
 ## 🚀 Run World Generator Pipeline
 
-Basic Dataflow:
+Basic dataflow — equirectangular panorama in, fused 3D world out:
 
-`ERP Image` -> `DA360 Depth` -> `Cubemap Faces` -> `SHARP per Face` -> `merged PLY`
+```mermaid
+flowchart LR
+  erp["🖼️ ERP image<br/>(equirectangular<br/>panorama .png)"]
+  da["🔭 DA360<br/>depth model"]
+  cubes["🧊 Cubemap<br/>6 faces"]
+  sharp["✨ SHARP<br/>per-face Gaussians"]
+  ply["🌍 Merged PLY<br/>(3D world)"]
+
+  erp ==> da ==> cubes
+  erp ==> cubes
+  cubes ==> sharp ==> ply
+
+  esrgan["⬆️ Real-ESRGAN<br/>(--super-sample)"] -.->|optional| cubes
+
+  classDef input fill:#e0e7ff,stroke:#3730a3,color:#1e1b4b
+  classDef step fill:#d1f0d8,stroke:#1f6f3d,color:#0b3b1f
+  classDef out fill:#fde68a,stroke:#92400e,color:#451a03
+  classDef opt fill:#fee2e2,stroke:#991b1b,color:#450a0a,stroke-dasharray:6 4
+  class erp input
+  class da,cubes,sharp step
+  class ply out
+  class esrgan opt
+```
 
 Basic run:
 

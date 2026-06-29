@@ -1,0 +1,49 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "benchmark_tape_measure_81406d8d|[0.15,0.15,0.1]|left_gripper"
+              },
+              {
+                "Follow": "benchmark_tape_measure_81406d8d|[0.15,0.15,0.1]|right_gripper"
+              },
+              {
+                "StepOut": 300
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "MixedRules": {
+                  "check_interval": 1,
+                  "mode": "and",
+                  "rules": [
+                    {
+                      "name": "RelativePosition",
+                      "params": "benchmark_tape_measure_81406d8d|benchmark_orange_e2275113|bottomof"
+                    },
+                    {
+                      "name": "RelativePosition",
+                      "params": "benchmark_tape_measure_81406d8d|benchmark_orange_e2275113|aligned_y|0.1"
+                    }
+                  ]
+                }
+              },
+              {
+                "StepOut": 600
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "place_object_relative_position"
+  }
+}

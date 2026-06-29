@@ -1,0 +1,42 @@
+{
+  "instructions": [
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "both"
+        }
+      },
+      "id": 1,
+      "instruction": "Pour the workpiece into the box with the right arm.",
+      "target": {
+        "idn": "sft_plastic_box_76bbe5b2"
+      },
+      "template_key": "pour_workpiece"
+    }
+  ],
+  "scene_id": "pour_workpiece",
+  "subtask_steps": [
+    {
+      "checker": {
+        "ActionSetWaitAll": [
+          {
+            "Inside": "sft_accessories_a4f0c3b9|sft_plastic_box_0f52ae58|1.1"
+          },
+          {
+            "Inside": "sft_accessories_0d88faf5|sft_plastic_box_0f52ae58|1.1"
+          },
+          {
+            "Inside": "sft_accessories_4af7c25e|sft_plastic_box_0f52ae58|1.1"
+          },
+          {
+            "Inside": "sft_accessories_2a700180|sft_plastic_box_0f52ae58|1.1"
+          }
+        ]
+      },
+      "instruction": "Pour the workpiece into the box with the right arm.",
+      "step_out": 900
+    }
+  ],
+  "task_id": "pour_workpiece"
+}

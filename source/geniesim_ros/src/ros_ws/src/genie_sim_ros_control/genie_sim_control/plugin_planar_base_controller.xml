@@ -1,0 +1,11 @@
+<library path="genie_sim_planar_base_controller">
+  <class name="genie_sim_control/PlanarBaseController"
+         type="genie_sim_control::PlanarBaseController"
+         base_class_type="controller_interface::ControllerInterface">
+    <description>
+      Trajectory dispatcher for an SRDF planar virtual_joint. Exposes a
+      FollowJointTrajectory action and publishes geometry_msgs/Twist
+      (typically /cmd_twist) using P feedback against TF map -> base_link.
+    </description>
+  </class>
+</library>

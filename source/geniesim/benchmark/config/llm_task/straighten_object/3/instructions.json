@@ -1,8 +1,0 @@
-{
-  "instructions": [
-    {
-      "instruction": "The right arm picks up the Coca-Cola from the table. Straighten the Coca-Cola with the right arm and return it to its original position."
-    }
-  ],
-  "task_id": "straighten_object"
-}

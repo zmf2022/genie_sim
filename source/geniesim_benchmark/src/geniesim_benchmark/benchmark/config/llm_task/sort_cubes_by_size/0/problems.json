@@ -1,0 +1,53 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "MixedRules": {
+                  "check_interval": 1,
+                  "mode": "and",
+                  "rules": [
+                    {
+                      "name": "RelativePosition",
+                      "params": "benchmark_building_blocks_ef9b51b7|benchmark_building_blocks_e500856a|rightof"
+                    },
+                    {
+                      "name": "RelativePosition",
+                      "params": "benchmark_building_blocks_2c2430fe|benchmark_building_blocks_ef9b51b7|rightof"
+                    },
+                    {
+                      "name": "RelativePosition",
+                      "params": "benchmark_building_blocks_ef9b51b7|benchmark_building_blocks_e500856a|aligned_x"
+                    },
+                    {
+                      "name": "RelativePosition",
+                      "params": "benchmark_building_blocks_2c2430fe|benchmark_building_blocks_e500856a|aligned_x"
+                    }
+                  ]
+                }
+              },
+              {
+                "Onfloor": "benchmark_building_blocks_2c2430fe|0"
+              },
+              {
+                "Onfloor": "benchmark_building_blocks_e500856a|0"
+              },
+              {
+                "Onfloor": "benchmark_building_blocks_ef9b51b7|0"
+              },
+              {
+                "StepOut": 1200
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "sort_cubes_by_size"
+  }
+}

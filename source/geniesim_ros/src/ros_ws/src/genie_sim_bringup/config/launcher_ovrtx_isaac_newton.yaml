@@ -1,0 +1,65 @@
+# GenieSim launcher config — Isaac Sim 6.0 with Isaac's Newton wrapper
+# (isaacsim.physics.newton, rigid-body bridge only) + OVRtx renderer.
+#
+# Usage:
+#   ros2 launch genie_sim_bringup app.launch.py \
+#     scene:=<scene> \
+#     launcher_config:=launcher_ovrtx_isaac_newton \
+#     headless:=false rviz:=true
+#
+# physics_engine choices (override via CLI):
+#   isaac_physx  (default elsewhere, stable; via omni.physx)
+#   isaac_newton (this launcher's default — Isaac's Newton wrapper;
+#                 rigid-body schemas only, no cloth / soft body /
+#                 particle bridge yet)
+#   newton       (newton-standalone — full VBD/XPBD/Style3D cloth)
+#
+# physics_solver choices (isaac_newton only):
+#   mujoco-warp (only supported value; pinned at choices=["mujoco-warp"]
+#                in physics_isaacsim.launch.py — wrong values fail at launch)
+#
+# Newton's NewtonConfig defaults to 600 Hz; 200 Hz is a practical
+# starting point — tune up if your scene is simple, down if GPU budget
+# is tight.
+#
+# CLI args defined here in ``genie_sim_engine.ros__parameters`` are
+# defaults that ``key:=value`` on the ros2 launch CLI overrides. See
+# physics_isaacsim.launch.py's ``_OVERRIDABLE_FROM_YAML`` set.
+launcher:
+  physics:
+    engine: genie_sim_engine
+    engines:
+      genie_sim_engine:
+        package: genie_sim_engine
+        executable: genie_sim_engine_isaacsim.py
+        name: genie_sim_engine
+    industrial_bridge: ""
+  renders: ["render_ovrtx"]
+
+genie_sim_engine:
+  ros__parameters:
+    # Isaac Sim's Newton wrapper (isaacsim.physics.newton). Override per
+    # run with ``physics_engine:=…`` on the CLI.
+    physics_engine: isaac_newton
+    # MuJoCo-Warp is the only supported solver for the Newton wrapper in
+    # Isaac Sim 6.0. Pinned at choices=["mujoco-warp"] in the launch file.
+    physics_solver: mujoco-warp
+    # 200 Hz: practical default per the header note above.
+    realtime_factor: 1.0
+    physics_hz: 100.0
+    # 10 mjwarp substeps per 10 ms outer frame → dt_solver = 1 ms,
+    # matching the pure-MuJoCo regime that was verified stable for
+    # this robot's PD gains. Cranking physics_hz instead would pay
+    # Kit/USD update cost (~9 ms) on every outer tick; substepping
+    # is the cheap path because mjwarp integrates inside one frame.
+    physics_solver_substep: 10
+    render_hz: 30.0
+    # ``raster`` = RaytracedLighting (~16 ms / frame on a 5090). Cheapest
+    # RTX submode that still has shadows + denoise; the default debug
+    # viewport. Switch to ``pathtrace`` / ``offline`` for screenshots.
+    render_mode: raster
+
+render_ovrtx:
+  ros__parameters:
+    plugin:
+      - genie_sim_render/RosImagePublisherPlugin

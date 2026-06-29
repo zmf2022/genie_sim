@@ -1,0 +1,62 @@
+{
+  "instructions": [
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 1,
+      "instruction": "I am very thirsty now, grasp an object that can quench thirst for me",
+      "target": {
+        "idn": "genie_beverage_bottle_ef998444"
+      },
+      "template_key": "pick_common_sense"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 2,
+      "instruction": "Get me an apple-like fruit",
+      "target": {
+        "idn": "benchmark_orange_fd1b8e88"
+      },
+      "template_key": "pick_common_sense"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 3,
+      "instruction": "I need to mark on documents, give me a pen",
+      "target": {
+        "idn": "benchmark_pen_19b8d774"
+      },
+      "template_key": "pick_common_sense"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 4,
+      "instruction": "I need something that can be held and played with",
+      "target": {
+        "idn": "benchmark_rubik_cube_3ddbd165"
+      },
+      "template_key": "pick_common_sense"
+    }
+  ],
+  "scene_id": "place_random_objects_on_desk",
+  "task_id": "pick_common_sense"
+}

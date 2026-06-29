@@ -1,0 +1,8 @@
+{
+  "instructions": [
+    {
+      "instruction": "picks up the paper cup closer to the rubik cube"
+    }
+  ],
+  "task_id": "pick_object_relative_position_1"
+}

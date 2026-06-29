@@ -1,0 +1,350 @@
+{
+  "layout": {
+    "benchmark_building_blocks_097b5d96": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "yellow",
+          "plastic",
+          "angular",
+          "small",
+          "interlocking",
+          "geometric",
+          "smooth",
+          "modular"
+        ],
+        "dimensions": [
+          0.029826035723090172,
+          0.015000002458691597,
+          0.024130690842866898
+        ],
+        "full_description": [
+          "A small, pale yellow, L-shaped building block with a matte finish and rounded edges."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "construction"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "digit_7",
+        "plastic",
+        "small",
+        "building_block",
+        "educational_toy"
+      ],
+      "tags": [
+        "root_scene_945e73ce",
+        "table_with_digit_blocks_98a9db1a",
+        "place_three_digit_blocks_on_table_b16fcaa8",
+        "digit_block_82949bea",
+        "benchmark_building_blocks_097b5d96"
+      ],
+      "usd": "benchmark_building_blocks_041",
+      "xyz": [
+        -0.134,
+        -0.094,
+        0.867
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.989815,
+        0.142356
+      ]
+    },
+    "benchmark_building_blocks_2463334c": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "small",
+          "yellow",
+          "complex",
+          "geometric",
+          "rigid"
+        ],
+        "dimensions": [
+          0.02969411015510559,
+          0.015108662657439709,
+          0.02445734478533268
+        ],
+        "full_description": [
+          "A small, solid, lime-green 3D block shaped like the number '2' with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "building_block"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "digit_2",
+        "plastic",
+        "small",
+        "building_block",
+        "educational_toy"
+      ],
+      "tags": [
+        "root_scene_945e73ce",
+        "table_with_digit_blocks_98a9db1a",
+        "place_three_digit_blocks_on_table_b16fcaa8",
+        "digit_block_5296f8bb",
+        "benchmark_building_blocks_2463334c"
+      ],
+      "usd": "benchmark_building_blocks_036",
+      "xyz": [
+        -0.163,
+        -0.194,
+        0.867
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.999361,
+        -0.035739
+      ]
+    },
+    "benchmark_building_blocks_5293e0ed": {
+      "description": {
+        "color": "purple",
+        "descriptive_terms": [
+          "purple",
+          "interlocking",
+          "plastic",
+          "small",
+          "symmetrical",
+          "geometric",
+          "modular"
+        ],
+        "dimensions": [
+          0.02872651070356369,
+          0.015138419345021248,
+          0.023441332392394543
+        ],
+        "full_description": [
+          "A purple, foam-like building block with a U-shaped cutout and rounded edges."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "construction"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "digit_3",
+        "plastic",
+        "small",
+        "building_block",
+        "educational_toy"
+      ],
+      "tags": [
+        "root_scene_945e73ce",
+        "table_with_digit_blocks_98a9db1a",
+        "place_three_digit_blocks_on_table_b16fcaa8",
+        "digit_block_b0ee6ec7",
+        "benchmark_building_blocks_5293e0ed"
+      ],
+      "usd": "benchmark_building_blocks_037",
+      "xyz": [
+        -0.193,
+        0.051,
+        0.867
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.999998,
+        -0.001752
+      ]
+    },
+    "table_ffc71b1e": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "rectangular",
+        "study_desk"
+      ],
+      "tags": [
+        "root_scene_945e73ce",
+        "table_with_digit_blocks_98a9db1a",
+        "place_three_digit_blocks_on_table_b16fcaa8",
+        "table_ffc71b1e"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_945e73ce",
+          "target": "table_with_digit_blocks_98a9db1a"
+        },
+        {
+          "source": "table_with_digit_blocks_98a9db1a",
+          "target": "place_three_digit_blocks_on_table_b16fcaa8"
+        },
+        {
+          "source": "place_three_digit_blocks_on_table_b16fcaa8",
+          "target": "table_ffc71b1e"
+        },
+        {
+          "source": "place_three_digit_blocks_on_table_b16fcaa8",
+          "target": "digit_block_5296f8bb"
+        },
+        {
+          "source": "place_three_digit_blocks_on_table_b16fcaa8",
+          "target": "digit_block_b0ee6ec7"
+        },
+        {
+          "source": "place_three_digit_blocks_on_table_b16fcaa8",
+          "target": "digit_block_82949bea"
+        },
+        {
+          "source": "digit_block_5296f8bb",
+          "target": "benchmark_building_blocks_2463334c"
+        },
+        {
+          "source": "digit_block_b0ee6ec7",
+          "target": "benchmark_building_blocks_5293e0ed"
+        },
+        {
+          "source": "digit_block_82949bea",
+          "target": "benchmark_building_blocks_097b5d96"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_945e73ce"
+        },
+        {
+          "id": "table_with_digit_blocks_98a9db1a"
+        },
+        {
+          "id": "place_three_digit_blocks_on_table_b16fcaa8"
+        },
+        {
+          "id": "table_ffc71b1e",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "rectangular",
+            "study_desk"
+          ]
+        },
+        {
+          "id": "digit_block_5296f8bb"
+        },
+        {
+          "id": "benchmark_building_blocks_2463334c",
+          "tags": [
+            "digit_2",
+            "plastic",
+            "small",
+            "building_block",
+            "educational_toy"
+          ]
+        },
+        {
+          "id": "digit_block_b0ee6ec7"
+        },
+        {
+          "id": "benchmark_building_blocks_5293e0ed",
+          "tags": [
+            "digit_3",
+            "plastic",
+            "small",
+            "building_block",
+            "educational_toy"
+          ]
+        },
+        {
+          "id": "digit_block_82949bea"
+        },
+        {
+          "id": "benchmark_building_blocks_097b5d96",
+          "tags": [
+            "digit_7",
+            "plastic",
+            "small",
+            "building_block",
+            "educational_toy"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_digit_blocks",
+  "seed": 3283129453
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>bio_ik</name>
+  <version>1.1.0</version>
+  <description>MoveIt kinematics plugin based on particle optimization and genetic algorithm (ROS2 port)</description>
+
+  <maintainer email="philipp.ruppel@tams.informatik.uni-hamburg.de">Philipp Ruppel</maintainer>
+  <license>BSD-3-Clause</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>moveit_core</depend>
+  <depend>moveit_ros_planning</depend>
+  <depend>pluginlib</depend>
+  <depend>tf2_eigen</depend>
+  <depend>tf2_kdl</depend>
+  <depend>geometry_msgs</depend>
+  <depend>moveit_msgs</depend>
+  <depend>kdl_parser</depend>
+
+  <build_depend>eigen</build_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

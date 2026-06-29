@@ -1,0 +1,420 @@
+{
+  "layout": {
+    "benchmark_rubik_cube_03c156b5": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "colorful",
+          "complex",
+          "geometric",
+          "small",
+          "plastic"
+        ],
+        "dimensions": [
+          0.057,
+          0.057,
+          0.057
+        ],
+        "full_description": [
+          "A 3x3 Rubik's cube with pastel-colored faces including yellow, pink, and cyan on a black background."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "puzzle",
+          "toy"
+        ],
+        "semantic_name": [
+          "rubik_cube"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "rubik_cube",
+        "object",
+        "rubik cube",
+        "\u9b54\u65b9"
+      ],
+      "tags": [
+        "root_scene_cd94f5ff",
+        "pick_object_relative_position_20ba79f3",
+        "place_objects_on_table_eebaef5e",
+        "create_tabletop_object_717eb1b7",
+        "benchmark_rubik_cube_03c156b5"
+      ],
+      "usd": "benchmark_rubik_cube_001",
+      "xyz": [
+        0.167,
+        -0.192,
+        0.768
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.979386,
+        0.201997
+      ]
+    },
+    "benchmark_toiletries_2feb242b": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "cylindrical",
+          "flexible",
+          "packaged",
+          "cosmetic",
+          "white"
+        ],
+        "dimensions": [
+          0.03400098532438278,
+          0.1400732398033142,
+          0.05983749404549599
+        ],
+        "full_description": [
+          "A white and blue plastic tube labeled 'Face Cleaner' with Chinese characters and a green logo."
+        ],
+        "materials": [
+          "plastic",
+          "paper"
+        ],
+        "object_category": [
+          "cosmetic",
+          "face cleaner"
+        ],
+        "semantic_name": [
+          "face_cleaner"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "face_cleanser",
+        "object",
+        "face cleanser",
+        "\u6d17\u9762\u5976",
+        "target"
+      ],
+      "tags": [
+        "root_scene_cd94f5ff",
+        "pick_object_relative_position_20ba79f3",
+        "place_objects_on_table_eebaef5e",
+        "create_tabletop_object_d5dfc72b",
+        "benchmark_toiletries_2feb242b"
+      ],
+      "usd": "benchmark_toiletries_009",
+      "xyz": [
+        0.003,
+        -0.148,
+        0.802
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.187172,
+        0.982327
+      ]
+    },
+    "benchmark_toiletries_8fe9eeca": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "cylindrical",
+          "flexible",
+          "packaged",
+          "cosmetic",
+          "white"
+        ],
+        "dimensions": [
+          0.03400098532438278,
+          0.1400732398033142,
+          0.05983749404549599
+        ],
+        "full_description": [
+          "A white and blue plastic tube labeled 'Face Cleaner' with Chinese characters and a green logo."
+        ],
+        "materials": [
+          "plastic",
+          "paper"
+        ],
+        "object_category": [
+          "cosmetic",
+          "face cleaner"
+        ],
+        "semantic_name": [
+          "face_cleaner"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "face_cleanser",
+        "object",
+        "face cleanser",
+        "\u6d17\u9762\u5976",
+        "target"
+      ],
+      "tags": [
+        "root_scene_cd94f5ff",
+        "pick_object_relative_position_20ba79f3",
+        "place_objects_on_table_eebaef5e",
+        "create_tabletop_object_103df37f",
+        "benchmark_toiletries_8fe9eeca"
+      ],
+      "usd": "benchmark_toiletries_009",
+      "xyz": [
+        0.192,
+        0.059,
+        0.802
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.977171,
+        0.212455
+      ]
+    },
+    "benchmark_toy_plane_840d401b": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "aerodynamic",
+          "detailed",
+          "colorful",
+          "realistic"
+        ],
+        "dimensions": [
+          0.13626107788085937,
+          0.05548237991333008,
+          0.12746756744384766
+        ],
+        "full_description": [
+          "A white toy airplane with blue tail and wingtips, featuring four engines and visible landing gear."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "vehicle",
+          "aircraft"
+        ],
+        "semantic_name": [
+          "toy_plane"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy_plane",
+        "object",
+        "toy plane",
+        "\u73a9\u5177\u98de\u673a"
+      ],
+      "tags": [
+        "root_scene_cd94f5ff",
+        "pick_object_relative_position_20ba79f3",
+        "place_objects_on_table_eebaef5e",
+        "create_tabletop_object_3bf1b61b",
+        "benchmark_toy_plane_840d401b"
+      ],
+      "usd": "benchmark_toy_plane_029",
+      "xyz": [
+        -0.132,
+        0.012,
+        0.759
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.362838,
+        0.931852
+      ]
+    },
+    "table_2484f6d7": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_cd94f5ff",
+        "pick_object_relative_position_20ba79f3",
+        "place_objects_on_table_eebaef5e",
+        "table_2484f6d7"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_cd94f5ff",
+          "target": "pick_object_relative_position_20ba79f3"
+        },
+        {
+          "source": "pick_object_relative_position_20ba79f3",
+          "target": "place_objects_on_table_eebaef5e"
+        },
+        {
+          "source": "place_objects_on_table_eebaef5e",
+          "target": "table_2484f6d7"
+        },
+        {
+          "source": "place_objects_on_table_eebaef5e",
+          "target": "create_tabletop_object_d5dfc72b"
+        },
+        {
+          "source": "place_objects_on_table_eebaef5e",
+          "target": "create_tabletop_object_103df37f"
+        },
+        {
+          "source": "place_objects_on_table_eebaef5e",
+          "target": "create_tabletop_object_717eb1b7"
+        },
+        {
+          "source": "place_objects_on_table_eebaef5e",
+          "target": "create_tabletop_object_3bf1b61b"
+        },
+        {
+          "source": "create_tabletop_object_d5dfc72b",
+          "target": "benchmark_toiletries_2feb242b"
+        },
+        {
+          "source": "create_tabletop_object_103df37f",
+          "target": "benchmark_toiletries_8fe9eeca"
+        },
+        {
+          "source": "create_tabletop_object_717eb1b7",
+          "target": "benchmark_rubik_cube_03c156b5"
+        },
+        {
+          "source": "create_tabletop_object_3bf1b61b",
+          "target": "benchmark_toy_plane_840d401b"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_cd94f5ff"
+        },
+        {
+          "id": "pick_object_relative_position_20ba79f3"
+        },
+        {
+          "id": "place_objects_on_table_eebaef5e"
+        },
+        {
+          "id": "table_2484f6d7",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_d5dfc72b"
+        },
+        {
+          "id": "benchmark_toiletries_2feb242b",
+          "tags": [
+            "face_cleanser",
+            "object",
+            "face cleanser",
+            "\u6d17\u9762\u5976",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_103df37f"
+        },
+        {
+          "id": "benchmark_toiletries_8fe9eeca",
+          "tags": [
+            "face_cleanser",
+            "object",
+            "face cleanser",
+            "\u6d17\u9762\u5976",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_717eb1b7"
+        },
+        {
+          "id": "benchmark_rubik_cube_03c156b5",
+          "tags": [
+            "rubik_cube",
+            "object",
+            "rubik cube",
+            "\u9b54\u65b9"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_3bf1b61b"
+        },
+        {
+          "id": "benchmark_toy_plane_840d401b",
+          "tags": [
+            "toy_plane",
+            "object",
+            "toy plane",
+            "\u73a9\u5177\u98de\u673a"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 4149533245
+}

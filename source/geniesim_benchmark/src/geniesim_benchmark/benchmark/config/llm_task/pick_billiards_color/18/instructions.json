@@ -1,0 +1,62 @@
+{
+  "instruction_category": "pick_billiards_color",
+  "instructions": [
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 1,
+      "instruction": "Left arm picks up red billiard balls on the table",
+      "target": {
+        "id1": "benchmark_billiards_95b18098"
+      },
+      "template_key": "pick_billiards_color"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 2,
+      "instruction": "Right arm picks up yellow billiard balls on the table",
+      "target": {
+        "id1": "benchmark_billiards_b1055831"
+      },
+      "template_key": "pick_billiards_color"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 3,
+      "instruction": "Right arm picks up blue billiard balls on the table",
+      "target": {
+        "id1": "benchmark_billiards_b741e0e8"
+      },
+      "template_key": "pick_billiards_color"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 4,
+      "instruction": "Right arm picks up green billiard balls on the table",
+      "target": {
+        "id1": "benchmark_billiards_a771aacd"
+      },
+      "template_key": "pick_billiards_color"
+    }
+  ],
+  "scene_id": "table_with_billiard_balls"
+}

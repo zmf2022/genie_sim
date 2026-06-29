@@ -1,0 +1,423 @@
+{
+  "layout": {
+    "benchmark_mouse_5cfa5801": {
+      "description": {
+        "color": "gray",
+        "descriptive_terms": [
+          "rounded",
+          "smooth",
+          "compact",
+          "ergonomic",
+          "modern"
+        ],
+        "dimensions": [
+          0.08789288997650146,
+          0.029345117509365082,
+          0.059461820870637894
+        ],
+        "full_description": [
+          "A dark gray, ergonomically shaped computer mouse with a textured side grip and visible 'Logitech' branding."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "electronic device",
+          "computer peripheral"
+        ],
+        "semantic_name": [
+          "computer mouse"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "mouse",
+        "object",
+        "mouse",
+        "\u9f20\u6807"
+      ],
+      "tags": [
+        "root_scene_fd7578e9",
+        "pick_object_relative_position_7aefe9cc",
+        "place_objects_on_table_a1128a2f",
+        "create_tabletop_object_4d1fc89a",
+        "benchmark_mouse_5cfa5801"
+      ],
+      "usd": "benchmark_mouse_000",
+      "xyz": [
+        -0.178,
+        0.142,
+        0.746
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.60976,
+        0.792586
+      ]
+    },
+    "benchmark_orange_d3ffdffd": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "round",
+          "smooth",
+          "vibrant",
+          "juicy",
+          "fresh"
+        ],
+        "dimensions": [
+          0.0740404799580574,
+          0.07486499100923538,
+          0.07437027990818024
+        ],
+        "full_description": [
+          "A round, orange-colored fruit with a textured peel and small dimples visible on its surface."
+        ],
+        "materials": [
+          "organic",
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "orange"
+        ],
+        "shape": "spherical",
+        "unit": "m"
+      },
+      "keywords": [
+        "orange",
+        "object",
+        "orange",
+        "\u6a59\u5b50"
+      ],
+      "tags": [
+        "root_scene_fd7578e9",
+        "pick_object_relative_position_7aefe9cc",
+        "place_objects_on_table_a1128a2f",
+        "create_tabletop_object_7e646bfa",
+        "benchmark_orange_d3ffdffd"
+      ],
+      "usd": "benchmark_orange_004",
+      "xyz": [
+        -0.13,
+        -0.206,
+        0.769
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.972276,
+        0.233838
+      ]
+    },
+    "benchmark_toiletries_6a8dba67": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "cylindrical",
+          "flexible",
+          "packaged",
+          "cosmetic",
+          "white"
+        ],
+        "dimensions": [
+          0.03400098532438278,
+          0.1400732398033142,
+          0.05983749404549599
+        ],
+        "full_description": [
+          "A white and blue plastic tube labeled 'Face Cleaner' with Chinese characters and a green logo."
+        ],
+        "materials": [
+          "plastic",
+          "paper"
+        ],
+        "object_category": [
+          "cosmetic",
+          "face cleaner"
+        ],
+        "semantic_name": [
+          "face_cleaner"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "face_cleanser",
+        "object",
+        "face cleanser",
+        "\u6d17\u9762\u5976",
+        "target"
+      ],
+      "tags": [
+        "root_scene_fd7578e9",
+        "pick_object_relative_position_7aefe9cc",
+        "place_objects_on_table_a1128a2f",
+        "create_tabletop_object_487ca46d",
+        "benchmark_toiletries_6a8dba67"
+      ],
+      "usd": "benchmark_toiletries_009",
+      "xyz": [
+        -0.024,
+        0.141,
+        0.802
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.999987,
+        -0.005083
+      ]
+    },
+    "benchmark_toiletries_81b51157": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "cylindrical",
+          "flexible",
+          "packaged",
+          "cosmetic",
+          "white"
+        ],
+        "dimensions": [
+          0.03400098532438278,
+          0.1400732398033142,
+          0.05983749404549599
+        ],
+        "full_description": [
+          "A white and blue plastic tube labeled 'Face Cleaner' with Chinese characters and a green logo."
+        ],
+        "materials": [
+          "plastic",
+          "paper"
+        ],
+        "object_category": [
+          "cosmetic",
+          "face cleaner"
+        ],
+        "semantic_name": [
+          "face_cleaner"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "face_cleanser",
+        "object",
+        "face cleanser",
+        "\u6d17\u9762\u5976",
+        "target"
+      ],
+      "tags": [
+        "root_scene_fd7578e9",
+        "pick_object_relative_position_7aefe9cc",
+        "place_objects_on_table_a1128a2f",
+        "create_tabletop_object_00a0ee80",
+        "benchmark_toiletries_81b51157"
+      ],
+      "usd": "benchmark_toiletries_009",
+      "xyz": [
+        0.054,
+        -0.118,
+        0.802
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.328429,
+        0.944529
+      ]
+    },
+    "table_d6fa99c5": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_fd7578e9",
+        "pick_object_relative_position_7aefe9cc",
+        "place_objects_on_table_a1128a2f",
+        "table_d6fa99c5"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_fd7578e9",
+          "target": "pick_object_relative_position_7aefe9cc"
+        },
+        {
+          "source": "pick_object_relative_position_7aefe9cc",
+          "target": "place_objects_on_table_a1128a2f"
+        },
+        {
+          "source": "place_objects_on_table_a1128a2f",
+          "target": "table_d6fa99c5"
+        },
+        {
+          "source": "place_objects_on_table_a1128a2f",
+          "target": "create_tabletop_object_00a0ee80"
+        },
+        {
+          "source": "place_objects_on_table_a1128a2f",
+          "target": "create_tabletop_object_487ca46d"
+        },
+        {
+          "source": "place_objects_on_table_a1128a2f",
+          "target": "create_tabletop_object_7e646bfa"
+        },
+        {
+          "source": "place_objects_on_table_a1128a2f",
+          "target": "create_tabletop_object_4d1fc89a"
+        },
+        {
+          "source": "create_tabletop_object_00a0ee80",
+          "target": "benchmark_toiletries_81b51157"
+        },
+        {
+          "source": "create_tabletop_object_487ca46d",
+          "target": "benchmark_toiletries_6a8dba67"
+        },
+        {
+          "source": "create_tabletop_object_7e646bfa",
+          "target": "benchmark_orange_d3ffdffd"
+        },
+        {
+          "source": "create_tabletop_object_4d1fc89a",
+          "target": "benchmark_mouse_5cfa5801"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_fd7578e9"
+        },
+        {
+          "id": "pick_object_relative_position_7aefe9cc"
+        },
+        {
+          "id": "place_objects_on_table_a1128a2f"
+        },
+        {
+          "id": "table_d6fa99c5",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_00a0ee80"
+        },
+        {
+          "id": "benchmark_toiletries_81b51157",
+          "tags": [
+            "face_cleanser",
+            "object",
+            "face cleanser",
+            "\u6d17\u9762\u5976",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_487ca46d"
+        },
+        {
+          "id": "benchmark_toiletries_6a8dba67",
+          "tags": [
+            "face_cleanser",
+            "object",
+            "face cleanser",
+            "\u6d17\u9762\u5976",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_7e646bfa"
+        },
+        {
+          "id": "benchmark_orange_d3ffdffd",
+          "tags": [
+            "orange",
+            "object",
+            "orange",
+            "\u6a59\u5b50"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_4d1fc89a"
+        },
+        {
+          "id": "benchmark_mouse_5cfa5801",
+          "tags": [
+            "mouse",
+            "object",
+            "mouse",
+            "\u9f20\u6807"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 4211789118
+}

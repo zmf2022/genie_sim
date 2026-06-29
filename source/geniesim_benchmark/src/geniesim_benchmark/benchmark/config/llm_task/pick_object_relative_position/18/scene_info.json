@@ -1,0 +1,423 @@
+{
+  "layout": {
+    "benchmark_stationery_dc75e431": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "yellow",
+          "rectangular",
+          "plastic",
+          "metal",
+          "compact",
+          "office",
+          "functional"
+        ],
+        "dimensions": [
+          0.03533313795924187,
+          0.06165076792240143,
+          0.13363394886255264
+        ],
+        "full_description": [
+          "A small stapler with a bright yellow top and a translucent gray base."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "stationery",
+          "office_supply"
+        ],
+        "semantic_name": [
+          "stapler"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "yellow_stapler",
+        "object",
+        "yellow stapler",
+        "\u9ec4\u8272\u8ba2\u4e66\u673a"
+      ],
+      "tags": [
+        "root_scene_a5938677",
+        "pick_object_relative_position_6c5602c9",
+        "place_objects_on_table_69eb64ba",
+        "create_tabletop_object_19cd5dc7",
+        "benchmark_stationery_dc75e431"
+      ],
+      "usd": "benchmark_stationery_009",
+      "xyz": [
+        0.187,
+        -0.198,
+        0.751
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.689114,
+        0.724653
+      ]
+    },
+    "benchmark_toy_plane_d3a9984b": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "aerodynamic",
+          "detailed",
+          "colorful",
+          "realistic"
+        ],
+        "dimensions": [
+          0.13626107788085937,
+          0.05548237991333008,
+          0.12746756744384766
+        ],
+        "full_description": [
+          "A white toy airplane with blue tail and wingtips, featuring four engines and visible landing gear."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "vehicle",
+          "aircraft"
+        ],
+        "semantic_name": [
+          "toy_plane"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy_plane",
+        "object",
+        "toy plane",
+        "\u73a9\u5177\u98de\u673a"
+      ],
+      "tags": [
+        "root_scene_a5938677",
+        "pick_object_relative_position_6c5602c9",
+        "place_objects_on_table_69eb64ba",
+        "create_tabletop_object_9abc9b4c",
+        "benchmark_toy_plane_d3a9984b"
+      ],
+      "usd": "benchmark_toy_plane_029",
+      "xyz": [
+        0.041,
+        0.12,
+        0.759
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.588304,
+        0.80864
+      ]
+    },
+    "genie_beverage_bottle_20824da1": {
+      "description": {
+        "color": "black",
+        "descriptive_terms": [
+          "cylindrical",
+          "black",
+          "plastic",
+          "packaged",
+          "beverage"
+        ],
+        "dimensions": [
+          0.04871850088238716,
+          0.16691981256008148,
+          0.05984169989824295
+        ],
+        "full_description": [
+          "A black plastic beverage bottle with a white cap and a label featuring red grapes and Chinese text."
+        ],
+        "materials": [
+          "plastic",
+          "label"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "grape_juice",
+        "object",
+        "grape juice",
+        "\u8461\u8404\u6c41",
+        "target"
+      ],
+      "tags": [
+        "root_scene_a5938677",
+        "pick_object_relative_position_6c5602c9",
+        "place_objects_on_table_69eb64ba",
+        "create_tabletop_object_1770ab2a",
+        "genie_beverage_bottle_20824da1"
+      ],
+      "usd": "genie_beverage_bottle_009",
+      "xyz": [
+        -0.13,
+        0.092,
+        0.817
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.209934,
+        0.977716
+      ]
+    },
+    "genie_beverage_bottle_970ba33f": {
+      "description": {
+        "color": "black",
+        "descriptive_terms": [
+          "cylindrical",
+          "black",
+          "plastic",
+          "packaged",
+          "beverage"
+        ],
+        "dimensions": [
+          0.04871850088238716,
+          0.16691981256008148,
+          0.05984169989824295
+        ],
+        "full_description": [
+          "A black plastic beverage bottle with a white cap and a label featuring red grapes and Chinese text."
+        ],
+        "materials": [
+          "plastic",
+          "label"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "grape_juice",
+        "object",
+        "grape juice",
+        "\u8461\u8404\u6c41",
+        "target"
+      ],
+      "tags": [
+        "root_scene_a5938677",
+        "pick_object_relative_position_6c5602c9",
+        "place_objects_on_table_69eb64ba",
+        "create_tabletop_object_ffd1cb93",
+        "genie_beverage_bottle_970ba33f"
+      ],
+      "usd": "genie_beverage_bottle_009",
+      "xyz": [
+        0.074,
+        -0.083,
+        0.817
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.358956,
+        0.933355
+      ]
+    },
+    "table_9268cc55": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_a5938677",
+        "pick_object_relative_position_6c5602c9",
+        "place_objects_on_table_69eb64ba",
+        "table_9268cc55"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_a5938677",
+          "target": "pick_object_relative_position_6c5602c9"
+        },
+        {
+          "source": "pick_object_relative_position_6c5602c9",
+          "target": "place_objects_on_table_69eb64ba"
+        },
+        {
+          "source": "place_objects_on_table_69eb64ba",
+          "target": "table_9268cc55"
+        },
+        {
+          "source": "place_objects_on_table_69eb64ba",
+          "target": "create_tabletop_object_ffd1cb93"
+        },
+        {
+          "source": "place_objects_on_table_69eb64ba",
+          "target": "create_tabletop_object_1770ab2a"
+        },
+        {
+          "source": "place_objects_on_table_69eb64ba",
+          "target": "create_tabletop_object_9abc9b4c"
+        },
+        {
+          "source": "place_objects_on_table_69eb64ba",
+          "target": "create_tabletop_object_19cd5dc7"
+        },
+        {
+          "source": "create_tabletop_object_ffd1cb93",
+          "target": "genie_beverage_bottle_970ba33f"
+        },
+        {
+          "source": "create_tabletop_object_1770ab2a",
+          "target": "genie_beverage_bottle_20824da1"
+        },
+        {
+          "source": "create_tabletop_object_9abc9b4c",
+          "target": "benchmark_toy_plane_d3a9984b"
+        },
+        {
+          "source": "create_tabletop_object_19cd5dc7",
+          "target": "benchmark_stationery_dc75e431"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_a5938677"
+        },
+        {
+          "id": "pick_object_relative_position_6c5602c9"
+        },
+        {
+          "id": "place_objects_on_table_69eb64ba"
+        },
+        {
+          "id": "table_9268cc55",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_ffd1cb93"
+        },
+        {
+          "id": "genie_beverage_bottle_970ba33f",
+          "tags": [
+            "grape_juice",
+            "object",
+            "grape juice",
+            "\u8461\u8404\u6c41",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_1770ab2a"
+        },
+        {
+          "id": "genie_beverage_bottle_20824da1",
+          "tags": [
+            "grape_juice",
+            "object",
+            "grape juice",
+            "\u8461\u8404\u6c41",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_9abc9b4c"
+        },
+        {
+          "id": "benchmark_toy_plane_d3a9984b",
+          "tags": [
+            "toy_plane",
+            "object",
+            "toy plane",
+            "\u73a9\u5177\u98de\u673a"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_19cd5dc7"
+        },
+        {
+          "id": "benchmark_stationery_dc75e431",
+          "tags": [
+            "yellow_stapler",
+            "object",
+            "yellow stapler",
+            "\u9ec4\u8272\u8ba2\u4e66\u673a"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 3614374582
+}

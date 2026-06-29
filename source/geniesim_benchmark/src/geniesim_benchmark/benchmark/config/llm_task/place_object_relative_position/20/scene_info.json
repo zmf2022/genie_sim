@@ -1,0 +1,457 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_e7d25bc0": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "cylindrical",
+          "orange",
+          "metallic",
+          "printed",
+          "beverage"
+        ],
+        "dimensions": [
+          0.06648768615722657,
+          0.1158542938232422,
+          0.06647872543334961
+        ],
+        "full_description": [
+          "An orange aluminum soda can with a silver top and bottom, featuring the Fanta logo and branding."
+        ],
+        "materials": [
+          "aluminum",
+          "plastic",
+          "printed label"
+        ],
+        "object_category": [
+          "container",
+          "beverage can"
+        ],
+        "semantic_name": [
+          "can"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "fanta",
+        "benchmark_beverage_bottle_003",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_25b4c63a",
+        "table_with_random_objects_d1c18be6",
+        "place_random_objects_on_desk_649c5203",
+        "benchmark_beverage_bottle_e7d25bc0"
+      ],
+      "usd": "benchmark_beverage_bottle_003",
+      "xyz": [
+        0.09,
+        -0.232,
+        0.976
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.085083,
+        0.996374
+      ]
+    },
+    "benchmark_lemon_6535d994": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "citrus",
+          "yellow",
+          "organic",
+          "fresh",
+          "juicy"
+        ],
+        "dimensions": [
+          0.0652875304222107,
+          0.08429359644651413,
+          0.06925402581691742
+        ],
+        "full_description": [
+          "A bright yellow, glossy, oval-shaped fruit with a small green stem nub."
+        ],
+        "materials": [
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "food",
+          "citrus fruit"
+        ],
+        "semantic_name": [
+          "lemon"
+        ],
+        "shape": "irregular",
+        "unit": "m"
+      },
+      "keywords": [
+        "lemon",
+        "benchmark_lemon_030",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_25b4c63a",
+        "table_with_random_objects_d1c18be6",
+        "place_random_objects_on_desk_649c5203",
+        "benchmark_lemon_6535d994"
+      ],
+      "usd": "benchmark_lemon_030",
+      "xyz": [
+        -0.119,
+        -0.203,
+        0.944
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.121737,
+        0.992562
+      ]
+    },
+    "benchmark_mouse_8606248f": {
+      "description": {
+        "color": "gray",
+        "descriptive_terms": [
+          "rounded",
+          "smooth",
+          "compact",
+          "ergonomic",
+          "modern"
+        ],
+        "dimensions": [
+          0.08789288997650146,
+          0.029345117509365082,
+          0.059461820870637894
+        ],
+        "full_description": [
+          "A dark gray, ergonomically shaped computer mouse with a textured side grip and visible 'Logitech' branding."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "electronic device",
+          "computer peripheral"
+        ],
+        "semantic_name": [
+          "computer mouse"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "mouse",
+        "benchmark_mouse_000",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_25b4c63a",
+        "table_with_random_objects_d1c18be6",
+        "place_random_objects_on_desk_649c5203",
+        "benchmark_mouse_8606248f"
+      ],
+      "usd": "benchmark_mouse_000",
+      "xyz": [
+        -0.065,
+        0.168,
+        0.889
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.014138,
+        0.9999
+      ]
+    },
+    "benchmark_toiletries_56153149": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "cylindrical",
+          "flexible",
+          "packaged",
+          "cosmetic",
+          "white"
+        ],
+        "dimensions": [
+          0.03400098532438278,
+          0.1400732398033142,
+          0.05983749404549599
+        ],
+        "full_description": [
+          "A white and blue plastic tube labeled 'Face Cleaner' with Chinese characters and a green logo."
+        ],
+        "materials": [
+          "plastic",
+          "paper"
+        ],
+        "object_category": [
+          "cosmetic",
+          "face cleaner"
+        ],
+        "semantic_name": [
+          "face_cleaner"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "face cleanser",
+        "benchmark_toiletries_009",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_25b4c63a",
+        "table_with_random_objects_d1c18be6",
+        "place_random_objects_on_desk_649c5203",
+        "benchmark_toiletries_56153149"
+      ],
+      "usd": "benchmark_toiletries_009",
+      "xyz": [
+        -0.168,
+        -0.007,
+        1.0
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.074693,
+        0.997207
+      ]
+    },
+    "benchmark_toy_car_a3bc011c": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy car",
+        "benchmark_toy_car_018",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_25b4c63a",
+        "table_with_random_objects_d1c18be6",
+        "place_random_objects_on_desk_649c5203",
+        "benchmark_toy_car_a3bc011c"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        0.122,
+        -0.102,
+        0.893
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.045548,
+        0.998962
+      ]
+    },
+    "table_503061dd": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_25b4c63a",
+        "table_with_random_objects_d1c18be6",
+        "place_random_objects_on_desk_649c5203",
+        "table_503061dd"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_25b4c63a",
+          "target": "table_with_random_objects_d1c18be6"
+        },
+        {
+          "source": "table_with_random_objects_d1c18be6",
+          "target": "place_random_objects_on_desk_649c5203"
+        },
+        {
+          "source": "place_random_objects_on_desk_649c5203",
+          "target": "table_503061dd"
+        },
+        {
+          "source": "place_random_objects_on_desk_649c5203",
+          "target": "benchmark_lemon_6535d994"
+        },
+        {
+          "source": "place_random_objects_on_desk_649c5203",
+          "target": "benchmark_toy_car_a3bc011c"
+        },
+        {
+          "source": "place_random_objects_on_desk_649c5203",
+          "target": "benchmark_mouse_8606248f"
+        },
+        {
+          "source": "place_random_objects_on_desk_649c5203",
+          "target": "benchmark_beverage_bottle_e7d25bc0"
+        },
+        {
+          "source": "place_random_objects_on_desk_649c5203",
+          "target": "benchmark_toiletries_56153149"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_25b4c63a"
+        },
+        {
+          "id": "table_with_random_objects_d1c18be6"
+        },
+        {
+          "id": "place_random_objects_on_desk_649c5203"
+        },
+        {
+          "id": "table_503061dd",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_lemon_6535d994",
+          "tags": [
+            "lemon",
+            "benchmark_lemon_030",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_toy_car_a3bc011c",
+          "tags": [
+            "toy car",
+            "benchmark_toy_car_018",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_mouse_8606248f",
+          "tags": [
+            "mouse",
+            "benchmark_mouse_000",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_beverage_bottle_e7d25bc0",
+          "tags": [
+            "fanta",
+            "benchmark_beverage_bottle_003",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_toiletries_56153149",
+          "tags": [
+            "face cleanser",
+            "benchmark_toiletries_009",
+            "on_desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 3941577264
+}

@@ -1,0 +1,8 @@
+{
+  "instructions": [
+    {
+      "instruction": "Left arm picks up the oolong tea on the table, Left arm straightens the oolong tea and returns it to the original position"
+    }
+  ],
+  "task_id": "straighten_object"
+}

@@ -1,0 +1,46 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "benchmark_beverage_bottle_76400655|[0.1,0.2,0.1]|left_gripper"
+              },
+              {
+                "StepOut": 300
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "MixedRules": {
+                  "check_interval": 1,
+                  "mode": "and",
+                  "rules": [
+                    {
+                      "name": "Upright",
+                      "params": "benchmark_beverage_bottle_76400655|15.0"
+                    },
+                    {
+                      "name": "InBBox",
+                      "params": "benchmark_beverage_bottle_76400655|-0.0820,-0.0810,0.8470|0.08,0.08,0.15"
+                    }
+                  ]
+                }
+              },
+              {
+                "StepOut": 600
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "place_beverage_to_anothers_position"
+  }
+}

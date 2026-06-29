@@ -1,0 +1,316 @@
+{
+  "layout": {
+    "benchmark_peach_2f9c2e73": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "round",
+          "ripe",
+          "juicy",
+          "fuzzy",
+          "organic"
+        ],
+        "dimensions": [
+          0.0926,
+          0.0916,
+          0.0869
+        ],
+        "full_description": [
+          "A round, fuzzy peach with a gradient of red and yellow skin."
+        ],
+        "materials": [
+          "flesh",
+          "skin"
+        ],
+        "object_category": [
+          "fruit",
+          "stone fruit"
+        ],
+        "semantic_name": [
+          "peach"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "peach",
+        "benchmark_peach_021",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_7ccf0192",
+        "table_with_random_objects_90c83cba",
+        "place_random_objects_on_desk_06bed7d0",
+        "benchmark_peach_2f9c2e73"
+      ],
+      "usd": "benchmark_peach_021",
+      "xyz": [
+        0.146,
+        -0.212,
+        0.952
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.036669,
+        0.999327
+      ]
+    },
+    "benchmark_toiletries_b251fcda": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "cylindrical",
+          "flexible",
+          "packaged",
+          "cosmetic",
+          "white"
+        ],
+        "dimensions": [
+          0.03400098532438278,
+          0.1400732398033142,
+          0.05983749404549599
+        ],
+        "full_description": [
+          "A white and blue plastic tube labeled 'Face Cleaner' with Chinese characters and a green logo."
+        ],
+        "materials": [
+          "plastic",
+          "paper"
+        ],
+        "object_category": [
+          "cosmetic",
+          "face cleaner"
+        ],
+        "semantic_name": [
+          "face_cleaner"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "face cleanser",
+        "benchmark_toiletries_009",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_7ccf0192",
+        "table_with_random_objects_90c83cba",
+        "place_random_objects_on_desk_06bed7d0",
+        "benchmark_toiletries_b251fcda"
+      ],
+      "usd": "benchmark_toiletries_009",
+      "xyz": [
+        -0.177,
+        0.0,
+        1.0
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.067376,
+        0.997728
+      ]
+    },
+    "benchmark_toy_car_b34a4092": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy car",
+        "benchmark_toy_car_018",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_7ccf0192",
+        "table_with_random_objects_90c83cba",
+        "place_random_objects_on_desk_06bed7d0",
+        "benchmark_toy_car_b34a4092"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        -0.047,
+        0.102,
+        0.893
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.020358,
+        0.999793
+      ]
+    },
+    "table_f1eeddcd": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_7ccf0192",
+        "table_with_random_objects_90c83cba",
+        "place_random_objects_on_desk_06bed7d0",
+        "table_f1eeddcd"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_7ccf0192",
+          "target": "table_with_random_objects_90c83cba"
+        },
+        {
+          "source": "table_with_random_objects_90c83cba",
+          "target": "place_random_objects_on_desk_06bed7d0"
+        },
+        {
+          "source": "place_random_objects_on_desk_06bed7d0",
+          "target": "table_f1eeddcd"
+        },
+        {
+          "source": "place_random_objects_on_desk_06bed7d0",
+          "target": "benchmark_toy_car_b34a4092"
+        },
+        {
+          "source": "place_random_objects_on_desk_06bed7d0",
+          "target": "benchmark_peach_2f9c2e73"
+        },
+        {
+          "source": "place_random_objects_on_desk_06bed7d0",
+          "target": "benchmark_toiletries_b251fcda"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_7ccf0192"
+        },
+        {
+          "id": "table_with_random_objects_90c83cba"
+        },
+        {
+          "id": "place_random_objects_on_desk_06bed7d0"
+        },
+        {
+          "id": "table_f1eeddcd",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_toy_car_b34a4092",
+          "tags": [
+            "toy car",
+            "benchmark_toy_car_018",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_peach_2f9c2e73",
+          "tags": [
+            "peach",
+            "benchmark_peach_021",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_toiletries_b251fcda",
+          "tags": [
+            "face cleanser",
+            "benchmark_toiletries_009",
+            "on_desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 4031927459
+}

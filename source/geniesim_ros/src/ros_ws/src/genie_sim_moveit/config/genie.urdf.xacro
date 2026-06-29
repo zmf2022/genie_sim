@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="genie">
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+    <xacro:arg name="ros2_control_hardware_plugin" default="mock_components/GenericSystem" />
+    <xacro:arg name="urdf_file" default="$(find genie_sim_robot_model)/urdf/genie_g2_crsB_swiftpicker.urdf" />
+
+    <!--
+        ===================================================================
+        MoveIt-only chassis ride-height re-parenting.
+        ===================================================================
+        The included canonical URDF declares ``base_link`` as the URDF root.
+        For MoveIt only (this xacro is the entry point used by
+        MoveItConfigsBuilder; the simulator builds its USD from a different
+        xacro tree under genie_sim_robot_model/xacro/robot.xacro), we
+        prepend a synthetic chain::
+
+            base_footprint  (massless link, ground-projected)
+              -> base_link  (real chassis root, was the URDF root)
+                 via prismatic joint along Z, name="base_footprint_to_base_link"
+
+        ``base_footprint`` becomes the new URDF root (it has no parent
+        joint).  The prismatic joint is passive (effort=0, velocity=0) and
+        is marked ``<passive_joint>`` in genie.srdf so the planner never
+        tries to vary its position.  The SRDF's planar virtual_joint
+        anchors at ``base_footprint`` (3-DoF: x, y, theta), so the planner
+        sees a clean planar joint and the chassis controller drives it as
+        before.
+
+        The simulator publishes the prismatic joint's value on
+        ``/joint_states`` each tick (= live ``body_q[base_link].z``), so
+        robot_state_publisher applies the live chassis ride height to
+        MoveIt's RobotState transparently.  This means MoveIt's view of
+        base_link tracks the simulator's actual base_link world pose,
+        including chassis bobbing under load and traversing platforms,
+        which is what makes object-relative manipulation correct.
+
+        The simulator never sees ``base_footprint`` or the prismatic
+        joint; its URDF / robot.usda is untouched.
+
+        Why declared in this xacro and not in the canonical
+        genie_sim_robot_model URDF: the canonical URDF feeds the
+        assemble_robot pipeline that bakes robot.usda for the simulator.
+        Adding base_footprint there would force the simulator to model
+        the prismatic joint too, which doesn't physically exist (the
+        chassis ride height is a downstream consequence of wheel contact
+        + body inertia, not a real joint).  Keeping the addition here
+        means MoveIt sees the abstraction and the simulator stays pure.
+    -->
+    <link name="base_footprint">
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="0.001"/>
+            <inertia ixx="1e-6" iyy="1e-6" izz="1e-6" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+    </link>
+    <joint name="base_footprint_to_base_link" type="prismatic">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <axis xyz="0 0 1"/>
+        <!--
+            Passive joint (effort=0, velocity=0): MoveIt's planner cannot
+            drive it.  Position bound [0, 0.5] m is a generous chassis
+            ride-height envelope; the live value comes from /joint_states
+            (simulator-side), not from any planning output.
+        -->
+        <limit lower="0.0" upper="0.5" effort="0" velocity="0"/>
+    </joint>
+
+    <!--
+        Canonical mobile-base layout (matches MoveIt 2 mobile_base_arm tutorial):
+        the included urdf defines `base_link`, and after the prismatic joint
+        above re-parents it under base_footprint, the SRDF attaches a 3-DoF
+        planar virtual_joint at `base_footprint` whose pose is resolved from
+        /tf (odom -> base_footprint published by the simulator).  bio_ik
+        handles the planar joint natively.
+    -->
+    <xacro:include filename="$(arg urdf_file)" />
+
+    <!-- Import control_xacro -->
+    <xacro:include filename="genie.ros2_control.xacro" />
+
+
+    <xacro:genie_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)" ros2_control_hardware_plugin="$(arg ros2_control_hardware_plugin)"/>
+
+</robot>

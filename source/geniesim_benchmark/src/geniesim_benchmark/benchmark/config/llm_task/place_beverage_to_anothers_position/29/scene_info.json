@@ -1,0 +1,375 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_28f2a7d4": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "cylindrical",
+          "metallic",
+          "branded",
+          "compact",
+          "vibrant"
+        ],
+        "dimensions": [
+          0.06610354781150818,
+          0.11493164673447609,
+          0.06654148921370506
+        ],
+        "full_description": [
+          "A red cylindrical beverage can with yellow Chinese characters '\u738b\u8001\u5409' and a light blue top."
+        ],
+        "materials": [
+          "metal",
+          "plastic"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "Wang Lao Ji can"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "wang_lao_ji",
+        "beverage",
+        "can",
+        "drink"
+      ],
+      "tags": [
+        "root_scene_2bb5b349",
+        "four_beverages_on_table_c1d6c0a8",
+        "benchmark_beverage_bottle_28f2a7d4"
+      ],
+      "usd": "benchmark_beverage_bottle_029",
+      "xyz": [
+        -0.086,
+        -0.088,
+        0.847
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.729598,
+        0.683876
+      ]
+    },
+    "benchmark_beverage_bottle_3672ae4d": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "cylindrical",
+          "red",
+          "metallic",
+          "beverage",
+          "portable"
+        ],
+        "dimensions": [
+          0.06459999829530716,
+          0.11520000547170639,
+          0.06460000947117805
+        ],
+        "full_description": [
+          "A red aluminum beverage can with white 'Coca-Cola' script logo and Chinese characters on its surface."
+        ],
+        "materials": [
+          "metal",
+          "plastic"
+        ],
+        "object_category": [
+          "container",
+          "beverage can"
+        ],
+        "semantic_name": [
+          "Coca-Cola can"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "coca_cola",
+        "beverage",
+        "can",
+        "drink"
+      ],
+      "tags": [
+        "root_scene_2bb5b349",
+        "four_beverages_on_table_c1d6c0a8",
+        "benchmark_beverage_bottle_3672ae4d"
+      ],
+      "usd": "benchmark_beverage_bottle_001",
+      "xyz": [
+        -0.077,
+        0.084,
+        0.847
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.96858,
+        -0.248704
+      ]
+    },
+    "benchmark_beverage_bottle_8b307ade": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "cylindrical",
+          "orange",
+          "metallic",
+          "printed",
+          "beverage"
+        ],
+        "dimensions": [
+          0.06648768615722657,
+          0.1158542938232422,
+          0.06647872543334961
+        ],
+        "full_description": [
+          "An orange aluminum soda can with a silver top and bottom, featuring the Fanta logo and branding."
+        ],
+        "materials": [
+          "aluminum",
+          "plastic",
+          "printed label"
+        ],
+        "object_category": [
+          "container",
+          "beverage can"
+        ],
+        "semantic_name": [
+          "can"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "fanta",
+        "beverage",
+        "can",
+        "drink"
+      ],
+      "tags": [
+        "root_scene_2bb5b349",
+        "four_beverages_on_table_c1d6c0a8",
+        "benchmark_beverage_bottle_8b307ade"
+      ],
+      "usd": "benchmark_beverage_bottle_003",
+      "xyz": [
+        0.085,
+        -0.085,
+        0.848
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.852019,
+        0.523511
+      ]
+    },
+    "benchmark_beverage_bottle_c9047f4b": {
+      "description": {
+        "color": "green",
+        "descriptive_terms": [
+          "cylindrical",
+          "green",
+          "metallic",
+          "packaged",
+          "beverage"
+        ],
+        "dimensions": [
+          0.06593398749828339,
+          0.11382035911083221,
+          0.06569337099790573
+        ],
+        "full_description": [
+          "A green aluminum soda can with white Chinese characters and a silver pull-tab top."
+        ],
+        "materials": [
+          "aluminum",
+          "plastic"
+        ],
+        "object_category": [
+          "container",
+          "beverage can"
+        ],
+        "semantic_name": [
+          "Sprite can"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "sprite",
+        "beverage",
+        "can",
+        "drink"
+      ],
+      "tags": [
+        "root_scene_2bb5b349",
+        "four_beverages_on_table_c1d6c0a8",
+        "benchmark_beverage_bottle_c9047f4b"
+      ],
+      "usd": "benchmark_beverage_bottle_002",
+      "xyz": [
+        0.075,
+        0.078,
+        0.847
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.955092,
+        -0.296309
+      ]
+    },
+    "table_15641386": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_2bb5b349",
+        "four_beverages_on_table_c1d6c0a8",
+        "table_15641386"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_2bb5b349",
+          "target": "four_beverages_on_table_c1d6c0a8"
+        },
+        {
+          "source": "four_beverages_on_table_c1d6c0a8",
+          "target": "table_15641386"
+        },
+        {
+          "source": "four_beverages_on_table_c1d6c0a8",
+          "target": "benchmark_beverage_bottle_28f2a7d4"
+        },
+        {
+          "source": "four_beverages_on_table_c1d6c0a8",
+          "target": "benchmark_beverage_bottle_3672ae4d"
+        },
+        {
+          "source": "four_beverages_on_table_c1d6c0a8",
+          "target": "benchmark_beverage_bottle_8b307ade"
+        },
+        {
+          "source": "four_beverages_on_table_c1d6c0a8",
+          "target": "benchmark_beverage_bottle_c9047f4b"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_2bb5b349"
+        },
+        {
+          "id": "four_beverages_on_table_c1d6c0a8"
+        },
+        {
+          "id": "table_15641386",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_beverage_bottle_28f2a7d4",
+          "tags": [
+            "wang_lao_ji",
+            "beverage",
+            "can",
+            "drink"
+          ]
+        },
+        {
+          "id": "benchmark_beverage_bottle_3672ae4d",
+          "tags": [
+            "coca_cola",
+            "beverage",
+            "can",
+            "drink"
+          ]
+        },
+        {
+          "id": "benchmark_beverage_bottle_8b307ade",
+          "tags": [
+            "fanta",
+            "beverage",
+            "can",
+            "drink"
+          ]
+        },
+        {
+          "id": "benchmark_beverage_bottle_c9047f4b",
+          "tags": [
+            "sprite",
+            "beverage",
+            "can",
+            "drink"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "four_beverages_on_table",
+  "seed": 998998552
+}

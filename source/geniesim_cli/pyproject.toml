@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geniesim_cli"
+dynamic = ["version"]
+description = "Lightweight command-line frontend for geniesim and geniesim_assets (analogous to comfy_cli ↔ comfy)"
+requires-python = ">=3.10,<3.13"
+license = {text = "MPL-2.0"}
+authors = [{ name = "Genie Sim Team" }]
+keywords = ["agibot", "genie", "sim", "cli"]
+classifiers = [
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Build Tools",
+]
+
+# Runtime deps — kept deliberately minimal so this CLI is installable in
+# isolation (control nodes, fresh laptops, control-plane containers). The
+# heavy SDK code lives in sibling distributions (`geniesim`,
+# `geniesim_benchmark`, `geniesim_ros`, `geniesim_assets`) and is pulled in
+# by `geniesim bootstrap` — auto-invoked on the user's first command,
+# see `cli.py:_ensure_bootstrap`. **This CLI is the root of the dep
+# graph** — every other geniesim_* distribution depends on it, so it must
+# not depend on them in return (that would re-introduce a cycle).
+#
+# What's actually imported here:
+#   * `tomli`  — TOML parser used by `_tiers.py` + `commands/tool.py` to
+#                read `source/geniesim/pyproject.toml`. Declared without
+#                a `python_version` marker so the dep set is identical
+#                across all supported Pythons (3.10 / 3.11 / 3.12). The
+#                code already prefers stdlib `tomllib` on 3.11+ and
+#                falls back to `tomli` on 3.10; the dep ships the
+#                backport for 3.10 and a harmless idle wheel on 3.11+.
+dependencies = [
+    "tomli",
+]
+
+[project.scripts]
+geniesim = "geniesim_cli.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/AgibotTech/genie_sim"
+
+# Single source of truth: the repo-root ``VERSION`` file. Every sibling
+# distribution reads the same path; ``geniesim version bump`` rewrites it
+# (along with every ROS ``package.xml``).
+[tool.setuptools.dynamic]
+version = {file = "VERSION"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"

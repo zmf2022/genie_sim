@@ -1,0 +1,1369 @@
+Panels:
+  - Class: rviz_common/Displays
+    Help Height: 0
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /TF1/Frames1
+        - /TF1/Tree1
+        - /RobotModel1/Status1
+        - /Planner1/path1
+        - /Planner1/GridBased1/path1
+        - /Planner1/GridBased1/potential1
+        - /Re Plan Checker1/RangeCollisionRePlanChecker1
+      Splitter Ratio: 0.4076147675514221
+    Tree Height: 474
+  - Class: rviz_common/Selection
+    Name: Selection
+  - Class: rviz_common/Tool Properties
+    Expanded: ~
+    Name: Tool Properties
+    Splitter Ratio: 0.39678284525871277
+  - Class: rviz_common/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+  - Class: rviz_common/Time
+    Experimental: false
+    Name: Time
+    SyncMode: 0
+    SyncSource: ""
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz_default_plugins/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Line Style:
+        Line Width: 0.029999999329447746
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 10
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/LaserScan
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0
+      Enabled: false
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 0
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: LaserScan
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.05000000074505806
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /scan
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: false
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        arm_base_link:
+          Value: true
+        arm_l_end_link:
+          Value: true
+        arm_l_link7:
+          Value: true
+        arm_r_end_link:
+          Value: true
+        arm_r_link7:
+          Value: true
+        base_link:
+          Value: true
+        body_link5:
+          Value: true
+        body_link6:
+          Value: true
+        chassis_link:
+          Value: true
+        gripper_l_base_link:
+          Value: true
+        gripper_l_inner_link4:
+          Value: true
+        gripper_l_inner_link5:
+          Value: true
+        gripper_l_outer_link4:
+          Value: true
+        gripper_l_outer_link5:
+          Value: true
+        gripper_r_base_link:
+          Value: true
+        gripper_r_inner_link4:
+          Value: true
+        gripper_r_inner_link5:
+          Value: true
+        gripper_r_outer_link4:
+          Value: true
+        gripper_r_outer_link5:
+          Value: true
+        laser_scan:
+          Value: true
+        map:
+          Value: true
+        odom:
+          Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        map:
+          odom:
+            {}
+      Update Interval: 0
+      Value: true
+    - Alpha: 1
+      Class: rviz_default_plugins/RobotModel
+      Collision Enabled: false
+      Description File: ""
+      Description Source: Topic
+      Description Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /model/robot_description
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        laser_scan:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Mass Properties:
+        Inertia: false
+        Mass: false
+      Name: RobotModel
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz_default_plugins/RobotModel
+      Collision Enabled: false
+      Description File: ""
+      Description Source: Topic
+      Description Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /visual_model/robot_description
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        arm_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        arm_l_end_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        arm_l_link1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        arm_l_link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        arm_l_link3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        arm_l_link4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        arm_l_link5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        arm_l_link6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        arm_l_link7:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        arm_r_end_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        arm_r_link1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        arm_r_link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        arm_r_link3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        arm_r_link4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        arm_r_link5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        arm_r_link6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        arm_r_link7:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        body_link1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        body_link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        body_link3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        body_link4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        body_link5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        body_link6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        chassis_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        chassis_lwheel_front_link1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        chassis_lwheel_front_link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        chassis_lwheel_rear_link1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        chassis_lwheel_rear_link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        chassis_rwheel_front_link1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        chassis_rwheel_front_link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        chassis_rwheel_rear_link1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        chassis_rwheel_rear_link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_l_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_l_inner_link1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_l_inner_link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_l_inner_link3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_l_inner_link4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_l_inner_link5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_l_outer_link1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_l_outer_link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_l_outer_link3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_l_outer_link4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_l_outer_link5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_r_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_r_inner_link1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_r_inner_link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_r_inner_link3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_r_inner_link4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_r_inner_link5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_r_outer_link1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_r_outer_link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_r_outer_link3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_r_outer_link4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_r_outer_link5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Mass Properties:
+        Inertia: false
+        Mass: false
+      Name: RobotModel
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Class: rviz_common/Group
+      Displays:
+        - Alpha: 1
+          Class: rviz_default_plugins/Polygon
+          Color: 25; 255; 0
+          Enabled: true
+          Name: update_area
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            Filter size: 10
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /update_area
+          Value: true
+        - Alpha: 0.5
+          Class: rviz_default_plugins/Map
+          Color Scheme: costmap
+          Draw Behind: false
+          Enabled: true
+          Name: map
+          Topic:
+            Depth: 5
+            Durability Policy: Transient Local
+            Filter size: 10
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /map
+          Update Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /map_updates
+          Use Timestamp: false
+          Value: true
+        - Class: rviz_common/Group
+          Displays: ~
+          Enabled: true
+          Name: ToPose
+        - Alpha: 0.5
+          Class: rviz_default_plugins/Map
+          Color Scheme: map
+          Draw Behind: false
+          Enabled: true
+          Name: init_static_map
+          Topic:
+            Depth: 5
+            Durability Policy: Transient Local
+            Filter size: 10
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /init_static_map
+          Update Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /init_static_map_updates
+          Use Timestamp: false
+          Value: true
+        - Alpha: 0.5
+          Class: rviz_default_plugins/Map
+          Color Scheme: map
+          Draw Behind: false
+          Enabled: true
+          Name: static_map
+          Topic:
+            Depth: 5
+            Durability Policy: Transient Local
+            Filter size: 10
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /static_map
+          Update Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /static_map_updates
+          Use Timestamp: false
+          Value: true
+      Enabled: true
+      Name: Map
+    - Class: rviz_common/Group
+      Displays:
+        - Class: rviz_common/Group
+          Displays:
+            - Class: rviz_default_plugins/MarkerArray
+              Enabled: true
+              Name: dbg_collision_check_path
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/SpinToStart/dbg_collision_check_path
+              Value: true
+            - Class: rviz_default_plugins/Marker
+              Enabled: true
+              Name: dbg_collision_pose
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/SpinToStart/dbg_collision_pose
+              Value: true
+          Enabled: true
+          Name: SpinToStart
+        - Class: rviz_common/Group
+          Displays:
+            - Class: rviz_default_plugins/MarkerArray
+              Enabled: true
+              Name: dbg_collision_check_path
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/SpinToStartOdom/dbg_collision_check_path
+              Value: true
+            - Class: rviz_default_plugins/Marker
+              Enabled: true
+              Name: dbg_collision_pose
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/SpinToStartOdom/dbg_collision_pose
+              Value: true
+          Enabled: true
+          Name: SpinToStartOdom
+        - Class: rviz_common/Group
+          Displays:
+            - Class: rviz_default_plugins/MarkerArray
+              Enabled: true
+              Name: dbg_collision_check_path
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/SpinToGoal/dbg_collision_check_path
+              Value: true
+            - Class: rviz_default_plugins/Marker
+              Enabled: true
+              Name: dbg_collision_pose
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/SpinToGoal/dbg_collision_pose
+              Value: true
+          Enabled: true
+          Name: SpinToGoal
+        - Class: rviz_common/Group
+          Displays:
+            - Class: rviz_default_plugins/MarkerArray
+              Enabled: true
+              Name: dbg_collision_check_path
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/SpinToGoalOdom/dbg_collision_check_path
+              Value: true
+            - Class: rviz_default_plugins/Marker
+              Enabled: true
+              Name: dbg_collision_pose
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/SpinToGoalOdom/dbg_collision_pose
+              Value: true
+          Enabled: true
+          Name: SpinToGoalOdom
+        - Class: rviz_common/Group
+          Displays:
+            - Class: rviz_default_plugins/MarkerArray
+              Enabled: true
+              Name: dbg_collision_check_path
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/SpinToNear/dbg_collision_check_path
+              Value: true
+            - Class: rviz_default_plugins/Marker
+              Enabled: true
+              Name: dbg_collision_pose
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/SpinToNear/dbg_collision_pose
+              Value: true
+          Enabled: true
+          Name: SpinToNear
+        - Class: rviz_common/Group
+          Displays:
+            - Class: rviz_default_plugins/MarkerArray
+              Enabled: true
+              Name: dbg_collision_check_path
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/SpinToNearOdom/dbg_collision_check_path
+              Value: true
+            - Class: rviz_default_plugins/Marker
+              Enabled: true
+              Name: dbg_collision_pose
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/SpinToNearOdom/dbg_collision_pose
+              Value: true
+          Enabled: true
+          Name: SpinToNearOdom
+        - Class: rviz_common/Group
+          Displays:
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz_default_plugins/Path
+              Color: 25; 255; 0
+              Enabled: true
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.029999999329447746
+              Name: dbg_path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 255; 85; 255
+              Pose Style: None
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/MPPIController/dbg_path
+              Value: true
+            - Class: rviz_default_plugins/MarkerArray
+              Enabled: true
+              Name: dbg_trajectories
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/MPPIController/dbg_trajectories
+              Value: true
+          Enabled: true
+          Name: MPPIController
+        - Class: rviz_common/Group
+          Displays:
+            - Class: rviz_default_plugins/MarkerArray
+              Enabled: true
+              Name: dbg_collision_check_path
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/ToPose/dbg_collision_check_path
+              Value: true
+            - Class: rviz_default_plugins/Marker
+              Enabled: true
+              Name: dbg_collision_pose
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/ToPose/dbg_collision_pose
+              Value: true
+          Enabled: true
+          Name: ToPose
+        - Class: rviz_common/Group
+          Displays:
+            - Class: rviz_default_plugins/MarkerArray
+              Enabled: true
+              Name: dbg_collision_check_path
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/ToPoseOdom/dbg_collision_check_path
+              Value: true
+            - Class: rviz_default_plugins/Marker
+              Enabled: true
+              Name: dbg_collision_pose
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/ToPoseOdom/dbg_collision_pose
+              Value: true
+          Enabled: true
+          Name: ToPoseOdom
+        - Class: rviz_common/Group
+          Displays:
+            - Class: rviz_default_plugins/MarkerArray
+              Enabled: true
+              Name: dbg_collision_check_path
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/ToPoseLateralOdom/dbg_collision_check_path
+              Value: true
+            - Class: rviz_default_plugins/Marker
+              Enabled: true
+              Name: dbg_collision_pose
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/ToPoseLateralOdom/dbg_collision_pose
+              Value: true
+          Enabled: true
+          Name: ToPoseLateralOdom
+        - Class: rviz_common/Group
+          Displays:
+            - Class: rviz_default_plugins/Marker
+              Enabled: true
+              Name: Plans
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/TEB/plans
+              Value: true
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz_default_plugins/Path
+              Color: 25; 255; 0
+              Enabled: true
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.029999999329447746
+              Name: Plan
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 255; 85; 255
+              Pose Style: None
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/TEB/plan
+              Value: true
+            - Class: rviz_default_plugins/Marker
+              Enabled: true
+              Name: GraphVizVertices
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/TEB/graph_vertices
+              Value: true
+            - Class: rviz_default_plugins/Marker
+              Enabled: false
+              Name: GraphVizEdges
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/controller_server_ros_node/TEB/graph_edges
+              Value: false
+          Enabled: true
+          Name: TebController
+      Enabled: true
+      Name: Controller
+    - Class: rviz_common/Group
+      Displays:
+        - Class: rviz_default_plugins/MarkerArray
+          Enabled: true
+          Name: MarkerArray
+          Namespaces:
+            {}
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /dbg_optimal_path_footprint
+          Value: true
+        - Alpha: 1
+          Buffer Length: 1
+          Class: rviz_default_plugins/Path
+          Color: 25; 255; 0
+          Enabled: true
+          Head Diameter: 0.029999999329447746
+          Head Length: 0.019999999552965164
+          Length: 0.30000001192092896
+          Line Style: Lines
+          Line Width: 0.029999999329447746
+          Name: Path
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Pose Color: 255; 85; 255
+          Pose Style: Arrows
+          Radius: 0.029999999329447746
+          Shaft Diameter: 0.009999999776482582
+          Shaft Length: 0.009999999776482582
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            Filter size: 10
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /dbg_optimal_path
+          Value: true
+      Enabled: true
+      Name: ALTRO
+    - Class: rviz_common/Group
+      Displays:
+        - Alpha: 0.5
+          Axes Length: 1
+          Axes Radius: 0.10000000149011612
+          Class: rviz_default_plugins/Pose
+          Color: 255; 25; 0
+          Enabled: true
+          Head Length: 0.10000000149011612
+          Head Radius: 0.10000000149011612
+          Name: pose
+          Shaft Length: 0.20000000298023224
+          Shaft Radius: 0.05000000074505806
+          Shape: Arrow
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            Filter size: 10
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /goal_pose
+          Value: true
+        - Alpha: 1
+          Buffer Length: 1
+          Class: rviz_default_plugins/Path
+          Color: 25; 255; 0
+          Enabled: true
+          Head Diameter: 0.014999999664723873
+          Head Length: 0.019999999552965164
+          Length: 0.30000001192092896
+          Line Style: Lines
+          Line Width: 0.029999999329447746
+          Name: path
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Pose Color: 255; 85; 255
+          Pose Style: Arrows
+          Radius: 0.029999999329447746
+          Shaft Diameter: 0.004999999888241291
+          Shaft Length: 0.009999999776482582
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            Filter size: 10
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /path
+          Value: true
+        - Class: rviz_common/Group
+          Displays:
+            - Alpha: 1
+              Axes Length: 1
+              Axes Radius: 0.10000000149011612
+              Class: rviz_default_plugins/Pose
+              Color: 255; 25; 0
+              Enabled: true
+              Head Length: 0.30000001192092896
+              Head Radius: 0.10000000149011612
+              Name: dbg_pose
+              Shaft Length: 1
+              Shaft Radius: 0.05000000074505806
+              Shape: Arrow
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/planner_server_ros_node/GridBased/dbg_pose
+              Value: true
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz_default_plugins/Path
+              Color: 25; 255; 0
+              Enabled: true
+              Head Diameter: 0.029999999329447746
+              Head Length: 0.019999999552965164
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.029999999329447746
+              Name: path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 255; 85; 255
+              Pose Style: Arrows
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.009999999776482582
+              Shaft Length: 0.009999999776482582
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/planner_server_ros_node/GridBased/path
+              Value: true
+            - Alpha: 0.10000000149011612
+              Class: rviz_default_plugins/Map
+              Color Scheme: raw
+              Draw Behind: false
+              Enabled: true
+              Name: potential
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/planner_server_ros_node/GridBased/potential
+              Update Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/planner_server_ros_node/GridBased/potential_updates
+              Use Timestamp: false
+              Value: true
+          Enabled: true
+          Name: GridBased
+        - Class: rviz_common/Group
+          Displays:
+            - Alpha: 1
+              Axes Length: 1
+              Axes Radius: 0.10000000149011612
+              Class: rviz_default_plugins/Pose
+              Color: 255; 25; 0
+              Enabled: true
+              Head Length: 0.30000001192092896
+              Head Radius: 0.10000000149011612
+              Name: dbg_pose
+              Shaft Length: 1
+              Shaft Radius: 0.05000000074505806
+              Shape: Arrow
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/planner_server_ros_node/GridBasedAstar/dbg_pose
+              Value: true
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz_default_plugins/Path
+              Color: 25; 255; 0
+              Enabled: true
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.029999999329447746
+              Name: path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 255; 85; 255
+              Pose Style: None
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/planner_server_ros_node/GridBasedAstar/path
+              Value: true
+            - Alpha: 0.10000000149011612
+              Class: rviz_default_plugins/Map
+              Color Scheme: raw
+              Draw Behind: false
+              Enabled: true
+              Name: potential
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/planner_server_ros_node/GridBasedAstar/potential
+              Update Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/planner_server_ros_node/GridBasedAstar/potential_updates
+              Use Timestamp: false
+              Value: true
+          Enabled: true
+          Name: GridBasedAstar
+      Enabled: true
+      Name: Planner
+    - Class: rviz_common/Group
+      Displays:
+        - Class: rviz_common/Group
+          Displays:
+            - Class: rviz_default_plugins/MarkerArray
+              Enabled: true
+              Name: dbg_check_path
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/re_plan_check_server_ros_node/RangeCollisionRePlanChecker/dbg_check_path
+              Value: true
+            - Class: rviz_default_plugins/Marker
+              Enabled: true
+              Name: dbg_collsion_pose
+              Namespaces:
+                {}
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /root/ros2_bridge_node/re_plan_check_server_ros_node/RangeCollisionRePlanChecker/dbg_collision_pose
+              Value: true
+          Enabled: true
+          Name: RangeCollisionRePlanChecker
+      Enabled: true
+      Name: Re Plan Checker
+    - Class: rviz_common/Group
+      Displays:
+        - Class: rviz_default_plugins/MarkerArray
+          Enabled: true
+          Name: dbg_polygon_visualize
+          Namespaces:
+            {}
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /dbg_polygon_visualize
+          Value: true
+      Enabled: true
+      Name: Perception
+  Enabled: true
+  Global Options:
+    Background Color: 170; 255; 255
+    Fixed Frame: map
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+      Hide Inactive Objects: true
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+      Line color: 128; 128; 0
+    - Class: rviz_default_plugins/SetInitialPose
+      Covariance x: 0.25
+      Covariance y: 0.25
+      Covariance yaw: 0.06853891909122467
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: initialpose
+    - Class: rviz_default_plugins/SetGoal
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: goal_pose
+    - Class: rviz_default_plugins/PublishPoint
+      Single click: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /clicked_point
+    - Class: rviz_nav_goal_tool/NavGoalTool
+      Tool Name: Start/Stop
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /root/task_service/normal_navigation/trigger
+    - Class: rviz_nav_point_tool/NavPointTool
+      Single click: true
+      Tool Name: Pause/Resume
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /root/task_service/task_pause_resume/trigger
+    - 2D only: false
+      Class: rviz_polygon_selection_tool/PolygonSelectionTool
+      Close loop: false
+      Lasso mode: false
+      Line Color: 0; 0; 0
+      Point Color: 0; 0; 0
+      Point Size: 5
+      Polygon Service Name: get_polygon
+      Polygon Topic: /dbg_wall
+      Selection Service Name: get_selection
+      Tool Name: Wall
+    - 2D only: false
+      Class: rviz_polygon_selection_tool/PolygonSelectionTool
+      Close loop: true
+      Lasso mode: false
+      Line Color: 0; 0; 0
+      Point Color: 0; 0; 0
+      Point Size: 5
+      Polygon Service Name: get_polygon
+      Polygon Topic: /dbg_infeasible_area
+      Selection Service Name: get_selection
+      Tool Name: Aera
+    - Class: rviz_nav_goal_tool/NavGoalTool
+      Tool Name: Reset Walls
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /dbg_reset_walls
+    - Class: rviz_nav_goal_tool/NavGoalTool
+      Tool Name: SetMap
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /root/map_service/set_map/trigger
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
+  Views:
+    Current:
+      Angle: -1.7881393432617188e-07
+      Class: rviz_default_plugins/TopDownOrtho
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Scale: 60.890785217285156
+      Target Frame: <Fixed Frame>
+      Value: TopDownOrtho (rviz_default_plugins)
+      X: 6.385959625244141
+      Y: 3.2213122844696045
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 1007
+  Hide Left Dock: false
+  Hide Right Dock: true
+  QMainWindow State: 000000ff00000000fd00000004000000000000016a0000032ffc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000007901000003fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000004c00000227000000fd01000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000274000001070000007901000003fb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c0000026100000001000001100000032ffc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000004c0000032f000000d301000003fb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007800000004cfc0100000002fb0000000800540069006d0065010000000000000780000002bd01000003fb0000000800540069006d00650100000000000004500000000000000000000006150000032f00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Selection:
+    collapsed: false
+  Time:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  Views:
+    collapsed: true
+  Width: 1920
+  X: 0
+  Y: 0

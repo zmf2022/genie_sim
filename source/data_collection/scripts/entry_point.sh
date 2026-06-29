@@ -18,7 +18,7 @@ sudo setfacl -m u:1234:rwX /isaac-sim/.local/share/ov/pkg
 
 # bashrc
 echo "export SIM_REPO_ROOT=/geniesim/main/data_collection" >>~/.bashrc
-echo "export SIM_ASSETS=/geniesim/main/source/geniesim/assets" >>~/.bashrc
+echo "export SIM_ASSETS=/geniesim_assets" >>~/.bashrc
 echo "export ENABLE_SIM=1" >>~/.bashrc
 echo "export ROS_DISTRO=${ROS_DISTRO}" >>~/.bashrc
 echo "export ROS_VERSION=2" >>~/.bashrc
@@ -36,4 +36,12 @@ echo "alias source_ros_py311='unset LD_LIBRARY_PATH && source /opt/ros/jazzy/set
 
 sudo cp -r ${SIM_ASSETS}/robot/curobo_robot/assets/robot $ISAACSIM_HOME/kit/python/lib/python3.11/site-packages/curobo/content/assets/
 sudo cp -r ${SIM_REPO_ROOT}/config/curobo/configs $ISAACSIM_HOME/kit/python/lib/python3.11/site-packages/curobo/content/
+
+# Editable-install geniesim_assets (bind-mounted at /geniesim_assets) so
+# `import geniesim_assets` / system_utils.assets_path() resolve.
+if [ -f /geniesim_assets/pyproject.toml ]; then
+    /isaac-sim/python.sh -m pip install -q -e /geniesim_assets 2>/dev/null || true
+    python3 -m pip install -q -e /geniesim_assets --break-system-packages 2>/dev/null || true
+fi
+
 exec "$@"

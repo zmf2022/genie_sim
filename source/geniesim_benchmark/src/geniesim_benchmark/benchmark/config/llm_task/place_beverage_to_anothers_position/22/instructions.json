@@ -1,0 +1,8 @@
+{
+  "instructions": [
+    {
+      "instruction": "Right arm picks up the sprite, Left arm picks up the fanta, Left arm places the fanta at the sprite's position"
+    }
+  ],
+  "task_id": "place_beverage_to_anothers_position_22"
+}

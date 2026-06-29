@@ -1,0 +1,18 @@
+# === pip install / build artifacts ===
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+pip-wheel-metadata/
+pip-build-env-*/
+wheels/
+
+# === Python bytecode (created on import) ===
+__pycache__/
+*.pyc
+*.pyo
+
+# === geniesim_ros — colcon workspace artifacts ===
+_ros_install/
+.colcon_deploy_*/

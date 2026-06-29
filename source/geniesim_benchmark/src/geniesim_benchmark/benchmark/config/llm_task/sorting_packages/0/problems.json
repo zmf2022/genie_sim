@@ -1,0 +1,70 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "benchmark_carton_dd2ffc11,benchmark_carton_f458eacd,benchmark_carton_00364e8c,benchmark_carton_8fe5bc84,benchmark_carton_872c57ed,benchmark_carton_61e51d7c,benchmark_carton_ad2b53a1,benchmark_carton_40f71e9c,benchmark_carton_8e3cb750,benchmark_carton_22ee63a1,benchmark_carton_f8718eb5|[0.2,0.2,0.2]|right_gripper"
+              },
+              {
+                "StepOut": 600
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "PickUpOnGripper": "benchmark_carton_dd2ffc11,benchmark_carton_f458eacd,benchmark_carton_00364e8c,benchmark_carton_8fe5bc84,benchmark_carton_872c57ed,benchmark_carton_61e51d7c,benchmark_carton_ad2b53a1,benchmark_carton_40f71e9c,benchmark_carton_8e3cb750,benchmark_carton_22ee63a1,benchmark_carton_f8718eb5|right_gripper"
+              },
+              {
+                "StepOut": 300
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "ActionSetWaitAll": [
+                  {
+                    "Inside": "{@placeholder_str1}|/World/background/benchmark_scanner_000|0.8"
+                  },
+                  {
+                    "Upright": "{@placeholder_str1}|5.0"
+                  }
+                ]
+              },
+              {
+                "StepOut": 900
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "PickUpOnGripper": "{@placeholder_str1}|right_gripper"
+              },
+              {
+                "StepOut": 900
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "Inside": "{@placeholder_str1}|/World/background/benchmark_material_tray_000|0.8"
+              },
+              {
+                "StepOut": 900
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "sorting_packages"
+  }
+}

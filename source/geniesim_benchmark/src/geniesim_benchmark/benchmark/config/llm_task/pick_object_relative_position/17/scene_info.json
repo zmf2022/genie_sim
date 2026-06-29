@@ -1,0 +1,422 @@
+{
+  "layout": {
+    "benchmark_bowl_sponge_b0a40739": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "porous",
+          "flexible",
+          "absorbent",
+          "textured",
+          "rectangular"
+        ],
+        "dimensions": [
+          0.08157370984554291,
+          0.02987557463347912,
+          0.05640790797770023
+        ],
+        "full_description": [
+          "A rectangular sponge with a yellow porous base and a green abrasive top layer."
+        ],
+        "materials": [
+          "plastic",
+          "foam"
+        ],
+        "object_category": [
+          "kitchen",
+          "cleaning"
+        ],
+        "semantic_name": [
+          "sponge"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "bowl_sponge",
+        "object",
+        "bowl sponge",
+        "\u6d17\u7897\u6d77\u7ef5"
+      ],
+      "tags": [
+        "root_scene_f2eb94ef",
+        "pick_object_relative_position_b425f3c4",
+        "place_objects_on_table_61d88a02",
+        "create_tabletop_object_f6fcbb30",
+        "benchmark_bowl_sponge_b0a40739"
+      ],
+      "usd": "benchmark_bowl_sponge_000",
+      "xyz": [
+        0.139,
+        0.044,
+        0.747
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.983112,
+        -0.183005
+      ]
+    },
+    "benchmark_peach_9064a3d0": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "round",
+          "ripe",
+          "juicy",
+          "fuzzy",
+          "organic"
+        ],
+        "dimensions": [
+          0.0926,
+          0.0916,
+          0.0869
+        ],
+        "full_description": [
+          "A round, fuzzy peach with a gradient of red and yellow skin."
+        ],
+        "materials": [
+          "flesh",
+          "skin"
+        ],
+        "object_category": [
+          "fruit",
+          "stone fruit"
+        ],
+        "semantic_name": [
+          "peach"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "peach",
+        "object",
+        "peach",
+        "\u6843\u5b50",
+        "target"
+      ],
+      "tags": [
+        "root_scene_f2eb94ef",
+        "pick_object_relative_position_b425f3c4",
+        "place_objects_on_table_61d88a02",
+        "create_tabletop_object_11f5876d",
+        "benchmark_peach_9064a3d0"
+      ],
+      "usd": "benchmark_peach_021",
+      "xyz": [
+        -0.176,
+        -0.215,
+        0.778
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.999966,
+        0.008186
+      ]
+    },
+    "benchmark_peach_ea5b3692": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "round",
+          "ripe",
+          "juicy",
+          "fuzzy",
+          "organic"
+        ],
+        "dimensions": [
+          0.0926,
+          0.0916,
+          0.0869
+        ],
+        "full_description": [
+          "A round, fuzzy peach with a gradient of red and yellow skin."
+        ],
+        "materials": [
+          "flesh",
+          "skin"
+        ],
+        "object_category": [
+          "fruit",
+          "stone fruit"
+        ],
+        "semantic_name": [
+          "peach"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "peach",
+        "object",
+        "peach",
+        "\u6843\u5b50",
+        "target"
+      ],
+      "tags": [
+        "root_scene_f2eb94ef",
+        "pick_object_relative_position_b425f3c4",
+        "place_objects_on_table_61d88a02",
+        "create_tabletop_object_e8039efb",
+        "benchmark_peach_ea5b3692"
+      ],
+      "usd": "benchmark_peach_021",
+      "xyz": [
+        0.182,
+        0.225,
+        0.778
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.761592,
+        0.648057
+      ]
+    },
+    "benchmark_toy_car_027e6b40": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy_car",
+        "object",
+        "toy car",
+        "\u73a9\u5177\u8f66"
+      ],
+      "tags": [
+        "root_scene_f2eb94ef",
+        "pick_object_relative_position_b425f3c4",
+        "place_objects_on_table_61d88a02",
+        "create_tabletop_object_6322ac24",
+        "benchmark_toy_car_027e6b40"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        -0.197,
+        0.151,
+        0.748
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.251366,
+        0.967892
+      ]
+    },
+    "table_7cd842d6": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_f2eb94ef",
+        "pick_object_relative_position_b425f3c4",
+        "place_objects_on_table_61d88a02",
+        "table_7cd842d6"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_f2eb94ef",
+          "target": "pick_object_relative_position_b425f3c4"
+        },
+        {
+          "source": "pick_object_relative_position_b425f3c4",
+          "target": "place_objects_on_table_61d88a02"
+        },
+        {
+          "source": "place_objects_on_table_61d88a02",
+          "target": "table_7cd842d6"
+        },
+        {
+          "source": "place_objects_on_table_61d88a02",
+          "target": "create_tabletop_object_11f5876d"
+        },
+        {
+          "source": "place_objects_on_table_61d88a02",
+          "target": "create_tabletop_object_e8039efb"
+        },
+        {
+          "source": "place_objects_on_table_61d88a02",
+          "target": "create_tabletop_object_6322ac24"
+        },
+        {
+          "source": "place_objects_on_table_61d88a02",
+          "target": "create_tabletop_object_f6fcbb30"
+        },
+        {
+          "source": "create_tabletop_object_11f5876d",
+          "target": "benchmark_peach_9064a3d0"
+        },
+        {
+          "source": "create_tabletop_object_e8039efb",
+          "target": "benchmark_peach_ea5b3692"
+        },
+        {
+          "source": "create_tabletop_object_6322ac24",
+          "target": "benchmark_toy_car_027e6b40"
+        },
+        {
+          "source": "create_tabletop_object_f6fcbb30",
+          "target": "benchmark_bowl_sponge_b0a40739"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_f2eb94ef"
+        },
+        {
+          "id": "pick_object_relative_position_b425f3c4"
+        },
+        {
+          "id": "place_objects_on_table_61d88a02"
+        },
+        {
+          "id": "table_7cd842d6",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_11f5876d"
+        },
+        {
+          "id": "benchmark_peach_9064a3d0",
+          "tags": [
+            "peach",
+            "object",
+            "peach",
+            "\u6843\u5b50",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_e8039efb"
+        },
+        {
+          "id": "benchmark_peach_ea5b3692",
+          "tags": [
+            "peach",
+            "object",
+            "peach",
+            "\u6843\u5b50",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_6322ac24"
+        },
+        {
+          "id": "benchmark_toy_car_027e6b40",
+          "tags": [
+            "toy_car",
+            "object",
+            "toy car",
+            "\u73a9\u5177\u8f66"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_f6fcbb30"
+        },
+        {
+          "id": "benchmark_bowl_sponge_b0a40739",
+          "tags": [
+            "bowl_sponge",
+            "object",
+            "bowl sponge",
+            "\u6d17\u7897\u6d77\u7ef5"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 3502811260
+}

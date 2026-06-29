@@ -26,28 +26,39 @@ A data collection system for robotic simulation tasks using Isaac Sim and cuRobo
 
 ## Getting Started
 
-**Note:** Before running, make sure to set the `SIM_ASSETS` environment variable:
+**Note:** Before running, `geniesim_assets` must be pip-installed (editable) on the host. The CLI discovers it (`find_spec`, like `geniesim docker`), bind-mounts it to `/geniesim_assets`, and the entrypoint editable-installs it:
 ```bash
-export SIM_ASSETS={YOUR_ASSETS_PATH}
+pip install -e /path/to/geniesim_assets
 ```
 
 ### Option 1: Docker Container (Recommended)
 
 #### Building the Docker Image
 
-First, build the Docker image:
-
-assuming the image of benchmark `registry.agibot.com/genie-sim/open_source:latest` is built, run
+Recommended — via the CLI (wraps the build with the right context and tag):
 
 ```bash
-docker build -f ./dockerfile -t registry.agibot.com/genie-sim/open_source-data-collection:latest .
+geniesim autocollect build
+```
+
+Or directly — assuming the benchmark base image `registry.agibot.com/genie-sim/geniesim3:latest` is built:
+
+```bash
+docker build -f ./dockerfile -t registry.agibot.com/genie-sim/geniesim3-data-collection:latest .
 ```
 
 **Note:**  For cuRobo installation, the Dockerfile is configured for RTX 4090D by default. If you're using a different GPU model, you need to modify the `TORCH_CUDA_ARCH_LIST` environment variable in the Dockerfile, 50 series GPU (SM_120) may not be able to install cuRobo, this needs a compatibility update by the cuRobo team.
 
 #### One-Click Data Collection (Recommended)
 
-Use `scripts/run_data_collection.sh` to start data collection in one command.
+The recommended entry point is the **`geniesim autocollect`** CLI (ships with `geniesim_cli`; see the repo [README](../../README.md) § 3.8). It auto-discovers the editable-installed `geniesim_assets`, resolves the task by name, and wraps the host orchestrator below:
+
+```bash
+geniesim autocollect list --robot=g2 <substr>            # discover tasks
+geniesim autocollect run <TASK> --headless --standalone  # collect (add --dry-run to preview)
+```
+
+Or call the underlying script directly:
 
 **Usage:**
 
@@ -63,8 +74,8 @@ Use `scripts/run_data_collection.sh` to start data collection in one command.
 - `--container-name NAME` - Container name (default: `data_collection_open_source`)
 - `--help, -h` - Show help message
 
-**Environment Variables:**
-- `SIM_ASSETS` - Path to Isaac Sim assets (required)
+**Assets:**
+- `geniesim_assets` must be pip-installed (editable) on the host. The CLI auto-discovers it and mounts it at `/geniesim_assets` — no manual `SIM_ASSETS` export needed.
 
 **Examples:**
 
@@ -93,7 +104,9 @@ Logs are saved to `logs/{TASK_NAME}/` directory:
 Outputs are save to `recording_data/[{TASK_NAME}_{INDEX}]/` directory
 #### Interactive Mode
 
-Use `scripts/start_gui.sh` to launch an interactive container for debugging or development.
+Via the CLI: **`geniesim autocollect up`** creates/starts the GUI container and **`geniesim autocollect into`** drops you into a shell in it (wrapping the script below).
+
+Or use `scripts/start_gui.sh` directly to launch an interactive container for debugging or development.
 
 **Usage:**
 
@@ -241,8 +254,8 @@ python scripts/run_data_collection.py --task_template tasks/geniesim_2025/sort_f
 ### Docker - Automated Data Collection
 
 ```bash
-# Set assets path
-export SIM_ASSETS=~/assets
+# Install geniesim_assets (editable, once on the host)
+pip install -e /path/to/geniesim_assets
 
 # Run data collection with custom task
 ./scripts/run_data_collection.sh \
@@ -253,8 +266,8 @@ export SIM_ASSETS=~/assets
 ### Docker - Interactive Development
 
 ```bash
-# Set assets path
-export SIM_ASSETS=~/assets
+# Install geniesim_assets (editable, once on the host)
+pip install -e /path/to/geniesim_assets
 
 # Start interactive container
 ./scripts/start_gui.sh run my_container

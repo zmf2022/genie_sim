@@ -1,0 +1,153 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_35b3d04a": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "cylindrical",
+          "orange",
+          "metallic",
+          "printed",
+          "beverage"
+        ],
+        "dimensions": [
+          0.06648768615722657,
+          0.1158542938232422,
+          0.06647872543334961
+        ],
+        "full_description": [
+          "An orange aluminum soda can with a silver top and bottom, featuring the Fanta logo and branding."
+        ],
+        "materials": [
+          "aluminum",
+          "plastic",
+          "printed label"
+        ],
+        "object_category": [
+          "container",
+          "beverage can"
+        ],
+        "semantic_name": [
+          "can"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "fanta",
+        "beverage",
+        "bottle",
+        "drink",
+        "right"
+      ],
+      "tags": [
+        "root_scene_28418aad",
+        "place_random_drink_df47dc3f",
+        "benchmark_beverage_bottle_35b3d04a"
+      ],
+      "usd": "benchmark_beverage_bottle_003",
+      "xyz": [
+        -2.951512,
+        -0.914891,
+        0.88
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.025849,
+        0.999666
+      ]
+    },
+    "genie_sprite_137a3117": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "sprite"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "sprite",
+      "xyz": [
+        -2.968246,
+        -0.637754,
+        0.88
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.113428,
+        0.993546
+      ]
+    },
+    "genie_sprite_aa329464": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "sprite"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "sprite",
+      "xyz": [
+        -2.94969,
+        -0.768459,
+        0.88
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.097735,
+        0.995212
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_28418aad",
+          "target": "place_random_drink_df47dc3f"
+        },
+        {
+          "source": "place_random_drink_df47dc3f",
+          "target": "benchmark_beverage_bottle_35b3d04a"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_28418aad"
+        },
+        {
+          "id": "place_random_drink_df47dc3f"
+        },
+        {
+          "id": "benchmark_beverage_bottle_35b3d04a",
+          "tags": [
+            "fanta",
+            "beverage",
+            "bottle",
+            "drink",
+            "right"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "place_random_drink",
+  "seed": 2246846766
+}

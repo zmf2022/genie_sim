@@ -1,0 +1,11 @@
+{
+  "instructions": [
+    {
+      "instruction": "Left arm picks up the stationery or red block on the table"
+    },
+    {
+      "instruction": "Right arm picks up the beverage or fruit on the table"
+    }
+  ],
+  "task_id": "pick_follow_logic_or"
+}

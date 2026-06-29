@@ -1,0 +1,26 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Inside": "benchmark_green_apple_49770faf|benchmark_storage_box_76399b64|1"
+              },
+              {
+                "Onfloor": "benchmark_green_apple_49770faf|0"
+              },
+              {
+                "StepOut": 600
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "sort_fruit"
+  }
+}

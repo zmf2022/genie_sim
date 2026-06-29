@@ -1,0 +1,70 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "benchmark_carton_adfa57f0,benchmark_carton_63afd80d,benchmark_carton_d1a06d63,benchmark_carton_7dc7feab,benchmark_carton_3c88e063,benchmark_carton_b34ce5ef,benchmark_carton_f8939b5e,benchmark_carton_4fb802c4,benchmark_carton_0d62c341|[0.2,0.2,0.2]|right_gripper"
+              },
+              {
+                "StepOut": 600
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "PickUpOnGripper": "benchmark_carton_adfa57f0,benchmark_carton_63afd80d,benchmark_carton_d1a06d63,benchmark_carton_7dc7feab,benchmark_carton_3c88e063,benchmark_carton_b34ce5ef,benchmark_carton_f8939b5e,benchmark_carton_4fb802c4,benchmark_carton_0d62c341|right_gripper"
+              },
+              {
+                "StepOut": 300
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "ActionSetWaitAll": [
+                  {
+                    "Inside": "{@placeholder_str1}|/World/background/benchmark_scanner_000|0.8"
+                  },
+                  {
+                    "Upright": "{@placeholder_str1}|5.0"
+                  }
+                ]
+              },
+              {
+                "StepOut": 900
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "PickUpOnGripper": "{@placeholder_str1}|right_gripper"
+              },
+              {
+                "StepOut": 900
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "Inside": "{@placeholder_str1}|/World/background/benchmark_material_tray_000|0.8"
+              },
+              {
+                "StepOut": 900
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "sorting_packages"
+  }
+}

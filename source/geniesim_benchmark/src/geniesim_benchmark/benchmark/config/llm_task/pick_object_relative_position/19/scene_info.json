@@ -1,0 +1,576 @@
+{
+  "layout": {
+    "benchmark_apple_6bab142b": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "round",
+          "red",
+          "ripe",
+          "smooth",
+          "natural"
+        ],
+        "dimensions": [
+          0.093,
+          0.0945,
+          0.0917
+        ],
+        "full_description": [
+          "A red and yellow apple with a glossy surface and a short brown stem."
+        ],
+        "materials": [
+          "fruit flesh",
+          "skin"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "apple"
+        ],
+        "shape": "round",
+        "unit": "m"
+      },
+      "keywords": [
+        "apple",
+        "object",
+        "apple",
+        "\u82f9\u679c"
+      ],
+      "tags": [
+        "root_scene_de864a56",
+        "pick_object_relative_position_b14d3cb3",
+        "place_objects_on_table_151fb40e",
+        "create_tabletop_object_4cc8bbac",
+        "benchmark_apple_6bab142b"
+      ],
+      "usd": "benchmark_apple_002",
+      "xyz": [
+        0.174,
+        0.028,
+        0.779
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.992812,
+        0.119686
+      ]
+    },
+    "benchmark_building_blocks_25f7d2c1": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "small",
+          "red",
+          "cubic",
+          "simple",
+          "solid"
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          0.03
+        ],
+        "full_description": [
+          "A small, solid red cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "building_block"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "cube",
+        "unit": "m"
+      },
+      "keywords": [
+        "building_blocks",
+        "object",
+        "building blocks",
+        "\u79ef\u6728",
+        "target"
+      ],
+      "tags": [
+        "root_scene_de864a56",
+        "pick_object_relative_position_b14d3cb3",
+        "place_objects_on_table_151fb40e",
+        "create_tabletop_object_73e2fd92",
+        "benchmark_building_blocks_25f7d2c1"
+      ],
+      "usd": "benchmark_building_blocks_072",
+      "xyz": [
+        0.08,
+        0.191,
+        0.747
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.97072,
+        0.240213
+      ]
+    },
+    "benchmark_building_blocks_b2e0babd": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "small",
+          "red",
+          "cubic",
+          "simple",
+          "solid"
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          0.03
+        ],
+        "full_description": [
+          "A small, solid red cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "building_block"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "cube",
+        "unit": "m"
+      },
+      "keywords": [
+        "building_blocks",
+        "object",
+        "building blocks",
+        "\u79ef\u6728",
+        "target"
+      ],
+      "tags": [
+        "root_scene_de864a56",
+        "pick_object_relative_position_b14d3cb3",
+        "place_objects_on_table_151fb40e",
+        "create_tabletop_object_8b82cbed",
+        "benchmark_building_blocks_b2e0babd"
+      ],
+      "usd": "benchmark_building_blocks_072",
+      "xyz": [
+        -0.029,
+        -0.25,
+        0.747
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.749734,
+        -0.661739
+      ]
+    },
+    "benchmark_clock_74412c86": {
+      "description": {
+        "color": "pink",
+        "descriptive_terms": [
+          "circular",
+          "compact",
+          "decorative",
+          "vintage",
+          "playful"
+        ],
+        "dimensions": [
+          0.08173294067382812,
+          0.13982281494140625,
+          0.13057781982421876
+        ],
+        "full_description": [
+          "A pink, pig-shaped alarm clock with a white face, black numbers, and two small ears on top."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "timepiece",
+          "analog clock"
+        ],
+        "semantic_name": [
+          "clock"
+        ],
+        "shape": "rounded",
+        "unit": "m"
+      },
+      "keywords": [
+        "clock",
+        "object",
+        "clock",
+        "\u95f9\u949f"
+      ],
+      "tags": [
+        "root_scene_de864a56",
+        "pick_object_relative_position_b14d3cb3",
+        "place_objects_on_table_151fb40e",
+        "create_tabletop_object_908b67bc",
+        "benchmark_clock_74412c86"
+      ],
+      "usd": "benchmark_clock_044",
+      "xyz": [
+        0.125,
+        -0.215,
+        0.802
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.633994,
+        0.773338
+      ]
+    },
+    "benchmark_rubik_cube_8b57b023": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "colorful",
+          "complex",
+          "geometric",
+          "small",
+          "plastic"
+        ],
+        "dimensions": [
+          0.057,
+          0.057,
+          0.057
+        ],
+        "full_description": [
+          "A 3x3 Rubik's cube with pastel-colored faces including yellow, pink, and cyan on a black background."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "puzzle",
+          "toy"
+        ],
+        "semantic_name": [
+          "rubik_cube"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "rubik_cube",
+        "object",
+        "rubik cube",
+        "\u9b54\u65b9"
+      ],
+      "tags": [
+        "root_scene_de864a56",
+        "pick_object_relative_position_b14d3cb3",
+        "place_objects_on_table_151fb40e",
+        "create_tabletop_object_bcb71a59",
+        "benchmark_rubik_cube_8b57b023"
+      ],
+      "usd": "benchmark_rubik_cube_001",
+      "xyz": [
+        -0.142,
+        0.01,
+        0.768
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.694135,
+        0.719845
+      ]
+    },
+    "benchmark_stationery_a41b4c02": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "yellow",
+          "rectangular",
+          "plastic",
+          "metal",
+          "compact",
+          "office",
+          "functional"
+        ],
+        "dimensions": [
+          0.03533313795924187,
+          0.06165076792240143,
+          0.13363394886255264
+        ],
+        "full_description": [
+          "A small stapler with a bright yellow top and a translucent gray base."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "stationery",
+          "office_supply"
+        ],
+        "semantic_name": [
+          "stapler"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "yellow_stapler",
+        "object",
+        "yellow stapler",
+        "\u9ec4\u8272\u8ba2\u4e66\u673a"
+      ],
+      "tags": [
+        "root_scene_de864a56",
+        "pick_object_relative_position_b14d3cb3",
+        "place_objects_on_table_151fb40e",
+        "create_tabletop_object_22cdddd5",
+        "benchmark_stationery_a41b4c02"
+      ],
+      "usd": "benchmark_stationery_009",
+      "xyz": [
+        -0.076,
+        0.161,
+        0.751
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.906088,
+        0.423088
+      ]
+    },
+    "table_e966df99": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_de864a56",
+        "pick_object_relative_position_b14d3cb3",
+        "place_objects_on_table_151fb40e",
+        "table_e966df99"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_de864a56",
+          "target": "pick_object_relative_position_b14d3cb3"
+        },
+        {
+          "source": "pick_object_relative_position_b14d3cb3",
+          "target": "place_objects_on_table_151fb40e"
+        },
+        {
+          "source": "place_objects_on_table_151fb40e",
+          "target": "table_e966df99"
+        },
+        {
+          "source": "place_objects_on_table_151fb40e",
+          "target": "create_tabletop_object_8b82cbed"
+        },
+        {
+          "source": "place_objects_on_table_151fb40e",
+          "target": "create_tabletop_object_73e2fd92"
+        },
+        {
+          "source": "place_objects_on_table_151fb40e",
+          "target": "create_tabletop_object_22cdddd5"
+        },
+        {
+          "source": "place_objects_on_table_151fb40e",
+          "target": "create_tabletop_object_bcb71a59"
+        },
+        {
+          "source": "place_objects_on_table_151fb40e",
+          "target": "create_tabletop_object_4cc8bbac"
+        },
+        {
+          "source": "place_objects_on_table_151fb40e",
+          "target": "create_tabletop_object_908b67bc"
+        },
+        {
+          "source": "create_tabletop_object_8b82cbed",
+          "target": "benchmark_building_blocks_b2e0babd"
+        },
+        {
+          "source": "create_tabletop_object_73e2fd92",
+          "target": "benchmark_building_blocks_25f7d2c1"
+        },
+        {
+          "source": "create_tabletop_object_22cdddd5",
+          "target": "benchmark_stationery_a41b4c02"
+        },
+        {
+          "source": "create_tabletop_object_bcb71a59",
+          "target": "benchmark_rubik_cube_8b57b023"
+        },
+        {
+          "source": "create_tabletop_object_4cc8bbac",
+          "target": "benchmark_apple_6bab142b"
+        },
+        {
+          "source": "create_tabletop_object_908b67bc",
+          "target": "benchmark_clock_74412c86"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_de864a56"
+        },
+        {
+          "id": "pick_object_relative_position_b14d3cb3"
+        },
+        {
+          "id": "place_objects_on_table_151fb40e"
+        },
+        {
+          "id": "table_e966df99",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_8b82cbed"
+        },
+        {
+          "id": "benchmark_building_blocks_b2e0babd",
+          "tags": [
+            "building_blocks",
+            "object",
+            "building blocks",
+            "\u79ef\u6728",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_73e2fd92"
+        },
+        {
+          "id": "benchmark_building_blocks_25f7d2c1",
+          "tags": [
+            "building_blocks",
+            "object",
+            "building blocks",
+            "\u79ef\u6728",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_22cdddd5"
+        },
+        {
+          "id": "benchmark_stationery_a41b4c02",
+          "tags": [
+            "yellow_stapler",
+            "object",
+            "yellow stapler",
+            "\u9ec4\u8272\u8ba2\u4e66\u673a"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_bcb71a59"
+        },
+        {
+          "id": "benchmark_rubik_cube_8b57b023",
+          "tags": [
+            "rubik_cube",
+            "object",
+            "rubik cube",
+            "\u9b54\u65b9"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_4cc8bbac"
+        },
+        {
+          "id": "benchmark_apple_6bab142b",
+          "tags": [
+            "apple",
+            "object",
+            "apple",
+            "\u82f9\u679c"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_908b67bc"
+        },
+        {
+          "id": "benchmark_clock_74412c86",
+          "tags": [
+            "clock",
+            "object",
+            "clock",
+            "\u95f9\u949f"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 3629093282
+}

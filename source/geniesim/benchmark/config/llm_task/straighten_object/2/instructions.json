@@ -1,8 +1,0 @@
-{
-  "instructions": [
-    {
-      "instruction": "The right arm picked up the Sprite on the table. Straighten the Sprite with the right arm and return it to its original position."
-    }
-  ],
-  "task_id": "straighten_object"
-}

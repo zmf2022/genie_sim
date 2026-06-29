@@ -1,0 +1,39 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "benchmark_rubik_cube_3fa80197|[0.1,0.1,0.1]|left_gripper"
+              },
+              {
+                "Follow": "benchmark_rubik_cube_3fa80197|[0.1,0.1,0.1]|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "PickUpOnGripper": "benchmark_rubik_cube_3fa80197|left_gripper"
+              },
+              {
+                "PickUpOnGripper": "benchmark_rubik_cube_3fa80197|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "pick_object_relative_position"
+  }
+}

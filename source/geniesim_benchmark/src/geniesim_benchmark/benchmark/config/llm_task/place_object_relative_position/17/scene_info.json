@@ -1,0 +1,454 @@
+{
+  "layout": {
+    "benchmark_bottle_91952483": {
+      "description": {
+        "color": "light-green",
+        "descriptive_terms": [
+          "cylindrical",
+          "smooth",
+          "translucent",
+          "rounded",
+          "portable"
+        ],
+        "dimensions": [
+          0.07978935241699218,
+          0.1634049835205078,
+          0.07737431716918945
+        ],
+        "full_description": [
+          "A light green, cylindrical bottle with a black lid and band, featuring a glossy finish and minor surface markings."
+        ],
+        "materials": [
+          "plastic",
+          "glass"
+        ],
+        "object_category": [
+          "container",
+          "bottle"
+        ],
+        "semantic_name": [
+          "bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "water bottle",
+        "benchmark_bottle_017",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_c3e06fdf",
+        "table_with_random_objects_d80840ae",
+        "place_random_objects_on_desk_ee5c2ef6",
+        "benchmark_bottle_91952483"
+      ],
+      "usd": "benchmark_bottle_017",
+      "xyz": [
+        -0.087,
+        -0.131,
+        1.023
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.055343,
+        0.998467
+      ]
+    },
+    "benchmark_bowl_sponge_9a16b00d": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "porous",
+          "flexible",
+          "absorbent",
+          "textured",
+          "rectangular"
+        ],
+        "dimensions": [
+          0.08157370984554291,
+          0.02987557463347912,
+          0.05640790797770023
+        ],
+        "full_description": [
+          "A rectangular sponge with a yellow porous base and a green abrasive top layer."
+        ],
+        "materials": [
+          "plastic",
+          "foam"
+        ],
+        "object_category": [
+          "kitchen",
+          "cleaning"
+        ],
+        "semantic_name": [
+          "sponge"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "bowl sponge",
+        "benchmark_bowl_sponge_000",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_c3e06fdf",
+        "table_with_random_objects_d80840ae",
+        "place_random_objects_on_desk_ee5c2ef6",
+        "benchmark_bowl_sponge_9a16b00d"
+      ],
+      "usd": "benchmark_bowl_sponge_000",
+      "xyz": [
+        0.071,
+        -0.121,
+        0.89
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.036286,
+        0.999341
+      ]
+    },
+    "benchmark_building_blocks_abe6c5ed": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "small",
+          "red",
+          "cubic",
+          "simple",
+          "solid"
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          0.03
+        ],
+        "full_description": [
+          "A small, solid red cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "building_block"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "cube",
+        "unit": "m"
+      },
+      "keywords": [
+        "building blocks",
+        "benchmark_building_blocks_072",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_c3e06fdf",
+        "table_with_random_objects_d80840ae",
+        "place_random_objects_on_desk_ee5c2ef6",
+        "benchmark_building_blocks_abe6c5ed"
+      ],
+      "usd": "benchmark_building_blocks_072",
+      "xyz": [
+        0.007,
+        0.073,
+        0.89
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.103251,
+        0.994655
+      ]
+    },
+    "benchmark_rubik_cube_8017e20a": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "colorful",
+          "complex",
+          "geometric",
+          "small",
+          "plastic"
+        ],
+        "dimensions": [
+          0.057,
+          0.057,
+          0.057
+        ],
+        "full_description": [
+          "A 3x3 Rubik's cube with pastel-colored faces including yellow, pink, and cyan on a black background."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "puzzle",
+          "toy"
+        ],
+        "semantic_name": [
+          "rubik_cube"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "rubik cube",
+        "benchmark_rubik_cube_001",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_c3e06fdf",
+        "table_with_random_objects_d80840ae",
+        "place_random_objects_on_desk_ee5c2ef6",
+        "benchmark_rubik_cube_8017e20a"
+      ],
+      "usd": "benchmark_rubik_cube_001",
+      "xyz": [
+        -0.195,
+        0.2,
+        0.917
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.149059,
+        0.988828
+      ]
+    },
+    "genie_beverage_bottle_aef0e69e": {
+      "description": {
+        "color": "black",
+        "descriptive_terms": [
+          "cylindrical",
+          "black",
+          "plastic",
+          "packaged",
+          "beverage"
+        ],
+        "dimensions": [
+          0.04871850088238716,
+          0.16691981256008148,
+          0.05984169989824295
+        ],
+        "full_description": [
+          "A black plastic beverage bottle with a white cap and a label featuring red grapes and Chinese text."
+        ],
+        "materials": [
+          "plastic",
+          "label"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "grape juice",
+        "genie_beverage_bottle_009",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_c3e06fdf",
+        "table_with_random_objects_d80840ae",
+        "place_random_objects_on_desk_ee5c2ef6",
+        "genie_beverage_bottle_aef0e69e"
+      ],
+      "usd": "genie_beverage_bottle_009",
+      "xyz": [
+        0.08,
+        0.233,
+        1.029
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.108075,
+        0.994143
+      ]
+    },
+    "table_1abc9b5b": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_c3e06fdf",
+        "table_with_random_objects_d80840ae",
+        "place_random_objects_on_desk_ee5c2ef6",
+        "table_1abc9b5b"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_c3e06fdf",
+          "target": "table_with_random_objects_d80840ae"
+        },
+        {
+          "source": "table_with_random_objects_d80840ae",
+          "target": "place_random_objects_on_desk_ee5c2ef6"
+        },
+        {
+          "source": "place_random_objects_on_desk_ee5c2ef6",
+          "target": "table_1abc9b5b"
+        },
+        {
+          "source": "place_random_objects_on_desk_ee5c2ef6",
+          "target": "benchmark_bottle_91952483"
+        },
+        {
+          "source": "place_random_objects_on_desk_ee5c2ef6",
+          "target": "benchmark_building_blocks_abe6c5ed"
+        },
+        {
+          "source": "place_random_objects_on_desk_ee5c2ef6",
+          "target": "benchmark_bowl_sponge_9a16b00d"
+        },
+        {
+          "source": "place_random_objects_on_desk_ee5c2ef6",
+          "target": "benchmark_rubik_cube_8017e20a"
+        },
+        {
+          "source": "place_random_objects_on_desk_ee5c2ef6",
+          "target": "genie_beverage_bottle_aef0e69e"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_c3e06fdf"
+        },
+        {
+          "id": "table_with_random_objects_d80840ae"
+        },
+        {
+          "id": "place_random_objects_on_desk_ee5c2ef6"
+        },
+        {
+          "id": "table_1abc9b5b",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_bottle_91952483",
+          "tags": [
+            "water bottle",
+            "benchmark_bottle_017",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_building_blocks_abe6c5ed",
+          "tags": [
+            "building blocks",
+            "benchmark_building_blocks_072",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_bowl_sponge_9a16b00d",
+          "tags": [
+            "bowl sponge",
+            "benchmark_bowl_sponge_000",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_rubik_cube_8017e20a",
+          "tags": [
+            "rubik cube",
+            "benchmark_rubik_cube_001",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "genie_beverage_bottle_aef0e69e",
+          "tags": [
+            "grape juice",
+            "genie_beverage_bottle_009",
+            "on_desk",
+            "right"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 3776618574
+}

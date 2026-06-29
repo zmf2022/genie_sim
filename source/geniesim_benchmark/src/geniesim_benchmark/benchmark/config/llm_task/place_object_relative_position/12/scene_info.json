@@ -1,0 +1,316 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_30e1337b": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "cylindrical",
+          "orange",
+          "metallic",
+          "printed",
+          "beverage"
+        ],
+        "dimensions": [
+          0.06648768615722657,
+          0.1158542938232422,
+          0.06647872543334961
+        ],
+        "full_description": [
+          "An orange aluminum soda can with a silver top and bottom, featuring the Fanta logo and branding."
+        ],
+        "materials": [
+          "aluminum",
+          "plastic",
+          "printed label"
+        ],
+        "object_category": [
+          "container",
+          "beverage can"
+        ],
+        "semantic_name": [
+          "can"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "fanta",
+        "benchmark_beverage_bottle_003",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_f8329d8d",
+        "table_with_random_objects_68e333c9",
+        "place_random_objects_on_desk_ec486c2a",
+        "benchmark_beverage_bottle_30e1337b"
+      ],
+      "usd": "benchmark_beverage_bottle_003",
+      "xyz": [
+        0.095,
+        -0.164,
+        0.976
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.098249,
+        0.995162
+      ]
+    },
+    "benchmark_bowl_sponge_acf73312": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "porous",
+          "flexible",
+          "absorbent",
+          "textured",
+          "rectangular"
+        ],
+        "dimensions": [
+          0.08157370984554291,
+          0.02987557463347912,
+          0.05640790797770023
+        ],
+        "full_description": [
+          "A rectangular sponge with a yellow porous base and a green abrasive top layer."
+        ],
+        "materials": [
+          "plastic",
+          "foam"
+        ],
+        "object_category": [
+          "kitchen",
+          "cleaning"
+        ],
+        "semantic_name": [
+          "sponge"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "bowl sponge",
+        "benchmark_bowl_sponge_000",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_f8329d8d",
+        "table_with_random_objects_68e333c9",
+        "place_random_objects_on_desk_ec486c2a",
+        "benchmark_bowl_sponge_acf73312"
+      ],
+      "usd": "benchmark_bowl_sponge_000",
+      "xyz": [
+        0.015,
+        0.075,
+        0.89
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.091135,
+        0.995839
+      ]
+    },
+    "benchmark_rubik_cube_cc25a1e6": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "colorful",
+          "complex",
+          "geometric",
+          "small",
+          "plastic"
+        ],
+        "dimensions": [
+          0.057,
+          0.057,
+          0.057
+        ],
+        "full_description": [
+          "A 3x3 Rubik's cube with pastel-colored faces including yellow, pink, and cyan on a black background."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "puzzle",
+          "toy"
+        ],
+        "semantic_name": [
+          "rubik_cube"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "rubik cube",
+        "benchmark_rubik_cube_001",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_f8329d8d",
+        "table_with_random_objects_68e333c9",
+        "place_random_objects_on_desk_ec486c2a",
+        "benchmark_rubik_cube_cc25a1e6"
+      ],
+      "usd": "benchmark_rubik_cube_001",
+      "xyz": [
+        -0.157,
+        0.182,
+        0.917
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.022301,
+        0.999751
+      ]
+    },
+    "table_ddbe14d7": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_f8329d8d",
+        "table_with_random_objects_68e333c9",
+        "place_random_objects_on_desk_ec486c2a",
+        "table_ddbe14d7"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_f8329d8d",
+          "target": "table_with_random_objects_68e333c9"
+        },
+        {
+          "source": "table_with_random_objects_68e333c9",
+          "target": "place_random_objects_on_desk_ec486c2a"
+        },
+        {
+          "source": "place_random_objects_on_desk_ec486c2a",
+          "target": "table_ddbe14d7"
+        },
+        {
+          "source": "place_random_objects_on_desk_ec486c2a",
+          "target": "benchmark_bowl_sponge_acf73312"
+        },
+        {
+          "source": "place_random_objects_on_desk_ec486c2a",
+          "target": "benchmark_beverage_bottle_30e1337b"
+        },
+        {
+          "source": "place_random_objects_on_desk_ec486c2a",
+          "target": "benchmark_rubik_cube_cc25a1e6"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_f8329d8d"
+        },
+        {
+          "id": "table_with_random_objects_68e333c9"
+        },
+        {
+          "id": "place_random_objects_on_desk_ec486c2a"
+        },
+        {
+          "id": "table_ddbe14d7",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_bowl_sponge_acf73312",
+          "tags": [
+            "bowl sponge",
+            "benchmark_bowl_sponge_000",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_beverage_bottle_30e1337b",
+          "tags": [
+            "fanta",
+            "benchmark_beverage_bottle_003",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_rubik_cube_cc25a1e6",
+          "tags": [
+            "rubik cube",
+            "benchmark_rubik_cube_001",
+            "on_desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 309098278
+}

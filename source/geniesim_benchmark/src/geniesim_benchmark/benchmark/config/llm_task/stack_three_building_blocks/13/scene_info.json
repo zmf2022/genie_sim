@@ -1,0 +1,318 @@
+{
+  "layout": {
+    "benchmark_building_blocks_1f545845": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "small",
+          "red",
+          "geometric",
+          "faceted",
+          "rigid"
+        ],
+        "dimensions": [
+          0.05,
+          0.05,
+          0.05
+        ],
+        "full_description": [
+          "A small, solid red cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "building_block"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "scattered_block_0",
+        "cube",
+        "building_block",
+        "toy",
+        "region_0"
+      ],
+      "tags": [
+        "root_scene_03b71ddb",
+        "table_with_scattered_blocks_01e430ef",
+        "scattered_blocks_ca3f4d5b",
+        "benchmark_building_blocks_1f545845"
+      ],
+      "usd": "benchmark_building_blocks_074",
+      "xyz": [
+        -0.146,
+        0.187,
+        0.885
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.030808,
+        0.999525
+      ]
+    },
+    "benchmark_building_blocks_a2c5d164": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "small",
+          "red",
+          "geometric",
+          "faceted",
+          "rigid"
+        ],
+        "dimensions": [
+          0.05,
+          0.05,
+          0.05
+        ],
+        "full_description": [
+          "A small, solid red cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "building_block"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "scattered_block_1",
+        "cube",
+        "building_block",
+        "toy",
+        "region_1"
+      ],
+      "tags": [
+        "root_scene_03b71ddb",
+        "table_with_scattered_blocks_01e430ef",
+        "scattered_blocks_ca3f4d5b",
+        "benchmark_building_blocks_a2c5d164"
+      ],
+      "usd": "benchmark_building_blocks_074",
+      "xyz": [
+        -0.023,
+        -0.238,
+        0.885
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.077533,
+        0.99699
+      ]
+    },
+    "benchmark_building_blocks_dcb71ccf": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "small",
+          "red",
+          "geometric",
+          "faceted",
+          "rigid"
+        ],
+        "dimensions": [
+          0.05,
+          0.05,
+          0.05
+        ],
+        "full_description": [
+          "A small, solid red cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "building_block"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "scattered_block_2",
+        "cube",
+        "building_block",
+        "toy",
+        "region_2"
+      ],
+      "tags": [
+        "root_scene_03b71ddb",
+        "table_with_scattered_blocks_01e430ef",
+        "scattered_blocks_ca3f4d5b",
+        "benchmark_building_blocks_dcb71ccf"
+      ],
+      "usd": "benchmark_building_blocks_074",
+      "xyz": [
+        -0.148,
+        -0.223,
+        0.885
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.027118,
+        0.999632
+      ]
+    },
+    "table_56ad2206": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "furniture",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_03b71ddb",
+        "table_with_scattered_blocks_01e430ef",
+        "table_56ad2206"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_03b71ddb",
+          "target": "table_with_scattered_blocks_01e430ef"
+        },
+        {
+          "source": "table_with_scattered_blocks_01e430ef",
+          "target": "table_56ad2206"
+        },
+        {
+          "source": "table_with_scattered_blocks_01e430ef",
+          "target": "scattered_blocks_ca3f4d5b"
+        },
+        {
+          "source": "scattered_blocks_ca3f4d5b",
+          "target": "benchmark_building_blocks_1f545845"
+        },
+        {
+          "source": "scattered_blocks_ca3f4d5b",
+          "target": "benchmark_building_blocks_a2c5d164"
+        },
+        {
+          "source": "scattered_blocks_ca3f4d5b",
+          "target": "benchmark_building_blocks_dcb71ccf"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_03b71ddb"
+        },
+        {
+          "id": "table_with_scattered_blocks_01e430ef"
+        },
+        {
+          "id": "table_56ad2206",
+          "tags": [
+            "workspace_table",
+            "table",
+            "furniture",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "scattered_blocks_ca3f4d5b"
+        },
+        {
+          "id": "benchmark_building_blocks_1f545845",
+          "tags": [
+            "scattered_block_0",
+            "cube",
+            "building_block",
+            "toy",
+            "region_0"
+          ]
+        },
+        {
+          "id": "benchmark_building_blocks_a2c5d164",
+          "tags": [
+            "scattered_block_1",
+            "cube",
+            "building_block",
+            "toy",
+            "region_1"
+          ]
+        },
+        {
+          "id": "benchmark_building_blocks_dcb71ccf",
+          "tags": [
+            "scattered_block_2",
+            "cube",
+            "building_block",
+            "toy",
+            "region_2"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_scattered_blocks",
+  "seed": 2854619686
+}

@@ -1,0 +1,387 @@
+{
+  "layout": {
+    "benchmark_bowl_sponge_5e4683e9": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "porous",
+          "flexible",
+          "absorbent",
+          "textured",
+          "rectangular"
+        ],
+        "dimensions": [
+          0.08157370984554291,
+          0.02987557463347912,
+          0.05640790797770023
+        ],
+        "full_description": [
+          "A rectangular sponge with a yellow porous base and a green abrasive top layer."
+        ],
+        "materials": [
+          "plastic",
+          "foam"
+        ],
+        "object_category": [
+          "kitchen",
+          "cleaning"
+        ],
+        "semantic_name": [
+          "sponge"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "bowl sponge",
+        "benchmark_bowl_sponge_000",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_ff495029",
+        "table_with_random_objects_ed253bb7",
+        "place_random_objects_on_desk_599d88f1",
+        "benchmark_bowl_sponge_5e4683e9"
+      ],
+      "usd": "benchmark_bowl_sponge_000",
+      "xyz": [
+        -0.181,
+        0.034,
+        0.89
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.118679,
+        0.992933
+      ]
+    },
+    "benchmark_cup_4b6231d9": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "cylindrical",
+          "white",
+          "simple",
+          "printed",
+          "small"
+        ],
+        "dimensions": [
+          0.0634383037686348,
+          0.07829996943473816,
+          0.06343957036733627
+        ],
+        "full_description": [
+          "A white paper cup with a black line-drawn pattern and yellow accents depicting household items."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "kitchenware",
+          "drinking vessel"
+        ],
+        "semantic_name": [
+          "cup"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "paper cup",
+        "benchmark_cup_105",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_ff495029",
+        "table_with_random_objects_ed253bb7",
+        "place_random_objects_on_desk_599d88f1",
+        "benchmark_cup_4b6231d9"
+      ],
+      "usd": "benchmark_cup_105",
+      "xyz": [
+        0.014,
+        -0.119,
+        0.938
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.142342,
+        0.989818
+      ]
+    },
+    "benchmark_medicine_bottle_fcd24999": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "cylindrical",
+          "white",
+          "yellow",
+          "packaged",
+          "small"
+        ],
+        "dimensions": [
+          0.06152497100830078,
+          0.11030638122558593,
+          0.06207268714904785
+        ],
+        "full_description": [
+          "A white plastic bottle with a bright yellow label featuring black text, including 'Glucosamine HCl Mega', and a white cap."
+        ],
+        "materials": [
+          "plastic",
+          "paper"
+        ],
+        "object_category": [
+          "container",
+          "medicine"
+        ],
+        "semantic_name": [
+          "medicine_bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "medicine bottle",
+        "benchmark_medicine_bottle_000",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_ff495029",
+        "table_with_random_objects_ed253bb7",
+        "place_random_objects_on_desk_599d88f1",
+        "benchmark_medicine_bottle_fcd24999"
+      ],
+      "usd": "benchmark_medicine_bottle_000",
+      "xyz": [
+        -0.151,
+        -0.215,
+        0.97
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.05026,
+        0.998736
+      ]
+    },
+    "benchmark_stationery_7d77ecec": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "yellow",
+          "rectangular",
+          "plastic",
+          "metal",
+          "compact",
+          "office",
+          "functional"
+        ],
+        "dimensions": [
+          0.03533313795924187,
+          0.06165076792240143,
+          0.13363394886255264
+        ],
+        "full_description": [
+          "A small stapler with a bright yellow top and a translucent gray base."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "stationery",
+          "office_supply"
+        ],
+        "semantic_name": [
+          "stapler"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "yellow stapler",
+        "benchmark_stationery_009",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_ff495029",
+        "table_with_random_objects_ed253bb7",
+        "place_random_objects_on_desk_599d88f1",
+        "benchmark_stationery_7d77ecec"
+      ],
+      "usd": "benchmark_stationery_009",
+      "xyz": [
+        0.014,
+        0.117,
+        0.91
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.098943,
+        0.995093
+      ]
+    },
+    "table_99637b25": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_ff495029",
+        "table_with_random_objects_ed253bb7",
+        "place_random_objects_on_desk_599d88f1",
+        "table_99637b25"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_ff495029",
+          "target": "table_with_random_objects_ed253bb7"
+        },
+        {
+          "source": "table_with_random_objects_ed253bb7",
+          "target": "place_random_objects_on_desk_599d88f1"
+        },
+        {
+          "source": "place_random_objects_on_desk_599d88f1",
+          "target": "table_99637b25"
+        },
+        {
+          "source": "place_random_objects_on_desk_599d88f1",
+          "target": "benchmark_cup_4b6231d9"
+        },
+        {
+          "source": "place_random_objects_on_desk_599d88f1",
+          "target": "benchmark_bowl_sponge_5e4683e9"
+        },
+        {
+          "source": "place_random_objects_on_desk_599d88f1",
+          "target": "benchmark_medicine_bottle_fcd24999"
+        },
+        {
+          "source": "place_random_objects_on_desk_599d88f1",
+          "target": "benchmark_stationery_7d77ecec"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_ff495029"
+        },
+        {
+          "id": "table_with_random_objects_ed253bb7"
+        },
+        {
+          "id": "place_random_objects_on_desk_599d88f1"
+        },
+        {
+          "id": "table_99637b25",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_cup_4b6231d9",
+          "tags": [
+            "paper cup",
+            "benchmark_cup_105",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_bowl_sponge_5e4683e9",
+          "tags": [
+            "bowl sponge",
+            "benchmark_bowl_sponge_000",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_medicine_bottle_fcd24999",
+          "tags": [
+            "medicine bottle",
+            "benchmark_medicine_bottle_000",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_stationery_7d77ecec",
+          "tags": [
+            "yellow stapler",
+            "benchmark_stationery_009",
+            "on_desk",
+            "right"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 1408452167
+}

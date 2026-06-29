@@ -1,0 +1,500 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_047da30f": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "cylindrical",
+          "red",
+          "liquid",
+          "bottled",
+          "packaged"
+        ],
+        "dimensions": [
+          0.06153380125761032,
+          0.14993929862976074,
+          0.06153379566967487
+        ],
+        "full_description": [
+          "A plastic bottle with a red label and black cap, containing dark liquid, featuring Chinese text and a Suntory logo."
+        ],
+        "materials": [
+          "plastic",
+          "liquid"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "oolong_tea_beverage",
+        "object",
+        "oolong tea beverage",
+        "\u4e4c\u9f99\u8336\u996e\u6599"
+      ],
+      "tags": [
+        "root_scene_ceea5064",
+        "pick_object_relative_position_847ccbfd",
+        "place_objects_on_table_ca7455a3",
+        "create_tabletop_object_e361f7eb",
+        "benchmark_beverage_bottle_047da30f"
+      ],
+      "usd": "benchmark_beverage_bottle_004",
+      "xyz": [
+        0.04,
+        -0.242,
+        0.797
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.537933,
+        0.842988
+      ]
+    },
+    "benchmark_lemon_1d3c7080": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "citrus",
+          "yellow",
+          "organic",
+          "fresh",
+          "juicy"
+        ],
+        "dimensions": [
+          0.0652875304222107,
+          0.08429359644651413,
+          0.06925402581691742
+        ],
+        "full_description": [
+          "A bright yellow, glossy, oval-shaped fruit with a small green stem nub."
+        ],
+        "materials": [
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "food",
+          "citrus fruit"
+        ],
+        "semantic_name": [
+          "lemon"
+        ],
+        "shape": "irregular",
+        "unit": "m"
+      },
+      "keywords": [
+        "lemon",
+        "object",
+        "lemon",
+        "\u67e0\u6aac"
+      ],
+      "tags": [
+        "root_scene_ceea5064",
+        "pick_object_relative_position_847ccbfd",
+        "place_objects_on_table_ca7455a3",
+        "create_tabletop_object_94104b8d",
+        "benchmark_lemon_1d3c7080"
+      ],
+      "usd": "benchmark_lemon_030",
+      "xyz": [
+        -0.188,
+        0.203,
+        0.774
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.594398,
+        0.804171
+      ]
+    },
+    "benchmark_peach_94bb4794": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "round",
+          "ripe",
+          "juicy",
+          "fuzzy",
+          "organic"
+        ],
+        "dimensions": [
+          0.0926,
+          0.0916,
+          0.0869
+        ],
+        "full_description": [
+          "A round, fuzzy peach with a gradient of red and yellow skin."
+        ],
+        "materials": [
+          "flesh",
+          "skin"
+        ],
+        "object_category": [
+          "fruit",
+          "stone fruit"
+        ],
+        "semantic_name": [
+          "peach"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "peach",
+        "object",
+        "peach",
+        "\u6843\u5b50"
+      ],
+      "tags": [
+        "root_scene_ceea5064",
+        "pick_object_relative_position_847ccbfd",
+        "place_objects_on_table_ca7455a3",
+        "create_tabletop_object_4014d8d5",
+        "benchmark_peach_94bb4794"
+      ],
+      "usd": "benchmark_peach_021",
+      "xyz": [
+        0.189,
+        -0.084,
+        0.778
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.515962,
+        0.856611
+      ]
+    },
+    "benchmark_tape_measure_caaa9624": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "compact",
+          "durable",
+          "portable",
+          "functional",
+          "robust"
+        ],
+        "dimensions": [
+          0.0889030990600586,
+          0.08185286712646485,
+          0.04844463539123535
+        ],
+        "full_description": [
+          "A compact tape measure with a black and bright yellow plastic casing, featuring a visible '7.5m' label on its side."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "tool",
+          "measurement"
+        ],
+        "semantic_name": [
+          "tape_measure"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "tape_measure",
+        "object",
+        "tape measure",
+        "\u5377\u5c3a",
+        "target"
+      ],
+      "tags": [
+        "root_scene_ceea5064",
+        "pick_object_relative_position_847ccbfd",
+        "place_objects_on_table_ca7455a3",
+        "create_tabletop_object_4acf3271",
+        "benchmark_tape_measure_caaa9624"
+      ],
+      "usd": "benchmark_tape_measure_007",
+      "xyz": [
+        0.105,
+        0.164,
+        0.773
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.052865,
+        0.998602
+      ]
+    },
+    "benchmark_tape_measure_d56a9567": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "compact",
+          "durable",
+          "portable",
+          "functional",
+          "robust"
+        ],
+        "dimensions": [
+          0.0889030990600586,
+          0.08185286712646485,
+          0.04844463539123535
+        ],
+        "full_description": [
+          "A compact tape measure with a black and bright yellow plastic casing, featuring a visible '7.5m' label on its side."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "tool",
+          "measurement"
+        ],
+        "semantic_name": [
+          "tape_measure"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "tape_measure",
+        "object",
+        "tape measure",
+        "\u5377\u5c3a",
+        "target"
+      ],
+      "tags": [
+        "root_scene_ceea5064",
+        "pick_object_relative_position_847ccbfd",
+        "place_objects_on_table_ca7455a3",
+        "create_tabletop_object_53b7622e",
+        "benchmark_tape_measure_d56a9567"
+      ],
+      "usd": "benchmark_tape_measure_007",
+      "xyz": [
+        -0.188,
+        -0.084,
+        0.773
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.586935,
+        0.809634
+      ]
+    },
+    "table_40c8399c": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_ceea5064",
+        "pick_object_relative_position_847ccbfd",
+        "place_objects_on_table_ca7455a3",
+        "table_40c8399c"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_ceea5064",
+          "target": "pick_object_relative_position_847ccbfd"
+        },
+        {
+          "source": "pick_object_relative_position_847ccbfd",
+          "target": "place_objects_on_table_ca7455a3"
+        },
+        {
+          "source": "place_objects_on_table_ca7455a3",
+          "target": "table_40c8399c"
+        },
+        {
+          "source": "place_objects_on_table_ca7455a3",
+          "target": "create_tabletop_object_4acf3271"
+        },
+        {
+          "source": "place_objects_on_table_ca7455a3",
+          "target": "create_tabletop_object_53b7622e"
+        },
+        {
+          "source": "place_objects_on_table_ca7455a3",
+          "target": "create_tabletop_object_4014d8d5"
+        },
+        {
+          "source": "place_objects_on_table_ca7455a3",
+          "target": "create_tabletop_object_94104b8d"
+        },
+        {
+          "source": "place_objects_on_table_ca7455a3",
+          "target": "create_tabletop_object_e361f7eb"
+        },
+        {
+          "source": "create_tabletop_object_4acf3271",
+          "target": "benchmark_tape_measure_caaa9624"
+        },
+        {
+          "source": "create_tabletop_object_53b7622e",
+          "target": "benchmark_tape_measure_d56a9567"
+        },
+        {
+          "source": "create_tabletop_object_4014d8d5",
+          "target": "benchmark_peach_94bb4794"
+        },
+        {
+          "source": "create_tabletop_object_94104b8d",
+          "target": "benchmark_lemon_1d3c7080"
+        },
+        {
+          "source": "create_tabletop_object_e361f7eb",
+          "target": "benchmark_beverage_bottle_047da30f"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_ceea5064"
+        },
+        {
+          "id": "pick_object_relative_position_847ccbfd"
+        },
+        {
+          "id": "place_objects_on_table_ca7455a3"
+        },
+        {
+          "id": "table_40c8399c",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_4acf3271"
+        },
+        {
+          "id": "benchmark_tape_measure_caaa9624",
+          "tags": [
+            "tape_measure",
+            "object",
+            "tape measure",
+            "\u5377\u5c3a",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_53b7622e"
+        },
+        {
+          "id": "benchmark_tape_measure_d56a9567",
+          "tags": [
+            "tape_measure",
+            "object",
+            "tape measure",
+            "\u5377\u5c3a",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_4014d8d5"
+        },
+        {
+          "id": "benchmark_peach_94bb4794",
+          "tags": [
+            "peach",
+            "object",
+            "peach",
+            "\u6843\u5b50"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_94104b8d"
+        },
+        {
+          "id": "benchmark_lemon_1d3c7080",
+          "tags": [
+            "lemon",
+            "object",
+            "lemon",
+            "\u67e0\u6aac"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_e361f7eb"
+        },
+        {
+          "id": "benchmark_beverage_bottle_047da30f",
+          "tags": [
+            "oolong_tea_beverage",
+            "object",
+            "oolong tea beverage",
+            "\u4e4c\u9f99\u8336\u996e\u6599"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 929192523
+}

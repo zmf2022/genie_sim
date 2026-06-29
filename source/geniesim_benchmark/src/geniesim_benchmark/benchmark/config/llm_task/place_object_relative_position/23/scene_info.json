@@ -1,0 +1,384 @@
+{
+  "layout": {
+    "benchmark_apple_2b0ad11f": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "round",
+          "red",
+          "ripe",
+          "smooth",
+          "natural"
+        ],
+        "dimensions": [
+          0.093,
+          0.0945,
+          0.0917
+        ],
+        "full_description": [
+          "A red and yellow apple with a glossy surface and a short brown stem."
+        ],
+        "materials": [
+          "fruit flesh",
+          "skin"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "apple"
+        ],
+        "shape": "round",
+        "unit": "m"
+      },
+      "keywords": [
+        "apple",
+        "benchmark_apple_002",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_a262da78",
+        "table_with_random_objects_4e8f1497",
+        "place_random_objects_on_desk_454a4951",
+        "benchmark_apple_2b0ad11f"
+      ],
+      "usd": "benchmark_apple_002",
+      "xyz": [
+        0.103,
+        0.08,
+        0.955
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.042436,
+        0.999099
+      ]
+    },
+    "benchmark_bottle_b7ac1433": {
+      "description": {
+        "color": "light-green",
+        "descriptive_terms": [
+          "cylindrical",
+          "smooth",
+          "translucent",
+          "rounded",
+          "portable"
+        ],
+        "dimensions": [
+          0.07978935241699218,
+          0.1634049835205078,
+          0.07737431716918945
+        ],
+        "full_description": [
+          "A light green, cylindrical bottle with a black lid and band, featuring a glossy finish and minor surface markings."
+        ],
+        "materials": [
+          "plastic",
+          "glass"
+        ],
+        "object_category": [
+          "container",
+          "bottle"
+        ],
+        "semantic_name": [
+          "bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "water bottle",
+        "benchmark_bottle_017",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_a262da78",
+        "table_with_random_objects_4e8f1497",
+        "place_random_objects_on_desk_454a4951",
+        "benchmark_bottle_b7ac1433"
+      ],
+      "usd": "benchmark_bottle_017",
+      "xyz": [
+        -0.136,
+        -0.041,
+        1.023
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.044304,
+        0.999018
+      ]
+    },
+    "benchmark_cup_60973f42": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "octagonal",
+          "ceramic",
+          "modern",
+          "functional",
+          "minimalist"
+        ],
+        "dimensions": [
+          0.12438757717609406,
+          0.06310572847723961,
+          0.09321336448192596
+        ],
+        "full_description": [
+          "A white, geometrically faceted cup with a single handle and octagonal profile."
+        ],
+        "materials": [
+          "ceramic"
+        ],
+        "object_category": [
+          "kitchen",
+          "cup"
+        ],
+        "semantic_name": [
+          "cup"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "mug",
+        "benchmark_cup_043",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_a262da78",
+        "table_with_random_objects_4e8f1497",
+        "place_random_objects_on_desk_454a4951",
+        "benchmark_cup_60973f42"
+      ],
+      "usd": "benchmark_cup_043",
+      "xyz": [
+        0.043,
+        -0.1,
+        0.927
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.019689,
+        0.999806
+      ]
+    },
+    "benchmark_rubik_cube_d4e443f5": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "colorful",
+          "complex",
+          "geometric",
+          "small",
+          "plastic"
+        ],
+        "dimensions": [
+          0.057,
+          0.057,
+          0.057
+        ],
+        "full_description": [
+          "A 3x3 Rubik's cube with pastel-colored faces including yellow, pink, and cyan on a black background."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "puzzle",
+          "toy"
+        ],
+        "semantic_name": [
+          "rubik_cube"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "rubik cube",
+        "benchmark_rubik_cube_001",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_a262da78",
+        "table_with_random_objects_4e8f1497",
+        "place_random_objects_on_desk_454a4951",
+        "benchmark_rubik_cube_d4e443f5"
+      ],
+      "usd": "benchmark_rubik_cube_001",
+      "xyz": [
+        -0.056,
+        0.193,
+        0.917
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.00901,
+        0.999959
+      ]
+    },
+    "table_3c9f9366": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_a262da78",
+        "table_with_random_objects_4e8f1497",
+        "place_random_objects_on_desk_454a4951",
+        "table_3c9f9366"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_a262da78",
+          "target": "table_with_random_objects_4e8f1497"
+        },
+        {
+          "source": "table_with_random_objects_4e8f1497",
+          "target": "place_random_objects_on_desk_454a4951"
+        },
+        {
+          "source": "place_random_objects_on_desk_454a4951",
+          "target": "table_3c9f9366"
+        },
+        {
+          "source": "place_random_objects_on_desk_454a4951",
+          "target": "benchmark_bottle_b7ac1433"
+        },
+        {
+          "source": "place_random_objects_on_desk_454a4951",
+          "target": "benchmark_cup_60973f42"
+        },
+        {
+          "source": "place_random_objects_on_desk_454a4951",
+          "target": "benchmark_rubik_cube_d4e443f5"
+        },
+        {
+          "source": "place_random_objects_on_desk_454a4951",
+          "target": "benchmark_apple_2b0ad11f"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_a262da78"
+        },
+        {
+          "id": "table_with_random_objects_4e8f1497"
+        },
+        {
+          "id": "place_random_objects_on_desk_454a4951"
+        },
+        {
+          "id": "table_3c9f9366",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_bottle_b7ac1433",
+          "tags": [
+            "water bottle",
+            "benchmark_bottle_017",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_cup_60973f42",
+          "tags": [
+            "mug",
+            "benchmark_cup_043",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_rubik_cube_d4e443f5",
+          "tags": [
+            "rubik cube",
+            "benchmark_rubik_cube_001",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_apple_2b0ad11f",
+          "tags": [
+            "apple",
+            "benchmark_apple_002",
+            "on_desk",
+            "right"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 4091894669
+}

@@ -1,0 +1,30 @@
+planning_plugin: genie_sim_moveit_plugins/GeniePlannerManager
+request_adapters: >-
+    default_planner_request_adapters/FixWorkspaceBounds
+    default_planner_request_adapters/FixStartStateBounds
+    default_planner_request_adapters/FixStartStateCollision
+    default_planner_request_adapters/FixStartStatePathConstraints
+
+simple_arm_l:
+  default_planner_config: GenieRRTConnect
+  planner_configs:
+    GenieRRTConnect:
+      type: "GenieRRTConnect"
+
+simple_arm_r:
+  default_planner_config: GenieRRTConnect
+  planner_configs:
+    GenieRRTConnect:
+      type: "GenieRRTConnect"
+
+wbc_arm_l:
+  default_planner_config: GenieRRTConnect
+  planner_configs:
+    GenieRRTConnect:
+      type: "GenieRRTConnect"
+
+wbc_arm_r:
+  default_planner_config: GenieRRTConnect
+  planner_configs:
+    GenieRRTConnect:
+      type: "GenieRRTConnect"

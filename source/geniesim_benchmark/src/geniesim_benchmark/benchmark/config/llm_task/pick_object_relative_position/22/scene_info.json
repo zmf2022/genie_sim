@@ -1,0 +1,342 @@
+{
+  "layout": {
+    "benchmark_rubik_cube_3fa80197": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "colorful",
+          "complex",
+          "geometric",
+          "small",
+          "plastic"
+        ],
+        "dimensions": [
+          0.057,
+          0.057,
+          0.057
+        ],
+        "full_description": [
+          "A 3x3 Rubik's cube with pastel-colored faces including yellow, pink, and cyan on a black background."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "puzzle",
+          "toy"
+        ],
+        "semantic_name": [
+          "rubik_cube"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "rubik_cube",
+        "object",
+        "rubik cube",
+        "\u9b54\u65b9",
+        "target"
+      ],
+      "tags": [
+        "root_scene_089e6486",
+        "pick_object_relative_position_6fa2b4a1",
+        "place_objects_on_table_55787968",
+        "create_tabletop_object_136532f8",
+        "benchmark_rubik_cube_3fa80197"
+      ],
+      "usd": "benchmark_rubik_cube_001",
+      "xyz": [
+        -0.083,
+        0.191,
+        0.768
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.354055,
+        0.935225
+      ]
+    },
+    "benchmark_rubik_cube_f8cf5837": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "colorful",
+          "complex",
+          "geometric",
+          "small",
+          "plastic"
+        ],
+        "dimensions": [
+          0.057,
+          0.057,
+          0.057
+        ],
+        "full_description": [
+          "A 3x3 Rubik's cube with pastel-colored faces including yellow, pink, and cyan on a black background."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "puzzle",
+          "toy"
+        ],
+        "semantic_name": [
+          "rubik_cube"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "rubik_cube",
+        "object",
+        "rubik cube",
+        "\u9b54\u65b9",
+        "target"
+      ],
+      "tags": [
+        "root_scene_089e6486",
+        "pick_object_relative_position_6fa2b4a1",
+        "place_objects_on_table_55787968",
+        "create_tabletop_object_fbbe2f81",
+        "benchmark_rubik_cube_f8cf5837"
+      ],
+      "usd": "benchmark_rubik_cube_001",
+      "xyz": [
+        0.158,
+        0.024,
+        0.768
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.275922,
+        0.96118
+      ]
+    },
+    "benchmark_toy_car_fceafa87": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy_car",
+        "object",
+        "toy car",
+        "\u73a9\u5177\u8f66"
+      ],
+      "tags": [
+        "root_scene_089e6486",
+        "pick_object_relative_position_6fa2b4a1",
+        "place_objects_on_table_55787968",
+        "create_tabletop_object_95c083a1",
+        "benchmark_toy_car_fceafa87"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        -0.155,
+        0.054,
+        0.748
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.636908,
+        0.77094
+      ]
+    },
+    "table_bcc237d6": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_089e6486",
+        "pick_object_relative_position_6fa2b4a1",
+        "place_objects_on_table_55787968",
+        "table_bcc237d6"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_089e6486",
+          "target": "pick_object_relative_position_6fa2b4a1"
+        },
+        {
+          "source": "pick_object_relative_position_6fa2b4a1",
+          "target": "place_objects_on_table_55787968"
+        },
+        {
+          "source": "place_objects_on_table_55787968",
+          "target": "table_bcc237d6"
+        },
+        {
+          "source": "place_objects_on_table_55787968",
+          "target": "create_tabletop_object_fbbe2f81"
+        },
+        {
+          "source": "place_objects_on_table_55787968",
+          "target": "create_tabletop_object_136532f8"
+        },
+        {
+          "source": "place_objects_on_table_55787968",
+          "target": "create_tabletop_object_95c083a1"
+        },
+        {
+          "source": "create_tabletop_object_fbbe2f81",
+          "target": "benchmark_rubik_cube_f8cf5837"
+        },
+        {
+          "source": "create_tabletop_object_136532f8",
+          "target": "benchmark_rubik_cube_3fa80197"
+        },
+        {
+          "source": "create_tabletop_object_95c083a1",
+          "target": "benchmark_toy_car_fceafa87"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_089e6486"
+        },
+        {
+          "id": "pick_object_relative_position_6fa2b4a1"
+        },
+        {
+          "id": "place_objects_on_table_55787968"
+        },
+        {
+          "id": "table_bcc237d6",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_fbbe2f81"
+        },
+        {
+          "id": "benchmark_rubik_cube_f8cf5837",
+          "tags": [
+            "rubik_cube",
+            "object",
+            "rubik cube",
+            "\u9b54\u65b9",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_136532f8"
+        },
+        {
+          "id": "benchmark_rubik_cube_3fa80197",
+          "tags": [
+            "rubik_cube",
+            "object",
+            "rubik cube",
+            "\u9b54\u65b9",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_95c083a1"
+        },
+        {
+          "id": "benchmark_toy_car_fceafa87",
+          "tags": [
+            "toy_car",
+            "object",
+            "toy car",
+            "\u73a9\u5177\u8f66"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 3752139156
+}

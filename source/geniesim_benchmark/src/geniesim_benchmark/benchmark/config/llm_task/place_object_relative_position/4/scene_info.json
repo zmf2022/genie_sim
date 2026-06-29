@@ -1,0 +1,318 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_c79b846f": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "cylindrical",
+          "red",
+          "liquid",
+          "bottled",
+          "packaged"
+        ],
+        "dimensions": [
+          0.06153380125761032,
+          0.14993929862976074,
+          0.06153379566967487
+        ],
+        "full_description": [
+          "A plastic bottle with a red label and black cap, containing dark liquid, featuring Chinese text and a Suntory logo."
+        ],
+        "materials": [
+          "plastic",
+          "liquid"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "oolong tea beverage",
+        "benchmark_beverage_bottle_004",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_1cb74000",
+        "table_with_random_objects_4877e41f",
+        "place_random_objects_on_desk_98f22cf1",
+        "benchmark_beverage_bottle_c79b846f"
+      ],
+      "usd": "benchmark_beverage_bottle_004",
+      "xyz": [
+        -0.176,
+        0.015,
+        1.0
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.018203,
+        0.999834
+      ]
+    },
+    "benchmark_bowl_sponge_50521954": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "porous",
+          "flexible",
+          "absorbent",
+          "textured",
+          "rectangular"
+        ],
+        "dimensions": [
+          0.08157370984554291,
+          0.02987557463347912,
+          0.05640790797770023
+        ],
+        "full_description": [
+          "A rectangular sponge with a yellow porous base and a green abrasive top layer."
+        ],
+        "materials": [
+          "plastic",
+          "foam"
+        ],
+        "object_category": [
+          "kitchen",
+          "cleaning"
+        ],
+        "semantic_name": [
+          "sponge"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "bowl sponge",
+        "benchmark_bowl_sponge_000",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_1cb74000",
+        "table_with_random_objects_4877e41f",
+        "place_random_objects_on_desk_98f22cf1",
+        "benchmark_bowl_sponge_50521954"
+      ],
+      "usd": "benchmark_bowl_sponge_000",
+      "xyz": [
+        0.099,
+        -0.087,
+        0.89
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.047442,
+        0.998874
+      ]
+    },
+    "benchmark_stationery_b3661228": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "yellow",
+          "rectangular",
+          "plastic",
+          "metal",
+          "compact",
+          "office",
+          "functional"
+        ],
+        "dimensions": [
+          0.03533313795924187,
+          0.06165076792240143,
+          0.13363394886255264
+        ],
+        "full_description": [
+          "A small stapler with a bright yellow top and a translucent gray base."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "stationery",
+          "office_supply"
+        ],
+        "semantic_name": [
+          "stapler"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "yellow stapler",
+        "benchmark_stationery_009",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_1cb74000",
+        "table_with_random_objects_4877e41f",
+        "place_random_objects_on_desk_98f22cf1",
+        "benchmark_stationery_b3661228"
+      ],
+      "usd": "benchmark_stationery_009",
+      "xyz": [
+        -0.084,
+        -0.205,
+        0.91
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.016454,
+        0.999865
+      ]
+    },
+    "table_459312e1": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_1cb74000",
+        "table_with_random_objects_4877e41f",
+        "place_random_objects_on_desk_98f22cf1",
+        "table_459312e1"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_1cb74000",
+          "target": "table_with_random_objects_4877e41f"
+        },
+        {
+          "source": "table_with_random_objects_4877e41f",
+          "target": "place_random_objects_on_desk_98f22cf1"
+        },
+        {
+          "source": "place_random_objects_on_desk_98f22cf1",
+          "target": "table_459312e1"
+        },
+        {
+          "source": "place_random_objects_on_desk_98f22cf1",
+          "target": "benchmark_bowl_sponge_50521954"
+        },
+        {
+          "source": "place_random_objects_on_desk_98f22cf1",
+          "target": "benchmark_stationery_b3661228"
+        },
+        {
+          "source": "place_random_objects_on_desk_98f22cf1",
+          "target": "benchmark_beverage_bottle_c79b846f"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_1cb74000"
+        },
+        {
+          "id": "table_with_random_objects_4877e41f"
+        },
+        {
+          "id": "place_random_objects_on_desk_98f22cf1"
+        },
+        {
+          "id": "table_459312e1",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_bowl_sponge_50521954",
+          "tags": [
+            "bowl sponge",
+            "benchmark_bowl_sponge_000",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_stationery_b3661228",
+          "tags": [
+            "yellow stapler",
+            "benchmark_stationery_009",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_beverage_bottle_c79b846f",
+          "tags": [
+            "oolong tea beverage",
+            "benchmark_beverage_bottle_004",
+            "on_desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 1802855173
+}

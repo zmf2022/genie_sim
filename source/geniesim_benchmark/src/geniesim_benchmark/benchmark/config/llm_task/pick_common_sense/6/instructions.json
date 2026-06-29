@@ -1,0 +1,62 @@
+{
+  "instructions": [
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 1,
+      "instruction": "Give me a bottle of juice",
+      "target": {
+        "idn": "genie_beverage_bottle_f3053b27"
+      },
+      "template_key": "pick_common_sense"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 2,
+      "instruction": "Give me a food that can be eaten directly",
+      "target": {
+        "idn": "benchmark_green_apple_2f4c3ba0"
+      },
+      "template_key": "pick_common_sense"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 3,
+      "instruction": "I need to mark on documents, give me a pen",
+      "target": {
+        "idn": "benchmark_pen_e7f7b61d"
+      },
+      "template_key": "pick_common_sense"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 4,
+      "instruction": "I need something to exercise brain power",
+      "target": {
+        "idn": "benchmark_rubik_cube_f6f1f879"
+      },
+      "template_key": "pick_common_sense"
+    }
+  ],
+  "scene_id": "place_random_objects_on_desk",
+  "task_id": "pick_common_sense"
+}

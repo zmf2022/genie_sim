@@ -1,0 +1,31 @@
+{
+  "instructions": [
+    {
+      "instruction": "Grasp both handles of the pot with left and right hands, move the pot to the stove and put it down."
+    }
+  ],
+  "subtask_steps": [
+    {
+      "checker": {
+        "LiftUp": "benchmark_pot_09aadb57|0.1"
+      },
+      "instruction": "Grasp both handles of the pot with left and right hands.",
+      "step_out": 900
+    },
+    {
+      "checker": {
+        "ActionSetWaitAll": [
+          {
+            "InBBox": "benchmark_pot_09aadb57|0.3605, -1.1624, 0.9351|0.3,0.3,0.3"
+          },
+          {
+            "Upright": "benchmark_pot_09aadb57|10"
+          }
+        ]
+      },
+      "instruction": "Move the pot to the stove and put it down.",
+      "step_out": 900
+    }
+  ],
+  "task_id": "hold_pot"
+}

@@ -1,0 +1,343 @@
+{
+  "layout": {
+    "benchmark_building_blocks_c4754424": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "small",
+          "red",
+          "cubic",
+          "simple",
+          "solid"
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          0.03
+        ],
+        "full_description": [
+          "A small, solid red cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "building_block"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "cube",
+        "unit": "m"
+      },
+      "keywords": [
+        "building_blocks",
+        "object",
+        "building blocks",
+        "\u79ef\u6728",
+        "target"
+      ],
+      "tags": [
+        "root_scene_8ae9d880",
+        "pick_object_relative_position_f4e6ea10",
+        "place_objects_on_table_7001665c",
+        "create_tabletop_object_1561f69b",
+        "benchmark_building_blocks_c4754424"
+      ],
+      "usd": "benchmark_building_blocks_072",
+      "xyz": [
+        -0.122,
+        0.244,
+        0.78
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.978661,
+        0.205482
+      ]
+    },
+    "benchmark_building_blocks_fda0a8fd": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "small",
+          "red",
+          "cubic",
+          "simple",
+          "solid"
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          0.03
+        ],
+        "full_description": [
+          "A small, solid red cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "building_block"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "cube",
+        "unit": "m"
+      },
+      "keywords": [
+        "building_blocks",
+        "object",
+        "building blocks",
+        "\u79ef\u6728",
+        "target"
+      ],
+      "tags": [
+        "root_scene_8ae9d880",
+        "pick_object_relative_position_f4e6ea10",
+        "place_objects_on_table_7001665c",
+        "create_tabletop_object_8eb87f4b",
+        "benchmark_building_blocks_fda0a8fd"
+      ],
+      "usd": "benchmark_building_blocks_072",
+      "xyz": [
+        -0.083,
+        -0.216,
+        0.78
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.323103,
+        0.946364
+      ]
+    },
+    "benchmark_orange_b65e4066": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "round",
+          "smooth",
+          "vibrant",
+          "juicy",
+          "fresh"
+        ],
+        "dimensions": [
+          0.0740404799580574,
+          0.07486499100923538,
+          0.07437027990818024
+        ],
+        "full_description": [
+          "A round, orange-colored fruit with a textured peel and small dimples visible on its surface."
+        ],
+        "materials": [
+          "organic",
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "orange"
+        ],
+        "shape": "spherical",
+        "unit": "m"
+      },
+      "keywords": [
+        "orange",
+        "object",
+        "orange",
+        "\u6a59\u5b50"
+      ],
+      "tags": [
+        "root_scene_8ae9d880",
+        "pick_object_relative_position_f4e6ea10",
+        "place_objects_on_table_7001665c",
+        "create_tabletop_object_ce3781d8",
+        "benchmark_orange_b65e4066"
+      ],
+      "usd": "benchmark_orange_004",
+      "xyz": [
+        0.116,
+        -0.208,
+        0.803
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.990951,
+        0.134226
+      ]
+    },
+    "table_4fb0f96e": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_8ae9d880",
+        "pick_object_relative_position_f4e6ea10",
+        "place_objects_on_table_7001665c",
+        "table_4fb0f96e"
+      ],
+      "usd": "benchmark_table_019",
+      "xyz": [
+        0.0,
+        0.0,
+        0.265
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "edges": [
+        {
+          "source": "root_scene_8ae9d880",
+          "target": "pick_object_relative_position_f4e6ea10"
+        },
+        {
+          "source": "pick_object_relative_position_f4e6ea10",
+          "target": "place_objects_on_table_7001665c"
+        },
+        {
+          "source": "place_objects_on_table_7001665c",
+          "target": "table_4fb0f96e"
+        },
+        {
+          "source": "place_objects_on_table_7001665c",
+          "target": "create_tabletop_object_1561f69b"
+        },
+        {
+          "source": "place_objects_on_table_7001665c",
+          "target": "create_tabletop_object_8eb87f4b"
+        },
+        {
+          "source": "place_objects_on_table_7001665c",
+          "target": "create_tabletop_object_ce3781d8"
+        },
+        {
+          "source": "create_tabletop_object_1561f69b",
+          "target": "benchmark_building_blocks_c4754424"
+        },
+        {
+          "source": "create_tabletop_object_8eb87f4b",
+          "target": "benchmark_building_blocks_fda0a8fd"
+        },
+        {
+          "source": "create_tabletop_object_ce3781d8",
+          "target": "benchmark_orange_b65e4066"
+        }
+      ],
+      "graph": {
+        "rankdir": "LR"
+      },
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_8ae9d880"
+        },
+        {
+          "id": "pick_object_relative_position_f4e6ea10"
+        },
+        {
+          "id": "place_objects_on_table_7001665c"
+        },
+        {
+          "id": "table_4fb0f96e",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_1561f69b"
+        },
+        {
+          "id": "benchmark_building_blocks_c4754424",
+          "tags": [
+            "building_blocks",
+            "object",
+            "building blocks",
+            "\u79ef\u6728",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_8eb87f4b"
+        },
+        {
+          "id": "benchmark_building_blocks_fda0a8fd",
+          "tags": [
+            "building_blocks",
+            "object",
+            "building blocks",
+            "\u79ef\u6728",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_ce3781d8"
+        },
+        {
+          "id": "benchmark_orange_b65e4066",
+          "tags": [
+            "orange",
+            "object",
+            "orange",
+            "\u6a59\u5b50"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 1000690151
+}

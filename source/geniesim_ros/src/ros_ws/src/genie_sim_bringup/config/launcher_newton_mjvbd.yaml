@@ -1,0 +1,104 @@
+# GenieSim launcher config — Newton standalone, VBD cloth + MuJoCo-Warp robot.
+#
+# Combo solver (mjvbd):
+#   * MuJoCo-Warp drives the robot's articulated rigid dynamics — implicit
+#     integrator, stable under contact, native REVOLUTE / PRISMATIC support
+#     (the thing that makes the AVBD path's "hurricane" not happen here).
+#   * A separate SolverVBD instance runs cloth particles in
+#     ``integrate_with_external_rigid_solver=True`` mode — sees robot
+#     bodies as kinematic and applies one-sided particle-vs-rigid contact.
+#
+# This is the MJW analogue of fsvbd.  Use it to compare MJW's rigid
+# integration against Featherstone's on cloth-folding scenes — same
+# scene yaml, swap only the launcher_config.
+#
+# Visualizer options (physics_engine_visualizer):
+#   none    — pure headless, no window (default)
+#   newton  — Newton ViewerGL OpenGL window; requires $DISPLAY
+#   ovrtx   — In-process OVRTX RTX render (kit-free); publishes
+#             <cam.topic>/image_raw + camera_info via gsi::RosBridge
+#             from a dedicated render thread.  See docs/ovrtx_sync.md.
+#   rerun   — TODO: Rerun gRPC stream (falls back to none)
+#
+# Note: physics_engine_visualizer:=ovrtx still requires headless:=false
+# (treated as a non-headless visualizer for forward compatibility with a
+# future GUI).  The kit visualizer was removed when newton-standalone
+# went Kit-free; use physics_engine:=isaac_newton for the Kit viewport.
+#
+# Usage — headless (default):
+#   ros2 launch genie_sim_bringup app.launch.py \
+#     scene:=<scene> \
+#     launcher_config:=launcher_newton_mjvbd
+#
+# Usage — Newton GL window:
+#   ros2 launch genie_sim_bringup app.launch.py \
+#     scene:=<scene> \
+#     launcher_config:=launcher_newton_mjvbd \
+#     headless:=false \
+#     physics_engine_visualizer:=newton
+#
+# Usage — Inline OVRtx (in-process RTX render, ROS image topics):
+#   ros2 launch genie_sim_bringup app.launch.py \
+#     scene:=<scene> \
+#     launcher_config:=launcher_newton_mjvbd \
+#     headless:=false \
+#     physics_engine_visualizer:=ovrtx
+
+launcher:
+  physics:
+    engine: genie_sim_engine_newton
+    engines:
+      genie_sim_engine_newton:
+        package: genie_sim_engine
+        executable: genie_sim_engine_newton.py
+        name: genie_sim_engine_newton
+    industrial_bridge: ""
+  renders: []
+
+genie_sim_engine_newton:
+  ros__parameters:
+    # Visualizer: none | newton | ovrtx | rerun (todo)
+    # Override per-run: physics_engine_visualizer:=newton on the CLI.
+    physics_engine_visualizer: newton
+
+    physics_solver: mjvbd
+
+    # Physics rate.  60 Hz is the VBD cloth working point — cloth artefacts
+    # become visible below 30 Hz.  MJW itself converges in a single
+    # implicit pass and would be happy at 100-200 Hz, but the cloth side
+    # is the cadence-binding constraint here.
+    realtime_factor: 0.25
+    physics_hz: 60.0
+
+    # Render rate.  Drives:
+    #  * newton GL ViewerGL frame cadence
+    #  * ovrtx visualizer's per-frame target FPS (latest-state-wins —
+    #    slow frames are dropped, not queued; physics never blocks).
+    # Ignored when physics_engine_visualizer: none.
+    render_hz: 40.0
+
+    # RTX submode for kit visualizer only; ignored for newton GL / ovrtx /
+    # none.  (kit removed from newton-standalone; see docs/fabric_sync.md
+    # §12.7.)
+    # raster ~16 ms/frame (RaytracedLighting, default)
+    # pathtrace ~49 ms/frame (RealTimePathTracing)
+    # offline 100-300 ms/frame (PathTracing, for screenshots)
+    render_mode: raster
+
+    # Optional ovrtx settings (only used when physics_engine_visualizer: ovrtx)
+    # ovrtx_root: ""                       # binary package root override
+    # ovrtx_log_path: "/tmp/ovrtx_inline.log"
+    # ovrtx_log_level: "info"
+    # ovrtx_camera_pose_topic: "/genie_sim_engine/viewer/camera_pose"
+    #   FreeCam viewport pose source.  Default matches the RViz plugin
+    #   (genie_sim_rviz_plugins/view_camera_pose_publisher_display) so the
+    #   FreeCam follows the RViz 3D viewport with no extra remap.
+
+    # Newton VBD-cloth solver tuning.  0 = engine picks its own default.
+    # Franka cloth demo working point: substep=10, iterations=5.
+    physics_solver_substep: 10
+    physics_solver_iterations: 5
+    # MJW has no mass-matrix-rebuild interval concept — this knob is
+    # honoured only by the Featherstone path.  Kept in the yaml for
+    # config-shape parity with launcher_newton_fsvbd.yaml; MJW ignores it.
+    physics_solver_mass_matrix_interval: 100000

@@ -1,0 +1,8 @@
+{
+  "instructions": [
+    {
+      "instruction": "Place fruits into corresponding storage boxes by type"
+    }
+  ],
+  "task_id": "sort_fruit"
+}

@@ -1,0 +1,526 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_23ce7813": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "cylindrical",
+          "orange",
+          "metallic",
+          "printed",
+          "beverage"
+        ],
+        "dimensions": [
+          0.06648768615722657,
+          0.1158542938232422,
+          0.06647872543334961
+        ],
+        "full_description": [
+          "An orange aluminum soda can with a silver top and bottom, featuring the Fanta logo and branding."
+        ],
+        "materials": [
+          "aluminum",
+          "plastic",
+          "printed label"
+        ],
+        "object_category": [
+          "container",
+          "beverage can"
+        ],
+        "semantic_name": [
+          "can"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "fanta",
+        "benchmark_beverage_bottle_003",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_19c9d21b",
+        "table_with_random_objects_f551e118",
+        "place_random_objects_on_desk_860c51e5",
+        "benchmark_beverage_bottle_23ce7813"
+      ],
+      "usd": "benchmark_beverage_bottle_003",
+      "xyz": [
+        -0.102,
+        0.245,
+        0.976
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.116403,
+        0.993202
+      ]
+    },
+    "benchmark_beverage_bottle_fdfc60ba": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "cylindrical",
+          "red",
+          "liquid",
+          "bottled",
+          "packaged"
+        ],
+        "dimensions": [
+          0.06153380125761032,
+          0.14993929862976074,
+          0.06153379566967487
+        ],
+        "full_description": [
+          "A plastic bottle with a red label and black cap, containing dark liquid, featuring Chinese text and a Suntory logo."
+        ],
+        "materials": [
+          "plastic",
+          "liquid"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "oolong tea beverage",
+        "benchmark_beverage_bottle_004",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_19c9d21b",
+        "table_with_random_objects_f551e118",
+        "place_random_objects_on_desk_860c51e5",
+        "benchmark_beverage_bottle_fdfc60ba"
+      ],
+      "usd": "benchmark_beverage_bottle_004",
+      "xyz": [
+        -0.014,
+        0.103,
+        1.0
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.129133,
+        0.991627
+      ]
+    },
+    "benchmark_cup_9109aea6": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "cylindrical",
+          "white",
+          "simple",
+          "printed",
+          "small"
+        ],
+        "dimensions": [
+          0.0634383037686348,
+          0.07829996943473816,
+          0.06343957036733627
+        ],
+        "full_description": [
+          "A white paper cup with a black line-drawn pattern and yellow accents depicting household items."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "kitchenware",
+          "drinking vessel"
+        ],
+        "semantic_name": [
+          "cup"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "paper cup",
+        "benchmark_cup_105",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_19c9d21b",
+        "table_with_random_objects_f551e118",
+        "place_random_objects_on_desk_860c51e5",
+        "benchmark_cup_9109aea6"
+      ],
+      "usd": "benchmark_cup_105",
+      "xyz": [
+        0.054,
+        -0.243,
+        0.938
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.096042,
+        0.995377
+      ]
+    },
+    "benchmark_lemon_82715c87": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "citrus",
+          "yellow",
+          "organic",
+          "fresh",
+          "juicy"
+        ],
+        "dimensions": [
+          0.0652875304222107,
+          0.08429359644651413,
+          0.06925402581691742
+        ],
+        "full_description": [
+          "A bright yellow, glossy, oval-shaped fruit with a small green stem nub."
+        ],
+        "materials": [
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "food",
+          "citrus fruit"
+        ],
+        "semantic_name": [
+          "lemon"
+        ],
+        "shape": "irregular",
+        "unit": "m"
+      },
+      "keywords": [
+        "lemon",
+        "benchmark_lemon_030",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_19c9d21b",
+        "table_with_random_objects_f551e118",
+        "place_random_objects_on_desk_860c51e5",
+        "benchmark_lemon_82715c87"
+      ],
+      "usd": "benchmark_lemon_030",
+      "xyz": [
+        0.083,
+        -0.083,
+        0.944
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.06314,
+        0.998005
+      ]
+    },
+    "benchmark_peach_3c91d55e": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "round",
+          "ripe",
+          "juicy",
+          "fuzzy",
+          "organic"
+        ],
+        "dimensions": [
+          0.0926,
+          0.0916,
+          0.0869
+        ],
+        "full_description": [
+          "A round, fuzzy peach with a gradient of red and yellow skin."
+        ],
+        "materials": [
+          "flesh",
+          "skin"
+        ],
+        "object_category": [
+          "fruit",
+          "stone fruit"
+        ],
+        "semantic_name": [
+          "peach"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "peach",
+        "benchmark_peach_021",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_19c9d21b",
+        "table_with_random_objects_f551e118",
+        "place_random_objects_on_desk_860c51e5",
+        "benchmark_peach_3c91d55e"
+      ],
+      "usd": "benchmark_peach_021",
+      "xyz": [
+        -0.075,
+        -0.085,
+        0.952
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.059228,
+        0.998245
+      ]
+    },
+    "benchmark_toiletries_1570ec41": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "cylindrical",
+          "flexible",
+          "packaged",
+          "cosmetic",
+          "white"
+        ],
+        "dimensions": [
+          0.03400098532438278,
+          0.1400732398033142,
+          0.05983749404549599
+        ],
+        "full_description": [
+          "A white and blue plastic tube labeled 'Face Cleaner' with Chinese characters and a green logo."
+        ],
+        "materials": [
+          "plastic",
+          "paper"
+        ],
+        "object_category": [
+          "cosmetic",
+          "face cleaner"
+        ],
+        "semantic_name": [
+          "face_cleaner"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "face cleanser",
+        "benchmark_toiletries_009",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_19c9d21b",
+        "table_with_random_objects_f551e118",
+        "place_random_objects_on_desk_860c51e5",
+        "benchmark_toiletries_1570ec41"
+      ],
+      "usd": "benchmark_toiletries_009",
+      "xyz": [
+        0.137,
+        -0.185,
+        1.0
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.114177,
+        0.99346
+      ]
+    },
+    "table_fd94cf36": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_19c9d21b",
+        "table_with_random_objects_f551e118",
+        "place_random_objects_on_desk_860c51e5",
+        "table_fd94cf36"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_19c9d21b",
+          "target": "table_with_random_objects_f551e118"
+        },
+        {
+          "source": "table_with_random_objects_f551e118",
+          "target": "place_random_objects_on_desk_860c51e5"
+        },
+        {
+          "source": "place_random_objects_on_desk_860c51e5",
+          "target": "table_fd94cf36"
+        },
+        {
+          "source": "place_random_objects_on_desk_860c51e5",
+          "target": "benchmark_peach_3c91d55e"
+        },
+        {
+          "source": "place_random_objects_on_desk_860c51e5",
+          "target": "benchmark_lemon_82715c87"
+        },
+        {
+          "source": "place_random_objects_on_desk_860c51e5",
+          "target": "benchmark_beverage_bottle_fdfc60ba"
+        },
+        {
+          "source": "place_random_objects_on_desk_860c51e5",
+          "target": "benchmark_toiletries_1570ec41"
+        },
+        {
+          "source": "place_random_objects_on_desk_860c51e5",
+          "target": "benchmark_beverage_bottle_23ce7813"
+        },
+        {
+          "source": "place_random_objects_on_desk_860c51e5",
+          "target": "benchmark_cup_9109aea6"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_19c9d21b"
+        },
+        {
+          "id": "table_with_random_objects_f551e118"
+        },
+        {
+          "id": "place_random_objects_on_desk_860c51e5"
+        },
+        {
+          "id": "table_fd94cf36",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_peach_3c91d55e",
+          "tags": [
+            "peach",
+            "benchmark_peach_021",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_lemon_82715c87",
+          "tags": [
+            "lemon",
+            "benchmark_lemon_030",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_beverage_bottle_fdfc60ba",
+          "tags": [
+            "oolong tea beverage",
+            "benchmark_beverage_bottle_004",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_toiletries_1570ec41",
+          "tags": [
+            "face cleanser",
+            "benchmark_toiletries_009",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_beverage_bottle_23ce7813",
+          "tags": [
+            "fanta",
+            "benchmark_beverage_bottle_003",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_cup_9109aea6",
+          "tags": [
+            "paper cup",
+            "benchmark_cup_105",
+            "on_desk",
+            "right"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 379356388
+}

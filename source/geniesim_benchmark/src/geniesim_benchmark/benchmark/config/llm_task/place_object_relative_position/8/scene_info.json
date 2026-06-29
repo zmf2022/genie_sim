@@ -1,0 +1,455 @@
+{
+  "layout": {
+    "benchmark_cup_c6d458e0": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "octagonal",
+          "ceramic",
+          "modern",
+          "functional",
+          "minimalist"
+        ],
+        "dimensions": [
+          0.12438757717609406,
+          0.06310572847723961,
+          0.09321336448192596
+        ],
+        "full_description": [
+          "A white, geometrically faceted cup with a single handle and octagonal profile."
+        ],
+        "materials": [
+          "ceramic"
+        ],
+        "object_category": [
+          "kitchen",
+          "cup"
+        ],
+        "semantic_name": [
+          "cup"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "mug",
+        "benchmark_cup_043",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_97797704",
+        "table_with_random_objects_2bb0747b",
+        "place_random_objects_on_desk_c4dd9d4c",
+        "benchmark_cup_c6d458e0"
+      ],
+      "usd": "benchmark_cup_043",
+      "xyz": [
+        0.019,
+        -0.236,
+        0.927
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.079159,
+        0.996862
+      ]
+    },
+    "benchmark_garage_kit_317a756f": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "cute",
+          "small",
+          "orange",
+          "detailed",
+          "playful"
+        ],
+        "dimensions": [
+          0.05908237838745117,
+          0.07324214172363282,
+          0.05124488067626953
+        ],
+        "full_description": [
+          "A small, yellow, dinosaur-like figurine with a red-tipped tail and white feet, appearing to be made of plastic or resin."
+        ],
+        "materials": [
+          "plastic",
+          "clay"
+        ],
+        "object_category": [
+          "Toy",
+          "Figurine"
+        ],
+        "semantic_name": [
+          "garage_kit"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "charmander figure",
+        "benchmark_garage_kit_064",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_97797704",
+        "table_with_random_objects_2bb0747b",
+        "place_random_objects_on_desk_c4dd9d4c",
+        "benchmark_garage_kit_317a756f"
+      ],
+      "usd": "benchmark_garage_kit_064",
+      "xyz": [
+        -0.103,
+        -0.122,
+        0.933
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.087396,
+        0.996174
+      ]
+    },
+    "benchmark_tape_measure_84916deb": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "compact",
+          "durable",
+          "portable",
+          "functional",
+          "robust"
+        ],
+        "dimensions": [
+          0.0889030990600586,
+          0.08185286712646485,
+          0.04844463539123535
+        ],
+        "full_description": [
+          "A compact tape measure with a black and bright yellow plastic casing, featuring a visible '7.5m' label on its side."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "tool",
+          "measurement"
+        ],
+        "semantic_name": [
+          "tape_measure"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "tape measure",
+        "benchmark_tape_measure_007",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_97797704",
+        "table_with_random_objects_2bb0747b",
+        "place_random_objects_on_desk_c4dd9d4c",
+        "benchmark_tape_measure_84916deb"
+      ],
+      "usd": "benchmark_tape_measure_007",
+      "xyz": [
+        -0.19,
+        0.245,
+        0.942
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.100143,
+        0.994973
+      ]
+    },
+    "benchmark_toy_car_24f18abd": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy car",
+        "benchmark_toy_car_018",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_97797704",
+        "table_with_random_objects_2bb0747b",
+        "place_random_objects_on_desk_c4dd9d4c",
+        "benchmark_toy_car_24f18abd"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        -0.081,
+        0.065,
+        0.893
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.138456,
+        0.990369
+      ]
+    },
+    "genie_beverage_bottle_871f0f95": {
+      "description": {
+        "color": "black",
+        "descriptive_terms": [
+          "cylindrical",
+          "black",
+          "plastic",
+          "packaged",
+          "beverage"
+        ],
+        "dimensions": [
+          0.04871850088238716,
+          0.16691981256008148,
+          0.05984169989824295
+        ],
+        "full_description": [
+          "A black plastic beverage bottle with a white cap and a label featuring red grapes and Chinese text."
+        ],
+        "materials": [
+          "plastic",
+          "label"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "grape juice",
+        "genie_beverage_bottle_009",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_97797704",
+        "table_with_random_objects_2bb0747b",
+        "place_random_objects_on_desk_c4dd9d4c",
+        "genie_beverage_bottle_871f0f95"
+      ],
+      "usd": "genie_beverage_bottle_009",
+      "xyz": [
+        0.087,
+        0.036,
+        1.029
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.117247,
+        0.993103
+      ]
+    },
+    "table_7d1e73d2": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_97797704",
+        "table_with_random_objects_2bb0747b",
+        "place_random_objects_on_desk_c4dd9d4c",
+        "table_7d1e73d2"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_97797704",
+          "target": "table_with_random_objects_2bb0747b"
+        },
+        {
+          "source": "table_with_random_objects_2bb0747b",
+          "target": "place_random_objects_on_desk_c4dd9d4c"
+        },
+        {
+          "source": "place_random_objects_on_desk_c4dd9d4c",
+          "target": "table_7d1e73d2"
+        },
+        {
+          "source": "place_random_objects_on_desk_c4dd9d4c",
+          "target": "benchmark_cup_c6d458e0"
+        },
+        {
+          "source": "place_random_objects_on_desk_c4dd9d4c",
+          "target": "genie_beverage_bottle_871f0f95"
+        },
+        {
+          "source": "place_random_objects_on_desk_c4dd9d4c",
+          "target": "benchmark_toy_car_24f18abd"
+        },
+        {
+          "source": "place_random_objects_on_desk_c4dd9d4c",
+          "target": "benchmark_garage_kit_317a756f"
+        },
+        {
+          "source": "place_random_objects_on_desk_c4dd9d4c",
+          "target": "benchmark_tape_measure_84916deb"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_97797704"
+        },
+        {
+          "id": "table_with_random_objects_2bb0747b"
+        },
+        {
+          "id": "place_random_objects_on_desk_c4dd9d4c"
+        },
+        {
+          "id": "table_7d1e73d2",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_cup_c6d458e0",
+          "tags": [
+            "mug",
+            "benchmark_cup_043",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "genie_beverage_bottle_871f0f95",
+          "tags": [
+            "grape juice",
+            "genie_beverage_bottle_009",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_toy_car_24f18abd",
+          "tags": [
+            "toy car",
+            "benchmark_toy_car_018",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_garage_kit_317a756f",
+          "tags": [
+            "charmander figure",
+            "benchmark_garage_kit_064",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_tape_measure_84916deb",
+          "tags": [
+            "tape measure",
+            "benchmark_tape_measure_007",
+            "on_desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 2705371095
+}

@@ -897,7 +897,7 @@ class RosExtrater:
                         tf_topics[topic][ts] = last_frame
 
                 result = {
-                    "schema": "simubotix.agibot.com/episode/v6",
+                    "schema": "v6",
                     "scene": {
                         "name": self.scene_name,
                         "metadata": None,
@@ -1056,6 +1056,9 @@ class RosExtrater:
                                 msg.header.stamp.nanosec
                             ) * np.power(10.0, -9)
                             img = message_to_cvimage(msg, "bgr8")  # change encoding type if needed
+                            if img is None or img.size == 0:
+                                logger.info(f"⚠️ empty image, skip key={key} ts={ts}")
+                                continue
                             cv2.imwrite(rgb_dir + "/{}.jpg".format(file_name), img)
                         min_value = min(stamp.values())
                         for key in stamp:

@@ -1,0 +1,7 @@
+<library path="genie_sim_render_ros_image_publisher_plugin">
+  <class name="genie_sim_render/RosImagePublisherPlugin"
+         type="genie_sim_render::RosImagePublisherPlugin"
+         base_class_type="genie_sim_render::IImagePublisherPlugin">
+    <description>Publishes camera images via standard ROS 2 image_transport topics</description>
+  </class>
+</library>

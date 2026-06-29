@@ -1,0 +1,32 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Stack": "[benchmark_bowl_06399dab,benchmark_bowl_f36406ff,benchmark_bowl_52f9677e]|[0.05,0.05]"
+              },
+              {
+                "Onfloor": "benchmark_bowl_06399dab|0"
+              },
+              {
+                "Onfloor": "benchmark_bowl_f36406ff|0"
+              },
+              {
+                "Onfloor": "benchmark_bowl_52f9677e|0"
+              },
+              {
+                "StepOut": 1500
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "stack_bowls"
+  }
+}

@@ -1,0 +1,388 @@
+{
+  "layout": {
+    "benchmark_clock_29484174": {
+      "description": {
+        "color": "pink",
+        "descriptive_terms": [
+          "circular",
+          "compact",
+          "decorative",
+          "vintage",
+          "playful"
+        ],
+        "dimensions": [
+          0.08173294067382812,
+          0.13982281494140625,
+          0.13057781982421876
+        ],
+        "full_description": [
+          "A pink, pig-shaped alarm clock with a white face, black numbers, and two small ears on top."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "timepiece",
+          "analog clock"
+        ],
+        "semantic_name": [
+          "clock"
+        ],
+        "shape": "rounded",
+        "unit": "m"
+      },
+      "keywords": [
+        "clock",
+        "benchmark_clock_044",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_87b18f6f",
+        "table_with_random_objects_4d4c468c",
+        "place_random_objects_on_desk_e602c302",
+        "benchmark_clock_29484174"
+      ],
+      "usd": "benchmark_clock_044",
+      "xyz": [
+        -0.01,
+        -0.16,
+        1.0
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.134448,
+        0.990921
+      ]
+    },
+    "benchmark_orange_302c3574": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "round",
+          "smooth",
+          "vibrant",
+          "juicy",
+          "fresh"
+        ],
+        "dimensions": [
+          0.0740404799580574,
+          0.07486499100923538,
+          0.07437027990818024
+        ],
+        "full_description": [
+          "A round, orange-colored fruit with a textured peel and small dimples visible on its surface."
+        ],
+        "materials": [
+          "organic",
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "orange"
+        ],
+        "shape": "spherical",
+        "unit": "m"
+      },
+      "keywords": [
+        "orange",
+        "benchmark_orange_004",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_87b18f6f",
+        "table_with_random_objects_4d4c468c",
+        "place_random_objects_on_desk_e602c302",
+        "benchmark_orange_302c3574"
+      ],
+      "usd": "benchmark_orange_004",
+      "xyz": [
+        -0.198,
+        0.02,
+        0.935
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.041984,
+        0.999118
+      ]
+    },
+    "benchmark_stationery_588adb08": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "yellow",
+          "rectangular",
+          "plastic",
+          "metal",
+          "compact",
+          "office",
+          "functional"
+        ],
+        "dimensions": [
+          0.03533313795924187,
+          0.06165076792240143,
+          0.13363394886255264
+        ],
+        "full_description": [
+          "A small stapler with a bright yellow top and a translucent gray base."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "stationery",
+          "office_supply"
+        ],
+        "semantic_name": [
+          "stapler"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "yellow stapler",
+        "benchmark_stationery_009",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_87b18f6f",
+        "table_with_random_objects_4d4c468c",
+        "place_random_objects_on_desk_e602c302",
+        "benchmark_stationery_588adb08"
+      ],
+      "usd": "benchmark_stationery_009",
+      "xyz": [
+        0.071,
+        0.198,
+        0.91
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.031965,
+        0.999489
+      ]
+    },
+    "benchmark_toy_car_bd8d435f": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy car",
+        "benchmark_toy_car_018",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_87b18f6f",
+        "table_with_random_objects_4d4c468c",
+        "place_random_objects_on_desk_e602c302",
+        "benchmark_toy_car_bd8d435f"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        -0.071,
+        0.135,
+        0.893
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.019447,
+        0.999811
+      ]
+    },
+    "table_3b1cbb7a": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_87b18f6f",
+        "table_with_random_objects_4d4c468c",
+        "place_random_objects_on_desk_e602c302",
+        "table_3b1cbb7a"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_87b18f6f",
+          "target": "table_with_random_objects_4d4c468c"
+        },
+        {
+          "source": "table_with_random_objects_4d4c468c",
+          "target": "place_random_objects_on_desk_e602c302"
+        },
+        {
+          "source": "place_random_objects_on_desk_e602c302",
+          "target": "table_3b1cbb7a"
+        },
+        {
+          "source": "place_random_objects_on_desk_e602c302",
+          "target": "benchmark_orange_302c3574"
+        },
+        {
+          "source": "place_random_objects_on_desk_e602c302",
+          "target": "benchmark_clock_29484174"
+        },
+        {
+          "source": "place_random_objects_on_desk_e602c302",
+          "target": "benchmark_stationery_588adb08"
+        },
+        {
+          "source": "place_random_objects_on_desk_e602c302",
+          "target": "benchmark_toy_car_bd8d435f"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_87b18f6f"
+        },
+        {
+          "id": "table_with_random_objects_4d4c468c"
+        },
+        {
+          "id": "place_random_objects_on_desk_e602c302"
+        },
+        {
+          "id": "table_3b1cbb7a",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_orange_302c3574",
+          "tags": [
+            "orange",
+            "benchmark_orange_004",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_clock_29484174",
+          "tags": [
+            "clock",
+            "benchmark_clock_044",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_stationery_588adb08",
+          "tags": [
+            "yellow stapler",
+            "benchmark_stationery_009",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_toy_car_bd8d435f",
+          "tags": [
+            "toy car",
+            "benchmark_toy_car_018",
+            "on_desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 572989049
+}

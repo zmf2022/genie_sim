@@ -1,0 +1,111 @@
+[package]
+description = "Minimal GenieSim experience for IsaacSim 5.1"
+title = "GenieSim"
+version = "1.0.0"
+keywords = ["experience", "app", "usd", "geniesim"]
+
+
+[dependencies]
+"isaacsim.core.api" = {}
+"isaacsim.core.utils" = {}
+"isaacsim.core.simulation_manager" = {}
+"isaacsim.core.cloner" = {}
+"isaacsim.core.deprecation_manager" = { order = -100 }
+"isaacsim.core.nodes" = {}
+"isaacsim.simulation_app" = {}
+
+"isaacsim.sensors.camera" = {}
+"isaacsim.sensors.physics" = {}
+"isaacsim.sensors.physx" = {}
+
+"isaacsim.asset.importer.urdf" = {}
+"isaacsim.robot.manipulators" = {}
+"isaacsim.robot.schema" = {}
+"isaacsim.robot.surface_gripper" = {}
+
+"isaacsim.replicator.writers" = {}
+"isaacsim.replicator.domain_randomization" = {}
+"isaacsim.replicator.behavior" = {}
+
+"isaacsim.ros2.bridge" = {}
+
+"omni.graph.core" = {}
+"omni.graph.action" = {}
+"omni.graph.nodes" = {}
+"omni.hydra.rtx" = {}
+"omni.hydra.usdrt_delegate" = {}
+"omni.kit.material.library" = {}
+"omni.kit.raycast.query" = {}
+"omni.kit.loop-isaac" = {}
+"omni.physx.tensors" = {}
+"omni.physics.physx" = {}
+"omni.physics.stageupdate" = {}
+"omni.replicator.core" = {}
+"omni.syntheticdata" = {}
+"omni.rtx.settings.core" = {}
+"omni.warp.core" = {}
+"omni.pip.compute" = {}
+"omni.isaac.core_archive" = {}
+"omni.hydra.engine.stats" = {}
+"omni.kit.window.stats" = {}
+"semantics.schema.editor" = {}
+"semantics.schema.property" = {}
+
+
+[settings]
+exts."omni.kit.renderer.core".present.enabled = false
+renderer.asyncInit = true
+renderer.gpuEnumeration.glInterop.enabled = false
+rtx-transient.dlssg.enabled = false
+rtx.hydra.mdlMaterialWarmup = true
+rtx.post.dlss.execMode = 0
+omni.replicator.asyncRendering = false
+foundation.verifyOsVersion.enabled = false
+physics.autoPopupSimulationOutputWindow = false
+
+[settings.app]
+name = "GenieSim"
+version = "1.0.0"
+content.emptyStageOnStart = true
+fastShutdown = true
+file.ignoreUnsavedOnExit = true
+gatherRenderResults = true
+settings.persistent = false
+settings.fabricDefaultStageFrameHistoryCount = 3
+useFabricSceneDelegate = true
+enableDeveloperWarnings = false
+runLoops.main.rateLimitEnabled = false
+runLoops.main.manualModeEnabled = true
+player.useFixedTimeStepping = false
+events.qualifiedNames = true
+vulkan = true
+asyncRendering = false
+asyncRenderingLowLatency = false
+
+[settings.app.renderer]
+resolution.height = 720
+resolution.width = 1280
+skipWhileMinimized = false
+sleepMsOnFocus = 0
+sleepMsOutOfFocus = 0
+
+[settings.app.exts.folders]
+'++' = [
+    "${app}",
+    "${app}/../exts",
+    "${app}/../extscache",
+    "${app}/../extsUser",
+    "${app}/../extsDeprecated",
+]
+
+[settings.persistent]
+app.stage.upAxis = "Z"
+simulation.defaultMetersPerUnit = 1.0
+physics.visualizationDisplayJoints = false
+physics.visualizationSimulationOutput = false
+physics.resetOnStop = true
+renderer.startupMessageDisplayed = true
+omni.replicator.captureOnPlay = true
+
+[settings.exts."omni.kit.registry.nucleus"]
+registries = []

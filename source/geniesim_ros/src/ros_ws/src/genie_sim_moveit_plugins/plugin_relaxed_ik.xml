@@ -1,0 +1,11 @@
+<library path="genie_sim_moveit_plugins_relaxed_ik_plugin">
+  <class name="genie_sim_moveit_plugins/GenieRelaxedIK"
+         type="genie_sim_moveit_plugins::GenieRelaxedIKPlugin"
+         base_class_type="kinematics::KinematicsBase">
+    <description>
+      NLopt-based Relaxed IK solver ported from Agibot motion-control.
+      Minimises a weighted sum of pose error, joint-displacement,
+      collision proximity, and singularity costs.
+    </description>
+  </class>
+</library>

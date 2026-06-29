@@ -1,0 +1,316 @@
+{
+  "layout": {
+    "benchmark_apple_ff1f6b16": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "round",
+          "red",
+          "ripe",
+          "smooth",
+          "natural"
+        ],
+        "dimensions": [
+          0.093,
+          0.0945,
+          0.0917
+        ],
+        "full_description": [
+          "A red and yellow apple with a glossy surface and a short brown stem."
+        ],
+        "materials": [
+          "fruit flesh",
+          "skin"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "apple"
+        ],
+        "shape": "round",
+        "unit": "m"
+      },
+      "keywords": [
+        "apple",
+        "benchmark_apple_002",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_d5cd8417",
+        "table_with_random_objects_a4abf877",
+        "place_random_objects_on_desk_cb75cd2c",
+        "benchmark_apple_ff1f6b16"
+      ],
+      "usd": "benchmark_apple_002",
+      "xyz": [
+        -0.127,
+        -0.198,
+        0.955
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.134267,
+        0.990945
+      ]
+    },
+    "benchmark_garage_kit_ba312ae1": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "cute",
+          "small",
+          "orange",
+          "detailed",
+          "playful"
+        ],
+        "dimensions": [
+          0.05908237838745117,
+          0.07324214172363282,
+          0.05124488067626953
+        ],
+        "full_description": [
+          "A small, yellow, dinosaur-like figurine with a red-tipped tail and white feet, appearing to be made of plastic or resin."
+        ],
+        "materials": [
+          "plastic",
+          "clay"
+        ],
+        "object_category": [
+          "Toy",
+          "Figurine"
+        ],
+        "semantic_name": [
+          "garage_kit"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "charmander figure",
+        "benchmark_garage_kit_064",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_d5cd8417",
+        "table_with_random_objects_a4abf877",
+        "place_random_objects_on_desk_cb75cd2c",
+        "benchmark_garage_kit_ba312ae1"
+      ],
+      "usd": "benchmark_garage_kit_064",
+      "xyz": [
+        -0.112,
+        0.138,
+        0.933
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.124235,
+        0.992253
+      ]
+    },
+    "genie_beverage_bottle_2a2e5129": {
+      "description": {
+        "color": "black",
+        "descriptive_terms": [
+          "cylindrical",
+          "black",
+          "plastic",
+          "packaged",
+          "beverage"
+        ],
+        "dimensions": [
+          0.04871850088238716,
+          0.16691981256008148,
+          0.05984169989824295
+        ],
+        "full_description": [
+          "A black plastic beverage bottle with a white cap and a label featuring red grapes and Chinese text."
+        ],
+        "materials": [
+          "plastic",
+          "label"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "grape juice",
+        "genie_beverage_bottle_009",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_d5cd8417",
+        "table_with_random_objects_a4abf877",
+        "place_random_objects_on_desk_cb75cd2c",
+        "genie_beverage_bottle_2a2e5129"
+      ],
+      "usd": "genie_beverage_bottle_009",
+      "xyz": [
+        0.071,
+        0.037,
+        1.029
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.008958,
+        0.99996
+      ]
+    },
+    "table_0911e762": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_d5cd8417",
+        "table_with_random_objects_a4abf877",
+        "place_random_objects_on_desk_cb75cd2c",
+        "table_0911e762"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_d5cd8417",
+          "target": "table_with_random_objects_a4abf877"
+        },
+        {
+          "source": "table_with_random_objects_a4abf877",
+          "target": "place_random_objects_on_desk_cb75cd2c"
+        },
+        {
+          "source": "place_random_objects_on_desk_cb75cd2c",
+          "target": "table_0911e762"
+        },
+        {
+          "source": "place_random_objects_on_desk_cb75cd2c",
+          "target": "benchmark_apple_ff1f6b16"
+        },
+        {
+          "source": "place_random_objects_on_desk_cb75cd2c",
+          "target": "genie_beverage_bottle_2a2e5129"
+        },
+        {
+          "source": "place_random_objects_on_desk_cb75cd2c",
+          "target": "benchmark_garage_kit_ba312ae1"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_d5cd8417"
+        },
+        {
+          "id": "table_with_random_objects_a4abf877"
+        },
+        {
+          "id": "place_random_objects_on_desk_cb75cd2c"
+        },
+        {
+          "id": "table_0911e762",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_apple_ff1f6b16",
+          "tags": [
+            "apple",
+            "benchmark_apple_002",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "genie_beverage_bottle_2a2e5129",
+          "tags": [
+            "grape juice",
+            "genie_beverage_bottle_009",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_garage_kit_ba312ae1",
+          "tags": [
+            "charmander figure",
+            "benchmark_garage_kit_064",
+            "on_desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 814487895
+}

@@ -1,0 +1,422 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_10293ff7": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "cylindrical",
+          "red",
+          "liquid",
+          "bottled",
+          "packaged"
+        ],
+        "dimensions": [
+          0.06153380125761032,
+          0.14993929862976074,
+          0.06153379566967487
+        ],
+        "full_description": [
+          "A plastic bottle with a red label and black cap, containing dark liquid, featuring Chinese text and a Suntory logo."
+        ],
+        "materials": [
+          "plastic",
+          "liquid"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "oolong_tea_beverage",
+        "object",
+        "oolong tea beverage",
+        "\u4e4c\u9f99\u8336\u996e\u6599"
+      ],
+      "tags": [
+        "root_scene_0726a971",
+        "pick_object_relative_position_1475efca",
+        "place_objects_on_table_306b83fc",
+        "create_tabletop_object_2a9d4250",
+        "benchmark_beverage_bottle_10293ff7"
+      ],
+      "usd": "benchmark_beverage_bottle_004",
+      "xyz": [
+        -0.167,
+        0.209,
+        0.797
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.097071,
+        0.995277
+      ]
+    },
+    "benchmark_lemon_1c5b7f48": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "citrus",
+          "yellow",
+          "organic",
+          "fresh",
+          "juicy"
+        ],
+        "dimensions": [
+          0.0652875304222107,
+          0.08429359644651413,
+          0.06925402581691742
+        ],
+        "full_description": [
+          "A bright yellow, glossy, oval-shaped fruit with a small green stem nub."
+        ],
+        "materials": [
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "food",
+          "citrus fruit"
+        ],
+        "semantic_name": [
+          "lemon"
+        ],
+        "shape": "irregular",
+        "unit": "m"
+      },
+      "keywords": [
+        "lemon",
+        "object",
+        "lemon",
+        "\u67e0\u6aac"
+      ],
+      "tags": [
+        "root_scene_0726a971",
+        "pick_object_relative_position_1475efca",
+        "place_objects_on_table_306b83fc",
+        "create_tabletop_object_583d8844",
+        "benchmark_lemon_1c5b7f48"
+      ],
+      "usd": "benchmark_lemon_030",
+      "xyz": [
+        0.154,
+        0.144,
+        0.774
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.98224,
+        0.187627
+      ]
+    },
+    "benchmark_toy_car_5d7da806": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy_car",
+        "object",
+        "toy car",
+        "\u73a9\u5177\u8f66",
+        "target"
+      ],
+      "tags": [
+        "root_scene_0726a971",
+        "pick_object_relative_position_1475efca",
+        "place_objects_on_table_306b83fc",
+        "create_tabletop_object_b6fb043b",
+        "benchmark_toy_car_5d7da806"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        -0.064,
+        -0.218,
+        0.748
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.808508,
+        -0.588485
+      ]
+    },
+    "benchmark_toy_car_e7cb0922": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy_car",
+        "object",
+        "toy car",
+        "\u73a9\u5177\u8f66",
+        "target"
+      ],
+      "tags": [
+        "root_scene_0726a971",
+        "pick_object_relative_position_1475efca",
+        "place_objects_on_table_306b83fc",
+        "create_tabletop_object_78bb0e52",
+        "benchmark_toy_car_e7cb0922"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        -0.01,
+        0.011,
+        0.748
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.223481,
+        0.974708
+      ]
+    },
+    "table_67670a97": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_0726a971",
+        "pick_object_relative_position_1475efca",
+        "place_objects_on_table_306b83fc",
+        "table_67670a97"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_0726a971",
+          "target": "pick_object_relative_position_1475efca"
+        },
+        {
+          "source": "pick_object_relative_position_1475efca",
+          "target": "place_objects_on_table_306b83fc"
+        },
+        {
+          "source": "place_objects_on_table_306b83fc",
+          "target": "table_67670a97"
+        },
+        {
+          "source": "place_objects_on_table_306b83fc",
+          "target": "create_tabletop_object_78bb0e52"
+        },
+        {
+          "source": "place_objects_on_table_306b83fc",
+          "target": "create_tabletop_object_b6fb043b"
+        },
+        {
+          "source": "place_objects_on_table_306b83fc",
+          "target": "create_tabletop_object_583d8844"
+        },
+        {
+          "source": "place_objects_on_table_306b83fc",
+          "target": "create_tabletop_object_2a9d4250"
+        },
+        {
+          "source": "create_tabletop_object_78bb0e52",
+          "target": "benchmark_toy_car_e7cb0922"
+        },
+        {
+          "source": "create_tabletop_object_b6fb043b",
+          "target": "benchmark_toy_car_5d7da806"
+        },
+        {
+          "source": "create_tabletop_object_583d8844",
+          "target": "benchmark_lemon_1c5b7f48"
+        },
+        {
+          "source": "create_tabletop_object_2a9d4250",
+          "target": "benchmark_beverage_bottle_10293ff7"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_0726a971"
+        },
+        {
+          "id": "pick_object_relative_position_1475efca"
+        },
+        {
+          "id": "place_objects_on_table_306b83fc"
+        },
+        {
+          "id": "table_67670a97",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_78bb0e52"
+        },
+        {
+          "id": "benchmark_toy_car_e7cb0922",
+          "tags": [
+            "toy_car",
+            "object",
+            "toy car",
+            "\u73a9\u5177\u8f66",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_b6fb043b"
+        },
+        {
+          "id": "benchmark_toy_car_5d7da806",
+          "tags": [
+            "toy_car",
+            "object",
+            "toy car",
+            "\u73a9\u5177\u8f66",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_583d8844"
+        },
+        {
+          "id": "benchmark_lemon_1c5b7f48",
+          "tags": [
+            "lemon",
+            "object",
+            "lemon",
+            "\u67e0\u6aac"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_2a9d4250"
+        },
+        {
+          "id": "benchmark_beverage_bottle_10293ff7",
+          "tags": [
+            "oolong_tea_beverage",
+            "object",
+            "oolong tea beverage",
+            "\u4e4c\u9f99\u8336\u996e\u6599"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 444559891
+}

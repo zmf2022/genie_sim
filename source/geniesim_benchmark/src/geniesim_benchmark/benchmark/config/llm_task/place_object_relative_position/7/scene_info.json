@@ -1,0 +1,385 @@
+{
+  "layout": {
+    "benchmark_apple_78e779a1": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "round",
+          "red",
+          "ripe",
+          "smooth",
+          "natural"
+        ],
+        "dimensions": [
+          0.093,
+          0.0945,
+          0.0917
+        ],
+        "full_description": [
+          "A red and yellow apple with a glossy surface and a short brown stem."
+        ],
+        "materials": [
+          "fruit flesh",
+          "skin"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "apple"
+        ],
+        "shape": "round",
+        "unit": "m"
+      },
+      "keywords": [
+        "apple",
+        "benchmark_apple_002",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_1a3c25aa",
+        "table_with_random_objects_b09d497b",
+        "place_random_objects_on_desk_2abd5b81",
+        "benchmark_apple_78e779a1"
+      ],
+      "usd": "benchmark_apple_002",
+      "xyz": [
+        -0.018,
+        -0.081,
+        0.955
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.147992,
+        0.988989
+      ]
+    },
+    "benchmark_beverage_bottle_98fd186c": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "cylindrical",
+          "red",
+          "liquid",
+          "bottled",
+          "packaged"
+        ],
+        "dimensions": [
+          0.06153380125761032,
+          0.14993929862976074,
+          0.06153379566967487
+        ],
+        "full_description": [
+          "A plastic bottle with a red label and black cap, containing dark liquid, featuring Chinese text and a Suntory logo."
+        ],
+        "materials": [
+          "plastic",
+          "liquid"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "oolong tea beverage",
+        "benchmark_beverage_bottle_004",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_1a3c25aa",
+        "table_with_random_objects_b09d497b",
+        "place_random_objects_on_desk_2abd5b81",
+        "benchmark_beverage_bottle_98fd186c"
+      ],
+      "usd": "benchmark_beverage_bottle_004",
+      "xyz": [
+        -0.112,
+        0.102,
+        1.0
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.052544,
+        0.998619
+      ]
+    },
+    "benchmark_cup_e674a62c": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "cylindrical",
+          "white",
+          "simple",
+          "printed",
+          "small"
+        ],
+        "dimensions": [
+          0.0634383037686348,
+          0.07829996943473816,
+          0.06343957036733627
+        ],
+        "full_description": [
+          "A white paper cup with a black line-drawn pattern and yellow accents depicting household items."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "kitchenware",
+          "drinking vessel"
+        ],
+        "semantic_name": [
+          "cup"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "paper cup",
+        "benchmark_cup_105",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_1a3c25aa",
+        "table_with_random_objects_b09d497b",
+        "place_random_objects_on_desk_2abd5b81",
+        "benchmark_cup_e674a62c"
+      ],
+      "usd": "benchmark_cup_105",
+      "xyz": [
+        -0.06,
+        -0.238,
+        0.938
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.104433,
+        0.994532
+      ]
+    },
+    "benchmark_mouse_19633105": {
+      "description": {
+        "color": "gray",
+        "descriptive_terms": [
+          "rounded",
+          "smooth",
+          "compact",
+          "ergonomic",
+          "modern"
+        ],
+        "dimensions": [
+          0.08789288997650146,
+          0.029345117509365082,
+          0.059461820870637894
+        ],
+        "full_description": [
+          "A dark gray, ergonomically shaped computer mouse with a textured side grip and visible 'Logitech' branding."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "electronic device",
+          "computer peripheral"
+        ],
+        "semantic_name": [
+          "computer mouse"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "mouse",
+        "benchmark_mouse_000",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_1a3c25aa",
+        "table_with_random_objects_b09d497b",
+        "place_random_objects_on_desk_2abd5b81",
+        "benchmark_mouse_19633105"
+      ],
+      "usd": "benchmark_mouse_000",
+      "xyz": [
+        0.124,
+        0.24,
+        0.889
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.076538,
+        0.997067
+      ]
+    },
+    "table_b3b1435f": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_1a3c25aa",
+        "table_with_random_objects_b09d497b",
+        "place_random_objects_on_desk_2abd5b81",
+        "table_b3b1435f"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_1a3c25aa",
+          "target": "table_with_random_objects_b09d497b"
+        },
+        {
+          "source": "table_with_random_objects_b09d497b",
+          "target": "place_random_objects_on_desk_2abd5b81"
+        },
+        {
+          "source": "place_random_objects_on_desk_2abd5b81",
+          "target": "table_b3b1435f"
+        },
+        {
+          "source": "place_random_objects_on_desk_2abd5b81",
+          "target": "benchmark_beverage_bottle_98fd186c"
+        },
+        {
+          "source": "place_random_objects_on_desk_2abd5b81",
+          "target": "benchmark_mouse_19633105"
+        },
+        {
+          "source": "place_random_objects_on_desk_2abd5b81",
+          "target": "benchmark_apple_78e779a1"
+        },
+        {
+          "source": "place_random_objects_on_desk_2abd5b81",
+          "target": "benchmark_cup_e674a62c"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_1a3c25aa"
+        },
+        {
+          "id": "table_with_random_objects_b09d497b"
+        },
+        {
+          "id": "place_random_objects_on_desk_2abd5b81"
+        },
+        {
+          "id": "table_b3b1435f",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_beverage_bottle_98fd186c",
+          "tags": [
+            "oolong tea beverage",
+            "benchmark_beverage_bottle_004",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_mouse_19633105",
+          "tags": [
+            "mouse",
+            "benchmark_mouse_000",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_apple_78e779a1",
+          "tags": [
+            "apple",
+            "benchmark_apple_002",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_cup_e674a62c",
+          "tags": [
+            "paper cup",
+            "benchmark_cup_105",
+            "on_desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 2669838299
+}

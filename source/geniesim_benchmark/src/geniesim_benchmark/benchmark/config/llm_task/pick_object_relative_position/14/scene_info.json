@@ -1,0 +1,576 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_21daeafb": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "cylindrical",
+          "red",
+          "liquid",
+          "bottled",
+          "packaged"
+        ],
+        "dimensions": [
+          0.06153380125761032,
+          0.14993929862976074,
+          0.06153379566967487
+        ],
+        "full_description": [
+          "A plastic bottle with a red label and black cap, containing dark liquid, featuring Chinese text and a Suntory logo."
+        ],
+        "materials": [
+          "plastic",
+          "liquid"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "oolong_tea_beverage",
+        "object",
+        "oolong tea beverage",
+        "\u4e4c\u9f99\u8336\u996e\u6599"
+      ],
+      "tags": [
+        "root_scene_04f2b94e",
+        "pick_object_relative_position_a282bf6c",
+        "place_objects_on_table_2374ce6f",
+        "create_tabletop_object_5bce3cb7",
+        "benchmark_beverage_bottle_21daeafb"
+      ],
+      "usd": "benchmark_beverage_bottle_004",
+      "xyz": [
+        0.193,
+        0.075,
+        0.797
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.377635,
+        0.925954
+      ]
+    },
+    "benchmark_bowl_sponge_c78e5557": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "porous",
+          "flexible",
+          "absorbent",
+          "textured",
+          "rectangular"
+        ],
+        "dimensions": [
+          0.08157370984554291,
+          0.02987557463347912,
+          0.05640790797770023
+        ],
+        "full_description": [
+          "A rectangular sponge with a yellow porous base and a green abrasive top layer."
+        ],
+        "materials": [
+          "plastic",
+          "foam"
+        ],
+        "object_category": [
+          "kitchen",
+          "cleaning"
+        ],
+        "semantic_name": [
+          "sponge"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "bowl_sponge",
+        "object",
+        "bowl sponge",
+        "\u6d17\u7897\u6d77\u7ef5"
+      ],
+      "tags": [
+        "root_scene_04f2b94e",
+        "pick_object_relative_position_a282bf6c",
+        "place_objects_on_table_2374ce6f",
+        "create_tabletop_object_fa619810",
+        "benchmark_bowl_sponge_c78e5557"
+      ],
+      "usd": "benchmark_bowl_sponge_000",
+      "xyz": [
+        -0.138,
+        -0.185,
+        0.747
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.852734,
+        0.522345
+      ]
+    },
+    "benchmark_building_blocks_3cf29a7a": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "small",
+          "red",
+          "cubic",
+          "simple",
+          "solid"
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          0.03
+        ],
+        "full_description": [
+          "A small, solid red cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "building_block"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "cube",
+        "unit": "m"
+      },
+      "keywords": [
+        "building_blocks",
+        "object",
+        "building blocks",
+        "\u79ef\u6728",
+        "target"
+      ],
+      "tags": [
+        "root_scene_04f2b94e",
+        "pick_object_relative_position_a282bf6c",
+        "place_objects_on_table_2374ce6f",
+        "create_tabletop_object_1f90fcf1",
+        "benchmark_building_blocks_3cf29a7a"
+      ],
+      "usd": "benchmark_building_blocks_072",
+      "xyz": [
+        -0.107,
+        0.223,
+        0.747
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.941934,
+        0.335799
+      ]
+    },
+    "benchmark_building_blocks_aa82aa89": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "small",
+          "red",
+          "cubic",
+          "simple",
+          "solid"
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          0.03
+        ],
+        "full_description": [
+          "A small, solid red cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "building_block"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "cube",
+        "unit": "m"
+      },
+      "keywords": [
+        "building_blocks",
+        "object",
+        "building blocks",
+        "\u79ef\u6728",
+        "target"
+      ],
+      "tags": [
+        "root_scene_04f2b94e",
+        "pick_object_relative_position_a282bf6c",
+        "place_objects_on_table_2374ce6f",
+        "create_tabletop_object_60a9c2c5",
+        "benchmark_building_blocks_aa82aa89"
+      ],
+      "usd": "benchmark_building_blocks_072",
+      "xyz": [
+        -0.129,
+        0.015,
+        0.747
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.785135,
+        -0.619325
+      ]
+    },
+    "benchmark_lemon_f225c0f9": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "citrus",
+          "yellow",
+          "organic",
+          "fresh",
+          "juicy"
+        ],
+        "dimensions": [
+          0.0652875304222107,
+          0.08429359644651413,
+          0.06925402581691742
+        ],
+        "full_description": [
+          "A bright yellow, glossy, oval-shaped fruit with a small green stem nub."
+        ],
+        "materials": [
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "food",
+          "citrus fruit"
+        ],
+        "semantic_name": [
+          "lemon"
+        ],
+        "shape": "irregular",
+        "unit": "m"
+      },
+      "keywords": [
+        "lemon",
+        "object",
+        "lemon",
+        "\u67e0\u6aac"
+      ],
+      "tags": [
+        "root_scene_04f2b94e",
+        "pick_object_relative_position_a282bf6c",
+        "place_objects_on_table_2374ce6f",
+        "create_tabletop_object_553d6d46",
+        "benchmark_lemon_f225c0f9"
+      ],
+      "usd": "benchmark_lemon_030",
+      "xyz": [
+        0.189,
+        -0.198,
+        0.774
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.77301,
+        -0.634394
+      ]
+    },
+    "benchmark_toy_car_2e7b74a7": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy_car",
+        "object",
+        "toy car",
+        "\u73a9\u5177\u8f66"
+      ],
+      "tags": [
+        "root_scene_04f2b94e",
+        "pick_object_relative_position_a282bf6c",
+        "place_objects_on_table_2374ce6f",
+        "create_tabletop_object_4fb72c39",
+        "benchmark_toy_car_2e7b74a7"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        0.041,
+        -0.229,
+        0.748
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.996489,
+        -0.083719
+      ]
+    },
+    "table_519439ad": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_04f2b94e",
+        "pick_object_relative_position_a282bf6c",
+        "place_objects_on_table_2374ce6f",
+        "table_519439ad"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_04f2b94e",
+          "target": "pick_object_relative_position_a282bf6c"
+        },
+        {
+          "source": "pick_object_relative_position_a282bf6c",
+          "target": "place_objects_on_table_2374ce6f"
+        },
+        {
+          "source": "place_objects_on_table_2374ce6f",
+          "target": "table_519439ad"
+        },
+        {
+          "source": "place_objects_on_table_2374ce6f",
+          "target": "create_tabletop_object_60a9c2c5"
+        },
+        {
+          "source": "place_objects_on_table_2374ce6f",
+          "target": "create_tabletop_object_1f90fcf1"
+        },
+        {
+          "source": "place_objects_on_table_2374ce6f",
+          "target": "create_tabletop_object_553d6d46"
+        },
+        {
+          "source": "place_objects_on_table_2374ce6f",
+          "target": "create_tabletop_object_5bce3cb7"
+        },
+        {
+          "source": "place_objects_on_table_2374ce6f",
+          "target": "create_tabletop_object_fa619810"
+        },
+        {
+          "source": "place_objects_on_table_2374ce6f",
+          "target": "create_tabletop_object_4fb72c39"
+        },
+        {
+          "source": "create_tabletop_object_60a9c2c5",
+          "target": "benchmark_building_blocks_aa82aa89"
+        },
+        {
+          "source": "create_tabletop_object_1f90fcf1",
+          "target": "benchmark_building_blocks_3cf29a7a"
+        },
+        {
+          "source": "create_tabletop_object_553d6d46",
+          "target": "benchmark_lemon_f225c0f9"
+        },
+        {
+          "source": "create_tabletop_object_5bce3cb7",
+          "target": "benchmark_beverage_bottle_21daeafb"
+        },
+        {
+          "source": "create_tabletop_object_fa619810",
+          "target": "benchmark_bowl_sponge_c78e5557"
+        },
+        {
+          "source": "create_tabletop_object_4fb72c39",
+          "target": "benchmark_toy_car_2e7b74a7"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_04f2b94e"
+        },
+        {
+          "id": "pick_object_relative_position_a282bf6c"
+        },
+        {
+          "id": "place_objects_on_table_2374ce6f"
+        },
+        {
+          "id": "table_519439ad",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_60a9c2c5"
+        },
+        {
+          "id": "benchmark_building_blocks_aa82aa89",
+          "tags": [
+            "building_blocks",
+            "object",
+            "building blocks",
+            "\u79ef\u6728",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_1f90fcf1"
+        },
+        {
+          "id": "benchmark_building_blocks_3cf29a7a",
+          "tags": [
+            "building_blocks",
+            "object",
+            "building blocks",
+            "\u79ef\u6728",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_553d6d46"
+        },
+        {
+          "id": "benchmark_lemon_f225c0f9",
+          "tags": [
+            "lemon",
+            "object",
+            "lemon",
+            "\u67e0\u6aac"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_5bce3cb7"
+        },
+        {
+          "id": "benchmark_beverage_bottle_21daeafb",
+          "tags": [
+            "oolong_tea_beverage",
+            "object",
+            "oolong tea beverage",
+            "\u4e4c\u9f99\u8336\u996e\u6599"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_fa619810"
+        },
+        {
+          "id": "benchmark_bowl_sponge_c78e5557",
+          "tags": [
+            "bowl_sponge",
+            "object",
+            "bowl sponge",
+            "\u6d17\u7897\u6d77\u7ef5"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_4fb72c39"
+        },
+        {
+          "id": "benchmark_toy_car_2e7b74a7",
+          "tags": [
+            "toy_car",
+            "object",
+            "toy car",
+            "\u73a9\u5177\u8f66"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 3273927914
+}

@@ -1,0 +1,346 @@
+{
+  "layout": {
+    "benchmark_bowl_22362089": {
+      "description": {
+        "color": "light green",
+        "descriptive_terms": [
+          "round",
+          "smooth",
+          "glazed",
+          "ceramic",
+          "shallow"
+        ],
+        "dimensions": [
+          0.15623040771484376,
+          0.0825987319946289,
+          0.15708323669433594
+        ],
+        "full_description": [
+          "A small, light green ceramic bowl with a dark rim and a glossy finish, featuring a subtle mark on its base."
+        ],
+        "materials": [
+          "ceramic",
+          "glaze"
+        ],
+        "object_category": [
+          "kitchenware",
+          "bowl"
+        ],
+        "semantic_name": [
+          "bowl"
+        ],
+        "shape": "round",
+        "unit": "m"
+      },
+      "keywords": [
+        "bowl_2",
+        "white",
+        "ceramic",
+        "kitchenware",
+        "on_table"
+      ],
+      "tags": [
+        "root_scene_085c1245",
+        "table_with_three_bowls_3dc47c38",
+        "three_well_spaced_rotated_bowls_on_table_0dd92d19",
+        "single_bowl_04dd5aa5",
+        "benchmark_bowl_22362089"
+      ],
+      "usd": "benchmark_bowl_025",
+      "xyz": [
+        0.032,
+        -0.275,
+        0.901
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.736759,
+        -0.676155
+      ]
+    },
+    "benchmark_bowl_a4d781e5": {
+      "description": {
+        "color": "light green",
+        "descriptive_terms": [
+          "round",
+          "smooth",
+          "glazed",
+          "ceramic",
+          "shallow"
+        ],
+        "dimensions": [
+          0.15623040771484376,
+          0.0825987319946289,
+          0.15708323669433594
+        ],
+        "full_description": [
+          "A small, light green ceramic bowl with a dark rim and a glossy finish, featuring a subtle mark on its base."
+        ],
+        "materials": [
+          "ceramic",
+          "glaze"
+        ],
+        "object_category": [
+          "kitchenware",
+          "bowl"
+        ],
+        "semantic_name": [
+          "bowl"
+        ],
+        "shape": "round",
+        "unit": "m"
+      },
+      "keywords": [
+        "bowl_3",
+        "white",
+        "ceramic",
+        "kitchenware",
+        "on_table"
+      ],
+      "tags": [
+        "root_scene_085c1245",
+        "table_with_three_bowls_3dc47c38",
+        "three_well_spaced_rotated_bowls_on_table_0dd92d19",
+        "single_bowl_38652d2b",
+        "benchmark_bowl_a4d781e5"
+      ],
+      "usd": "benchmark_bowl_025",
+      "xyz": [
+        -0.197,
+        -0.138,
+        0.901
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.393062,
+        0.919512
+      ]
+    },
+    "benchmark_bowl_b389d2fc": {
+      "description": {
+        "color": "light green",
+        "descriptive_terms": [
+          "round",
+          "smooth",
+          "glazed",
+          "ceramic",
+          "shallow"
+        ],
+        "dimensions": [
+          0.15623040771484376,
+          0.0825987319946289,
+          0.15708323669433594
+        ],
+        "full_description": [
+          "A small, light green ceramic bowl with a dark rim and a glossy finish, featuring a subtle mark on its base."
+        ],
+        "materials": [
+          "ceramic",
+          "glaze"
+        ],
+        "object_category": [
+          "kitchenware",
+          "bowl"
+        ],
+        "semantic_name": [
+          "bowl"
+        ],
+        "shape": "round",
+        "unit": "m"
+      },
+      "keywords": [
+        "bowl_1",
+        "white",
+        "ceramic",
+        "kitchenware",
+        "on_table"
+      ],
+      "tags": [
+        "root_scene_085c1245",
+        "table_with_three_bowls_3dc47c38",
+        "three_well_spaced_rotated_bowls_on_table_0dd92d19",
+        "single_bowl_b514e11c",
+        "benchmark_bowl_b389d2fc"
+      ],
+      "usd": "benchmark_bowl_025",
+      "xyz": [
+        0.038,
+        0.211,
+        0.901
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.189364,
+        0.981907
+      ]
+    },
+    "table_ec885f81": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "dining_table",
+        "table",
+        "wood",
+        "furniture"
+      ],
+      "tags": [
+        "root_scene_085c1245",
+        "table_with_three_bowls_3dc47c38",
+        "three_well_spaced_rotated_bowls_on_table_0dd92d19",
+        "table_ec885f81"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_085c1245",
+          "target": "table_with_three_bowls_3dc47c38"
+        },
+        {
+          "source": "table_with_three_bowls_3dc47c38",
+          "target": "three_well_spaced_rotated_bowls_on_table_0dd92d19"
+        },
+        {
+          "source": "three_well_spaced_rotated_bowls_on_table_0dd92d19",
+          "target": "table_ec885f81"
+        },
+        {
+          "source": "three_well_spaced_rotated_bowls_on_table_0dd92d19",
+          "target": "single_bowl_b514e11c"
+        },
+        {
+          "source": "three_well_spaced_rotated_bowls_on_table_0dd92d19",
+          "target": "single_bowl_04dd5aa5"
+        },
+        {
+          "source": "three_well_spaced_rotated_bowls_on_table_0dd92d19",
+          "target": "single_bowl_38652d2b"
+        },
+        {
+          "source": "single_bowl_b514e11c",
+          "target": "benchmark_bowl_b389d2fc"
+        },
+        {
+          "source": "single_bowl_04dd5aa5",
+          "target": "benchmark_bowl_22362089"
+        },
+        {
+          "source": "single_bowl_38652d2b",
+          "target": "benchmark_bowl_a4d781e5"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_085c1245"
+        },
+        {
+          "id": "table_with_three_bowls_3dc47c38"
+        },
+        {
+          "id": "three_well_spaced_rotated_bowls_on_table_0dd92d19"
+        },
+        {
+          "id": "table_ec885f81",
+          "tags": [
+            "dining_table",
+            "table",
+            "wood",
+            "furniture"
+          ]
+        },
+        {
+          "id": "single_bowl_b514e11c"
+        },
+        {
+          "id": "benchmark_bowl_b389d2fc",
+          "tags": [
+            "bowl_1",
+            "white",
+            "ceramic",
+            "kitchenware",
+            "on_table"
+          ]
+        },
+        {
+          "id": "single_bowl_04dd5aa5"
+        },
+        {
+          "id": "benchmark_bowl_22362089",
+          "tags": [
+            "bowl_2",
+            "white",
+            "ceramic",
+            "kitchenware",
+            "on_table"
+          ]
+        },
+        {
+          "id": "single_bowl_38652d2b"
+        },
+        {
+          "id": "benchmark_bowl_a4d781e5",
+          "tags": [
+            "bowl_3",
+            "white",
+            "ceramic",
+            "kitchenware",
+            "on_table"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_three_bowls",
+  "seed": 676071638
+}

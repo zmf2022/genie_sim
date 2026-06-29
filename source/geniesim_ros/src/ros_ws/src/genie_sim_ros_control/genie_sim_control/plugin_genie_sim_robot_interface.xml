@@ -1,0 +1,6 @@
+<library path="genie_sim_robot_interface">
+  <class name="genie_sim_control/GenieSimRobotInterface"
+         type="genie_sim_control::GenieSimRobotInterface"
+         base_class_type="hardware_interface::SystemInterface">
+  </class>
+</library>

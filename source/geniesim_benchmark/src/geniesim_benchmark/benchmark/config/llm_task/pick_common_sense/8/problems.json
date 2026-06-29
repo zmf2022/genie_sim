@@ -1,0 +1,150 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "genie_beverage_bottle_35066f59|[0.1,0.2,0.1]|left_gripper"
+              },
+              {
+                "Follow": "genie_beverage_bottle_35066f59|[0.1,0.2,0.1]|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "PickUpOnGripper": "genie_beverage_bottle_35066f59|left_gripper"
+              },
+              {
+                "PickUpOnGripper": "genie_beverage_bottle_35066f59|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "pick_common_sense"
+  },
+  "problem2": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "benchmark_green_apple_f18877d5|[0.1,0.2,0.1]|left_gripper"
+              },
+              {
+                "Follow": "benchmark_green_apple_f18877d5|[0.1,0.2,0.1]|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "PickUpOnGripper": "benchmark_green_apple_f18877d5|left_gripper"
+              },
+              {
+                "PickUpOnGripper": "benchmark_green_apple_f18877d5|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "pick_common_sense"
+  },
+  "problem3": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "benchmark_pen_874b8edf|[0.1,0.2,0.1]|left_gripper"
+              },
+              {
+                "Follow": "benchmark_pen_874b8edf|[0.1,0.2,0.1]|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "PickUpOnGripper": "benchmark_pen_874b8edf|left_gripper"
+              },
+              {
+                "PickUpOnGripper": "benchmark_pen_874b8edf|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "pick_common_sense"
+  },
+  "problem4": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "benchmark_toy_car_3daccb65|[0.1,0.2,0.1]|left_gripper"
+              },
+              {
+                "Follow": "benchmark_toy_car_3daccb65|[0.1,0.2,0.1]|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "PickUpOnGripper": "benchmark_toy_car_3daccb65|left_gripper"
+              },
+              {
+                "PickUpOnGripper": "benchmark_toy_car_3daccb65|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "pick_common_sense"
+  }
+}

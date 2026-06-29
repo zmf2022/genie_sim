@@ -1,0 +1,14 @@
+<library path="genie_sim_rviz_plugins">
+  <class
+    name="genie_sim_rviz_plugins/ViewCameraPosePublisher"
+    type="genie_sim_rviz_plugins::ViewCameraPosePublisherDisplay"
+    base_class_type="rviz_common::Display"
+  >
+    <description>
+      Publishes the active RViz 3D view's camera pose as
+      geometry_msgs/PoseStamped on a configurable topic. Intended to drive
+      the headless OVRTX render node's FreeCam so the off-screen render
+      mirrors the user's interactive RViz viewpoint.
+    </description>
+  </class>
+</library>

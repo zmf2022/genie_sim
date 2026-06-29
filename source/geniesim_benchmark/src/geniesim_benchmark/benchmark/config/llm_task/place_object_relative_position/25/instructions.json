@@ -1,0 +1,8 @@
+{
+  "instructions": [
+    {
+      "instruction": "place the mug to the top of the peach"
+    }
+  ],
+  "task_id": "place_object_relative_position_25"
+}

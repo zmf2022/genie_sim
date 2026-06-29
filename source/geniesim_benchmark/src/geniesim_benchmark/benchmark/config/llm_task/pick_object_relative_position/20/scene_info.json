@@ -1,0 +1,422 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_2a2e468b": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "cylindrical",
+          "orange",
+          "metallic",
+          "printed",
+          "beverage"
+        ],
+        "dimensions": [
+          0.06648768615722657,
+          0.1158542938232422,
+          0.06647872543334961
+        ],
+        "full_description": [
+          "An orange aluminum soda can with a silver top and bottom, featuring the Fanta logo and branding."
+        ],
+        "materials": [
+          "aluminum",
+          "plastic",
+          "printed label"
+        ],
+        "object_category": [
+          "container",
+          "beverage can"
+        ],
+        "semantic_name": [
+          "can"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "fanta",
+        "object",
+        "fanta",
+        "\u82ac\u8fbe"
+      ],
+      "tags": [
+        "root_scene_2bb62b9e",
+        "pick_object_relative_position_65f1a41b",
+        "place_objects_on_table_df10985d",
+        "create_tabletop_object_214c6392",
+        "benchmark_beverage_bottle_2a2e468b"
+      ],
+      "usd": "benchmark_beverage_bottle_003",
+      "xyz": [
+        0.052,
+        0.146,
+        0.79
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.482726,
+        0.875771
+      ]
+    },
+    "benchmark_rubik_cube_5a831869": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "colorful",
+          "complex",
+          "geometric",
+          "small",
+          "plastic"
+        ],
+        "dimensions": [
+          0.057,
+          0.057,
+          0.057
+        ],
+        "full_description": [
+          "A 3x3 Rubik's cube with pastel-colored faces including yellow, pink, and cyan on a black background."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "puzzle",
+          "toy"
+        ],
+        "semantic_name": [
+          "rubik_cube"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "rubik_cube",
+        "object",
+        "rubik cube",
+        "\u9b54\u65b9"
+      ],
+      "tags": [
+        "root_scene_2bb62b9e",
+        "pick_object_relative_position_65f1a41b",
+        "place_objects_on_table_df10985d",
+        "create_tabletop_object_19227207",
+        "benchmark_rubik_cube_5a831869"
+      ],
+      "usd": "benchmark_rubik_cube_001",
+      "xyz": [
+        0.169,
+        -0.197,
+        0.76
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.122231,
+        0.992502
+      ]
+    },
+    "benchmark_tape_measure_133cbf0d": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "compact",
+          "durable",
+          "portable",
+          "functional",
+          "robust"
+        ],
+        "dimensions": [
+          0.0889030990600586,
+          0.08185286712646485,
+          0.04844463539123535
+        ],
+        "full_description": [
+          "A compact tape measure with a black and bright yellow plastic casing, featuring a visible '7.5m' label on its side."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "tool",
+          "measurement"
+        ],
+        "semantic_name": [
+          "tape_measure"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "tape_measure",
+        "object",
+        "tape measure",
+        "\u5377\u5c3a",
+        "target"
+      ],
+      "tags": [
+        "root_scene_2bb62b9e",
+        "pick_object_relative_position_65f1a41b",
+        "place_objects_on_table_df10985d",
+        "create_tabletop_object_e9726fa0",
+        "benchmark_tape_measure_133cbf0d"
+      ],
+      "usd": "benchmark_tape_measure_007",
+      "xyz": [
+        -0.142,
+        -0.037,
+        0.773
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.408916,
+        0.912572
+      ]
+    },
+    "benchmark_tape_measure_be8a442a": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "compact",
+          "durable",
+          "portable",
+          "functional",
+          "robust"
+        ],
+        "dimensions": [
+          0.0889030990600586,
+          0.08185286712646485,
+          0.04844463539123535
+        ],
+        "full_description": [
+          "A compact tape measure with a black and bright yellow plastic casing, featuring a visible '7.5m' label on its side."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "tool",
+          "measurement"
+        ],
+        "semantic_name": [
+          "tape_measure"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "tape_measure",
+        "object",
+        "tape measure",
+        "\u5377\u5c3a",
+        "target"
+      ],
+      "tags": [
+        "root_scene_2bb62b9e",
+        "pick_object_relative_position_65f1a41b",
+        "place_objects_on_table_df10985d",
+        "create_tabletop_object_9b30ba09",
+        "benchmark_tape_measure_be8a442a"
+      ],
+      "usd": "benchmark_tape_measure_007",
+      "xyz": [
+        -0.083,
+        0.23,
+        0.773
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.266039,
+        0.963962
+      ]
+    },
+    "table_a2c505ae": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_2bb62b9e",
+        "pick_object_relative_position_65f1a41b",
+        "place_objects_on_table_df10985d",
+        "table_a2c505ae"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_2bb62b9e",
+          "target": "pick_object_relative_position_65f1a41b"
+        },
+        {
+          "source": "pick_object_relative_position_65f1a41b",
+          "target": "place_objects_on_table_df10985d"
+        },
+        {
+          "source": "place_objects_on_table_df10985d",
+          "target": "table_a2c505ae"
+        },
+        {
+          "source": "place_objects_on_table_df10985d",
+          "target": "create_tabletop_object_9b30ba09"
+        },
+        {
+          "source": "place_objects_on_table_df10985d",
+          "target": "create_tabletop_object_e9726fa0"
+        },
+        {
+          "source": "place_objects_on_table_df10985d",
+          "target": "create_tabletop_object_214c6392"
+        },
+        {
+          "source": "place_objects_on_table_df10985d",
+          "target": "create_tabletop_object_19227207"
+        },
+        {
+          "source": "create_tabletop_object_9b30ba09",
+          "target": "benchmark_tape_measure_be8a442a"
+        },
+        {
+          "source": "create_tabletop_object_e9726fa0",
+          "target": "benchmark_tape_measure_133cbf0d"
+        },
+        {
+          "source": "create_tabletop_object_214c6392",
+          "target": "benchmark_beverage_bottle_2a2e468b"
+        },
+        {
+          "source": "create_tabletop_object_19227207",
+          "target": "benchmark_rubik_cube_5a831869"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_2bb62b9e"
+        },
+        {
+          "id": "pick_object_relative_position_65f1a41b"
+        },
+        {
+          "id": "place_objects_on_table_df10985d"
+        },
+        {
+          "id": "table_a2c505ae",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_9b30ba09"
+        },
+        {
+          "id": "benchmark_tape_measure_be8a442a",
+          "tags": [
+            "tape_measure",
+            "object",
+            "tape measure",
+            "\u5377\u5c3a",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_e9726fa0"
+        },
+        {
+          "id": "benchmark_tape_measure_133cbf0d",
+          "tags": [
+            "tape_measure",
+            "object",
+            "tape measure",
+            "\u5377\u5c3a",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_214c6392"
+        },
+        {
+          "id": "benchmark_beverage_bottle_2a2e468b",
+          "tags": [
+            "fanta",
+            "object",
+            "fanta",
+            "\u82ac\u8fbe"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_19227207"
+        },
+        {
+          "id": "benchmark_rubik_cube_5a831869",
+          "tags": [
+            "rubik_cube",
+            "object",
+            "rubik cube",
+            "\u9b54\u65b9"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 365365324
+}

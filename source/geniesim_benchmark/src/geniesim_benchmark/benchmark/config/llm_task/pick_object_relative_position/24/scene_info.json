@@ -1,0 +1,421 @@
+{
+  "layout": {
+    "benchmark_apple_2d73af79": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "round",
+          "red",
+          "ripe",
+          "smooth",
+          "natural"
+        ],
+        "dimensions": [
+          0.093,
+          0.0945,
+          0.0917
+        ],
+        "full_description": [
+          "A red and yellow apple with a glossy surface and a short brown stem."
+        ],
+        "materials": [
+          "fruit flesh",
+          "skin"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "apple"
+        ],
+        "shape": "round",
+        "unit": "m"
+      },
+      "keywords": [
+        "apple",
+        "object",
+        "apple",
+        "\u82f9\u679c",
+        "target"
+      ],
+      "tags": [
+        "root_scene_9d6b4556",
+        "pick_object_relative_position_291d0c90",
+        "place_objects_on_table_8812af7e",
+        "create_tabletop_object_4022120e",
+        "benchmark_apple_2d73af79"
+      ],
+      "usd": "benchmark_apple_002",
+      "xyz": [
+        0.08,
+        0.062,
+        0.779
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.993788,
+        -0.111292
+      ]
+    },
+    "benchmark_apple_92675624": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "round",
+          "red",
+          "ripe",
+          "smooth",
+          "natural"
+        ],
+        "dimensions": [
+          0.093,
+          0.0945,
+          0.0917
+        ],
+        "full_description": [
+          "A red and yellow apple with a glossy surface and a short brown stem."
+        ],
+        "materials": [
+          "fruit flesh",
+          "skin"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "apple"
+        ],
+        "shape": "round",
+        "unit": "m"
+      },
+      "keywords": [
+        "apple",
+        "object",
+        "apple",
+        "\u82f9\u679c",
+        "target"
+      ],
+      "tags": [
+        "root_scene_9d6b4556",
+        "pick_object_relative_position_291d0c90",
+        "place_objects_on_table_8812af7e",
+        "create_tabletop_object_0c6c185b",
+        "benchmark_apple_92675624"
+      ],
+      "usd": "benchmark_apple_002",
+      "xyz": [
+        0.142,
+        -0.237,
+        0.779
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.380205,
+        0.924902
+      ]
+    },
+    "benchmark_clock_ee829870": {
+      "description": {
+        "color": "pink",
+        "descriptive_terms": [
+          "circular",
+          "compact",
+          "decorative",
+          "vintage",
+          "playful"
+        ],
+        "dimensions": [
+          0.08173294067382812,
+          0.13982281494140625,
+          0.13057781982421876
+        ],
+        "full_description": [
+          "A pink, pig-shaped alarm clock with a white face, black numbers, and two small ears on top."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "timepiece",
+          "analog clock"
+        ],
+        "semantic_name": [
+          "clock"
+        ],
+        "shape": "rounded",
+        "unit": "m"
+      },
+      "keywords": [
+        "clock",
+        "object",
+        "clock",
+        "\u95f9\u949f"
+      ],
+      "tags": [
+        "root_scene_9d6b4556",
+        "pick_object_relative_position_291d0c90",
+        "place_objects_on_table_8812af7e",
+        "create_tabletop_object_72f7d7dd",
+        "benchmark_clock_ee829870"
+      ],
+      "usd": "benchmark_clock_044",
+      "xyz": [
+        -0.089,
+        -0.126,
+        0.802
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.163972,
+        0.986465
+      ]
+    },
+    "benchmark_peach_0ea0f4da": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "round",
+          "ripe",
+          "juicy",
+          "fuzzy",
+          "organic"
+        ],
+        "dimensions": [
+          0.0926,
+          0.0916,
+          0.0869
+        ],
+        "full_description": [
+          "A round, fuzzy peach with a gradient of red and yellow skin."
+        ],
+        "materials": [
+          "flesh",
+          "skin"
+        ],
+        "object_category": [
+          "fruit",
+          "stone fruit"
+        ],
+        "semantic_name": [
+          "peach"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "peach",
+        "object",
+        "peach",
+        "\u6843\u5b50"
+      ],
+      "tags": [
+        "root_scene_9d6b4556",
+        "pick_object_relative_position_291d0c90",
+        "place_objects_on_table_8812af7e",
+        "create_tabletop_object_d8448335",
+        "benchmark_peach_0ea0f4da"
+      ],
+      "usd": "benchmark_peach_021",
+      "xyz": [
+        -0.086,
+        0.141,
+        0.778
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.998976,
+        0.045236
+      ]
+    },
+    "table_9b90af5c": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_9d6b4556",
+        "pick_object_relative_position_291d0c90",
+        "place_objects_on_table_8812af7e",
+        "table_9b90af5c"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_9d6b4556",
+          "target": "pick_object_relative_position_291d0c90"
+        },
+        {
+          "source": "pick_object_relative_position_291d0c90",
+          "target": "place_objects_on_table_8812af7e"
+        },
+        {
+          "source": "place_objects_on_table_8812af7e",
+          "target": "table_9b90af5c"
+        },
+        {
+          "source": "place_objects_on_table_8812af7e",
+          "target": "create_tabletop_object_4022120e"
+        },
+        {
+          "source": "place_objects_on_table_8812af7e",
+          "target": "create_tabletop_object_0c6c185b"
+        },
+        {
+          "source": "place_objects_on_table_8812af7e",
+          "target": "create_tabletop_object_d8448335"
+        },
+        {
+          "source": "place_objects_on_table_8812af7e",
+          "target": "create_tabletop_object_72f7d7dd"
+        },
+        {
+          "source": "create_tabletop_object_4022120e",
+          "target": "benchmark_apple_2d73af79"
+        },
+        {
+          "source": "create_tabletop_object_0c6c185b",
+          "target": "benchmark_apple_92675624"
+        },
+        {
+          "source": "create_tabletop_object_d8448335",
+          "target": "benchmark_peach_0ea0f4da"
+        },
+        {
+          "source": "create_tabletop_object_72f7d7dd",
+          "target": "benchmark_clock_ee829870"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_9d6b4556"
+        },
+        {
+          "id": "pick_object_relative_position_291d0c90"
+        },
+        {
+          "id": "place_objects_on_table_8812af7e"
+        },
+        {
+          "id": "table_9b90af5c",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_4022120e"
+        },
+        {
+          "id": "benchmark_apple_2d73af79",
+          "tags": [
+            "apple",
+            "object",
+            "apple",
+            "\u82f9\u679c",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_0c6c185b"
+        },
+        {
+          "id": "benchmark_apple_92675624",
+          "tags": [
+            "apple",
+            "object",
+            "apple",
+            "\u82f9\u679c",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_d8448335"
+        },
+        {
+          "id": "benchmark_peach_0ea0f4da",
+          "tags": [
+            "peach",
+            "object",
+            "peach",
+            "\u6843\u5b50"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_72f7d7dd"
+        },
+        {
+          "id": "benchmark_clock_ee829870",
+          "tags": [
+            "clock",
+            "object",
+            "clock",
+            "\u95f9\u949f"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 4146132923
+}

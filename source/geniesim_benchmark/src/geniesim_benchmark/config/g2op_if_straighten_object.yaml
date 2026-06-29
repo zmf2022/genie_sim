@@ -1,0 +1,11 @@
+app:
+  enable_rate_limit: true
+  enable_ros: false
+benchmark:
+  num_episode: 1
+  task_name: table_task_0_g2_op
+  platform: g2_op
+  sub_task_name: straighten_object
+  seed: 1
+  model_arc: corobot
+  record: false

@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geniesim_benchmark"
+dynamic = ["version"]
+description = "Genie Sim — benchmark distribution (app, benchmark, evaluator, plugins, robot, teleop, utils)"
+requires-python = ">=3.10,<3.13"
+license = {text = "MPL-2.0"}
+authors = [{ name = "Genie Sim Team" }]
+keywords = ["agibot", "genie", "sim", "benchmark", "isaac"]
+classifiers = [
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+# All heavy runtime deps formerly carried by the geniesim umbrella now live
+# here. The umbrella is a meta-package; the code is here.
+dependencies = [
+    "geniesim_cli",
+    "geniesim_assets",
+    "isaacsim",
+    "colorama",
+    "cv-bridge",
+    "future",
+    "grasp_nms",
+    "msgpack",
+    "openai",
+    "pyyaml",
+    "ruckig",
+    "shapely",
+    "trimesh"
+]
+
+[project.urls]
+Homepage = "https://github.com/AgibotTech/genie_sim"
+
+[tool.setuptools.dynamic]
+version = {file = "VERSION"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.setuptools.package-data]
+"geniesim_benchmark" = [
+    "LICENSE",
+    "config/*.yaml",
+    "benchmark/config/**/*.json",
+    "benchmark/config/**/*.usda",
+    "benchmark/config/**/*.dot",
+    "benchmark/config/**/*.svg",
+    "plugins/tgs/config/*.json",
+    "plugins/output_system/*.json",
+    "app/curobo/**/*.yml",
+    "app/robot_cfg/**/*.json",
+    "app/robot_cfg/**/*.urdf",
+    "app/robot_cfg/**/*.yml",
+    "app/robot_cfg/**/*.yaml",
+    "evaluator/config/*.yaml",
+    "evaluator/prompts/*.md",
+    "evaluator/prompts/*.txt",
+    "robot/isaac_sim/robot_urdf/*.urdf",
+    "utils/IK-SDK/*",
+    "utils/urdf_solver/*",
+    "scripts/*.py",
+    "scripts/*.sh",
+    "scripts/*.pkl",
+]

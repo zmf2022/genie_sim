@@ -1,0 +1,8 @@
+{
+  "instructions": [
+    {
+      "instruction": "picks up the peach closer to the paper cup"
+    }
+  ],
+  "task_id": "pick_object_relative_position_5"
+}

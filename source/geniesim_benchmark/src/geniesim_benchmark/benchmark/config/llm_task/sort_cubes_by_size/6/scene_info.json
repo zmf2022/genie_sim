@@ -1,0 +1,349 @@
+{
+  "layout": {
+    "benchmark_building_blocks_4f9904fc": {
+      "description": {
+        "color": "blue",
+        "descriptive_terms": [
+          "small",
+          "blue",
+          "geometric",
+          "simple",
+          "solid"
+        ],
+        "dimensions": [
+          0.030000001192092896,
+          0.029999999329447746,
+          0.029999999329447746
+        ],
+        "full_description": [
+          "A small, solid blue cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "geometry",
+          "primitive"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "cube",
+        "unit": "m"
+      },
+      "keywords": [
+        "medium_cube_blue",
+        "blue",
+        "cube",
+        "building_block",
+        "interaction",
+        "up_axis_y"
+      ],
+      "tags": [
+        "root_scene_1a642f4b",
+        "table_with_cubes_by_size_075a28e9",
+        "place_cubes_on_table_81eb9ada",
+        "medium_cube_3d19aab6",
+        "benchmark_building_blocks_4f9904fc"
+      ],
+      "usd": "benchmark_building_blocks_076",
+      "xyz": [
+        -0.105,
+        0.0,
+        0.875
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.355781,
+        0.93457
+      ]
+    },
+    "benchmark_building_blocks_52067a0f": {
+      "description": {
+        "color": "green",
+        "descriptive_terms": [
+          "small",
+          "geometric",
+          "simple",
+          "solid",
+          "regular"
+        ],
+        "dimensions": [
+          0.02,
+          0.02,
+          0.02
+        ],
+        "full_description": [
+          "A small, solid cyan cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "geometry",
+          "primitive"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "cube",
+        "unit": "m"
+      },
+      "keywords": [
+        "small_cube",
+        "green",
+        "cube",
+        "building_block",
+        "interaction",
+        "up_axis_y"
+      ],
+      "tags": [
+        "root_scene_1a642f4b",
+        "table_with_cubes_by_size_075a28e9",
+        "place_cubes_on_table_81eb9ada",
+        "small_cube_4b8d383d",
+        "benchmark_building_blocks_52067a0f"
+      ],
+      "usd": "benchmark_building_blocks_079",
+      "xyz": [
+        -0.05,
+        0.013,
+        0.87
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.506776,
+        0.862078
+      ]
+    },
+    "benchmark_building_blocks_8c32c446": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "small",
+          "red",
+          "cubic",
+          "simple",
+          "solid"
+        ],
+        "dimensions": [
+          0.04,
+          0.04,
+          0.04
+        ],
+        "full_description": [
+          "A small, solid red cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "building_block"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "cube",
+        "unit": "m"
+      },
+      "keywords": [
+        "large_cube_red",
+        "red",
+        "cube",
+        "building_block",
+        "interaction",
+        "up_axis_y"
+      ],
+      "tags": [
+        "root_scene_1a642f4b",
+        "table_with_cubes_by_size_075a28e9",
+        "place_cubes_on_table_81eb9ada",
+        "large_cube_f157af34",
+        "benchmark_building_blocks_8c32c446"
+      ],
+      "usd": "benchmark_building_blocks_073",
+      "xyz": [
+        -0.02,
+        -0.067,
+        0.88
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.851888,
+        -0.523724
+      ]
+    },
+    "table_85c3c2cd": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_1a642f4b",
+        "table_with_cubes_by_size_075a28e9",
+        "place_cubes_on_table_81eb9ada",
+        "table_85c3c2cd"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_1a642f4b",
+          "target": "table_with_cubes_by_size_075a28e9"
+        },
+        {
+          "source": "table_with_cubes_by_size_075a28e9",
+          "target": "place_cubes_on_table_81eb9ada"
+        },
+        {
+          "source": "place_cubes_on_table_81eb9ada",
+          "target": "table_85c3c2cd"
+        },
+        {
+          "source": "place_cubes_on_table_81eb9ada",
+          "target": "large_cube_f157af34"
+        },
+        {
+          "source": "place_cubes_on_table_81eb9ada",
+          "target": "medium_cube_3d19aab6"
+        },
+        {
+          "source": "place_cubes_on_table_81eb9ada",
+          "target": "small_cube_4b8d383d"
+        },
+        {
+          "source": "large_cube_f157af34",
+          "target": "benchmark_building_blocks_8c32c446"
+        },
+        {
+          "source": "medium_cube_3d19aab6",
+          "target": "benchmark_building_blocks_4f9904fc"
+        },
+        {
+          "source": "small_cube_4b8d383d",
+          "target": "benchmark_building_blocks_52067a0f"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_1a642f4b"
+        },
+        {
+          "id": "table_with_cubes_by_size_075a28e9"
+        },
+        {
+          "id": "place_cubes_on_table_81eb9ada"
+        },
+        {
+          "id": "table_85c3c2cd",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "large_cube_f157af34"
+        },
+        {
+          "id": "benchmark_building_blocks_8c32c446",
+          "tags": [
+            "large_cube_red",
+            "red",
+            "cube",
+            "building_block",
+            "interaction",
+            "up_axis_y"
+          ]
+        },
+        {
+          "id": "medium_cube_3d19aab6"
+        },
+        {
+          "id": "benchmark_building_blocks_4f9904fc",
+          "tags": [
+            "medium_cube_blue",
+            "blue",
+            "cube",
+            "building_block",
+            "interaction",
+            "up_axis_y"
+          ]
+        },
+        {
+          "id": "small_cube_4b8d383d"
+        },
+        {
+          "id": "benchmark_building_blocks_52067a0f",
+          "tags": [
+            "small_cube",
+            "green",
+            "cube",
+            "building_block",
+            "interaction",
+            "up_axis_y"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_cubes_by_size",
+  "seed": 1896029965
+}

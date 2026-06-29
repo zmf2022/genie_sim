@@ -1,0 +1,139 @@
+# GenieSim launcher config — Newton standalone, MuJoCo-Warp rigid-body solver.
+#
+# Runs genie_sim_engine_newton.py Kit-free.  MuJoCo-Warp is an implicit
+# integrator built for stiff articulated bodies: single-pass convergence,
+# stable at high Hz, no iteration count tuning required.
+#
+# When to use vs other newton launchers:
+#   mujoco-warp — articulated robots, rigid scenes, high-speed manipulation.
+#                 Converges in 1 pass; run at 100-200 Hz.  No cloth.
+#   mjvbd       — MJW robot + VBD cloth (this launcher's combo flavour).
+#                 Use launcher_newton_mjvbd.yaml.
+#   fsvbd       — Featherstone robot + VBD cloth.  Featherstone is more
+#                 mature for high-stiffness articulations; MJW is faster
+#                 and stable under stiff implicit gains.  Use
+#                 launcher_newton_fsvbd.yaml.
+#   avbd        — Unified rigid + cloth via SolverVBD's Augmented VBD.
+#                 Best for cloth + passive rigid (hanger drape, drop
+#                 tests).  Use launcher_newton_avbd.yaml.
+#
+# Visualizer options (physics_engine_visualizer):
+#   none    — pure headless, no window (default)
+#   newton  — Newton ViewerGL OpenGL window; requires $DISPLAY
+#   ovrtx   — In-process OVRTX RTX render (kit-free); publishes
+#             <cam.topic>/image_raw + camera_info via gsi::RosBridge
+#             from a dedicated render thread.  See docs/ovrtx_sync.md.
+#   rerun   — TODO: Rerun gRPC stream (falls back to none)
+#
+# Note: physics_engine_visualizer:=ovrtx still requires headless:=false
+# (treated as a non-headless visualizer for forward compatibility with a
+# future GUI).  The kit visualizer was removed when newton-standalone
+# went Kit-free; use physics_engine:=isaac_newton for the Kit viewport.
+#
+# Usage — headless (default):
+#   ros2 launch genie_sim_bringup app.launch.py \
+#     scene:=<scene> \
+#     launcher_config:=launcher_newton_mjwarp
+#
+# Usage — Newton GL window:
+#   ros2 launch genie_sim_bringup app.launch.py \
+#     scene:=<scene> \
+#     launcher_config:=launcher_newton_mjwarp \
+#     headless:=false \
+#     physics_engine_visualizer:=newton
+#
+# Usage — Inline OVRtx (in-process RTX render, ROS image topics):
+#   ros2 launch genie_sim_bringup app.launch.py \
+#     scene:=<scene> \
+#     launcher_config:=launcher_newton_mjwarp \
+#     headless:=false \
+#     physics_engine_visualizer:=ovrtx
+
+launcher:
+  physics:
+    engine: genie_sim_engine_newton
+    engines:
+      genie_sim_engine_newton:
+        package: genie_sim_engine
+        executable: genie_sim_engine_newton.py
+        name: genie_sim_engine_newton
+    industrial_bridge: ""
+  renders: []
+
+genie_sim_engine_newton:
+  ros__parameters:
+    # Visualizer: none | newton | ovrtx | rerun (todo)
+    physics_engine_visualizer: newton
+
+    physics_solver: mujoco-warp
+
+    # MuJoCo-Warp converges in a single implicit pass, so 100 Hz is
+    # comfortable for most articulated-body scenes.  Push to 200 Hz for
+    # fast manipulation; drop to 60 Hz if the scene has many contacts.
+    realtime_factor: 1.0
+    physics_hz: 100.0
+
+    # Render rate.  Drives:
+    #  * newton GL ViewerGL frame cadence
+    #  * ovrtx visualizer's per-frame target FPS (latest-state-wins —
+    #    slow frames are dropped, not queued; physics never blocks).
+    # Ignored when physics_engine_visualizer: none.
+    render_hz: 30.0
+
+    # RTX submode for kit visualizer only; ignored for newton GL / ovrtx /
+    # none.  (kit removed from newton-standalone; see docs/fabric_sync.md
+    # §12.7.)
+    # raster ~16 ms/frame (RaytracedLighting, default)
+    # pathtrace ~49 ms/frame (RealTimePathTracing)
+    # offline 100-300 ms/frame (PathTracing, for screenshots)
+    render_mode: raster
+
+    # Optional ovrtx settings (only used when physics_engine_visualizer: ovrtx)
+    # ovrtx_root: ""                       # binary package root override
+    # ovrtx_log_path: "/tmp/ovrtx_inline.log"
+    # ovrtx_log_level: "info"
+    # ovrtx_camera_pose_topic: "/genie_sim_engine/viewer/camera_pose"
+    #   FreeCam viewport pose source.  Default matches the RViz plugin
+    #   (genie_sim_rviz_plugins/view_camera_pose_publisher_display) so the
+    #   FreeCam follows the RViz 3D viewport with no extra remap.
+
+    # physics_solver_substep controls sim_dt = (1/physics_hz) / substeps.
+    #
+    # substep=5   → sim_dt= 2ms at 100 Hz  (legacy default; OK for stiff
+    #               body/head but MARGINAL on arm_shoulder distal joints
+    #               with the x2-style uniform armature=0.03 baseline —
+    #               kp=40000 against M_eff=0.052 has only 1.3× stability
+    #               margin, manifests as visible ringing under arm sweeps).
+    # substep=10  → sim_dt= 1ms at 100 Hz  ← current default ★
+    #               Matches reference convention (G2_t2v2_crsB +
+    #               x2_31dof_hand both use dt=1ms).  Gives 5× margin on
+    #               arm_shoulder at current kp, plenty of headroom on
+    #               everything else — eliminates the residual overshoot
+    #               that lingered with passive damping=0.  Cost: 2×
+    #               more substeps per physics tick vs the legacy default.
+    # substep>10  → diminishing returns on accuracy, linear compute cost.
+    #               Only bump higher if you see contact tunneling.
+    #
+    # MuJoCo-Warp's implicit integrator handles velocity-side feedback
+    # implicitly (kd is unconditionally stable), but the position term
+    # (kp) is explicit — its stability gate is kp/M_eff < 4/dt².  At
+    # dt=2ms with the uniform armature=0.03 baseline, that ceiling sits
+    # just above the tuned arm kp values; halving dt to 1ms quadruples
+    # the ceiling and removes the marginal-stability gotcha entirely.
+    physics_solver_substep: 10
+    # physics_solver_iterations: 0
+
+    # SolverMuJoCo PD gains for DOFs that have no URDF drive params.
+    # Applied as defaults when joint_target_ke/kd are still 0 after add_usd.
+    #
+    # Start here and tune UP until joints track fast, then back off if you
+    # see overshoot/oscillation.  Reference: user MJCF has kp=30k–100k.
+    #
+    # ke [N·m/rad] — position stiffness.  Higher = stiffer, faster tracking.
+    # kd [N·m·s/rad] — velocity damping.  ~1% of ke is a good starting point.
+    # mujoco_pd_ke: 50000.0
+    # mujoco_pd_kd: 500.0
+
+    # Note: MuJoCo internal contact buffers (njmax, nconmax) are hardcoded in
+    # lifecycle.py (SolverMuJoCo constructor).  If you see "nefc overflow" or
+    # "nconmax overflow" in the log, increase njmax/nconmax there.

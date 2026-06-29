@@ -1,45 +1,167 @@
-# geniesim_world Agent Guide 🤖
+# geniesim_world — Agent Development Guide 🌍
 
-This file is for coding agents only.
-User-facing documentation belongs in `README.md`.
+Multimodal spatial world model: turns a single equirectangular panorama
+into a photorealistic, explorable 3D world (Gaussian splat / depth / cube
+geometry) via the **PanoRecon** pipeline (SHARP + DA360 fusion). Owns the
+`geniesim_world` console script.
 
-## 🎯 Scope
+Source: [source/geniesim_world/](.)
+License: [Mozilla Public License Version 2.0](LICENSE)
+Public intro: [README.md](README.md)
+Skills: [skills/](skills/)
+Paper: https://arxiv.org/abs/2604.07105
 
-- Package root: `geniesim_world/src/geniesim_world/`
-- Main CLI: `geniesim_world create`, `geniesim_world debug`
-- Runtime external dependencies:
-  - `../external/ml-sharp`
-  - `../external/DA360`
-  - optional Real-ESRGAN binary
+> **Maintenance contract** — when you change CLI flags, add/remove a
+> subcommand, alter the env var registry (`GENIESIM_*`), swap an
+> external dep (ml-sharp / DA360 / Real-ESRGAN), or change the depth
+> normalisation contract, **update this file in the same diff**.
+> Agents read this as the source of truth.
 
-## 🧭 Routing Map
+---
 
-- CLI args, orchestration, `create` + `debug` registration -> `src/geniesim_world/cli_pano.py`
-- `debug` subcommand (EXR PNG + depth diff) -> `src/geniesim_world/cli_debug.py`
-- SHARP wrapper and predictor interaction -> `src/geniesim_world/predict_run.py`, `src/geniesim_world/predictor.py` (`DepthGuidedRGBGaussianPredictor`: `depth_gt` merge for init), `gaussian_ops.cull_gaussians_outside_pinhole_frustum` (91° ref frustum; `--ply-frustum-fov-deg`; `--no-ply-frustum-cull`; `--no-ndc-frustum-mask`)
-- Cubemap split/merge and face I/O -> `src/geniesim_world/utils/cubes.py`
-- DA360 depth inference and DA360-like exports -> `src/geniesim_world/utils/da360_depth.py` (min-normalized relative depth; clamp `[1e-4, 1e4]` like SHARP disparity band; no `depth_max` in this module)
-- PLY post-processing and merge -> `src/geniesim_world/utils/merge.py`
-- Packaging metadata -> `setup.py`, `pyproject.toml`, `requirements-cu128.txt`
-- User docs -> `README.md`
+## 1. Why this distribution exists
 
-## ⚙️ Operational Rules
+`geniesim_world` is the platform's **scene-from-photo** front-end. It
+sits outside the `geniesim bootstrap` install path because its CUDA / ML
+deps (PyTorch + SHARP + DA360) collide with the rest of the stack. Users
+spin up a dedicated conda env, generate a world, and consume the
+`.ply` / `.gsp` Gaussian output via `geniesim_world`'s own tooling.
 
-1. Keep env var names under `GENIESIM_*`.
-2. Keep DA360 as a runtime repo dependency (loaded via `sys.path`); do not force pip-installable DA360.
-3. Cubemap `*_depth.exr`: **`da360` / `both`** use DA360 **relative** depth (min-normalized). **`sharp`** uses SHARP meters. **`fuse`** median-aligns DA360 to SHARP in `cli_pano` then fuses to meters. When CLI **`--depth-max`** is set, maps clip to **`[0, depth_max]`**; inverse-depth resize uses `(eps < d < depth_max)` for support. When unset, EXR depth is **≥ 0** only (no global far clip). Depth resize: `resize_depth_map` (unknown support → 0); cube EXR: refine + **mask** clears depth; equirect→cube: linear + optional `--cube-depth-refine`.
-4. Preserve CLI compatibility unless user asks for breaking changes.
-5. When behavior changes, update `README.md` in the same task.
+> 🚧 **RT Engine integration is W.I.P.** Loading the generated world
+> into a `scene_*.yaml` for `geniesim_ros` to render is on the
+> roadmap; it is **not** a supported flow today. Don't promise it in
+> downstream docs, and don't add a scene-yaml example that depends on
+> it.
 
-## ✅ Completion Checklist
+---
 
-- `--help` text reflects current behavior.
-- README examples still match real flags/env vars.
-- No stale legacy identifiers (`genie_sim_world_model`, `GENIE_*`, old CLI names).
-- If packaging changed, re-check editable install assumptions.
+## 2. Layout
+
+```
+source/geniesim_world/
+├── AGENTS.md              ← this file
+├── README.md              ← user-facing intro + install
+├── pyproject.toml         ← build config
+├── setup.py               ← entry_points: geniesim_world=…cli_pano:cli
+├── requirements-cu128.txt ← tested on RTX 5090 / CUDA 12.8
+├── skills/
+│   └── generate-world/SKILL.md
+└── src/geniesim_world/
+    ├── cli_pano.py        ← Click group; `create` subcommand
+    ├── cli_debug.py       ← `debug` subcommand (EXR / depth diff)
+    ├── predict_run.py     ← SHARP wrapper, predictor orchestration
+    ├── predictor.py       ← `DepthGuidedRGBGaussianPredictor`
+    ├── gaussian_ops.py    ← frustum culling, splat ops
+    └── utils/
+        ├── cubes.py       ← cubemap split / merge / face I/O
+        ├── da360_depth.py ← DA360 depth inference + relative-depth normalisation
+        ├── merge.py       ← PLY post-processing + merge
+        └── pano_fuse.py   ← cubemap fusion
+```
+
+---
+
+## 3. CLI surface
+
+Console script: `geniesim_world` (Click group).
+
+| Subcommand | Purpose |
+|---|---|
+| `geniesim_world create` | Panorama → 3D world (the primary one) |
+| `geniesim_world debug` | EXR PNG + depth diff utilities |
+
+Common flags on `create`:
+
+| Flag | Effect |
+|---|---|
+| `--panorama PATH` | Equirectangular RGB input (required) |
+| `--work-dir PATH` | Output directory (default: cwd / `runs/<stamp>/`) |
+| `--da360-root DIR` | Override `external/DA360/` location |
+| `--da360-checkpoint PATH` | Override DA360 checkpoint location |
+| `--checkpoint-path PATH` | SHARP checkpoint override |
+| `--depth-max FLOAT` | Clip predicted depth at N metres |
+| `--device STR` | Torch device (default: `default` → cuda:0 if available) |
+| `--no-depth-gt-init` | Stock SHARP (ignore `depth_gt` override) |
+| `--super-sample` | Run Real-ESRGAN before fusing (needs the optional binary) |
+
+`geniesim_world --help` / `geniesim_world create --help` are the
+authoritative live docs.
+
+---
+
+## 4. External dependencies
+
+Loaded via `sys.path` (not pip), so the repo layout matters:
+
+| Dep | Location | How acquired |
+|---|---|---|
+| `ml-sharp` | `external/ml-sharp/` | `git clone https://github.com/apple/ml-sharp.git` |
+| `DA360` repo + checkpoint | `external/DA360/` + `DA360_large.pth` | clone + download checkpoint separately |
+| Real-ESRGAN (optional) | `external/realesrgan-ncnn-vulkan-…/` | download binary release |
+
+Override paths via `GENIESIM_DA360_CHECKPOINT`, `--da360-root`, etc.
+
+---
+
+## 5. Environment variables
+
+| Var | Effect |
+|---|---|
+| `GENIESIM_DA360_CHECKPOINT` | Absolute path to DA360 checkpoint (overrides `external/DA360/DA360_large.pth`) |
+| `GENIESIM_REALESRGAN_BIN` | Absolute path to Real-ESRGAN binary |
+
+All env vars are namespaced under `GENIESIM_*`. Do not introduce
+non-namespaced vars or legacy `GENIE_*` names (those are deprecated).
+
+---
+
+## 6. Architectural rules (do not violate)
+
+1. **Keep DA360 as a runtime sys.path dep.** Do not force a pip-installable DA360 — upstream doesn't ship one cleanly, and the checkpoint path is fluid.
+2. **Depth normalisation contract** (see `da360_depth.py`):
+   - `da360` / `both` modes → DA360 **relative** depth (min-normalized), clamped `[1e-4, 1e4]` (matches SHARP disparity band).
+   - `sharp` mode → SHARP **meters**.
+   - `fuse` mode → DA360 median-aligned to SHARP in `cli_pano`, then fused → meters.
+3. **`--depth-max` semantics:**
+   - When set → maps clip to `[0, depth_max]`; inverse-depth resize uses `(eps < d < depth_max)` for support.
+   - When unset → EXR depth is **≥ 0** only (no global far clip).
+4. **Depth resize:** `resize_depth_map` treats unknown support as 0. Cube EXR refine pass clears masked depth. Equirect→cube uses linear interp + optional `--cube-depth-refine`.
+5. **CLI compat is a contract.** Preserve flag names + semantics across versions unless the user asks for breaking changes. README examples are the regression suite.
+6. **No legacy identifiers.** No `genie_sim_world_model`, no `GENIE_*` env vars, no pre-rename CLI names.
+
+---
+
+## 7. Skills
+
+| Skill | Trigger |
+|---|---|
+| [generate-world](skills/generate-world/SKILL.md) | "generate a world", "pano to 3D", "PanoRecon", "make a scene from a photo" |
+
+---
+
+## 8. Verification recipes
+
+| Goal | Command |
+|---|---|
+| Confirm CLI installs | `geniesim_world --help` (after `pip install -e .` in this dir) |
+| Smoke-test `create` | `geniesim_world create --panorama assets/sample.png --work-dir /tmp/test` |
+| Inspect a previous run's depth | `geniesim_world debug …` (see `cli_debug.py --help`) |
+| Lint check | `black --line-length 120 --check src/` |
+
+---
+
+## 9. Do not
+
+- Don't add this package to `geniesim bootstrap`'s default install set — its CUDA / SHARP / DA360 deps belong in a dedicated conda env, not the shared stack.
+- Don't update README example flags without re-running the example — flag drift between docs and reality is the #1 reported bug here.
+- Don't bypass `cli_pano.py` to call `predict_run.py` directly from a user-facing skill. The CLI is the public surface.
+- Don't promise features marked `*COMING SOON*` in README — text-to-3D and sparse-image-to-3D are research not product.
+
+---
 
 ## 📚 Related Docs
 
-- `README.md` (user-facing)
-- `../AGENTS.md` (repo-wide routing)
-- `../external/AGENTS.md` (external capability registry)
+- [`README.md`](README.md) — user-facing intro + install
+- [`skills/generate-world/SKILL.md`](skills/generate-world/SKILL.md) — agent-driven workflow
+- [`../AGENTS.md`](../AGENTS.md) — repository module map
+- [`../../AGENTS.md`](../../AGENTS.md) — repo root agent guide (boot sequence)

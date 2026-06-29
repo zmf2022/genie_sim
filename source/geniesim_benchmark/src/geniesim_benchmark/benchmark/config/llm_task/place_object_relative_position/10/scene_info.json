@@ -1,0 +1,524 @@
+{
+  "layout": {
+    "benchmark_building_blocks_e3e5f0e5": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "small",
+          "red",
+          "cubic",
+          "simple",
+          "solid"
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          0.03
+        ],
+        "full_description": [
+          "A small, solid red cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "building_block"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "cube",
+        "unit": "m"
+      },
+      "keywords": [
+        "building blocks",
+        "benchmark_building_blocks_072",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_12992499",
+        "table_with_random_objects_d9d68ff3",
+        "place_random_objects_on_desk_83a3e27e",
+        "benchmark_building_blocks_e3e5f0e5"
+      ],
+      "usd": "benchmark_building_blocks_072",
+      "xyz": [
+        -0.123,
+        0.185,
+        0.89
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.112385,
+        0.993665
+      ]
+    },
+    "benchmark_cup_0b0f9f99": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "cylindrical",
+          "white",
+          "simple",
+          "printed",
+          "small"
+        ],
+        "dimensions": [
+          0.0634383037686348,
+          0.07829996943473816,
+          0.06343957036733627
+        ],
+        "full_description": [
+          "A white paper cup with a black line-drawn pattern and yellow accents depicting household items."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "kitchenware",
+          "drinking vessel"
+        ],
+        "semantic_name": [
+          "cup"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "paper cup",
+        "benchmark_cup_105",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_12992499",
+        "table_with_random_objects_d9d68ff3",
+        "place_random_objects_on_desk_83a3e27e",
+        "benchmark_cup_0b0f9f99"
+      ],
+      "usd": "benchmark_cup_105",
+      "xyz": [
+        -0.117,
+        0.02,
+        0.938
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.147961,
+        0.988993
+      ]
+    },
+    "benchmark_medicine_bottle_d0d7f9c2": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "cylindrical",
+          "white",
+          "yellow",
+          "packaged",
+          "small"
+        ],
+        "dimensions": [
+          0.06152497100830078,
+          0.11030638122558593,
+          0.06207268714904785
+        ],
+        "full_description": [
+          "A white plastic bottle with a bright yellow label featuring black text, including 'Glucosamine HCl Mega', and a white cap."
+        ],
+        "materials": [
+          "plastic",
+          "paper"
+        ],
+        "object_category": [
+          "container",
+          "medicine"
+        ],
+        "semantic_name": [
+          "medicine_bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "medicine bottle",
+        "benchmark_medicine_bottle_000",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_12992499",
+        "table_with_random_objects_d9d68ff3",
+        "place_random_objects_on_desk_83a3e27e",
+        "benchmark_medicine_bottle_d0d7f9c2"
+      ],
+      "usd": "benchmark_medicine_bottle_000",
+      "xyz": [
+        -0.067,
+        -0.146,
+        0.97
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.147914,
+        0.989
+      ]
+    },
+    "benchmark_toiletries_5a67210f": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "cylindrical",
+          "flexible",
+          "packaged",
+          "cosmetic",
+          "white"
+        ],
+        "dimensions": [
+          0.03400098532438278,
+          0.1400732398033142,
+          0.05983749404549599
+        ],
+        "full_description": [
+          "A white and blue plastic tube labeled 'Face Cleaner' with Chinese characters and a green logo."
+        ],
+        "materials": [
+          "plastic",
+          "paper"
+        ],
+        "object_category": [
+          "cosmetic",
+          "face cleaner"
+        ],
+        "semantic_name": [
+          "face_cleaner"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "face cleanser",
+        "benchmark_toiletries_009",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_12992499",
+        "table_with_random_objects_d9d68ff3",
+        "place_random_objects_on_desk_83a3e27e",
+        "benchmark_toiletries_5a67210f"
+      ],
+      "usd": "benchmark_toiletries_009",
+      "xyz": [
+        0.136,
+        0.158,
+        1.0
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.04577,
+        0.998952
+      ]
+    },
+    "benchmark_toy_car_cecfd4e9": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy car",
+        "benchmark_toy_car_018",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_12992499",
+        "table_with_random_objects_d9d68ff3",
+        "place_random_objects_on_desk_83a3e27e",
+        "benchmark_toy_car_cecfd4e9"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        0.034,
+        -0.007,
+        0.893
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.035923,
+        0.999355
+      ]
+    },
+    "genie_beverage_bottle_1aa97eab": {
+      "description": {
+        "color": "black",
+        "descriptive_terms": [
+          "cylindrical",
+          "black",
+          "plastic",
+          "packaged",
+          "beverage"
+        ],
+        "dimensions": [
+          0.04871850088238716,
+          0.16691981256008148,
+          0.05984169989824295
+        ],
+        "full_description": [
+          "A black plastic beverage bottle with a white cap and a label featuring red grapes and Chinese text."
+        ],
+        "materials": [
+          "plastic",
+          "label"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "grape juice",
+        "genie_beverage_bottle_009",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_12992499",
+        "table_with_random_objects_d9d68ff3",
+        "place_random_objects_on_desk_83a3e27e",
+        "genie_beverage_bottle_1aa97eab"
+      ],
+      "usd": "genie_beverage_bottle_009",
+      "xyz": [
+        -0.192,
+        -0.231,
+        1.029
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.14293,
+        0.989733
+      ]
+    },
+    "table_bf0b978d": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_12992499",
+        "table_with_random_objects_d9d68ff3",
+        "place_random_objects_on_desk_83a3e27e",
+        "table_bf0b978d"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_12992499",
+          "target": "table_with_random_objects_d9d68ff3"
+        },
+        {
+          "source": "table_with_random_objects_d9d68ff3",
+          "target": "place_random_objects_on_desk_83a3e27e"
+        },
+        {
+          "source": "place_random_objects_on_desk_83a3e27e",
+          "target": "table_bf0b978d"
+        },
+        {
+          "source": "place_random_objects_on_desk_83a3e27e",
+          "target": "benchmark_building_blocks_e3e5f0e5"
+        },
+        {
+          "source": "place_random_objects_on_desk_83a3e27e",
+          "target": "benchmark_toy_car_cecfd4e9"
+        },
+        {
+          "source": "place_random_objects_on_desk_83a3e27e",
+          "target": "benchmark_medicine_bottle_d0d7f9c2"
+        },
+        {
+          "source": "place_random_objects_on_desk_83a3e27e",
+          "target": "benchmark_toiletries_5a67210f"
+        },
+        {
+          "source": "place_random_objects_on_desk_83a3e27e",
+          "target": "benchmark_cup_0b0f9f99"
+        },
+        {
+          "source": "place_random_objects_on_desk_83a3e27e",
+          "target": "genie_beverage_bottle_1aa97eab"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_12992499"
+        },
+        {
+          "id": "table_with_random_objects_d9d68ff3"
+        },
+        {
+          "id": "place_random_objects_on_desk_83a3e27e"
+        },
+        {
+          "id": "table_bf0b978d",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_building_blocks_e3e5f0e5",
+          "tags": [
+            "building blocks",
+            "benchmark_building_blocks_072",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_toy_car_cecfd4e9",
+          "tags": [
+            "toy car",
+            "benchmark_toy_car_018",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_medicine_bottle_d0d7f9c2",
+          "tags": [
+            "medicine bottle",
+            "benchmark_medicine_bottle_000",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_toiletries_5a67210f",
+          "tags": [
+            "face cleanser",
+            "benchmark_toiletries_009",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_cup_0b0f9f99",
+          "tags": [
+            "paper cup",
+            "benchmark_cup_105",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "genie_beverage_bottle_1aa97eab",
+          "tags": [
+            "grape juice",
+            "genie_beverage_bottle_009",
+            "on_desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 2757678123
+}

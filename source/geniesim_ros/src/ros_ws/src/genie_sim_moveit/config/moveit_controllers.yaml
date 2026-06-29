@@ -1,0 +1,108 @@
+moveit_simple_controller_manager:
+  # NOTE: simple_body_controller is intentionally OMITTED from this list.
+  # It is declared in ros2_controllers.yaml as a convenience controller that
+  # claims the same position interfaces (idx01..idx05_body_joint) as
+  # simple_waist_controller + simple_torso_controller combined, and is NOT
+  # auto-spawned (see wbc.launch.py). If MoveIt sees it here, the trajectory
+  # execution manager prefers the single-controller split (1 controller for
+  # 5 joints) over the two-controller split, and then fails with
+  # "Action client not connected to action server: simple_body_controller/
+  # follow_joint_trajectory" because that controller is inactive. Hiding it
+  # from MoveIt forces the waist+torso routing, which matches what's
+  # actually running. To use simple_body_controller manually, run:
+  #   ros2 control switch_controllers \
+  #     --activate simple_body_controller \
+  #     --deactivate simple_waist_controller simple_torso_controller
+  controller_names:
+    - simple_arm_l_controller
+    - simple_arm_r_controller
+    - simple_waist_controller
+    - simple_torso_controller
+    - simple_head_controller
+    - gripper_l_controller
+    - gripper_r_controller
+    - chassis_controller
+
+  simple_arm_l_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - idx21_arm_l_joint1
+      - idx22_arm_l_joint2
+      - idx23_arm_l_joint3
+      - idx24_arm_l_joint4
+      - idx25_arm_l_joint5
+      - idx26_arm_l_joint6
+      - idx27_arm_l_joint7
+
+  simple_arm_r_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - idx61_arm_r_joint1
+      - idx62_arm_r_joint2
+      - idx63_arm_r_joint3
+      - idx64_arm_r_joint4
+      - idx65_arm_r_joint5
+      - idx66_arm_r_joint6
+      - idx67_arm_r_joint7
+
+  simple_waist_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - idx01_body_joint1
+      - idx02_body_joint2
+      - idx03_body_joint3
+
+  simple_torso_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - idx04_body_joint4
+      - idx05_body_joint5
+
+  simple_body_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - idx01_body_joint1
+      - idx02_body_joint2
+      - idx03_body_joint3
+      - idx04_body_joint4
+      - idx05_body_joint5
+
+  simple_head_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - idx11_head_joint1
+      - idx12_head_joint2
+      - idx13_head_joint3
+
+  gripper_l_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - idx31_gripper_l_inner_joint1
+
+  gripper_r_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - idx71_gripper_r_inner_joint1
+
+  chassis_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - planar_joint

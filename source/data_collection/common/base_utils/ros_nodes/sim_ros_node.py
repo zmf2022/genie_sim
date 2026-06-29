@@ -6,7 +6,11 @@ import os
 import sys
 
 import numpy as np
-from cv_bridge import CvBridge
+
+try:
+    from cv_bridge import CvBridge
+except ImportError:  # real cv_bridge targets the system ROS Python, not IsaacSim's
+    from common.base_utils.cv_bridge_compat import CvBridge
 from rclpy.node import Node
 from rclpy.parameter import Parameter
 from rclpy.qos import QoSDurabilityPolicy, QoSHistoryPolicy, QoSProfile, QoSReliabilityPolicy

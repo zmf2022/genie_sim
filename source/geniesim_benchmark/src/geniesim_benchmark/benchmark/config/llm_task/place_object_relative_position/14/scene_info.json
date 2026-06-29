@@ -1,0 +1,458 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_c0b905ad": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "cylindrical",
+          "red",
+          "metallic",
+          "beverage",
+          "portable"
+        ],
+        "dimensions": [
+          0.06459999829530716,
+          0.11520000547170639,
+          0.06460000947117805
+        ],
+        "full_description": [
+          "A red aluminum beverage can with white 'Coca-Cola' script logo and Chinese characters on its surface."
+        ],
+        "materials": [
+          "metal",
+          "plastic"
+        ],
+        "object_category": [
+          "container",
+          "beverage can"
+        ],
+        "semantic_name": [
+          "Coca-Cola can"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "coke cola",
+        "benchmark_beverage_bottle_001",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_fbb62363",
+        "table_with_random_objects_1e3bda98",
+        "place_random_objects_on_desk_6615c365",
+        "benchmark_beverage_bottle_c0b905ad"
+      ],
+      "usd": "benchmark_beverage_bottle_001",
+      "xyz": [
+        0.129,
+        -0.228,
+        0.975
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.007537,
+        0.999972
+      ]
+    },
+    "benchmark_beverage_bottle_ee0025ea": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "cylindrical",
+          "red",
+          "liquid",
+          "bottled",
+          "packaged"
+        ],
+        "dimensions": [
+          0.06153380125761032,
+          0.14993929862976074,
+          0.06153379566967487
+        ],
+        "full_description": [
+          "A plastic bottle with a red label and black cap, containing dark liquid, featuring Chinese text and a Suntory logo."
+        ],
+        "materials": [
+          "plastic",
+          "liquid"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "oolong tea beverage",
+        "benchmark_beverage_bottle_004",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_fbb62363",
+        "table_with_random_objects_1e3bda98",
+        "place_random_objects_on_desk_6615c365",
+        "benchmark_beverage_bottle_ee0025ea"
+      ],
+      "usd": "benchmark_beverage_bottle_004",
+      "xyz": [
+        -0.126,
+        0.177,
+        1.0
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.032945,
+        0.999457
+      ]
+    },
+    "benchmark_medicine_bottle_bc6b0a99": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "cylindrical",
+          "white",
+          "yellow",
+          "packaged",
+          "small"
+        ],
+        "dimensions": [
+          0.06152497100830078,
+          0.11030638122558593,
+          0.06207268714904785
+        ],
+        "full_description": [
+          "A white plastic bottle with a bright yellow label featuring black text, including 'Glucosamine HCl Mega', and a white cap."
+        ],
+        "materials": [
+          "plastic",
+          "paper"
+        ],
+        "object_category": [
+          "container",
+          "medicine"
+        ],
+        "semantic_name": [
+          "medicine_bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "medicine bottle",
+        "benchmark_medicine_bottle_000",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_fbb62363",
+        "table_with_random_objects_1e3bda98",
+        "place_random_objects_on_desk_6615c365",
+        "benchmark_medicine_bottle_bc6b0a99"
+      ],
+      "usd": "benchmark_medicine_bottle_000",
+      "xyz": [
+        0.099,
+        0.009,
+        0.97
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.048634,
+        0.998817
+      ]
+    },
+    "benchmark_stationery_0b351d21": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "yellow",
+          "rectangular",
+          "plastic",
+          "metal",
+          "compact",
+          "office",
+          "functional"
+        ],
+        "dimensions": [
+          0.03533313795924187,
+          0.06165076792240143,
+          0.13363394886255264
+        ],
+        "full_description": [
+          "A small stapler with a bright yellow top and a translucent gray base."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "stationery",
+          "office_supply"
+        ],
+        "semantic_name": [
+          "stapler"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "yellow stapler",
+        "benchmark_stationery_009",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_fbb62363",
+        "table_with_random_objects_1e3bda98",
+        "place_random_objects_on_desk_6615c365",
+        "benchmark_stationery_0b351d21"
+      ],
+      "usd": "benchmark_stationery_009",
+      "xyz": [
+        0.093,
+        0.198,
+        0.91
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.112437,
+        0.993659
+      ]
+    },
+    "benchmark_toy_car_8ccbecc9": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy car",
+        "benchmark_toy_car_018",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_fbb62363",
+        "table_with_random_objects_1e3bda98",
+        "place_random_objects_on_desk_6615c365",
+        "benchmark_toy_car_8ccbecc9"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        -0.071,
+        0.085,
+        0.893
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.009405,
+        0.999956
+      ]
+    },
+    "table_dd3eefe3": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_fbb62363",
+        "table_with_random_objects_1e3bda98",
+        "place_random_objects_on_desk_6615c365",
+        "table_dd3eefe3"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_fbb62363",
+          "target": "table_with_random_objects_1e3bda98"
+        },
+        {
+          "source": "table_with_random_objects_1e3bda98",
+          "target": "place_random_objects_on_desk_6615c365"
+        },
+        {
+          "source": "place_random_objects_on_desk_6615c365",
+          "target": "table_dd3eefe3"
+        },
+        {
+          "source": "place_random_objects_on_desk_6615c365",
+          "target": "benchmark_beverage_bottle_ee0025ea"
+        },
+        {
+          "source": "place_random_objects_on_desk_6615c365",
+          "target": "benchmark_toy_car_8ccbecc9"
+        },
+        {
+          "source": "place_random_objects_on_desk_6615c365",
+          "target": "benchmark_beverage_bottle_c0b905ad"
+        },
+        {
+          "source": "place_random_objects_on_desk_6615c365",
+          "target": "benchmark_medicine_bottle_bc6b0a99"
+        },
+        {
+          "source": "place_random_objects_on_desk_6615c365",
+          "target": "benchmark_stationery_0b351d21"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_fbb62363"
+        },
+        {
+          "id": "table_with_random_objects_1e3bda98"
+        },
+        {
+          "id": "place_random_objects_on_desk_6615c365"
+        },
+        {
+          "id": "table_dd3eefe3",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_beverage_bottle_ee0025ea",
+          "tags": [
+            "oolong tea beverage",
+            "benchmark_beverage_bottle_004",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_toy_car_8ccbecc9",
+          "tags": [
+            "toy car",
+            "benchmark_toy_car_018",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_beverage_bottle_c0b905ad",
+          "tags": [
+            "coke cola",
+            "benchmark_beverage_bottle_001",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_medicine_bottle_bc6b0a99",
+          "tags": [
+            "medicine bottle",
+            "benchmark_medicine_bottle_000",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_stationery_0b351d21",
+          "tags": [
+            "yellow stapler",
+            "benchmark_stationery_009",
+            "on_desk",
+            "right"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 3175836373
+}

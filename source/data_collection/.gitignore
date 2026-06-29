@@ -1,3 +1,20 @@
+# === pip install / build artifacts ===
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+pip-wheel-metadata/
+pip-build-env-*/
+wheels/
+
+# === Python bytecode (created on import) ===
+__pycache__
+__pycache__/
+*.pyc
+*.pyo
+
+# === data_collection — runtime & content ===
 !output/
 !server/recording
 !config/curobo/assets
@@ -8,14 +25,11 @@
 *.onnx
 *.png
 *.pt
-*.pyc
 *.wav
-*egg-info
 .vscode
 !tasks/**/*.json
 !config/robot_cfg/**/*.urdf
 !config/**/*.json
-__pycache__
 recording_data
 config/robot_cfg/*/*_tmp.yaml
 tmp/

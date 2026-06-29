@@ -1,0 +1,900 @@
+{
+  "layout": {
+    "sft_accessories_23a1d9db": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "small",
+          "white",
+          "rigid",
+          "functional",
+          "compact"
+        ],
+        "dimensions": [
+          0.096,
+          0.015,
+          0.068
+        ],
+        "full_description": [
+          "A white L-shaped bracket with a central circular bearing insert."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "mechanical",
+          "fastener"
+        ],
+        "semantic_name": [
+          "bearing_mount"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "accessory_2",
+        "small",
+        "detail",
+        "laboratory"
+      ],
+      "tags": [
+        "root_scene_aacc7306",
+        "pour_workpiece_71d03be6",
+        "arrange_scene_elements_46fffbc8",
+        "accessories_scatter_d8874301",
+        "sft_accessories_23a1d9db"
+      ],
+      "usd": "sft_accessories_000",
+      "xyz": [
+        -1.83006,
+        2.348163,
+        0.975
+      ],
+      "xyzw": [
+        0.608182,
+        0.070328,
+        0.037299,
+        0.789795
+      ]
+    },
+    "sft_accessories_3b491984": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "small",
+          "white",
+          "rigid",
+          "functional",
+          "compact"
+        ],
+        "dimensions": [
+          0.096,
+          0.015,
+          0.068
+        ],
+        "full_description": [
+          "A white L-shaped bracket with a central circular bearing insert."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "mechanical",
+          "fastener"
+        ],
+        "semantic_name": [
+          "bearing_mount"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "accessory_8",
+        "small",
+        "detail",
+        "laboratory"
+      ],
+      "tags": [
+        "root_scene_aacc7306",
+        "pour_workpiece_71d03be6",
+        "arrange_scene_elements_46fffbc8",
+        "accessories_scatter_d8874301",
+        "sft_accessories_3b491984"
+      ],
+      "usd": "sft_accessories_000",
+      "xyz": [
+        -1.817542,
+        2.111824,
+        1.017
+      ],
+      "xyzw": [
+        -0.111867,
+        0.628335,
+        0.769829,
+        0.006682
+      ]
+    },
+    "sft_accessories_43728147": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "small",
+          "white",
+          "rigid",
+          "functional",
+          "compact"
+        ],
+        "dimensions": [
+          0.096,
+          0.015,
+          0.068
+        ],
+        "full_description": [
+          "A white L-shaped bracket with a central circular bearing insert."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "mechanical",
+          "fastener"
+        ],
+        "semantic_name": [
+          "bearing_mount"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "accessory_6",
+        "small",
+        "detail",
+        "laboratory"
+      ],
+      "tags": [
+        "root_scene_aacc7306",
+        "pour_workpiece_71d03be6",
+        "arrange_scene_elements_46fffbc8",
+        "accessories_scatter_d8874301",
+        "sft_accessories_43728147"
+      ],
+      "usd": "sft_accessories_000",
+      "xyz": [
+        -1.847971,
+        2.152405,
+        1.031
+      ],
+      "xyzw": [
+        0.051449,
+        0.618712,
+        0.783928,
+        0.002379
+      ]
+    },
+    "sft_accessories_5a82cc94": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "small",
+          "white",
+          "rigid",
+          "functional",
+          "compact"
+        ],
+        "dimensions": [
+          0.096,
+          0.015,
+          0.068
+        ],
+        "full_description": [
+          "A white L-shaped bracket with a central circular bearing insert."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "mechanical",
+          "fastener"
+        ],
+        "semantic_name": [
+          "bearing_mount"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "accessory_5",
+        "small",
+        "detail",
+        "laboratory"
+      ],
+      "tags": [
+        "root_scene_aacc7306",
+        "pour_workpiece_71d03be6",
+        "arrange_scene_elements_46fffbc8",
+        "accessories_scatter_d8874301",
+        "sft_accessories_5a82cc94"
+      ],
+      "usd": "sft_accessories_000",
+      "xyz": [
+        -1.818405,
+        2.19362,
+        1.045
+      ],
+      "xyzw": [
+        -0.066127,
+        0.602264,
+        0.795104,
+        -0.026742
+      ]
+    },
+    "sft_accessories_6505c594": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "small",
+          "white",
+          "rigid",
+          "functional",
+          "compact"
+        ],
+        "dimensions": [
+          0.096,
+          0.015,
+          0.068
+        ],
+        "full_description": [
+          "A white L-shaped bracket with a central circular bearing insert."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "mechanical",
+          "fastener"
+        ],
+        "semantic_name": [
+          "bearing_mount"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "accessory_4",
+        "small",
+        "detail",
+        "laboratory"
+      ],
+      "tags": [
+        "root_scene_aacc7306",
+        "pour_workpiece_71d03be6",
+        "arrange_scene_elements_46fffbc8",
+        "accessories_scatter_d8874301",
+        "sft_accessories_6505c594"
+      ],
+      "usd": "sft_accessories_000",
+      "xyz": [
+        -1.846245,
+        1.988814,
+        0.975
+      ],
+      "xyzw": [
+        0.045976,
+        0.786647,
+        0.61484,
+        0.032323
+      ]
+    },
+    "sft_accessories_73887fd9": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "small",
+          "white",
+          "rigid",
+          "functional",
+          "compact"
+        ],
+        "dimensions": [
+          0.096,
+          0.015,
+          0.068
+        ],
+        "full_description": [
+          "A white L-shaped bracket with a central circular bearing insert."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "mechanical",
+          "fastener"
+        ],
+        "semantic_name": [
+          "bearing_mount"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "accessory_3",
+        "small",
+        "detail",
+        "laboratory"
+      ],
+      "tags": [
+        "root_scene_aacc7306",
+        "pour_workpiece_71d03be6",
+        "arrange_scene_elements_46fffbc8",
+        "accessories_scatter_d8874301",
+        "sft_accessories_73887fd9"
+      ],
+      "usd": "sft_accessories_000",
+      "xyz": [
+        -1.803644,
+        2.603559,
+        0.975
+      ],
+      "xyzw": [
+        0.786882,
+        -0.042146,
+        -0.033704,
+        0.614739
+      ]
+    },
+    "sft_accessories_7a9792f1": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "small",
+          "white",
+          "rigid",
+          "functional",
+          "compact"
+        ],
+        "dimensions": [
+          0.096,
+          0.015,
+          0.068
+        ],
+        "full_description": [
+          "A white L-shaped bracket with a central circular bearing insert."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "mechanical",
+          "fastener"
+        ],
+        "semantic_name": [
+          "bearing_mount"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "accessory_1",
+        "small",
+        "detail",
+        "laboratory"
+      ],
+      "tags": [
+        "root_scene_aacc7306",
+        "pour_workpiece_71d03be6",
+        "arrange_scene_elements_46fffbc8",
+        "accessories_scatter_d8874301",
+        "sft_accessories_7a9792f1"
+      ],
+      "usd": "sft_accessories_000",
+      "xyz": [
+        -1.801257,
+        2.433576,
+        0.975
+      ],
+      "xyzw": [
+        0.627988,
+        -0.049369,
+        0.010195,
+        0.776589
+      ]
+    },
+    "sft_accessories_81812782": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "small",
+          "white",
+          "rigid",
+          "functional",
+          "compact"
+        ],
+        "dimensions": [
+          0.096,
+          0.015,
+          0.068
+        ],
+        "full_description": [
+          "A white L-shaped bracket with a central circular bearing insert."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "mechanical",
+          "fastener"
+        ],
+        "semantic_name": [
+          "bearing_mount"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "accessory_7",
+        "small",
+        "detail",
+        "laboratory"
+      ],
+      "tags": [
+        "root_scene_aacc7306",
+        "pour_workpiece_71d03be6",
+        "arrange_scene_elements_46fffbc8",
+        "accessories_scatter_d8874301",
+        "sft_accessories_81812782"
+      ],
+      "usd": "sft_accessories_000",
+      "xyz": [
+        -1.816679,
+        2.030029,
+        0.989
+      ],
+      "xyzw": [
+        -0.059183,
+        0.795651,
+        0.602474,
+        -0.021488
+      ]
+    },
+    "sft_accessories_dd465031": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "small",
+          "white",
+          "rigid",
+          "functional",
+          "compact"
+        ],
+        "dimensions": [
+          0.096,
+          0.015,
+          0.068
+        ],
+        "full_description": [
+          "A white L-shaped bracket with a central circular bearing insert."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "mechanical",
+          "fastener"
+        ],
+        "semantic_name": [
+          "bearing_mount"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "accessory_0",
+        "small",
+        "detail",
+        "laboratory"
+      ],
+      "tags": [
+        "root_scene_aacc7306",
+        "pour_workpiece_71d03be6",
+        "arrange_scene_elements_46fffbc8",
+        "accessories_scatter_d8874301",
+        "sft_accessories_dd465031"
+      ],
+      "usd": "sft_accessories_000",
+      "xyz": [
+        -1.832447,
+        2.518146,
+        0.975
+      ],
+      "xyzw": [
+        0.79318,
+        0.070071,
+        0.013044,
+        0.604802
+      ]
+    },
+    "sft_accessories_dee1854b": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "small",
+          "white",
+          "rigid",
+          "functional",
+          "compact"
+        ],
+        "dimensions": [
+          0.096,
+          0.015,
+          0.068
+        ],
+        "full_description": [
+          "A white L-shaped bracket with a central circular bearing insert."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "mechanical",
+          "fastener"
+        ],
+        "semantic_name": [
+          "bearing_mount"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "accessory_9",
+        "small",
+        "detail",
+        "laboratory"
+      ],
+      "tags": [
+        "root_scene_aacc7306",
+        "pour_workpiece_71d03be6",
+        "arrange_scene_elements_46fffbc8",
+        "accessories_scatter_d8874301",
+        "sft_accessories_dee1854b"
+      ],
+      "usd": "sft_accessories_000",
+      "xyz": [
+        -1.847108,
+        2.07061,
+        1.003
+      ],
+      "xyzw": [
+        0.065527,
+        0.768648,
+        0.635858,
+        -0.023898
+      ]
+    },
+    "sft_plastic_box_2800ecf1": {
+      "description": {
+        "color": "blue",
+        "descriptive_terms": [
+          "rectangular",
+          "open",
+          "simple",
+          "durable",
+          "practical"
+        ],
+        "dimensions": [
+          0.37059998512268066,
+          0.14079999923706055,
+          0.20080000162124634
+        ],
+        "full_description": [
+          "A blue rectangular plastic box with a slightly textured surface and an open top."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "container",
+          "storage box"
+        ],
+        "semantic_name": [
+          "plastic_box"
+        ],
+        "shape": "rectangular prism",
+        "unit": "m"
+      },
+      "keywords": [
+        "plastic_box_1",
+        "storage",
+        "plastic",
+        "container"
+      ],
+      "tags": [
+        "root_scene_aacc7306",
+        "pour_workpiece_71d03be6",
+        "arrange_scene_elements_46fffbc8",
+        "plastic_box_cluster_c15b84d2",
+        "sft_plastic_box_2800ecf1"
+      ],
+      "usd": "sft_plastic_box_002",
+      "xyz": [
+        -1.816852,
+        2.475861,
+        0.957
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.7021230328873859,
+        0.7120556485900654
+      ]
+    },
+    "sft_plastic_box_6863e995": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "rectangular",
+          "open",
+          "yellow",
+          "simple",
+          "storage"
+        ],
+        "dimensions": [
+          0.31449998915195465,
+          0.14079999923706055,
+          0.20069999992847443
+        ],
+        "full_description": [
+          "A yellow rectangular plastic box with a matte finish and slightly worn texture, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "container",
+          "storage"
+        ],
+        "semantic_name": [
+          "plastic_box"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "plastic_box_0",
+        "storage",
+        "plastic",
+        "container"
+      ],
+      "tags": [
+        "root_scene_aacc7306",
+        "pour_workpiece_71d03be6",
+        "arrange_scene_elements_46fffbc8",
+        "plastic_box_cluster_c15b84d2",
+        "sft_plastic_box_6863e995"
+      ],
+      "usd": "sft_plastic_box_001",
+      "xyz": [
+        -1.832325,
+        2.091217,
+        0.957
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.7108274823674121,
+        0.7033663983381679
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_aacc7306",
+          "target": "pour_workpiece_71d03be6"
+        },
+        {
+          "source": "pour_workpiece_71d03be6",
+          "target": "arrange_scene_elements_46fffbc8"
+        },
+        {
+          "source": "arrange_scene_elements_46fffbc8",
+          "target": "plastic_box_cluster_c15b84d2"
+        },
+        {
+          "source": "arrange_scene_elements_46fffbc8",
+          "target": "accessories_scatter_d8874301"
+        },
+        {
+          "source": "plastic_box_cluster_c15b84d2",
+          "target": "sft_plastic_box_6863e995"
+        },
+        {
+          "source": "plastic_box_cluster_c15b84d2",
+          "target": "sft_plastic_box_2800ecf1"
+        },
+        {
+          "source": "accessories_scatter_d8874301",
+          "target": "sft_accessories_dd465031"
+        },
+        {
+          "source": "accessories_scatter_d8874301",
+          "target": "sft_accessories_7a9792f1"
+        },
+        {
+          "source": "accessories_scatter_d8874301",
+          "target": "sft_accessories_23a1d9db"
+        },
+        {
+          "source": "accessories_scatter_d8874301",
+          "target": "sft_accessories_73887fd9"
+        },
+        {
+          "source": "accessories_scatter_d8874301",
+          "target": "sft_accessories_6505c594"
+        },
+        {
+          "source": "accessories_scatter_d8874301",
+          "target": "sft_accessories_5a82cc94"
+        },
+        {
+          "source": "accessories_scatter_d8874301",
+          "target": "sft_accessories_43728147"
+        },
+        {
+          "source": "accessories_scatter_d8874301",
+          "target": "sft_accessories_81812782"
+        },
+        {
+          "source": "accessories_scatter_d8874301",
+          "target": "sft_accessories_3b491984"
+        },
+        {
+          "source": "accessories_scatter_d8874301",
+          "target": "sft_accessories_dee1854b"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_aacc7306"
+        },
+        {
+          "id": "pour_workpiece_71d03be6"
+        },
+        {
+          "id": "arrange_scene_elements_46fffbc8"
+        },
+        {
+          "id": "plastic_box_cluster_c15b84d2"
+        },
+        {
+          "id": "sft_plastic_box_6863e995",
+          "tags": [
+            "plastic_box_0",
+            "storage",
+            "plastic",
+            "container"
+          ]
+        },
+        {
+          "id": "sft_plastic_box_2800ecf1",
+          "tags": [
+            "plastic_box_1",
+            "storage",
+            "plastic",
+            "container"
+          ]
+        },
+        {
+          "id": "accessories_scatter_d8874301"
+        },
+        {
+          "id": "sft_accessories_dd465031",
+          "tags": [
+            "accessory_0",
+            "small",
+            "detail",
+            "laboratory"
+          ]
+        },
+        {
+          "id": "sft_accessories_7a9792f1",
+          "tags": [
+            "accessory_1",
+            "small",
+            "detail",
+            "laboratory"
+          ]
+        },
+        {
+          "id": "sft_accessories_23a1d9db",
+          "tags": [
+            "accessory_2",
+            "small",
+            "detail",
+            "laboratory"
+          ]
+        },
+        {
+          "id": "sft_accessories_73887fd9",
+          "tags": [
+            "accessory_3",
+            "small",
+            "detail",
+            "laboratory"
+          ]
+        },
+        {
+          "id": "sft_accessories_6505c594",
+          "tags": [
+            "accessory_4",
+            "small",
+            "detail",
+            "laboratory"
+          ]
+        },
+        {
+          "id": "sft_accessories_5a82cc94",
+          "tags": [
+            "accessory_5",
+            "small",
+            "detail",
+            "laboratory"
+          ]
+        },
+        {
+          "id": "sft_accessories_43728147",
+          "tags": [
+            "accessory_6",
+            "small",
+            "detail",
+            "laboratory"
+          ]
+        },
+        {
+          "id": "sft_accessories_81812782",
+          "tags": [
+            "accessory_7",
+            "small",
+            "detail",
+            "laboratory"
+          ]
+        },
+        {
+          "id": "sft_accessories_3b491984",
+          "tags": [
+            "accessory_8",
+            "small",
+            "detail",
+            "laboratory"
+          ]
+        },
+        {
+          "id": "sft_accessories_dee1854b",
+          "tags": [
+            "accessory_9",
+            "small",
+            "detail",
+            "laboratory"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pour_workpiece",
+  "seed": 2837282552
+}

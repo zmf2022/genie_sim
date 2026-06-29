@@ -1,0 +1,255 @@
+simple_arm_l:
+  kinematics_solver: genie_sim_moveit_plugins/KDLKinematicsPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+simple_arm_r:
+  kinematics_solver: genie_sim_moveit_plugins/KDLKinematicsPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+simple_waist:
+  kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+simple_torso:
+  kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+# simple_body: full body trunk = simple_waist + simple_torso (joints idx01..idx05).
+# KDL is fine because the underlying chain is still a single linear chain
+# (base_link -> body_link5). body_link5 has NO <end_effector>, so no
+# interactive markers are drawn for simple_body / simple_torso; pose or
+# orientation constraints on body_link5 must go through
+# MotionPlanRequest.path_constraints, not kinematics_solver_ik_links.
+simple_body:
+  kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+# gripper_l / gripper_r / simple_head intentionally omitted: with no IK plugin
+# assigned, RobotInteraction::decideActiveEndEffectors() rejects every candidate
+# because canSetStateFromIK() returns false (no solver), and the fallback path
+# also requires canSetStateFromIK() — yielding zero interactive markers for
+# these planning groups, as desired. The composite groups (wbc / wbc_headless /
+# mobile_base_manipulator) still drive the head and grippers via BioIK, since
+# BioIK auto-discovers tips through JointModelGroup::getEndEffectorTips().
+wbc_arm_l:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  # Single-arm IK: seed is usually good (planner waypoint or marker drag),
+  # so we don't need bio2_memetic's global exploration. gd_c (gradient
+  # descent with constraint projection) converges in 1-3 iterations from
+  # a decent seed -> ~5-10x faster than bio2_memetic with the same success
+  # rate on reachable poses. For unreachable poses gd_c may fail where
+  # bio2_memetic would have escaped a local minimum, but this is rare in
+  # practice and the wall-clock cost of failure is also smaller.
+  mode: gd_c
+  # Tighter timeout: gd_c either converges fast or it doesn't, so the
+  # 100 ms budget was almost all wasted on retries that don't help.
+  kinematics_solver_timeout: 0.05
+  # 4 threads is the right operating point for a 7-DoF arm: more threads
+  # means more solver clones doing redundant work + barrier overhead
+  # dominates the actual solve. With threads: 0 (default) BioIK spawns
+  # std::thread::hardware_concurrency() workers (16-32 on modern CPUs).
+  threads: 4
+  # Smaller population halves per-step cost; gd_c does not really use
+  # the full population anyway, only elite_count gradient descents.
+  population_size: 4
+  elite_count: 2
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+  posture_joints: ["idx04_body_joint4", "idx05_body_joint5"]
+  posture_targets: [0.0, 0.0]
+  posture_weight: 0.3
+  chassis_posture_joints: ["planar_joint/x", "planar_joint/y", "planar_joint/theta"]
+  chassis_posture_weight: 1.0
+wbc_arm_r:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  mode: gd_c
+  kinematics_solver_timeout: 0.05
+  threads: 4
+  population_size: 4
+  elite_count: 2
+  kinematics_solver_ik_links:
+    - arm_r_end_link
+  posture_joints: ["idx04_body_joint4", "idx05_body_joint5"]
+  posture_targets: [0.0, 0.0]
+  posture_weight: 0.3
+  chassis_posture_joints: ["planar_joint/x", "planar_joint/y", "planar_joint/theta"]
+  chassis_posture_weight: 1.0
+wbc:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  # Multi-tip (3 tips: arm_l, arm_r, head) keeps bio2_memetic because the
+  # search space is genuinely non-convex (head LookAt + dual-arm coupling
+  # admits multiple basins). gd_c here reliably gets stuck.
+  kinematics_solver_timeout: 0.1
+  # 8 threads for 3-tip is a reasonable middle ground; more is wasteful.
+  threads: 8
+  population_size: 6
+  elite_count: 3
+  # Only links that have a matching <end_effector> may be listed here.
+  # Adding body_link5 (or any intermediate link) creates an extra IK goal
+  # tip with no marker and no draggable EEF, which over-constrains the
+  # solve and silently breaks the gripper markers. See genie.srdf comment.
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+    - arm_r_end_link
+    - head_link3
+  # Human-like priors:
+  #  - posture_*: keep idx04/idx05 (torso pitch/roll) near 0 -> torso upright.
+  #  - chassis_posture_*: pin planar joint (x, y, theta) to the IK seed so
+  #    the optimizer prefers reaching with the arms before walking the base.
+  #    The high weight here is intentional; it costs much more to move the
+  #    base than to bend a torso joint, mirroring real human behaviour.
+  #  - lookat_*: orient head_link3's +X axis toward arm_l_end_link by
+  #    default. Application code can override per-call by passing a
+  #    BioIKKinematicsQueryOptions with its own goals (the user-supplied
+  #    goals stack on top of these defaults). When the target link is
+  #    empty/missing, the LookAt goal is silently skipped (free constraint).
+  posture_joints: ["idx04_body_joint4", "idx05_body_joint5"]
+  posture_targets: [0.0, 0.0]
+  posture_weight: 0.3
+  chassis_posture_joints: ["planar_joint/x", "planar_joint/y", "planar_joint/theta"]
+  chassis_posture_weight: 1.0
+  lookat_link: "head_link3"
+  lookat_axis_xyz: [1.0, 0.0, 0.0]
+  lookat_target_link: "arm_l_end_link"
+  lookat_weight: 0.2
+wbc_headless:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+  threads: 8
+  population_size: 6
+  elite_count: 3
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+    - arm_r_end_link
+  # No head IK tip in this group -> no lookat goal. Posture + chassis-pin
+  # still apply.
+  posture_joints: ["idx04_body_joint4", "idx05_body_joint5"]
+  posture_targets: [0.0, 0.0]
+  posture_weight: 0.3
+  chassis_posture_joints: ["planar_joint/x", "planar_joint/y", "planar_joint/theta"]
+  chassis_posture_weight: 1.0
+# wbc_arms: dual-arm + chassis, NO body torso DOFs, NO head. Same multi-tip
+# tuning as wbc_headless; chassis-pin prior still applies. Torso-straight
+# posture goal is omitted because idx04/idx05 are not in this planning group.
+wbc_arms:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+  threads: 8
+  population_size: 6
+  elite_count: 3
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+    - arm_r_end_link
+  chassis_posture_joints: ["planar_joint/x", "planar_joint/y", "planar_joint/theta"]
+  chassis_posture_weight: 1.0
+mobile_base_manipulator:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+  threads: 8
+  population_size: 6
+  elite_count: 3
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+    - arm_r_end_link
+  posture_joints: ["idx04_body_joint4", "idx05_body_joint5"]
+  posture_targets: [0.0, 0.0]
+  posture_weight: 0.3
+  chassis_posture_joints: ["planar_joint/x", "planar_joint/y", "planar_joint/theta"]
+  chassis_posture_weight: 1.0
+# wbc_fixed_* groups: same joint topology as wbc_* but without the chassis
+# planar virtual_joint. BioIK still works (KDL would too for the single-arm
+# variants, but BioIK keeps the multi-tip composites consistent). Tips are
+# auto-discovered from <end_effector> declarations via getEndEffectorTips().
+wbc_fixed_arm_l:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  # Same single-arm-fast tuning as wbc_arm_l.
+  mode: gd_c
+  kinematics_solver_timeout: 0.05
+  threads: 4
+  population_size: 4
+  elite_count: 2
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+  # No chassis pin (no planar virtual_joint in wbc_fixed_*); only the
+  # torso-straight posture survives.
+  posture_joints: ["idx04_body_joint4", "idx05_body_joint5"]
+  posture_targets: [0.0, 0.0]
+  posture_weight: 0.3
+wbc_fixed_arm_r:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  mode: gd_c
+  kinematics_solver_timeout: 0.05
+  threads: 4
+  population_size: 4
+  elite_count: 2
+  kinematics_solver_ik_links:
+    - arm_r_end_link
+  posture_joints: ["idx04_body_joint4", "idx05_body_joint5"]
+  posture_targets: [0.0, 0.0]
+  posture_weight: 0.3
+wbc_fixed:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+  threads: 8
+  population_size: 6
+  elite_count: 3
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+    - arm_r_end_link
+    - head_link3
+  posture_joints: ["idx04_body_joint4", "idx05_body_joint5"]
+  posture_targets: [0.0, 0.0]
+  posture_weight: 0.3
+  lookat_link: "head_link3"
+  lookat_axis_xyz: [1.0, 0.0, 0.0]
+  lookat_target_link: "arm_l_end_link"
+  lookat_weight: 0.2
+wbc_fixed_headless:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+  threads: 8
+  population_size: 6
+  elite_count: 3
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+    - arm_r_end_link
+  posture_joints: ["idx04_body_joint4", "idx05_body_joint5"]
+  posture_targets: [0.0, 0.0]
+  posture_weight: 0.3
+# wbc_fixed_arms: dual-arm only, NO body torso, NO head, NO chassis. Same
+# multi-tip BioIK tuning, but no priors apply (torso joints and chassis
+# joints are absent from this planning group).
+wbc_fixed_arms:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+  threads: 8
+  population_size: 6
+  elite_count: 3
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+    - arm_r_end_link
+# simple_arms: canonical "both arms" bimanual planning group (sibling of
+# simple_arm_l / simple_arm_r in the SRDF).  Same multi-tip BioIK tuning
+# as wbc_fixed_arms — that group is now an SRDF alias of simple_arms, so
+# this entry is the source of truth for dual-arm-only IK config.
+simple_arms:
+  kinematics_solver: genie_sim_moveit_plugins/BioIKPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.1
+  threads: 8
+  population_size: 6
+  elite_count: 3
+  kinematics_solver_ik_links:
+    - arm_l_end_link
+    - arm_r_end_link

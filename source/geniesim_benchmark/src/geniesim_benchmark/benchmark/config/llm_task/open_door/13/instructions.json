@@ -1,0 +1,17 @@
+{
+  "instructions": [
+    {
+      "instruction": "Turn the doorknob with the right arm, push the door."
+    }
+  ],
+  "subtask_steps": [
+    {
+      "checker": {
+        "PushPull": "/World/objects/benchmark_door_000|0.05|1.5708|0"
+      },
+      "instruction": "Turn the doorknob with the right arm, push the door.",
+      "step_out": 450
+    }
+  ],
+  "task_id": "open_door"
+}

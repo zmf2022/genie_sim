@@ -29,12 +29,12 @@ def _path_dep(dist_name: str, folder: str) -> str:
 
 
 setup(
-    name="geniesim-world",
+    name="geniesim_world",
     version="0.1.0",
     description="Add-on for Apple ml-sharp: depth-guided predictor + panorama pipeline CLI (no vendored sharp).",
     long_description=(_ROOT / "README.md").read_text(encoding="utf-8"),
     long_description_content_type="text/markdown",
-    python_requires=">=3.10",
+    python_requires=">=3.10,<3.13",
     package_dir={"": "src"},
     packages=find_packages("src"),
     install_requires=[

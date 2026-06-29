@@ -1,0 +1,9 @@
+<library path="genie_sim_moveit_plugins_bio_ik_coupled_plugin">
+  <class name="genie_sim_moveit_plugins/BioIKPlugin"
+         type="genie_sim_moveit_plugins::BioIKPlugin"
+         base_class_type="kinematics::KinematicsBase">
+    <description>
+      BioIK evolutionary IK solver with coupled joint constraints (A*q &lt;= b).
+    </description>
+  </class>
+</library>

@@ -1,0 +1,8 @@
+{
+  "instructions": [
+    {
+      "instruction": "arrange blocks from small to large"
+    }
+  ],
+  "task_id": "sort_cubes_by_size_5"
+}

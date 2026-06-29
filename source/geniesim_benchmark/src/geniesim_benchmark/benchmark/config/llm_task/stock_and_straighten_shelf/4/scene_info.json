@@ -1,0 +1,540 @@
+{
+  "layout": {
+    "genie_beverage_bottle_000": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_000",
+      "xyz": [
+        0.049338182933569855,
+        -0.7172701432169869,
+        0.8039927190598766
+      ],
+      "xyzw": [
+        0.054758128,
+        -0.44607764,
+        -0.108841896,
+        0.8866621
+      ]
+    },
+    "genie_beverage_bottle_001": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_001",
+      "xyz": [
+        0.039361822376210776,
+        -0.5421814766747516,
+        0.7957513131558096
+      ],
+      "xyzw": [
+        0.0,
+        -0.4494268,
+        0.0,
+        0.89331716
+      ]
+    },
+    "genie_beverage_bottle_002": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_002",
+      "xyz": [
+        0.021230007341493953,
+        -0.8921995485658663,
+        0.941759006936766
+      ],
+      "xyzw": [
+        0.0,
+        0.3960506,
+        0.0,
+        0.9182287
+      ]
+    },
+    "genie_beverage_bottle_003": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_003",
+      "xyz": [
+        0.010165762111115195,
+        -0.7062446095652173,
+        0.968033517154772
+      ],
+      "xyzw": [
+        0.0,
+        0.3960506,
+        0.0,
+        0.9182287
+      ]
+    },
+    "genie_beverage_bottle_004": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_004",
+      "xyz": [
+        0.011397357931978602,
+        -0.9709739285122072,
+        0.8661084202351926
+      ],
+      "xyzw": [
+        0.0,
+        -0.46102947,
+        0.0,
+        0.88738483
+      ]
+    },
+    "genie_beverage_bottle_005": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_005",
+      "xyz": [
+        0.010165762111115195,
+        -0.8139444775433183,
+        0.8669737725098717
+      ],
+      "xyzw": [
+        0.0,
+        -0.46102947,
+        0.0,
+        0.88738483
+      ]
+    },
+    "genie_beverage_bottle_006": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_006",
+      "xyz": [
+        0.010165762111115195,
+        -0.8355393139763191,
+        1.0010912949158695
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    "genie_beverage_bottle_007": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "cylindrical",
+          "white",
+          "packaged",
+          "sealed",
+          "portable"
+        ],
+        "dimensions": [
+          0.049950599670410156,
+          0.1545971930027008,
+          0.049950599670410156
+        ],
+        "full_description": [
+          "A white plastic beverage bottle with blue and red text and a white cap, labeled '\u9c9c\u6930\u6c41'."
+        ],
+        "materials": [
+          "plastic",
+          "foil"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "beverage_bottle",
+        "bottle",
+        "drink",
+        "bottle_7"
+      ],
+      "tags": [
+        "root_scene_2e17a7d7",
+        "place_tilted_beverage_bottle_cafb4ba9",
+        "genie_beverage_bottle_b16cbda4"
+      ],
+      "usd": "genie_beverage_bottle_007",
+      "xyz": [
+        0.010165762111115195,
+        -0.598253407918204,
+        1.0008062548688879
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    "genie_beverage_bottle_008": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_008",
+      "xyz": [
+        0.02542260245470697,
+        -0.7101147638918534,
+        1.1325597367189044
+      ],
+      "xyzw": [
+        0.22636516,
+        -0.32122082,
+        0.585883,
+        0.70874333
+      ]
+    },
+    "genie_beverage_bottle_009": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_009",
+      "xyz": [
+        -0.060101239077987784,
+        -0.6314074722798566,
+        0.984687198142723
+      ],
+      "xyzw": [
+        0.34030175,
+        -0.19651645,
+        0.82928854,
+        0.3973116
+      ]
+    },
+    "genie_beverage_bottle_009_06": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_009",
+      "xyz": [
+        -0.3477723314296369,
+        -0.2935091969491738,
+        1.1536730312158914
+      ],
+      "xyzw": [
+        0.30857942,
+        0.0,
+        0.0,
+        0.9511986
+      ]
+    },
+    "genie_beverage_bottle_010": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_010",
+      "xyz": [
+        -0.046496407692060565,
+        -0.9514124753007528,
+        1.026599602544946
+      ],
+      "xyzw": [
+        -0.55411077,
+        0.0,
+        0.0,
+        0.83244294
+      ]
+    },
+    "genie_beverage_bottle_011": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_011",
+      "xyz": [
+        0.10636369711836126,
+        -0.7610982628601346,
+        0.9730987898455231
+      ],
+      "xyzw": [
+        0.63974816,
+        0.0,
+        0.0,
+        0.7685846
+      ]
+    },
+    "genie_beverage_bottle_012": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_012",
+      "xyz": [
+        0.026457789331928605,
+        -0.9793319889314376,
+        0.9473167748484573
+      ],
+      "xyzw": [
+        -0.5570346,
+        0.0,
+        0.0,
+        0.8304893
+      ]
+    },
+    "genie_beverage_bottle_013": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_013",
+      "xyz": [
+        0.024766931569952466,
+        -0.7551073993841055,
+        0.956773380169402
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    "genie_beverage_bottle_014": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_014",
+      "xyz": [
+        0.09692541768138493,
+        -0.5353333725204541,
+        0.956773380169402
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    "genie_beverage_bottle_015": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_015",
+      "xyz": [
+        -0.061728559185388915,
+        -0.4841308681225848,
+        0.956773380169402
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    "genie_beverage_bottle_016": {
+      "description": {
+        "dimensions": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "semantic_name": [
+          "beverage bottle"
+        ]
+      },
+      "keywords": [],
+      "tags": [],
+      "usd": "genie_beverage_bottle_016",
+      "xyz": [
+        0.11232372088231302,
+        -0.8875230055463469,
+        0.9567733801693896
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_2e17a7d7",
+          "target": "place_tilted_beverage_bottle_cafb4ba9"
+        },
+        {
+          "source": "place_tilted_beverage_bottle_cafb4ba9",
+          "target": "genie_beverage_bottle_b16cbda4"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_2e17a7d7"
+        },
+        {
+          "id": "place_tilted_beverage_bottle_cafb4ba9"
+        },
+        {
+          "id": "genie_beverage_bottle_b16cbda4",
+          "tags": [
+            "beverage_bottle",
+            "bottle",
+            "drink",
+            "bottle_7"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "place_tilted_beverage_bottle",
+  "seed": 2077863491
+}

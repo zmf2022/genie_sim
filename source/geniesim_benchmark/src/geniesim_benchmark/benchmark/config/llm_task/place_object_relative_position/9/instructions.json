@@ -1,0 +1,8 @@
+{
+  "instructions": [
+    {
+      "instruction": "place the bowl sponge to the left of the mouse"
+    }
+  ],
+  "task_id": "place_object_relative_position_9"
+}

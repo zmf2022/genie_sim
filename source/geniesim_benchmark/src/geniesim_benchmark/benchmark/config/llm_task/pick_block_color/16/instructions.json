@@ -1,0 +1,76 @@
+{
+  "instruction_category": "pick_block_color",
+  "instructions": [
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 1,
+      "instruction": "Right arm picks up yellow block on the table",
+      "target": {
+        "id1": "benchmark_building_blocks_8c4e25bb"
+      },
+      "template_key": "pick_block_color"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 2,
+      "instruction": "Right arm picks up blue block on the table",
+      "target": {
+        "id1": "benchmark_building_blocks_77fd4efb"
+      },
+      "template_key": "pick_block_color"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 3,
+      "instruction": "Left arm picks up red block on the table",
+      "target": {
+        "id1": "benchmark_building_blocks_ee3ea0f8"
+      },
+      "template_key": "pick_block_color"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 4,
+      "instruction": "Left arm picks up green block on the table",
+      "target": {
+        "id1": "benchmark_building_blocks_ce056b57"
+      },
+      "template_key": "pick_block_color"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 5,
+      "instruction": "Left arm picks up purple block on the table",
+      "target": {
+        "id1": "benchmark_building_blocks_e9cd5e22"
+      },
+      "template_key": "pick_block_color"
+    }
+  ],
+  "scene_id": "table_scene"
+}

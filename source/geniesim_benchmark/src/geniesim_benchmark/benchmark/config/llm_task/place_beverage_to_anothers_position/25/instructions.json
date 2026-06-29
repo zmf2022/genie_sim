@@ -1,0 +1,8 @@
+{
+  "instructions": [
+    {
+      "instruction": "Left arm picks up the fanta, Right arm picks up the wang lao ji, Right arm places the wang lao ji at the fanta's position"
+    }
+  ],
+  "task_id": "place_beverage_to_anothers_position_25"
+}

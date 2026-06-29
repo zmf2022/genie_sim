@@ -1,0 +1,577 @@
+{
+  "layout": {
+    "benchmark_apple_9fd572c3": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "round",
+          "red",
+          "ripe",
+          "smooth",
+          "natural"
+        ],
+        "dimensions": [
+          0.093,
+          0.0945,
+          0.0917
+        ],
+        "full_description": [
+          "A red and yellow apple with a glossy surface and a short brown stem."
+        ],
+        "materials": [
+          "fruit flesh",
+          "skin"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "apple"
+        ],
+        "shape": "round",
+        "unit": "m"
+      },
+      "keywords": [
+        "apple",
+        "object",
+        "apple",
+        "\u82f9\u679c"
+      ],
+      "tags": [
+        "root_scene_17cc474b",
+        "pick_object_relative_position_f4a15fe8",
+        "place_objects_on_table_0a911306",
+        "create_tabletop_object_3abe921b",
+        "benchmark_apple_9fd572c3"
+      ],
+      "usd": "benchmark_apple_002",
+      "xyz": [
+        -0.153,
+        0.0,
+        0.779
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.241174,
+        0.970482
+      ]
+    },
+    "benchmark_bowl_sponge_59009c0e": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "porous",
+          "flexible",
+          "absorbent",
+          "textured",
+          "rectangular"
+        ],
+        "dimensions": [
+          0.08157370984554291,
+          0.02987557463347912,
+          0.05640790797770023
+        ],
+        "full_description": [
+          "A rectangular sponge with a yellow porous base and a green abrasive top layer."
+        ],
+        "materials": [
+          "plastic",
+          "foam"
+        ],
+        "object_category": [
+          "kitchen",
+          "cleaning"
+        ],
+        "semantic_name": [
+          "sponge"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "bowl_sponge",
+        "object",
+        "bowl sponge",
+        "\u6d17\u7897\u6d77\u7ef5",
+        "target"
+      ],
+      "tags": [
+        "root_scene_17cc474b",
+        "pick_object_relative_position_f4a15fe8",
+        "place_objects_on_table_0a911306",
+        "create_tabletop_object_a9c4a559",
+        "benchmark_bowl_sponge_59009c0e"
+      ],
+      "usd": "benchmark_bowl_sponge_000",
+      "xyz": [
+        0.141,
+        0.03,
+        0.747
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.599062,
+        0.800702
+      ]
+    },
+    "benchmark_bowl_sponge_b5596fdc": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "porous",
+          "flexible",
+          "absorbent",
+          "textured",
+          "rectangular"
+        ],
+        "dimensions": [
+          0.08157370984554291,
+          0.02987557463347912,
+          0.05640790797770023
+        ],
+        "full_description": [
+          "A rectangular sponge with a yellow porous base and a green abrasive top layer."
+        ],
+        "materials": [
+          "plastic",
+          "foam"
+        ],
+        "object_category": [
+          "kitchen",
+          "cleaning"
+        ],
+        "semantic_name": [
+          "sponge"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "bowl_sponge",
+        "object",
+        "bowl sponge",
+        "\u6d17\u7897\u6d77\u7ef5",
+        "target"
+      ],
+      "tags": [
+        "root_scene_17cc474b",
+        "pick_object_relative_position_f4a15fe8",
+        "place_objects_on_table_0a911306",
+        "create_tabletop_object_59209b1c",
+        "benchmark_bowl_sponge_b5596fdc"
+      ],
+      "usd": "benchmark_bowl_sponge_000",
+      "xyz": [
+        -0.013,
+        0.174,
+        0.747
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.727483,
+        0.686126
+      ]
+    },
+    "benchmark_cup_d9cdffbf": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "cylindrical",
+          "white",
+          "simple",
+          "printed",
+          "small"
+        ],
+        "dimensions": [
+          0.0634383037686348,
+          0.07829996943473816,
+          0.06343957036733627
+        ],
+        "full_description": [
+          "A white paper cup with a black line-drawn pattern and yellow accents depicting household items."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "kitchenware",
+          "drinking vessel"
+        ],
+        "semantic_name": [
+          "cup"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "paper_cup",
+        "object",
+        "paper cup",
+        "\u7eb8\u676f"
+      ],
+      "tags": [
+        "root_scene_17cc474b",
+        "pick_object_relative_position_f4a15fe8",
+        "place_objects_on_table_0a911306",
+        "create_tabletop_object_7313cfaa",
+        "benchmark_cup_d9cdffbf"
+      ],
+      "usd": "benchmark_cup_105",
+      "xyz": [
+        0.019,
+        -0.113,
+        0.771
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.540421,
+        0.841395
+      ]
+    },
+    "benchmark_green_apple_9ed81204": {
+      "description": {
+        "color": "green",
+        "descriptive_terms": [
+          "round",
+          "green",
+          "fresh",
+          "ripe",
+          "small"
+        ],
+        "dimensions": [
+          0.0708455890417099,
+          0.0702173262834549,
+          0.07104996591806412
+        ],
+        "full_description": [
+          "A shiny, light green apple with a short brown stem and smooth, rounded shape."
+        ],
+        "materials": [
+          "fruit flesh",
+          "skin"
+        ],
+        "object_category": [
+          "fruit",
+          "pome"
+        ],
+        "semantic_name": [
+          "green_apple"
+        ],
+        "shape": "spherical",
+        "unit": "m"
+      },
+      "keywords": [
+        "green_apple",
+        "object",
+        "green apple",
+        "\u9752\u82f9\u679c"
+      ],
+      "tags": [
+        "root_scene_17cc474b",
+        "pick_object_relative_position_f4a15fe8",
+        "place_objects_on_table_0a911306",
+        "create_tabletop_object_b46fbc56",
+        "benchmark_green_apple_9ed81204"
+      ],
+      "usd": "benchmark_green_apple_001",
+      "xyz": [
+        -0.164,
+        -0.2,
+        0.767
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.498768,
+        0.866736
+      ]
+    },
+    "benchmark_medicine_bottle_b5ea3d73": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "cylindrical",
+          "white",
+          "yellow",
+          "packaged",
+          "small"
+        ],
+        "dimensions": [
+          0.06152497100830078,
+          0.11030638122558593,
+          0.06207268714904785
+        ],
+        "full_description": [
+          "A white plastic bottle with a bright yellow label featuring black text, including 'Glucosamine HCl Mega', and a white cap."
+        ],
+        "materials": [
+          "plastic",
+          "paper"
+        ],
+        "object_category": [
+          "container",
+          "medicine"
+        ],
+        "semantic_name": [
+          "medicine_bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "medicine_bottle",
+        "object",
+        "medicine bottle",
+        "\u836f\u74f6"
+      ],
+      "tags": [
+        "root_scene_17cc474b",
+        "pick_object_relative_position_f4a15fe8",
+        "place_objects_on_table_0a911306",
+        "create_tabletop_object_c7198db7",
+        "benchmark_medicine_bottle_b5ea3d73"
+      ],
+      "usd": "benchmark_medicine_bottle_000",
+      "xyz": [
+        0.135,
+        0.23,
+        0.787
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.497037,
+        0.867729
+      ]
+    },
+    "table_a581ab63": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_17cc474b",
+        "pick_object_relative_position_f4a15fe8",
+        "place_objects_on_table_0a911306",
+        "table_a581ab63"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_17cc474b",
+          "target": "pick_object_relative_position_f4a15fe8"
+        },
+        {
+          "source": "pick_object_relative_position_f4a15fe8",
+          "target": "place_objects_on_table_0a911306"
+        },
+        {
+          "source": "place_objects_on_table_0a911306",
+          "target": "table_a581ab63"
+        },
+        {
+          "source": "place_objects_on_table_0a911306",
+          "target": "create_tabletop_object_59209b1c"
+        },
+        {
+          "source": "place_objects_on_table_0a911306",
+          "target": "create_tabletop_object_a9c4a559"
+        },
+        {
+          "source": "place_objects_on_table_0a911306",
+          "target": "create_tabletop_object_7313cfaa"
+        },
+        {
+          "source": "place_objects_on_table_0a911306",
+          "target": "create_tabletop_object_b46fbc56"
+        },
+        {
+          "source": "place_objects_on_table_0a911306",
+          "target": "create_tabletop_object_3abe921b"
+        },
+        {
+          "source": "place_objects_on_table_0a911306",
+          "target": "create_tabletop_object_c7198db7"
+        },
+        {
+          "source": "create_tabletop_object_59209b1c",
+          "target": "benchmark_bowl_sponge_b5596fdc"
+        },
+        {
+          "source": "create_tabletop_object_a9c4a559",
+          "target": "benchmark_bowl_sponge_59009c0e"
+        },
+        {
+          "source": "create_tabletop_object_7313cfaa",
+          "target": "benchmark_cup_d9cdffbf"
+        },
+        {
+          "source": "create_tabletop_object_b46fbc56",
+          "target": "benchmark_green_apple_9ed81204"
+        },
+        {
+          "source": "create_tabletop_object_3abe921b",
+          "target": "benchmark_apple_9fd572c3"
+        },
+        {
+          "source": "create_tabletop_object_c7198db7",
+          "target": "benchmark_medicine_bottle_b5ea3d73"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_17cc474b"
+        },
+        {
+          "id": "pick_object_relative_position_f4a15fe8"
+        },
+        {
+          "id": "place_objects_on_table_0a911306"
+        },
+        {
+          "id": "table_a581ab63",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_59209b1c"
+        },
+        {
+          "id": "benchmark_bowl_sponge_b5596fdc",
+          "tags": [
+            "bowl_sponge",
+            "object",
+            "bowl sponge",
+            "\u6d17\u7897\u6d77\u7ef5",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_a9c4a559"
+        },
+        {
+          "id": "benchmark_bowl_sponge_59009c0e",
+          "tags": [
+            "bowl_sponge",
+            "object",
+            "bowl sponge",
+            "\u6d17\u7897\u6d77\u7ef5",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_7313cfaa"
+        },
+        {
+          "id": "benchmark_cup_d9cdffbf",
+          "tags": [
+            "paper_cup",
+            "object",
+            "paper cup",
+            "\u7eb8\u676f"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_b46fbc56"
+        },
+        {
+          "id": "benchmark_green_apple_9ed81204",
+          "tags": [
+            "green_apple",
+            "object",
+            "green apple",
+            "\u9752\u82f9\u679c"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_3abe921b"
+        },
+        {
+          "id": "benchmark_apple_9fd572c3",
+          "tags": [
+            "apple",
+            "object",
+            "apple",
+            "\u82f9\u679c"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_c7198db7"
+        },
+        {
+          "id": "benchmark_medicine_bottle_b5ea3d73",
+          "tags": [
+            "medicine_bottle",
+            "object",
+            "medicine bottle",
+            "\u836f\u74f6"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 1010753760
+}

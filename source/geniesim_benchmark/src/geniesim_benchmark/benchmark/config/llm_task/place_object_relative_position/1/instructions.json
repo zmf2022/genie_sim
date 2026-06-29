@@ -1,0 +1,8 @@
+{
+  "instructions": [
+    {
+      "instruction": "place the medicine bottle to the left of the orange"
+    }
+  ],
+  "task_id": "place_object_relative_position_1"
+}

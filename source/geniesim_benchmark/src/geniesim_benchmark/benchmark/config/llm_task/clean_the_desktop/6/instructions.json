@@ -1,0 +1,45 @@
+{
+  "instructions": [
+    {
+      "instruction": "Pick up the pen on the left side and place it into the pen holder, close the laptop, pick up the tissue on the table and place it into the trash bin on the right size. Then, pick up the mouse and place it on the right side of the laptop. Finally, straighten the colored pencil box."
+    }
+  ],
+  "subtask_steps": [
+    {
+      "checker": {
+        "Inside": "sft_pen_03952059|iros_pen_cup_49a7fdc9|1.2"
+      },
+      "instruction": "Pick up the pen on the left side and place it into the pen holder.",
+      "step_out": 600
+    },
+    {
+      "checker": {
+        "PushPull": "benchmark_laptop_cc6943dd|1.5708|2.0944"
+      },
+      "instruction": "Close the laptop.",
+      "step_out": 600
+    },
+    {
+      "checker": {
+        "Inside": "iros_crumpled_paper_0185d234|benchmark_trash_can_e869e921|1.2"
+      },
+      "instruction": "Pick up the tissue on the table and place it into the trash bin on the right side.",
+      "step_out": 600
+    },
+    {
+      "checker": {
+        "RelativePosition": "benchmark_mouse_8c05ce5b|benchmark_laptop_cc6943dd|rightof"
+      },
+      "instruction": "Pick up the mouse and place it on the right side of the laptop.",
+      "step_out": 600
+    },
+    {
+      "checker": {
+        "Upright": "sft_pen_0888a612|5.0|true"
+      },
+      "instruction": "Straighten the colored pencil box.",
+      "step_out": 300
+    }
+  ],
+  "task_id": "clean_the_desktop"
+}

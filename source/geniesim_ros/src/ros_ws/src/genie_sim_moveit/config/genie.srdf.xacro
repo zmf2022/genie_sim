@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="genie" xmlns:xacro="http://wiki.ros.org/xacro">
+    <!-- Gripper variant (swiftpicker / omnipicker).  Drives which
+         srdf_grippers/<gripper>.srdf.xacro fragment is included; the
+         fragment carries the gripper-specific planning groups,
+         passive mimic joints, and disable_collisions pairs.  Default
+         keeps the legacy SP behaviour (so launches that do not pass
+         the mapping still produce the same SRDF as before). -->
+    <xacro:arg name="gripper" default="swiftpicker"/>
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <!--
+        ATOMIC GROUPS: every higher-level planning group below is built by
+        referencing exactly these five chains plus the chassis virtual joint.
+        The body trunk is exposed at three granularities so the planner can
+        choose how much of the lower body to recruit:
+          - simple_waist : base_link    -> body_link3   (idx01..idx03 body_joint)
+          - simple_torso : body_link3   -> body_link5   (idx04..idx05 body_joint)
+          - simple_body  : base_link    -> body_link5   (idx01..idx05 body_joint)
+                           = simple_waist + simple_torso, the full body chain
+          - simple_head  : head_base_link -> head_link3
+          - simple_arm_l : arm_base_link  -> arm_l_end_link
+          - simple_arm_r : arm_base_link  -> arm_r_end_link
+        arm_base_link / head_base_link are FIXED-jointed children of body_link5
+        (idx20_arm_base_joint, idx10_head_base_joint), so simple_torso owns
+        the last revolute joint feeding both branches. simple_body covers the
+        whole trunk — convenient when a caller wants one MoveGroupInterface /
+        one trajectory controller for the entire 5-DoF body without recruiting
+        the arms or head. body_link5 has no <end_effector>, so neither
+        simple_torso nor simple_body draws an interactive marker; pose
+        constraints on body_link5 must go through MotionPlanRequest.
+    -->
+    <group name="simple_waist">
+        <chain base_link="base_link" tip_link="body_link3"/>
+    </group>
+    <group name="simple_torso">
+        <chain base_link="body_link3" tip_link="body_link5"/>
+    </group>
+    <group name="simple_body">
+        <group name="simple_waist"/>
+        <group name="simple_torso"/>
+    </group>
+    <group name="simple_head">
+        <chain base_link="head_base_link" tip_link="head_link3"/>
+    </group>
+    <group name="simple_arm_l">
+        <chain base_link="arm_base_link" tip_link="arm_l_end_link"/>
+    </group>
+    <group name="simple_arm_r">
+        <chain base_link="arm_base_link" tip_link="arm_r_end_link"/>
+    </group>
+    <!-- simple_arms : dual-arm bimanual planning group (both arms, no
+         torso / head / chassis).  Use this when a single MoveGroupInterface
+         needs to plan / actuate both arms together for symmetric tasks
+         (carry-a-tray, wok-flip with one arm holding, hand-over-hand
+         coordinated motion).  Sub-group of all the wbc_* groups that
+         include both arms — added as a sibling of simple_arm_l /
+         simple_arm_r so its name follows the "simple_" atomic-style
+         prefix even though it's a composite. -->
+    <group name="simple_arms">
+        <group name="simple_arm_l"/>
+        <group name="simple_arm_r"/>
+    </group>
+    <group name="chassis">
+        <joint name="planar_joint"/>
+        <!-- Adding base_link gives the group a URDF anchor link so
+             MoveIt's dynamics_solver can compute kinematics for the
+             chassis.  Without this, dynamics_solver complains
+             ``Group 'chassis' does not have a parent link`` and skips
+             this group's velocity/torque solutions (planning still
+             works).  base_link is the natural choice — it's the
+             planar joint's child link. -->
+        <link name="base_link"/>
+    </group>
+    <!--
+        COMPOSITE GROUPS: every other planning group is a pure subgroup
+        composition of the atomic groups above. None of them re-declare
+        joints or chains, so the only place to edit the kinematic topology
+        is the atomic block above.
+
+        Naming preserved for backwards compatibility with controllers and
+        RViz state files:
+          - simple_arms           : both arms only — canonical dual-arm
+                                    bimanual group (no torso / head / chassis).
+                                    Used by callers that want one
+                                    MoveGroupInterface to plan / actuate
+                                    both arms together.
+          - wbc_arm_l / wbc_arm_r : single arm + full torso (no chassis)
+          - wbc_fixed_*           : identical to wbc_* (no chassis); kept
+                                    distinct so each ros2_controllers entry
+                                    has a 1:1 selectable group in RViz.
+                                    wbc_fixed_arms is an alias of simple_arms.
+          - wbc_headless          : torso + both arms + chassis (no head)
+          - wbc                   : torso + both arms + head + chassis
+          - mobile_base_manipulator : tutorial-style group from the PickNik
+                                      MoveIt 2 mobile-base + arm tutorial.
+                                      Composes `chassis` (planar virtual joint)
+                                      directly with the body and both arms;
+                                      no `mobile_base` wrapper layer.
+    -->
+    <!-- Single-arm + full body, no chassis -->
+    <group name="wbc_arm_l">
+        <group name="simple_body"/>
+        <group name="simple_arm_l"/>
+    </group>
+    <group name="wbc_arm_r">
+        <group name="simple_body"/>
+        <group name="simple_arm_r"/>
+    </group>
+    <group name="wbc_fixed_arm_l">
+        <group name="simple_body"/>
+        <group name="simple_arm_l"/>
+    </group>
+    <group name="wbc_fixed_arm_r">
+        <group name="simple_body"/>
+        <group name="simple_arm_r"/>
+    </group>
+    <!-- Both arms + full body (+ head / + chassis variants) -->
+    <group name="wbc_fixed_headless">
+        <group name="simple_body"/>
+        <group name="simple_arm_l"/>
+        <group name="simple_arm_r"/>
+    </group>
+    <!-- Dual-arm only, no body torso DOFs, no head, no chassis. Useful when
+         you want to plan reaching with both hands while keeping the torso
+         and head fixed (e.g. bimanual manipulation from a parked stance).
+         Alias of ``simple_arms`` — kept under the wbc_* family for
+         back-compat with existing controller-yaml references. -->
+    <group name="wbc_fixed_arms">
+        <group name="simple_arms"/>
+    </group>
+    <group name="wbc_fixed">
+        <group name="simple_body"/>
+        <group name="simple_arm_l"/>
+        <group name="simple_arm_r"/>
+        <group name="simple_head"/>
+    </group>
+    <group name="wbc_headless">
+        <group name="chassis"/>
+        <group name="simple_body"/>
+        <group name="simple_arm_l"/>
+        <group name="simple_arm_r"/>
+    </group>
+    <!-- Dual-arm + chassis, no body torso DOFs, no head. Useful when the
+         torso pose should stay fixed but the chassis is free to translate /
+         yaw to bring both hands into reach (mobile bimanual). -->
+    <group name="wbc_arms">
+        <group name="chassis"/>
+        <group name="simple_arm_l"/>
+        <group name="simple_arm_r"/>
+    </group>
+    <group name="wbc">
+        <group name="chassis"/>
+        <group name="simple_body"/>
+        <group name="simple_arm_l"/>
+        <group name="simple_arm_r"/>
+        <group name="simple_head"/>
+    </group>
+    <group name="mobile_base_manipulator">
+        <group name="chassis"/>
+        <group name="simple_body"/>
+        <group name="simple_arm_l"/>
+        <group name="simple_arm_r"/>
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="T Pose" group="simple_arm_l">
+        <joint name="idx21_arm_l_joint1" value="0"/>
+        <joint name="idx22_arm_l_joint2" value="0"/>
+        <joint name="idx23_arm_l_joint3" value="0"/>
+        <joint name="idx24_arm_l_joint4" value="0"/>
+        <joint name="idx25_arm_l_joint5" value="0"/>
+        <joint name="idx26_arm_l_joint6" value="0"/>
+        <joint name="idx27_arm_l_joint7" value="0"/>
+    </group_state>
+    <group_state name="T Pose" group="simple_arm_r">
+        <joint name="idx61_arm_r_joint1" value="0"/>
+        <joint name="idx62_arm_r_joint2" value="0"/>
+        <joint name="idx63_arm_r_joint3" value="0"/>
+        <joint name="idx64_arm_r_joint4" value="0"/>
+        <joint name="idx65_arm_r_joint5" value="0"/>
+        <joint name="idx66_arm_r_joint6" value="0"/>
+        <joint name="idx67_arm_r_joint7" value="0"/>
+    </group_state>
+    <group_state name="T Pose" group="simple_waist">
+        <joint name="idx01_body_joint1" value="0"/>
+        <joint name="idx02_body_joint2" value="0"/>
+        <joint name="idx03_body_joint3" value="0"/>
+    </group_state>
+    <group_state name="T Pose" group="simple_torso">
+        <joint name="idx04_body_joint4" value="0"/>
+        <joint name="idx05_body_joint5" value="0"/>
+    </group_state>
+    <group_state name="T Pose" group="simple_body">
+        <joint name="idx01_body_joint1" value="0"/>
+        <joint name="idx02_body_joint2" value="0"/>
+        <joint name="idx03_body_joint3" value="0"/>
+        <joint name="idx04_body_joint4" value="0"/>
+        <joint name="idx05_body_joint5" value="0"/>
+    </group_state>
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <!--
+        IMPORTANT: do NOT declare an <end_effector> on body_link5 (or any other
+        intermediate link). bio_ik's BioIKKinematicsPlugin::load() automatically
+        appends every <end_effector> whose group is part of the planning group
+        to its IK tip set (via JointModelGroup::getEndEffectorTips()), even
+        when kinematics_solver_ik_links is configured. For composite groups
+        like mobile_base_manipulator that's fatal: an extra body_link5 tip
+        creates an over-constrained, often infeasible 3-tip IK problem on
+        every interactive-marker drag, which fails silently (no log spam) and
+        leaves the markers un-draggable. Keep end-effectors only on true tips.
+    -->
+    <!--
+        SRDF <end_effector> semantics (from moveit_core SrdfModel):
+          - group:        the EE *component* group (the gripper itself)
+          - parent_group: the arm group whose IK drives this EE
+                          (LEAVE EMPTY so RobotInteraction accepts the EE
+                          for ANY group whose IK can reach parent_link;
+                          this is required for composite groups like
+                          mobile_base_manipulator / wbc / wbc_headless).
+          - parent_link:  the link the EE is rigidly attached to
+
+        decideActiveEndEffectors() (moveit_ros_robot_interaction) accepts
+        the EE iff:
+            single_group->hasLinkModel(parent_link)
+          && (parent_group_.empty() || single_group->getName()==parent_group_)
+          && single_group->canSetStateFromIK(parent_link).
+        Setting parent_group="simple_arm_l" excludes mobile_base_manipulator and
+        leaves the composite group with no EE markers (only the fallback
+        "last link" marker), defeating the dual-arm whole-body workflow.
+
+        BioIK's plugin used to crash here with "Invalid link" because it
+        called getGlobalLinkTransform(getBaseFrame()) where getBaseFrame()
+        resolves to the model frame "odom" (the SRDF planar virtual_joint's
+        parent_frame). That's a virtual frame, not a URDF link, so
+        RobotModel::getLinkModel("odom") returns nullptr and
+        getGlobalLinkTransform(LinkModel*) throws Exception("Invalid link").
+        Fixed in src/external/bio_ik/src/kinematics_plugin.cpp by switching
+        to RobotState::getFrameTransform(), which mirrors the canonical
+        pattern used by PickNik's stretch_kinematics_plugin and returns
+        IDENTITY for the model frame instead of throwing.
+
+        See: https://moveit.picknik.ai/main/doc/examples/mobile_base_arm/
+              https://github.com/PickNikRobotics/stretch_moveit_plugins
+    -->
+    <end_effector name="gripper_l" parent_link="arm_l_end_link" group="gripper_l"/>
+    <end_effector name="gripper_r" parent_link="arm_r_end_link" group="gripper_r"/>
+    <end_effector name="head_ee" parent_link="head_link3" group="simple_head"/>
+    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+    <!--
+        Mobile-base wiring: 3-DoF planar virtual_joint between "odom" and
+        ``base_footprint``.  ``base_footprint`` is a synthetic link
+        injected by genie.urdf.xacro (MoveIt-side only); the canonical
+        URDF / robot.usda used by the simulator is unchanged.  The chain
+        is::
+
+            odom (planar virtual_joint, x/y/theta)
+              -> base_footprint   (synthetic, ground-projected)
+                 via prismatic Z joint "base_footprint_to_base_link"
+              -> base_link        (real chassis link, was the URDF root)
+
+        The prismatic joint is marked ``<passive_joint>`` below so the
+        planner never tries to vary its position.  Its value comes from
+        ``/joint_states`` each tick (simulator-side: synthesised from
+        ``body_q[base_link].z``); robot_state_publisher applies that to
+        MoveIt's RobotState so base_link's world pose tracks the
+        simulator's actual chassis ride height (chassis bobbing under
+        load, traversing platforms, wheel deformation).  This is what
+        makes object-relative manipulation correct even when the chassis
+        rides at a non-zero z.
+
+        ``planar_joint`` name kept for compatibility with the existing
+        joint-name references in moveit_controllers.yaml, kinematics.yaml,
+        and PlanarBaseController.  motion_model="holonomic" matches the
+        4WS chassis.
+    -->
+    <virtual_joint name="planar_joint" type="planar" parent_frame="odom" child_link="base_footprint"/>
+    <!--
+        PlanarJointModel properties (per the official MoveIt 2 mobile-base + arm
+        tutorial, https://moveit.picknik.ai/main/doc/examples/mobile_base_arm/).
+
+        - motion_model="holonomic" matches the 4WS chassis (no diff-drive constraint).
+        - min_translational_distance=0.01 m: below this, OMPL collapses a translation
+          into pure rotation. Default 1e-5 m is too small and produces spurious
+          micro-rotations on noisy starts.
+        - angular_distance_weight=0.3: relative cost of 1 rad vs 1 m in OMPL's
+          state-space distance metric. Default 1.0 over-penalizes orientation and
+          biases planners toward rotating-rather-than-translating, which is the
+          opposite of what a holonomic 4WS wants. Lower than the tutorial's 0.5
+          because our base is fully holonomic.
+    -->
+    <joint_property joint_name="planar_joint" property_name="motion_model" value="holonomic"/>
+    <joint_property joint_name="planar_joint" property_name="min_translational_distance" value="0.01"/>
+    <joint_property joint_name="planar_joint" property_name="angular_distance_weight" value="0.3"/>
+    <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
+    <!--
+        ``base_footprint_to_base_link`` is the prismatic Z joint injected
+        by genie.urdf.xacro to communicate the chassis's live ride height
+        from the simulator to MoveIt's RobotState.  Marking it passive
+        keeps the planner from sampling over it (chassis ride height is
+        not a controllable DoF; the value comes from /joint_states).
+    -->
+    <passive_joint name="base_footprint_to_base_link"/>
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="arm_l_link1" link2="arm_l_link2" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link1" link2="arm_l_link3" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link1" link2="arm_l_link4" reason="Default"/>
+    <disable_collisions link1="arm_l_link1" link2="arm_l_link5" reason="Default"/>
+    <disable_collisions link1="arm_l_link1" link2="arm_l_link6" reason="Default"/>
+    <disable_collisions link1="arm_l_link1" link2="arm_l_link7" reason="Default"/>
+    <disable_collisions link1="arm_l_link1" link2="arm_r_link1" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link1" link2="arm_r_link2" reason="Default"/>
+    <disable_collisions link1="arm_l_link1" link2="arm_r_link3" reason="Default"/>
+    <disable_collisions link1="arm_l_link1" link2="arm_r_link4" reason="Default"/>
+    <disable_collisions link1="arm_l_link1" link2="arm_r_link5" reason="Default"/>
+    <disable_collisions link1="arm_l_link1" link2="arm_r_link6" reason="Default"/>
+    <disable_collisions link1="arm_l_link1" link2="body_link2" reason="Default"/>
+    <disable_collisions link1="arm_l_link1" link2="body_link3" reason="Default"/>
+    <disable_collisions link1="arm_l_link1" link2="body_link4" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link1" link2="body_link5" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link1" link2="head_link1" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link1" link2="head_link2" reason="Default"/>
+    <disable_collisions link1="arm_l_link1" link2="head_link3" reason="Default"/>
+    <disable_collisions link1="arm_l_link2" link2="arm_l_link3" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link2" link2="arm_l_link4" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link2" link2="arm_l_link5" reason="Default"/>
+    <disable_collisions link1="arm_l_link2" link2="arm_l_link6" reason="Default"/>
+    <disable_collisions link1="arm_l_link2" link2="arm_l_link7" reason="Default"/>
+    <disable_collisions link1="arm_l_link2" link2="arm_r_link1" reason="Default"/>
+    <disable_collisions link1="arm_l_link2" link2="arm_r_link2" reason="Default"/>
+    <disable_collisions link1="arm_l_link2" link2="arm_r_link3" reason="Default"/>
+    <disable_collisions link1="arm_l_link2" link2="arm_r_link4" reason="Default"/>
+    <disable_collisions link1="arm_l_link2" link2="arm_r_link5" reason="Default"/>
+    <disable_collisions link1="arm_l_link2" link2="body_link2" reason="Default"/>
+    <disable_collisions link1="arm_l_link2" link2="body_link3" reason="Default"/>
+    <disable_collisions link1="arm_l_link2" link2="body_link4" reason="Default"/>
+    <disable_collisions link1="arm_l_link2" link2="body_link5" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link2" link2="head_link1" reason="Default"/>
+    <disable_collisions link1="arm_l_link2" link2="head_link2" reason="Default"/>
+    <disable_collisions link1="arm_l_link2" link2="head_link3" reason="Default"/>
+    <disable_collisions link1="arm_l_link3" link2="arm_l_link4" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link3" link2="arm_l_link5" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link3" link2="arm_l_link6" reason="Default"/>
+    <disable_collisions link1="arm_l_link3" link2="arm_l_link7" reason="Default"/>
+    <disable_collisions link1="arm_l_link3" link2="arm_r_link1" reason="Default"/>
+    <disable_collisions link1="arm_l_link3" link2="arm_r_link2" reason="Default"/>
+    <disable_collisions link1="arm_l_link3" link2="arm_r_link3" reason="Default"/>
+    <disable_collisions link1="arm_l_link3" link2="arm_r_link4" reason="Default"/>
+    <disable_collisions link1="arm_l_link3" link2="body_link3" reason="Default"/>
+    <disable_collisions link1="arm_l_link4" link2="arm_l_link5" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link4" link2="arm_l_link6" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link4" link2="arm_l_link7" reason="Default"/>
+    <disable_collisions link1="arm_l_link4" link2="arm_r_link1" reason="Default"/>
+    <disable_collisions link1="arm_l_link4" link2="arm_r_link2" reason="Default"/>
+    <disable_collisions link1="arm_l_link5" link2="arm_l_link6" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link5" link2="arm_l_link7" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link5" link2="arm_r_link1" reason="Default"/>
+    <disable_collisions link1="arm_l_link5" link2="arm_r_link2" reason="Default"/>
+    <disable_collisions link1="arm_l_link6" link2="arm_l_link7" reason="Adjacent"/>
+    <disable_collisions link1="arm_l_link6" link2="arm_r_link1" reason="Default"/>
+    <disable_collisions link1="arm_r_link1" link2="arm_r_link2" reason="Adjacent"/>
+    <disable_collisions link1="arm_r_link1" link2="arm_r_link3" reason="Adjacent"/>
+    <disable_collisions link1="arm_r_link1" link2="arm_r_link4" reason="Default"/>
+    <disable_collisions link1="arm_r_link1" link2="arm_r_link5" reason="Default"/>
+    <disable_collisions link1="arm_r_link1" link2="arm_r_link6" reason="Default"/>
+    <disable_collisions link1="arm_r_link1" link2="arm_r_link7" reason="Default"/>
+    <disable_collisions link1="arm_r_link1" link2="body_link2" reason="Default"/>
+    <disable_collisions link1="arm_r_link1" link2="body_link3" reason="Default"/>
+    <disable_collisions link1="arm_r_link1" link2="body_link4" reason="Adjacent"/>
+    <disable_collisions link1="arm_r_link1" link2="body_link5" reason="Adjacent"/>
+    <disable_collisions link1="arm_r_link1" link2="head_link1" reason="Adjacent"/>
+    <disable_collisions link1="arm_r_link1" link2="head_link2" reason="Default"/>
+    <disable_collisions link1="arm_r_link1" link2="head_link3" reason="Default"/>
+    <disable_collisions link1="arm_r_link2" link2="arm_r_link3" reason="Adjacent"/>
+    <disable_collisions link1="arm_r_link2" link2="arm_r_link4" reason="Adjacent"/>
+    <disable_collisions link1="arm_r_link2" link2="arm_r_link5" reason="Default"/>
+    <disable_collisions link1="arm_r_link2" link2="arm_r_link6" reason="Default"/>
+    <disable_collisions link1="arm_r_link2" link2="arm_r_link7" reason="Default"/>
+    <disable_collisions link1="arm_r_link2" link2="body_link2" reason="Default"/>
+    <disable_collisions link1="arm_r_link2" link2="body_link3" reason="Default"/>
+    <disable_collisions link1="arm_r_link2" link2="body_link4" reason="Default"/>
+    <disable_collisions link1="arm_r_link2" link2="body_link5" reason="Adjacent"/>
+    <disable_collisions link1="arm_r_link2" link2="head_link1" reason="Default"/>
+    <disable_collisions link1="arm_r_link2" link2="head_link2" reason="Default"/>
+    <disable_collisions link1="arm_r_link2" link2="head_link3" reason="Default"/>
+    <disable_collisions link1="arm_r_link3" link2="arm_r_link4" reason="Adjacent"/>
+    <disable_collisions link1="arm_r_link3" link2="arm_r_link5" reason="Adjacent"/>
+    <disable_collisions link1="arm_r_link3" link2="arm_r_link6" reason="Default"/>
+    <disable_collisions link1="arm_r_link3" link2="arm_r_link7" reason="Default"/>
+    <disable_collisions link1="arm_r_link3" link2="body_link3" reason="Default"/>
+    <disable_collisions link1="arm_r_link4" link2="arm_r_link5" reason="Adjacent"/>
+    <disable_collisions link1="arm_r_link4" link2="arm_r_link6" reason="Adjacent"/>
+    <disable_collisions link1="arm_r_link4" link2="arm_r_link7" reason="Default"/>
+    <disable_collisions link1="arm_r_link5" link2="arm_r_link6" reason="Adjacent"/>
+    <disable_collisions link1="arm_r_link5" link2="arm_r_link7" reason="Adjacent"/>
+    <disable_collisions link1="arm_r_link6" link2="arm_r_link7" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="body_link1" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="body_link2" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="chassis_lwheel_front_link1" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="chassis_lwheel_front_link2" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="chassis_lwheel_rear_link1" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="chassis_lwheel_rear_link2" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="chassis_rwheel_front_link1" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="chassis_rwheel_front_link2" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="chassis_rwheel_rear_link1" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="chassis_rwheel_rear_link2" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="head_link2" reason="Default"/>
+    <disable_collisions link1="base_link" link2="head_link3" reason="Default"/>
+    <disable_collisions link1="body_link1" link2="body_link2" reason="Adjacent"/>
+    <disable_collisions link1="body_link1" link2="body_link3" reason="Adjacent"/>
+    <disable_collisions link1="body_link1" link2="chassis_lwheel_front_link1" reason="Adjacent"/>
+    <disable_collisions link1="body_link1" link2="chassis_lwheel_rear_link1" reason="Adjacent"/>
+    <disable_collisions link1="body_link1" link2="chassis_rwheel_front_link1" reason="Adjacent"/>
+    <disable_collisions link1="body_link1" link2="chassis_rwheel_rear_link1" reason="Adjacent"/>
+    <disable_collisions link1="body_link1" link2="head_link1" reason="Default"/>
+    <disable_collisions link1="body_link1" link2="head_link2" reason="Default"/>
+    <disable_collisions link1="body_link1" link2="head_link3" reason="Default"/>
+    <disable_collisions link1="body_link2" link2="body_link3" reason="Adjacent"/>
+    <disable_collisions link1="body_link2" link2="body_link4" reason="Adjacent"/>
+    <disable_collisions link1="body_link2" link2="body_link5" reason="Default"/>
+    <disable_collisions link1="body_link2" link2="chassis_lwheel_front_link1" reason="Default"/>
+    <disable_collisions link1="body_link2" link2="chassis_lwheel_rear_link1" reason="Default"/>
+    <disable_collisions link1="body_link2" link2="chassis_rwheel_front_link1" reason="Default"/>
+    <disable_collisions link1="body_link2" link2="chassis_rwheel_rear_link1" reason="Default"/>
+    <disable_collisions link1="body_link2" link2="head_link1" reason="Default"/>
+    <disable_collisions link1="body_link2" link2="head_link2" reason="Default"/>
+    <disable_collisions link1="body_link2" link2="head_link3" reason="Default"/>
+    <disable_collisions link1="body_link3" link2="body_link4" reason="Adjacent"/>
+    <disable_collisions link1="body_link3" link2="body_link5" reason="Adjacent"/>
+    <disable_collisions link1="body_link3" link2="chassis_lwheel_front_link1" reason="Default"/>
+    <disable_collisions link1="body_link3" link2="chassis_lwheel_rear_link1" reason="Default"/>
+    <disable_collisions link1="body_link3" link2="chassis_rwheel_front_link1" reason="Default"/>
+    <disable_collisions link1="body_link3" link2="chassis_rwheel_rear_link1" reason="Default"/>
+    <disable_collisions link1="body_link3" link2="head_link1" reason="Default"/>
+    <disable_collisions link1="body_link3" link2="head_link2" reason="Default"/>
+    <disable_collisions link1="body_link3" link2="head_link3" reason="Default"/>
+    <disable_collisions link1="body_link4" link2="body_link5" reason="Adjacent"/>
+    <disable_collisions link1="body_link4" link2="chassis_lwheel_front_link1" reason="Default"/>
+    <disable_collisions link1="body_link4" link2="chassis_lwheel_rear_link1" reason="Default"/>
+    <disable_collisions link1="body_link4" link2="chassis_rwheel_front_link1" reason="Default"/>
+    <disable_collisions link1="body_link4" link2="chassis_rwheel_rear_link1" reason="Default"/>
+    <disable_collisions link1="body_link4" link2="head_link1" reason="Adjacent"/>
+    <disable_collisions link1="body_link4" link2="head_link2" reason="Default"/>
+    <disable_collisions link1="body_link4" link2="head_link3" reason="Default"/>
+    <disable_collisions link1="body_link5" link2="chassis_lwheel_rear_link1" reason="Default"/>
+    <disable_collisions link1="body_link5" link2="head_link1" reason="Adjacent"/>
+    <disable_collisions link1="body_link5" link2="head_link2" reason="Adjacent"/>
+    <disable_collisions link1="body_link5" link2="head_link3" reason="Always"/>
+    <disable_collisions link1="chassis_lwheel_front_link1" link2="chassis_lwheel_front_link2" reason="Adjacent"/>
+    <disable_collisions link1="chassis_lwheel_front_link1" link2="chassis_lwheel_rear_link1" reason="Adjacent"/>
+    <disable_collisions link1="chassis_lwheel_front_link1" link2="chassis_rwheel_front_link1" reason="Adjacent"/>
+    <disable_collisions link1="chassis_lwheel_front_link1" link2="chassis_rwheel_rear_link1" reason="Adjacent"/>
+    <disable_collisions link1="chassis_lwheel_front_link1" link2="head_link1" reason="Default"/>
+    <disable_collisions link1="chassis_lwheel_front_link1" link2="head_link2" reason="Default"/>
+    <disable_collisions link1="chassis_lwheel_front_link1" link2="head_link3" reason="Default"/>
+    <disable_collisions link1="chassis_lwheel_rear_link1" link2="chassis_lwheel_rear_link2" reason="Adjacent"/>
+    <disable_collisions link1="chassis_lwheel_rear_link1" link2="chassis_rwheel_front_link1" reason="Adjacent"/>
+    <disable_collisions link1="chassis_lwheel_rear_link1" link2="chassis_rwheel_rear_link1" reason="Adjacent"/>
+    <disable_collisions link1="chassis_lwheel_rear_link1" link2="head_link1" reason="Default"/>
+    <disable_collisions link1="chassis_lwheel_rear_link1" link2="head_link2" reason="Default"/>
+    <disable_collisions link1="chassis_lwheel_rear_link1" link2="head_link3" reason="Default"/>
+    <disable_collisions link1="chassis_rwheel_front_link1" link2="chassis_rwheel_front_link2" reason="Adjacent"/>
+    <disable_collisions link1="chassis_rwheel_front_link1" link2="chassis_rwheel_rear_link1" reason="Adjacent"/>
+    <disable_collisions link1="chassis_rwheel_front_link1" link2="head_link1" reason="Default"/>
+    <disable_collisions link1="chassis_rwheel_front_link1" link2="head_link2" reason="Default"/>
+    <disable_collisions link1="chassis_rwheel_front_link1" link2="head_link3" reason="Default"/>
+    <disable_collisions link1="chassis_rwheel_rear_link1" link2="chassis_rwheel_rear_link2" reason="Adjacent"/>
+    <disable_collisions link1="chassis_rwheel_rear_link1" link2="head_link1" reason="Default"/>
+    <disable_collisions link1="chassis_rwheel_rear_link1" link2="head_link2" reason="Default"/>
+    <disable_collisions link1="chassis_rwheel_rear_link1" link2="head_link3" reason="Default"/>
+    <disable_collisions link1="head_link1" link2="head_link2" reason="Adjacent"/>
+    <disable_collisions link1="head_link1" link2="head_link3" reason="Adjacent"/>
+    <disable_collisions link1="head_link2" link2="head_link3" reason="Adjacent"/>
+    <!-- Gripper-specific groups + passive_joints + disable_collisions.
+         See srdf_grippers/{swiftpicker,omnipicker}.srdf.xacro for the
+         per-gripper fragments.  Selected by the ``gripper`` xacro arg
+         which wbc.launch.py wires to the matching launch CLI arg. -->
+    <xacro:include filename="$(find genie_sim_moveit)/config/srdf_grippers/$(arg gripper).srdf.xacro"/>
+</robot>

@@ -1,0 +1,8 @@
+{
+  "instructions": [
+    {
+      "instruction": "place the fanta to the left of the toy car"
+    }
+  ],
+  "task_id": "place_object_relative_position_20"
+}

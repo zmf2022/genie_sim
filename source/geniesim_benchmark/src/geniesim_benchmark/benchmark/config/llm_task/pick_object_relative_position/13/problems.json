@@ -1,0 +1,39 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "benchmark_beverage_bottle_bbfe5fa8|[0.1,0.2,0.1]|left_gripper"
+              },
+              {
+                "Follow": "benchmark_beverage_bottle_bbfe5fa8|[0.1,0.2,0.1]|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "PickUpOnGripper": "benchmark_beverage_bottle_bbfe5fa8|left_gripper"
+              },
+              {
+                "PickUpOnGripper": "benchmark_beverage_bottle_bbfe5fa8|right_gripper"
+              },
+              {
+                "StepOut": 200
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "pick_object_relative_position"
+  }
+}

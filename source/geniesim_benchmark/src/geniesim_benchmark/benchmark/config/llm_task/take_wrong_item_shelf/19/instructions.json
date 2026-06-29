@@ -1,0 +1,36 @@
+{
+  "instructions": [
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 1,
+      "instruction": "The left arm picks up the incorrectly placed item from the shelf, place the misplaced items from the shelf into the shopping basket.",
+      "target": {
+        "idn": "benchmark_beverage_bottle_35b3d04a"
+      },
+      "template_key": "take_wrong_item_shelf"
+    }
+  ],
+  "scene_id": "place_random_drink",
+  "subtask_steps": [
+    {
+      "checker": {
+        "Follow": "benchmark_beverage_bottle_35b3d04a|[0.2,0.2,0.2]|left_gripper"
+      },
+      "instruction": "The left arm picks up the incorrectly placed item from the shelf.",
+      "step_out": 300
+    },
+    {
+      "checker": {
+        "Inside": "benchmark_beverage_bottle_35b3d04a|/World/storage_bin|1.0"
+      },
+      "instruction": "Place the misplaced items from the shelf into the shopping basket.",
+      "step_out": 400
+    }
+  ],
+  "task_id": "take_wrong_item_shelf"
+}

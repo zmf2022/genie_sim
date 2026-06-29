@@ -1,0 +1,101 @@
+# OMPL planning pipeline config (loaded by MoveItConfigsBuilder when the
+# moveit_config calls .planning_pipelines(pipelines=["ompl"]); see
+# wbc.launch.py).
+#
+# History note: this file used to declare planning_plugin
+# genie_sim_moveit_plugins/GeniePlannerManager and a custom GenieRRTConnect
+# type.  Neither was honoured -- MoveIt 2's pipeline machinery loads
+# moveit_planners_ompl for the "ompl" pipeline name regardless of any
+# planning_plugin field, so every plan silently fell back to OMPL's
+# default RRTConnect with no per-group config.  We now align with that
+# reality: OMPL planner_ids ("geometric::RRTConnect" etc.) and per-group
+# OMPL knobs.
+
+planning_plugins:
+  - ompl_interface/OMPLPlanner
+
+request_adapters:
+  - default_planning_request_adapters/ResolveConstraintFrames
+  - default_planning_request_adapters/ValidateWorkspaceBounds
+  - default_planning_request_adapters/CheckStartStateBounds
+  - default_planning_request_adapters/CheckStartStateCollision
+
+response_adapters:
+  - default_planning_response_adapters/AddTimeOptimalParameterization
+  - default_planning_response_adapters/ValidateSolution
+  - default_planning_response_adapters/DisplayMotionPath
+
+planner_configs:
+  RRTConnectkConfigDefault:
+    type: geometric::RRTConnect
+    range: 0.0  # 0 -> use default per-state-space heuristic
+  RRTstarkConfigDefault:
+    type: geometric::RRTstar
+    range: 0.0
+    goal_bias: 0.05
+
+# ---------------------------------------------------------------------------
+# Per-group settings.
+# ---------------------------------------------------------------------------
+
+# Arm-only groups (no virtual_joint).
+simple_arm_l:
+  default_planner_config: RRTConnectkConfigDefault
+  planner_configs: [RRTConnectkConfigDefault]
+
+simple_arm_r:
+  default_planner_config: RRTConnectkConfigDefault
+  planner_configs: [RRTConnectkConfigDefault]
+
+wbc_arm_l:
+  default_planner_config: RRTConnectkConfigDefault
+  planner_configs: [RRTConnectkConfigDefault]
+
+wbc_arm_r:
+  default_planner_config: RRTConnectkConfigDefault
+  planner_configs: [RRTConnectkConfigDefault]
+
+# Multi-tip dual-arm groups.  longest_valid_segment_fraction is OMPL-
+# native (denser collision checks along edges); projection_evaluator
+# helps any future KPIECE/PRM usage.
+simple_arms:
+  default_planner_config: RRTConnectkConfigDefault
+  planner_configs: [RRTConnectkConfigDefault, RRTstarkConfigDefault]
+  longest_valid_segment_fraction: 0.005
+  projection_evaluator: "joints(idx21_arm_l_joint1,idx61_arm_r_joint1)"
+
+wbc_arms:
+  default_planner_config: RRTConnectkConfigDefault
+  planner_configs: [RRTConnectkConfigDefault, RRTstarkConfigDefault]
+  longest_valid_segment_fraction: 0.005
+  projection_evaluator: "joints(idx21_arm_l_joint1,idx61_arm_r_joint1)"
+
+wbc_fixed_arms:
+  default_planner_config: RRTConnectkConfigDefault
+  planner_configs: [RRTConnectkConfigDefault, RRTstarkConfigDefault]
+  longest_valid_segment_fraction: 0.005
+  projection_evaluator: "joints(idx21_arm_l_joint1,idx61_arm_r_joint1)"
+
+# Chassis-including groups.  Plain RRTConnect on PoseModelStateSpace --
+# the virtual_joint is type="planar" (3-DoF), no floating-joint
+# quaternion drama, no JMSS workaround needed.  base_footprint is the
+# child link; the prismatic Z joint to base_link is marked
+# <passive_joint> in genie.srdf so the planner never samples over it.
+chassis:
+  default_planner_config: RRTConnectkConfigDefault
+  planner_configs: [RRTConnectkConfigDefault]
+
+wbc:
+  default_planner_config: RRTConnectkConfigDefault
+  planner_configs: [RRTConnectkConfigDefault]
+  longest_valid_segment_fraction: 0.005
+
+wbc_headless:
+  default_planner_config: RRTConnectkConfigDefault
+  planner_configs: [RRTConnectkConfigDefault]
+  longest_valid_segment_fraction: 0.005
+
+mobile_base_manipulator:
+  default_planner_config: RRTConnectkConfigDefault
+  planner_configs: [RRTConnectkConfigDefault]
+  longest_valid_segment_fraction: 0.005

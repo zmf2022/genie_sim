@@ -1,0 +1,76 @@
+{
+  "instruction_category": "pick_block_number",
+  "instructions": [
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 1,
+      "instruction": "Left arm picks up the block shaped like number 5 on the table",
+      "target": {
+        "id1": "benchmark_building_blocks_95798853"
+      },
+      "template_key": "pick_block_number"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 2,
+      "instruction": "Right arm picks up the block shaped like number 7 on the table",
+      "target": {
+        "id1": "benchmark_building_blocks_2d1beefe"
+      },
+      "template_key": "pick_block_number"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 3,
+      "instruction": "Right arm picks up the block shaped like number 1 on the table",
+      "target": {
+        "id1": "benchmark_building_blocks_64285456"
+      },
+      "template_key": "pick_block_number"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 4,
+      "instruction": "Right arm picks up the block shaped like number 0 on the table",
+      "target": {
+        "id1": "benchmark_building_blocks_161cc524"
+      },
+      "template_key": "pick_block_number"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 5,
+      "instruction": "Right arm picks up the block shaped like number 8 on the table",
+      "target": {
+        "id1": "benchmark_building_blocks_1cc37ad0"
+      },
+      "template_key": "pick_block_number"
+    }
+  ],
+  "scene_id": "random_number_blocks"
+}

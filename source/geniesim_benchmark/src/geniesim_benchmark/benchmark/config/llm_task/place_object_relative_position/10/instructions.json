@@ -1,0 +1,8 @@
+{
+  "instructions": [
+    {
+      "instruction": "place the grape juice to the top of the medicine bottle"
+    }
+  ],
+  "task_id": "place_object_relative_position_10"
+}

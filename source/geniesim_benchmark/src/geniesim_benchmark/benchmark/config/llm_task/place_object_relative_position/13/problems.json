@@ -1,0 +1,49 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "benchmark_lemon_74854702|[0.1,0.15,0.1]|left_gripper"
+              },
+              {
+                "Follow": "benchmark_lemon_74854702|[0.1,0.15,0.1]|right_gripper"
+              },
+              {
+                "StepOut": 300
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "MixedRules": {
+                  "check_interval": 1,
+                  "mode": "and",
+                  "rules": [
+                    {
+                      "name": "RelativePosition",
+                      "params": "benchmark_lemon_74854702|benchmark_rubik_cube_d369f762|topof"
+                    },
+                    {
+                      "name": "RelativePosition",
+                      "params": "benchmark_lemon_74854702|benchmark_rubik_cube_d369f762|aligned_y|0.1"
+                    }
+                  ]
+                }
+              },
+              {
+                "StepOut": 600
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "place_object_relative_position"
+  }
+}

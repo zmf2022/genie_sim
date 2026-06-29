@@ -1,0 +1,8 @@
+{
+  "instructions": [
+    {
+      "instruction": "picks up the toy car further from the clock"
+    }
+  ],
+  "task_id": "pick_object_relative_position_10"
+}

@@ -1,0 +1,76 @@
+{
+  "instruction_category": "pick_block_shape",
+  "instructions": [
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 1,
+      "instruction": "Left arm picks up the cube block on the table",
+      "target": {
+        "id1": "benchmark_building_blocks_caebfb21"
+      },
+      "template_key": "pick_block_shape"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 2,
+      "instruction": "Right arm picks up the rectangular block on the table",
+      "target": {
+        "id1": "benchmark_building_blocks_16b47cdc"
+      },
+      "template_key": "pick_block_shape"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 3,
+      "instruction": "Left arm picks up the triangular prism block on the table",
+      "target": {
+        "id1": "benchmark_building_blocks_91ab5076"
+      },
+      "template_key": "pick_block_shape"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 4,
+      "instruction": "Left arm picks up the cylindrical block on the table",
+      "target": {
+        "id1": "benchmark_building_blocks_5193d040"
+      },
+      "template_key": "pick_block_shape"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 5,
+      "instruction": "Right arm picks up the hexagonal prism block on the table",
+      "target": {
+        "id1": "benchmark_building_blocks_bd198389"
+      },
+      "template_key": "pick_block_shape"
+    }
+  ],
+  "scene_id": "place_random_blocks"
+}

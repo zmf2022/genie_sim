@@ -1,0 +1,12 @@
+<library path="genie_sim_controllers_chassis_servo_controller">
+  <class name="genie_sim_controllers/ChassisServoController"
+         type="genie_sim_controllers::ChassisServoController"
+         base_class_type="controller_interface::ControllerInterface">
+    <description>
+      Four-wheel-steering chassis servo as a ros2_control controller.
+      Subscribes to /cmd_twist + /joint_states, publishes /cmd_4ws.
+      Does not claim any hardware interfaces (topic-driven, same
+      pattern as PlanarBaseController).
+    </description>
+  </class>
+</library>

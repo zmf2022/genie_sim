@@ -1,0 +1,43 @@
+{
+  "instructions": [
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 1,
+      "instruction": "Pick up the wei-chuan orange juice in the shopping basket and place it on the shelf with right arm, straighten the overturned wei-chuan grape juice with right arm.",
+      "target": {
+        "idn": "genie_beverage_bottle_008"
+      },
+      "template_key": "pick_object_type"
+    }
+  ],
+  "scene_id": "place_tilted_beverage_bottle",
+  "subtask_steps": [
+    {
+      "checker": {
+        "PickUpOnGripper": "/Workspace/Objects/genie_beverage_bottle_008/entity|right_gripper"
+      },
+      "instruction": "Pick up the wei-chuan orange juice in the shopping basket with the right arm.",
+      "step_out": 400
+    },
+    {
+      "checker": {
+        "InBBox": "/Workspace/Objects/genie_beverage_bottle_008/entity|-0.3156, -0.6454, 1.1241|0.2,0.3,0.2"
+      },
+      "instruction": "Place the wei-chuan orange juice on the shelf with the right arm.",
+      "step_out": 600
+    },
+    {
+      "checker": {
+        "Upright": "/Workspace/Objects/genie_beverage_bottle_009_06/entity|15"
+      },
+      "instruction": "Straighten the overturned wei-chuan grape juice with the right arm.",
+      "step_out": 600
+    }
+  ],
+  "task_id": "instruction_category: stock_and_straighten_shelf"
+}

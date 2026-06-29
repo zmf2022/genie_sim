@@ -14,7 +14,7 @@ assets
 *.tmp/
 *.whl
 output/
-record*/
+/record*/
 *.hdf5
 
 *.tar
@@ -29,9 +29,14 @@ checkpoints
 
 source/geniesim/app/robot_cfg/*_recording.json
 
+# RLinf compat alias created at container runtime by source/rlinf_geniesim/scripts/entrypoint_geniesim_rlinf.sh
+# (symlink → source/rlinf_geniesim); never committed.
+/source/geniesim/rl
+
 default.etcd
 python3*INFO*
 *.INFO*
+*.ini
 
 release_pkg
 
@@ -39,6 +44,9 @@ release_pkg
 build/
 install/
 log/
+devel_build/
+devel/
+devel_log/
 
 logs/
 logs
@@ -47,3 +55,7 @@ logs
 .cache
 
 **/*.egg-info
+
+MUJOCO_LOG.TXT
+
+.claude

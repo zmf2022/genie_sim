@@ -1,0 +1,316 @@
+{
+  "layout": {
+    "benchmark_cup_9860d461": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "cylindrical",
+          "white",
+          "simple",
+          "printed",
+          "small"
+        ],
+        "dimensions": [
+          0.0634383037686348,
+          0.07829996943473816,
+          0.06343957036733627
+        ],
+        "full_description": [
+          "A white paper cup with a black line-drawn pattern and yellow accents depicting household items."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "kitchenware",
+          "drinking vessel"
+        ],
+        "semantic_name": [
+          "cup"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "paper cup",
+        "benchmark_cup_105",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_ebf3f799",
+        "table_with_random_objects_d6da59cb",
+        "place_random_objects_on_desk_13a1941a",
+        "benchmark_cup_9860d461"
+      ],
+      "usd": "benchmark_cup_105",
+      "xyz": [
+        0.125,
+        0.018,
+        0.938
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.001216,
+        0.999999
+      ]
+    },
+    "benchmark_orange_9cdd8b3b": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "round",
+          "smooth",
+          "vibrant",
+          "juicy",
+          "fresh"
+        ],
+        "dimensions": [
+          0.0740404799580574,
+          0.07486499100923538,
+          0.07437027990818024
+        ],
+        "full_description": [
+          "A round, orange-colored fruit with a textured peel and small dimples visible on its surface."
+        ],
+        "materials": [
+          "organic",
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "orange"
+        ],
+        "shape": "spherical",
+        "unit": "m"
+      },
+      "keywords": [
+        "orange",
+        "benchmark_orange_004",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_ebf3f799",
+        "table_with_random_objects_d6da59cb",
+        "place_random_objects_on_desk_13a1941a",
+        "benchmark_orange_9cdd8b3b"
+      ],
+      "usd": "benchmark_orange_004",
+      "xyz": [
+        -0.131,
+        0.054,
+        0.935
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.035939,
+        0.999354
+      ]
+    },
+    "benchmark_toiletries_61737e70": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "cylindrical",
+          "flexible",
+          "packaged",
+          "cosmetic",
+          "white"
+        ],
+        "dimensions": [
+          0.03400098532438278,
+          0.1400732398033142,
+          0.05983749404549599
+        ],
+        "full_description": [
+          "A white and blue plastic tube labeled 'Face Cleaner' with Chinese characters and a green logo."
+        ],
+        "materials": [
+          "plastic",
+          "paper"
+        ],
+        "object_category": [
+          "cosmetic",
+          "face cleaner"
+        ],
+        "semantic_name": [
+          "face_cleaner"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "face cleanser",
+        "benchmark_toiletries_009",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_ebf3f799",
+        "table_with_random_objects_d6da59cb",
+        "place_random_objects_on_desk_13a1941a",
+        "benchmark_toiletries_61737e70"
+      ],
+      "usd": "benchmark_toiletries_009",
+      "xyz": [
+        -0.097,
+        0.204,
+        1.0
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.037903,
+        0.999281
+      ]
+    },
+    "table_ee4cfb01": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_ebf3f799",
+        "table_with_random_objects_d6da59cb",
+        "place_random_objects_on_desk_13a1941a",
+        "table_ee4cfb01"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_ebf3f799",
+          "target": "table_with_random_objects_d6da59cb"
+        },
+        {
+          "source": "table_with_random_objects_d6da59cb",
+          "target": "place_random_objects_on_desk_13a1941a"
+        },
+        {
+          "source": "place_random_objects_on_desk_13a1941a",
+          "target": "table_ee4cfb01"
+        },
+        {
+          "source": "place_random_objects_on_desk_13a1941a",
+          "target": "benchmark_cup_9860d461"
+        },
+        {
+          "source": "place_random_objects_on_desk_13a1941a",
+          "target": "benchmark_orange_9cdd8b3b"
+        },
+        {
+          "source": "place_random_objects_on_desk_13a1941a",
+          "target": "benchmark_toiletries_61737e70"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_ebf3f799"
+        },
+        {
+          "id": "table_with_random_objects_d6da59cb"
+        },
+        {
+          "id": "place_random_objects_on_desk_13a1941a"
+        },
+        {
+          "id": "table_ee4cfb01",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_cup_9860d461",
+          "tags": [
+            "paper cup",
+            "benchmark_cup_105",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_orange_9cdd8b3b",
+          "tags": [
+            "orange",
+            "benchmark_orange_004",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_toiletries_61737e70",
+          "tags": [
+            "face cleanser",
+            "benchmark_toiletries_009",
+            "on_desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 3415295843
+}

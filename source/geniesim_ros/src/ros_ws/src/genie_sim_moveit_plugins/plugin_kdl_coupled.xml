@@ -1,0 +1,10 @@
+<library path="genie_sim_moveit_plugins_kdl_coupled_plugin">
+  <class name="genie_sim_moveit_plugins/KDLKinematicsPlugin"
+         type="genie_sim_moveit_plugins::KDLKinematicsPlugin"
+         base_class_type="kinematics::KinematicsBase">
+    <description>
+      KDL IK solver extended with coupled joint constraints (A*q &lt;= b).
+      Drop-in replacement for kdl_kinematics_plugin/KDLKinematicsPlugin.
+    </description>
+  </class>
+</library>

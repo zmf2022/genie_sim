@@ -1,0 +1,457 @@
+{
+  "layout": {
+    "benchmark_lemon_27926a01": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "citrus",
+          "yellow",
+          "organic",
+          "fresh",
+          "juicy"
+        ],
+        "dimensions": [
+          0.0652875304222107,
+          0.08429359644651413,
+          0.06925402581691742
+        ],
+        "full_description": [
+          "A bright yellow, glossy, oval-shaped fruit with a small green stem nub."
+        ],
+        "materials": [
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "food",
+          "citrus fruit"
+        ],
+        "semantic_name": [
+          "lemon"
+        ],
+        "shape": "irregular",
+        "unit": "m"
+      },
+      "keywords": [
+        "lemon",
+        "benchmark_lemon_030",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_46bab37b",
+        "table_with_random_objects_9f35a327",
+        "place_random_objects_on_desk_9c7a3dbd",
+        "benchmark_lemon_27926a01"
+      ],
+      "usd": "benchmark_lemon_030",
+      "xyz": [
+        0.021,
+        -0.022,
+        0.944
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.128887,
+        0.991659
+      ]
+    },
+    "benchmark_orange_e2275113": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "round",
+          "smooth",
+          "vibrant",
+          "juicy",
+          "fresh"
+        ],
+        "dimensions": [
+          0.0740404799580574,
+          0.07486499100923538,
+          0.07437027990818024
+        ],
+        "full_description": [
+          "A round, orange-colored fruit with a textured peel and small dimples visible on its surface."
+        ],
+        "materials": [
+          "organic",
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "food",
+          "fruit"
+        ],
+        "semantic_name": [
+          "orange"
+        ],
+        "shape": "spherical",
+        "unit": "m"
+      },
+      "keywords": [
+        "orange",
+        "benchmark_orange_004",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_46bab37b",
+        "table_with_random_objects_9f35a327",
+        "place_random_objects_on_desk_9c7a3dbd",
+        "benchmark_orange_e2275113"
+      ],
+      "usd": "benchmark_orange_004",
+      "xyz": [
+        0.078,
+        0.127,
+        0.935
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.046415,
+        0.998922
+      ]
+    },
+    "benchmark_tape_measure_81406d8d": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "compact",
+          "durable",
+          "portable",
+          "functional",
+          "robust"
+        ],
+        "dimensions": [
+          0.0889030990600586,
+          0.08185286712646485,
+          0.04844463539123535
+        ],
+        "full_description": [
+          "A compact tape measure with a black and bright yellow plastic casing, featuring a visible '7.5m' label on its side."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "tool",
+          "measurement"
+        ],
+        "semantic_name": [
+          "tape_measure"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "tape measure",
+        "benchmark_tape_measure_007",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_46bab37b",
+        "table_with_random_objects_9f35a327",
+        "place_random_objects_on_desk_9c7a3dbd",
+        "benchmark_tape_measure_81406d8d"
+      ],
+      "usd": "benchmark_tape_measure_007",
+      "xyz": [
+        -0.085,
+        0.238,
+        0.942
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.024292,
+        0.999705
+      ]
+    },
+    "benchmark_toy_car_4fa442dc": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy car",
+        "benchmark_toy_car_018",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_46bab37b",
+        "table_with_random_objects_9f35a327",
+        "place_random_objects_on_desk_9c7a3dbd",
+        "benchmark_toy_car_4fa442dc"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        -0.2,
+        0.112,
+        0.893
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.035898,
+        0.999355
+      ]
+    },
+    "genie_beverage_bottle_307285e3": {
+      "description": {
+        "color": "black",
+        "descriptive_terms": [
+          "cylindrical",
+          "black",
+          "plastic",
+          "packaged",
+          "beverage"
+        ],
+        "dimensions": [
+          0.04871850088238716,
+          0.16691981256008148,
+          0.05984169989824295
+        ],
+        "full_description": [
+          "A black plastic beverage bottle with a white cap and a label featuring red grapes and Chinese text."
+        ],
+        "materials": [
+          "plastic",
+          "label"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "grape juice",
+        "genie_beverage_bottle_009",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_46bab37b",
+        "table_with_random_objects_9f35a327",
+        "place_random_objects_on_desk_9c7a3dbd",
+        "genie_beverage_bottle_307285e3"
+      ],
+      "usd": "genie_beverage_bottle_009",
+      "xyz": [
+        -0.175,
+        -0.119,
+        1.029
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.003782,
+        0.999993
+      ]
+    },
+    "table_7db6679a": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_46bab37b",
+        "table_with_random_objects_9f35a327",
+        "place_random_objects_on_desk_9c7a3dbd",
+        "table_7db6679a"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_46bab37b",
+          "target": "table_with_random_objects_9f35a327"
+        },
+        {
+          "source": "table_with_random_objects_9f35a327",
+          "target": "place_random_objects_on_desk_9c7a3dbd"
+        },
+        {
+          "source": "place_random_objects_on_desk_9c7a3dbd",
+          "target": "table_7db6679a"
+        },
+        {
+          "source": "place_random_objects_on_desk_9c7a3dbd",
+          "target": "benchmark_toy_car_4fa442dc"
+        },
+        {
+          "source": "place_random_objects_on_desk_9c7a3dbd",
+          "target": "benchmark_tape_measure_81406d8d"
+        },
+        {
+          "source": "place_random_objects_on_desk_9c7a3dbd",
+          "target": "benchmark_orange_e2275113"
+        },
+        {
+          "source": "place_random_objects_on_desk_9c7a3dbd",
+          "target": "benchmark_lemon_27926a01"
+        },
+        {
+          "source": "place_random_objects_on_desk_9c7a3dbd",
+          "target": "genie_beverage_bottle_307285e3"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_46bab37b"
+        },
+        {
+          "id": "table_with_random_objects_9f35a327"
+        },
+        {
+          "id": "place_random_objects_on_desk_9c7a3dbd"
+        },
+        {
+          "id": "table_7db6679a",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_toy_car_4fa442dc",
+          "tags": [
+            "toy car",
+            "benchmark_toy_car_018",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_tape_measure_81406d8d",
+          "tags": [
+            "tape measure",
+            "benchmark_tape_measure_007",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_orange_e2275113",
+          "tags": [
+            "orange",
+            "benchmark_orange_004",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_lemon_27926a01",
+          "tags": [
+            "lemon",
+            "benchmark_lemon_030",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "genie_beverage_bottle_307285e3",
+          "tags": [
+            "grape juice",
+            "genie_beverage_bottle_009",
+            "on_desk",
+            "left"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 558215661
+}

@@ -1,0 +1,62 @@
+{
+  "instructions": [
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 1,
+      "instruction": "Get me a bottle of carbonated drink",
+      "target": {
+        "idn": "genie_beverage_bottle_35066f59"
+      },
+      "template_key": "pick_common_sense"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 2,
+      "instruction": "I want to eat some fruit to supplement Vitamin C",
+      "target": {
+        "idn": "benchmark_green_apple_f18877d5"
+      },
+      "template_key": "pick_common_sense"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 3,
+      "instruction": "I need to mark on documents, give me a pen",
+      "target": {
+        "idn": "benchmark_pen_874b8edf"
+      },
+      "template_key": "pick_common_sense"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 4,
+      "instruction": "Choose a gift for a child who really likes cars",
+      "target": {
+        "idn": "benchmark_toy_car_3daccb65"
+      },
+      "template_key": "pick_common_sense"
+    }
+  ],
+  "scene_id": "place_random_objects_on_desk",
+  "task_id": "pick_common_sense"
+}

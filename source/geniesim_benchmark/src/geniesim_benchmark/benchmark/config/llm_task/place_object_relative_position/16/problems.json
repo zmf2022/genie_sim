@@ -1,0 +1,49 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Follow": "benchmark_apple_52a124e1|[0.15,0.15,0.15]|left_gripper"
+              },
+              {
+                "Follow": "benchmark_apple_52a124e1|[0.15,0.15,0.15]|right_gripper"
+              },
+              {
+                "StepOut": 300
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "MixedRules": {
+                  "check_interval": 1,
+                  "mode": "and",
+                  "rules": [
+                    {
+                      "name": "RelativePosition",
+                      "params": "benchmark_apple_52a124e1|benchmark_toy_car_d9d58082|bottomof"
+                    },
+                    {
+                      "name": "RelativePosition",
+                      "params": "benchmark_apple_52a124e1|benchmark_toy_car_d9d58082|aligned_y|0.1"
+                    }
+                  ]
+                }
+              },
+              {
+                "StepOut": 600
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "place_object_relative_position"
+  }
+}

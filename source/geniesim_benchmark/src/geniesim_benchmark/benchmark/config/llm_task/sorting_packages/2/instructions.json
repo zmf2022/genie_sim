@@ -1,0 +1,45 @@
+{
+  "instructions": [
+    {
+      "instruction": "Grab the red package on the table with right arm. Turn the waist right to face the barcode scanner. Place the package on the scanning table with the barcode facing up. The right arm grabs the package. Rotate the waist with the right arm. Place the package in the blue bin. Both arms coordinate and the waist returns to the initial posture."
+    }
+  ],
+  "subtask_steps": [
+    {
+      "checker": {
+        "PickUpOnGripper": "benchmark_carton_dd2ffc11|right_gripper"
+      },
+      "instruction": "Grab the red package on the table with right arm.",
+      "step_out": 600
+    },
+    {
+      "checker": {
+        "ActionSetWaitAll": [
+          {
+            "Inside": "benchmark_carton_dd2ffc11|/World/background/benchmark_scanner_000|0.8"
+          },
+          {
+            "Upright": "benchmark_carton_dd2ffc11|5.0"
+          }
+        ]
+      },
+      "instruction": "Turn the waist right to face the barcode scanner. Place the package on the scanning table with the barcode facing up.",
+      "step_out": 900
+    },
+    {
+      "checker": {
+        "PickUpOnGripper": "benchmark_carton_dd2ffc11|right_gripper"
+      },
+      "instruction": "The right arm grabs the package. Rotate the waist with the right arm.",
+      "step_out": 900
+    },
+    {
+      "checker": {
+        "Inside": "benchmark_carton_dd2ffc11|/World/background/benchmark_material_tray_000|0.8"
+      },
+      "instruction": "Place the package in the blue bin. Both arms coordinate and the waist returns to the initial posture.",
+      "step_out": 900
+    }
+  ],
+  "task_id": "sorting_packages"
+}

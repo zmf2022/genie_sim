@@ -1,0 +1,221 @@
+#usda 1.0
+(
+    customLayerData = {
+        dictionary cameraSettings = {
+            dictionary Front = {
+                double3 position = (5, 0, 0)
+                double radius = 5
+            }
+            dictionary Perspective = {
+                double3 position = (0.0029699303217572293, 0.07831621926783061, 2.417797186843618)
+                double3 target = (-0.004431854611080867, -0.18154309856322975, -6.23855414316351)
+            }
+            dictionary Right = {
+                double3 position = (0, -5, 0)
+                double radius = 5
+            }
+            dictionary Top = {
+                double3 position = (0, 0, 5)
+                double radius = 5
+            }
+            string boundCamera = "/OmniverseKit_Persp"
+        }
+        dictionary omni_layer = {
+            string authoring_layer = "./scene.usda"
+        }
+        dictionary renderSettings = {
+        }
+    }
+    defaultPrim = "World"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def "World"
+{
+    def "Objects"
+    {
+        def Xform "table_74eee47f" (
+            prepend payload = @/geniesim_assets/objects/benchmark/table/benchmark_table_019/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 0, 0.265)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "geniesim_2025_building_blocks_000" (
+            prepend payload = @/geniesim_assets/objects/benchmark/building_blocks/benchmark_building_blocks_000/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.8885771863947498, 0.0, 0.0, -0.45872713438251095)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-0.07227404116858072, 0.0764999999999999, 0.8200725623145699)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "geniesim_2025_target_building_block" (
+            prepend payload = @/geniesim_assets/objects/benchmark/building_blocks/benchmark_building_blocks_002/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.07945098657814043, 0.0, 5.551115123125783e-17, 0.9968387736899886)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-0.2022740411685806, 0.39649999999999996, 0.838978301435709)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "geniesim_2025_building_blocks_012" (
+            prepend payload = @/geniesim_assets/objects/benchmark/building_blocks/benchmark_building_blocks_012/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.9855455617793029, 2.220446049250313e-16, 0.0, -0.16941058307295487)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0.06772595883141941, -0.3235000000000001, 0.8200141000002623)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "geniesim_2025_building_blocks_008" (
+            prepend payload = @/geniesim_assets/objects/benchmark/building_blocks/benchmark_building_blocks_008/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.9999903574002621, 1.1102230246251565e-16, 0.0, 0.004391481127839729)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0.08772595883141943, 0.4165, 0.8200193000007421)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "geniesim_2025_building_blocks_016" (
+            prepend payload = @/geniesim_assets/objects/benchmark/building_blocks/benchmark_building_blocks_016/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.5783445757929396, 0.0, 1.1102230246251565e-16, 0.8157925910737881)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-0.2122740411685804, -0.24350000000000016, 0.8200173000004143)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "geniesim_2025_building_blocks_003" (
+            prepend payload = @/geniesim_assets/objects/benchmark/building_blocks/benchmark_building_blocks_003/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (-0.006740869596058415, 0.0, 2.220446049250313e-16, 0.9999772800804472)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0.07772595883141964, -0.09350000000000014, 0.8389751870930194)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "geniesim_2025_building_blocks_005" (
+            prepend payload = @/geniesim_assets/objects/benchmark/building_blocks/benchmark_building_blocks_005/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.8678453081311489, 3.3306690738754696e-16, 0.0, -0.4968345007693722)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-0.04227404116858047, 0.26649999999999985, 0.8200149999996648)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "geniesim_2025_building_blocks_010" (
+            prepend payload = @/geniesim_assets/objects/benchmark/building_blocks/benchmark_building_blocks_010/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.7954930654419864, 3.3306690738754696e-16, 0.0, 0.6059626909585373)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-0.11227404116858075, -0.09350000000000014, 0.820019999999553)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "geniesim_2025_building_blocks_006" (
+            prepend payload = @/geniesim_assets/objects/benchmark/building_blocks/benchmark_building_blocks_006/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.6755737959895961, 0.0, 2.7755575615628914e-16, 0.7372923749586779)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-0.04227404116858047, -0.24350000000000016, 0.8200201999992133)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "geniesim_2025_building_blocks_001" (
+            prepend payload = @/geniesim_assets/objects/benchmark/building_blocks/benchmark_building_blocks_001/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.9554223207801158, -1.6653345369377348e-16, 0.0, 0.2952425933959018)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0.037725958831419604, 0.15649999999999986, 0.8200149999996648)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "geniesim_2025_building_blocks_007" (
+            prepend payload = @/geniesim_assets/objects/benchmark/building_blocks/benchmark_building_blocks_007/Aligned.usda@
+        )
+        {
+            quatf xformOp:orient = (0.3691140673101355, 0.0, 2.220446049250313e-16, 0.9293840999897561)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-0.17227404116858036, 0.24649999999999983, 0.820019999999553)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+    }
+}
+
+def "Render" (
+    hide_in_stage_window = true
+    no_delete = true
+)
+{
+    def "OmniverseKit"
+    {
+        def "HydraTextures" (
+            hide_in_stage_window = true
+            no_delete = true
+        )
+        {
+            def RenderProduct "omni_kit_widget_viewport_ViewportTexture_0" (
+                prepend apiSchemas = ["OmniRtxSettingsCommonAdvancedAPI_1", "OmniRtxSettingsRtAdvancedAPI_1", "OmniRtxSettingsPtAdvancedAPI_1", "OmniRtxPostColorGradingAPI_1", "OmniRtxPostChromaticAberrationAPI_1", "OmniRtxPostBloomPhysicalAPI_1", "OmniRtxPostMatteObjectAPI_1", "OmniRtxPostCompositingAPI_1", "OmniRtxPostDofAPI_1", "OmniRtxPostMotionBlurAPI_1", "OmniRtxPostTvNoiseAPI_1", "OmniRtxPostTonemapIrayReinhardAPI_1", "OmniRtxPostDebugSettingsAPI_1", "OmniRtxDebugSettingsAPI_1"]
+                hide_in_stage_window = true
+                no_delete = true
+            )
+            {
+                rel camera = </OmniverseKit_Persp>
+                token omni:rtx:background:source:texture:textureMode = "repeatMirrored"
+                token omni:rtx:background:source:type = "domeLight"
+                bool omni:rtx:dlss:frameGeneration = 0
+                bool omni:rtx:material:db:nonVisualMaterialCSV:enabled = 0
+                bool omni:rtx:material:db:syncLoads = 1
+                token omni:rtx:post:dlss:execMode = "performance"
+                bool omni:rtx:post:registeredCompositing:invertColorCorrection = 1
+                bool omni:rtx:post:registeredCompositing:invertToneMap = 1
+                bool omni:rtx:pt:lightcache:cached:dontResolveConflicts = 1
+                int omni:rtx:pt:maxSamplesPerLaunch = 2073600
+                int omni:rtx:pt:mgpu:maxPixelsPerRegionExponent = 12
+                color3f omni:rtx:rt:ambientLight:color = (0.1, 0.1, 0.1)
+                bool omni:rtx:rt:demoire = 0
+                bool omni:rtx:rt:lightcache:spatialCache:dontResolveConflicts = 1
+                bool omni:rtx:scene:hydra:materialSyncLoads = 1
+                bool omni:rtx:scene:hydra:mdlMaterialWarmup = 1
+                uint omni:rtx:viewTile:limit = 4294967295
+                rel orderedVars = </Render/Vars/LdrColor>
+                custom bool overrideClipRange = 0
+                uniform int2 resolution = (1280, 720)
+            }
+        }
+    }
+
+    def RenderSettings "OmniverseGlobalRenderSettings" (
+        prepend apiSchemas = ["OmniRtxSettingsGlobalRtAdvancedAPI_1", "OmniRtxSettingsGlobalPtAdvancedAPI_1"]
+        no_delete = true
+    )
+    {
+        rel products = </Render/OmniverseKit/HydraTextures/omni_kit_widget_viewport_ViewportTexture_0>
+    }
+
+    def "Vars"
+    {
+        def RenderVar "LdrColor" (
+            hide_in_stage_window = true
+            no_delete = true
+        )
+        {
+            uniform string sourceName = "LdrColor"
+        }
+    }
+}

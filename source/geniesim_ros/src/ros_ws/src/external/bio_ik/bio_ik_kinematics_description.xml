@@ -1,0 +1,6 @@
+<library path="bio_ik">
+    <class name="bio_ik/BioIKKinematicsPlugin" type="bio_ik_kinematics_plugin::BioIKKinematicsPlugin" base_class_type="kinematics::KinematicsBase">
+    </class>
+    <class name="genie_sim_moveit_plugins/BioIKPlugin" type="genie_sim_moveit_plugins::BioIKPlugin" base_class_type="kinematics::KinematicsBase">
+    </class>
+</library>

@@ -1,0 +1,11 @@
+<library path="genie_sim_moveit_plugins_planner_plugin">
+  <class name="genie_sim_moveit_plugins/GeniePlannerManager"
+         type="genie_sim_moveit_plugins::GeniePlannerManager"
+         base_class_type="planning_interface::PlannerManager">
+    <description>
+      Custom RRT-Connect planner with DP path simplification and TOPP-RA
+      time-optimal trajectory parameterization, ported from Agibot
+      motion-control.
+    </description>
+  </class>
+</library>

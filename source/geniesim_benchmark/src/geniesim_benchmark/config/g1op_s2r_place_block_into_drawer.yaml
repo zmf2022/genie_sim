@@ -1,0 +1,11 @@
+app:
+  enable_rate_limit: true
+  enable_ros: false
+benchmark:
+  num_episode: 5
+  task_name: drawer_task_g1_op
+  platform: g1_op
+  sub_task_name: place_block_into_drawer
+  seed: 1
+  model_arc: corobot
+  record: false

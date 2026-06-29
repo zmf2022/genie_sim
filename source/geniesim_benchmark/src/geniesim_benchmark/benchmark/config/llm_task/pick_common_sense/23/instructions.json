@@ -1,0 +1,62 @@
+{
+  "instructions": [
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 1,
+      "instruction": "I am very thirsty now, grasp an object that can quench thirst for me",
+      "target": {
+        "idn": "benchmark_beverage_bottle_019f97c4"
+      },
+      "template_key": "pick_common_sense"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 2,
+      "instruction": "I want to eat some fruit to supplement Vitamin C",
+      "target": {
+        "idn": "benchmark_orange_4206b21a"
+      },
+      "template_key": "pick_common_sense"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "right"
+        }
+      },
+      "id": 3,
+      "instruction": "I'm going to take notes at a meeting, prepare tools for me",
+      "target": {
+        "idn": "benchmark_pen_3cd65718"
+      },
+      "template_key": "pick_common_sense"
+    },
+    {
+      "gripper": {
+        "1": {
+          "handover": false,
+          "side": "left"
+        }
+      },
+      "id": 4,
+      "instruction": "Choose a toy for a child who likes planes",
+      "target": {
+        "idn": "benchmark_toy_plane_fb00725e"
+      },
+      "template_key": "pick_common_sense"
+    }
+  ],
+  "scene_id": "place_random_objects_on_desk",
+  "task_id": "pick_common_sense"
+}

@@ -1,0 +1,386 @@
+{
+  "layout": {
+    "benchmark_bottle_bd16c322": {
+      "description": {
+        "color": "light-green",
+        "descriptive_terms": [
+          "cylindrical",
+          "smooth",
+          "translucent",
+          "rounded",
+          "portable"
+        ],
+        "dimensions": [
+          0.07978935241699218,
+          0.1634049835205078,
+          0.07737431716918945
+        ],
+        "full_description": [
+          "A light green, cylindrical bottle with a black lid and band, featuring a glossy finish and minor surface markings."
+        ],
+        "materials": [
+          "plastic",
+          "glass"
+        ],
+        "object_category": [
+          "container",
+          "bottle"
+        ],
+        "semantic_name": [
+          "bottle"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "water bottle",
+        "benchmark_bottle_017",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_94f7f1f2",
+        "table_with_random_objects_0084bc20",
+        "place_random_objects_on_desk_5494c140",
+        "benchmark_bottle_bd16c322"
+      ],
+      "usd": "benchmark_bottle_017",
+      "xyz": [
+        -0.176,
+        0.153,
+        1.023
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.008335,
+        0.999965
+      ]
+    },
+    "benchmark_garage_kit_e7cd710f": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "cute",
+          "small",
+          "orange",
+          "detailed",
+          "playful"
+        ],
+        "dimensions": [
+          0.05908237838745117,
+          0.07324214172363282,
+          0.05124488067626953
+        ],
+        "full_description": [
+          "A small, yellow, dinosaur-like figurine with a red-tipped tail and white feet, appearing to be made of plastic or resin."
+        ],
+        "materials": [
+          "plastic",
+          "clay"
+        ],
+        "object_category": [
+          "Toy",
+          "Figurine"
+        ],
+        "semantic_name": [
+          "garage_kit"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "charmander figure",
+        "benchmark_garage_kit_064",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_94f7f1f2",
+        "table_with_random_objects_0084bc20",
+        "place_random_objects_on_desk_5494c140",
+        "benchmark_garage_kit_e7cd710f"
+      ],
+      "usd": "benchmark_garage_kit_064",
+      "xyz": [
+        0.11,
+        -0.123,
+        0.933
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.001943,
+        0.999998
+      ]
+    },
+    "benchmark_lemon_ae549af4": {
+      "description": {
+        "color": "yellow",
+        "descriptive_terms": [
+          "citrus",
+          "yellow",
+          "organic",
+          "fresh",
+          "juicy"
+        ],
+        "dimensions": [
+          0.0652875304222107,
+          0.08429359644651413,
+          0.06925402581691742
+        ],
+        "full_description": [
+          "A bright yellow, glossy, oval-shaped fruit with a small green stem nub."
+        ],
+        "materials": [
+          "fruit flesh",
+          "peel"
+        ],
+        "object_category": [
+          "food",
+          "citrus fruit"
+        ],
+        "semantic_name": [
+          "lemon"
+        ],
+        "shape": "irregular",
+        "unit": "m"
+      },
+      "keywords": [
+        "lemon",
+        "benchmark_lemon_030",
+        "on_desk",
+        "right"
+      ],
+      "tags": [
+        "root_scene_94f7f1f2",
+        "table_with_random_objects_0084bc20",
+        "place_random_objects_on_desk_5494c140",
+        "benchmark_lemon_ae549af4"
+      ],
+      "usd": "benchmark_lemon_030",
+      "xyz": [
+        0.022,
+        0.055,
+        0.944
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.112706,
+        0.993628
+      ]
+    },
+    "benchmark_toy_car_98c4bf1e": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "colorful",
+          "rounded",
+          "compact",
+          "playful"
+        ],
+        "dimensions": [
+          0.08492589569091798,
+          0.03287537384033203,
+          0.041361156463623046
+        ],
+        "full_description": [
+          "A small toy car with a black body, pink and green splotchy paint, and light green wheels."
+        ],
+        "materials": [
+          "plastic",
+          "rubber"
+        ],
+        "object_category": [
+          "vehicle",
+          "toy"
+        ],
+        "semantic_name": [
+          "toy_car"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy car",
+        "benchmark_toy_car_018",
+        "on_desk",
+        "left"
+      ],
+      "tags": [
+        "root_scene_94f7f1f2",
+        "table_with_random_objects_0084bc20",
+        "place_random_objects_on_desk_5494c140",
+        "benchmark_toy_car_98c4bf1e"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        -0.098,
+        -0.221,
+        0.893
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.075271,
+        0.997163
+      ]
+    },
+    "table_60c23299": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_94f7f1f2",
+        "table_with_random_objects_0084bc20",
+        "place_random_objects_on_desk_5494c140",
+        "table_60c23299"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_94f7f1f2",
+          "target": "table_with_random_objects_0084bc20"
+        },
+        {
+          "source": "table_with_random_objects_0084bc20",
+          "target": "place_random_objects_on_desk_5494c140"
+        },
+        {
+          "source": "place_random_objects_on_desk_5494c140",
+          "target": "table_60c23299"
+        },
+        {
+          "source": "place_random_objects_on_desk_5494c140",
+          "target": "benchmark_lemon_ae549af4"
+        },
+        {
+          "source": "place_random_objects_on_desk_5494c140",
+          "target": "benchmark_toy_car_98c4bf1e"
+        },
+        {
+          "source": "place_random_objects_on_desk_5494c140",
+          "target": "benchmark_bottle_bd16c322"
+        },
+        {
+          "source": "place_random_objects_on_desk_5494c140",
+          "target": "benchmark_garage_kit_e7cd710f"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_94f7f1f2"
+        },
+        {
+          "id": "table_with_random_objects_0084bc20"
+        },
+        {
+          "id": "place_random_objects_on_desk_5494c140"
+        },
+        {
+          "id": "table_60c23299",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "benchmark_lemon_ae549af4",
+          "tags": [
+            "lemon",
+            "benchmark_lemon_030",
+            "on_desk",
+            "right"
+          ]
+        },
+        {
+          "id": "benchmark_toy_car_98c4bf1e",
+          "tags": [
+            "toy car",
+            "benchmark_toy_car_018",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_bottle_bd16c322",
+          "tags": [
+            "water bottle",
+            "benchmark_bottle_017",
+            "on_desk",
+            "left"
+          ]
+        },
+        {
+          "id": "benchmark_garage_kit_e7cd710f",
+          "tags": [
+            "charmander figure",
+            "benchmark_garage_kit_064",
+            "on_desk",
+            "right"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "table_with_random_objects",
+  "seed": 2366732785
+}

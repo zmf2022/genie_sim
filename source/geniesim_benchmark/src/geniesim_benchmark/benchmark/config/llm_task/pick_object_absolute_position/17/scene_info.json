@@ -1,0 +1,498 @@
+{
+  "layout": {
+    "benchmark_peach_086642c6": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "round",
+          "ripe",
+          "juicy",
+          "fuzzy",
+          "organic"
+        ],
+        "dimensions": [
+          0.0926,
+          0.0916,
+          0.0869
+        ],
+        "full_description": [
+          "A round, fuzzy peach with a gradient of red and yellow skin."
+        ],
+        "materials": [
+          "flesh",
+          "skin"
+        ],
+        "object_category": [
+          "fruit",
+          "stone fruit"
+        ],
+        "semantic_name": [
+          "peach"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "peach",
+        "object",
+        "peach",
+        "\u6843\u5b50"
+      ],
+      "tags": [
+        "root_scene_66116ef1",
+        "pick_object_relative_position_5a295d02",
+        "place_objects_on_table_8faa193e",
+        "create_tabletop_object_926f0fde",
+        "benchmark_peach_086642c6"
+      ],
+      "usd": "benchmark_peach_021",
+      "xyz": [
+        0.1406574975297081,
+        -0.0055735440579400995,
+        0.8109999999999892
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.73722714,
+        0.675645
+      ]
+    },
+    "benchmark_toy_car_2ab692f9": {
+      "description": {
+        "color": "orange",
+        "descriptive_terms": [
+          "cute",
+          "small",
+          "orange",
+          "detailed",
+          "playful"
+        ],
+        "dimensions": [
+          0.05908237838745117,
+          0.07324214172363282,
+          0.05124488067626953
+        ],
+        "full_description": [
+          "A small, yellow, dinosaur-like figurine with a red-tipped tail and white feet, appearing to be made of plastic or resin."
+        ],
+        "materials": [
+          "plastic",
+          "clay"
+        ],
+        "object_category": [
+          "Toy",
+          "Figurine"
+        ],
+        "semantic_name": [
+          "garage_kit"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "charmander_figure",
+        "object",
+        "charmander figure",
+        "\u5c0f\u706b\u9f99\u6446\u4ef6"
+      ],
+      "tags": [
+        "root_scene_66116ef1",
+        "pick_object_relative_position_5a295d02",
+        "place_objects_on_table_8faa193e",
+        "create_tabletop_object_0865022f",
+        "benchmark_garage_kit_2ab692f9"
+      ],
+      "usd": "benchmark_toy_car_018",
+      "xyz": [
+        -0.043925596248951926,
+        -0.2795902358190041,
+        0.8019999999999762
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.34743786,
+        0.937703
+      ]
+    },
+    "benchmark_toy_plane_982ce031": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "aerodynamic",
+          "detailed",
+          "colorful",
+          "realistic"
+        ],
+        "dimensions": [
+          0.13626107788085937,
+          0.05548237991333008,
+          0.12746756744384766
+        ],
+        "full_description": [
+          "A white toy airplane with blue tail and wingtips, featuring four engines and visible landing gear."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "vehicle",
+          "aircraft"
+        ],
+        "semantic_name": [
+          "toy_plane"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy_plane",
+        "object",
+        "toy plane",
+        "\u73a9\u5177\u98de\u673a",
+        "target"
+      ],
+      "tags": [
+        "root_scene_66116ef1",
+        "pick_object_relative_position_5a295d02",
+        "place_objects_on_table_8faa193e",
+        "create_tabletop_object_dad22f1d",
+        "benchmark_toy_plane_982ce031"
+      ],
+      "usd": "benchmark_toy_plane_029",
+      "xyz": [
+        0.11610400583532435,
+        -0.21604383706837876,
+        0.792999999999996
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.97873724,
+        0.205118
+      ]
+    },
+    "benchmark_toy_plane_c9b0a3d2": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "miniature",
+          "aerodynamic",
+          "detailed",
+          "colorful",
+          "realistic"
+        ],
+        "dimensions": [
+          0.13626107788085937,
+          0.05548237991333008,
+          0.12746756744384766
+        ],
+        "full_description": [
+          "A white toy airplane with blue tail and wingtips, featuring four engines and visible landing gear."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "vehicle",
+          "aircraft"
+        ],
+        "semantic_name": [
+          "toy_plane"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "toy_plane",
+        "object",
+        "toy plane",
+        "\u73a9\u5177\u98de\u673a",
+        "target"
+      ],
+      "tags": [
+        "root_scene_66116ef1",
+        "pick_object_relative_position_5a295d02",
+        "place_objects_on_table_8faa193e",
+        "create_tabletop_object_fcc27b00",
+        "benchmark_toy_plane_c9b0a3d2"
+      ],
+      "usd": "benchmark_toy_plane_029",
+      "xyz": [
+        -0.079,
+        0.009,
+        0.793
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.609318,
+        0.792926
+      ]
+    },
+    "genie_beverage_bottle_108526a1": {
+      "description": {
+        "color": "black",
+        "descriptive_terms": [
+          "cylindrical",
+          "black",
+          "plastic",
+          "packaged",
+          "beverage"
+        ],
+        "dimensions": [
+          0.04871850088238716,
+          0.16691981256008148,
+          0.05984169989824295
+        ],
+        "full_description": [
+          "A black plastic beverage bottle with a white cap and a label featuring red grapes and Chinese text."
+        ],
+        "materials": [
+          "plastic",
+          "label"
+        ],
+        "object_category": [
+          "container",
+          "beverage"
+        ],
+        "semantic_name": [
+          "beverage_bottle"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "grape_juice",
+        "object",
+        "grape juice",
+        "\u8461\u8404\u6c41"
+      ],
+      "tags": [
+        "root_scene_66116ef1",
+        "pick_object_relative_position_5a295d02",
+        "place_objects_on_table_8faa193e",
+        "create_tabletop_object_4c5f9ac7",
+        "genie_beverage_bottle_108526a1"
+      ],
+      "usd": "genie_beverage_bottle_009",
+      "xyz": [
+        0.134,
+        0.241,
+        0.851
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.884541,
+        -0.466462
+      ]
+    },
+    "table_690c5241": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_66116ef1",
+        "pick_object_relative_position_5a295d02",
+        "place_objects_on_table_8faa193e",
+        "table_690c5241"
+      ],
+      "usd": "benchmark_table_019",
+      "xyz": [
+        0.0,
+        0.0,
+        0.265
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "edges": [
+        {
+          "source": "root_scene_66116ef1",
+          "target": "pick_object_relative_position_5a295d02"
+        },
+        {
+          "source": "pick_object_relative_position_5a295d02",
+          "target": "place_objects_on_table_8faa193e"
+        },
+        {
+          "source": "place_objects_on_table_8faa193e",
+          "target": "table_690c5241"
+        },
+        {
+          "source": "place_objects_on_table_8faa193e",
+          "target": "create_tabletop_object_dad22f1d"
+        },
+        {
+          "source": "place_objects_on_table_8faa193e",
+          "target": "create_tabletop_object_fcc27b00"
+        },
+        {
+          "source": "place_objects_on_table_8faa193e",
+          "target": "create_tabletop_object_4c5f9ac7"
+        },
+        {
+          "source": "place_objects_on_table_8faa193e",
+          "target": "create_tabletop_object_0865022f"
+        },
+        {
+          "source": "place_objects_on_table_8faa193e",
+          "target": "create_tabletop_object_926f0fde"
+        },
+        {
+          "source": "create_tabletop_object_dad22f1d",
+          "target": "benchmark_toy_plane_982ce031"
+        },
+        {
+          "source": "create_tabletop_object_fcc27b00",
+          "target": "benchmark_toy_plane_c9b0a3d2"
+        },
+        {
+          "source": "create_tabletop_object_4c5f9ac7",
+          "target": "genie_beverage_bottle_108526a1"
+        },
+        {
+          "source": "create_tabletop_object_0865022f",
+          "target": "benchmark_garage_kit_2ab692f9"
+        },
+        {
+          "source": "create_tabletop_object_926f0fde",
+          "target": "benchmark_peach_086642c6"
+        }
+      ],
+      "graph": {
+        "rankdir": "LR"
+      },
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_66116ef1"
+        },
+        {
+          "id": "pick_object_relative_position_5a295d02"
+        },
+        {
+          "id": "place_objects_on_table_8faa193e"
+        },
+        {
+          "id": "table_690c5241",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_dad22f1d"
+        },
+        {
+          "id": "benchmark_toy_plane_982ce031",
+          "tags": [
+            "toy_plane",
+            "object",
+            "toy plane",
+            "\u73a9\u5177\u98de\u673a",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_fcc27b00"
+        },
+        {
+          "id": "benchmark_toy_plane_c9b0a3d2",
+          "tags": [
+            "toy_plane",
+            "object",
+            "toy plane",
+            "\u73a9\u5177\u98de\u673a",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_4c5f9ac7"
+        },
+        {
+          "id": "genie_beverage_bottle_108526a1",
+          "tags": [
+            "grape_juice",
+            "object",
+            "grape juice",
+            "\u8461\u8404\u6c41"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_0865022f"
+        },
+        {
+          "id": "benchmark_garage_kit_2ab692f9",
+          "tags": [
+            "charmander_figure",
+            "object",
+            "charmander figure",
+            "\u5c0f\u706b\u9f99\u6446\u4ef6"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_926f0fde"
+        },
+        {
+          "id": "benchmark_peach_086642c6",
+          "tags": [
+            "peach",
+            "object",
+            "peach",
+            "\u6843\u5b50"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 109050030
+}

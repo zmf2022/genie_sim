@@ -1,0 +1,63 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Inside": "sft_pen_03952059|iros_pen_cup_49a7fdc9|1.2"
+              },
+              {
+                "StepOut": 600
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "PushPull": "benchmark_laptop_cc6943dd|1.5708|2.0944"
+              },
+              {
+                "StepOut": 600
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "Inside": "iros_crumpled_paper_0185d234|benchmark_trash_can_e869e921|1.2"
+              },
+              {
+                "StepOut": 600
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "RelativePosition": "benchmark_mouse_8c05ce5b|benchmark_laptop_cc6943dd|rightof"
+              },
+              {
+                "StepOut": 600
+              }
+            ]
+          },
+          {
+            "ActionSetWaitAny": [
+              {
+                "Upright": "sft_pen_0888a612|5.0|true"
+              },
+              {
+                "StepOut": 300
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "clean_the_desktop"
+  }
+}

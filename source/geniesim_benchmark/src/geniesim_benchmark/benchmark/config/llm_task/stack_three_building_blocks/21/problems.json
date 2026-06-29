@@ -1,0 +1,32 @@
+{
+  "problem1": {
+    "Acts": [
+      {
+        "ActionList": [
+          {
+            "ActionSetWaitAny": [
+              {
+                "Stack": "[benchmark_building_blocks_fa41e183,benchmark_building_blocks_994b6e7a,benchmark_building_blocks_e69d23a4]|[0.03,0.03]"
+              },
+              {
+                "Onfloor": "benchmark_building_blocks_994b6e7a|0"
+              },
+              {
+                "Onfloor": "benchmark_building_blocks_e69d23a4|0"
+              },
+              {
+                "Onfloor": "benchmark_building_blocks_fa41e183|0"
+              },
+              {
+                "StepOut": 1500
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Init": [],
+    "Objects": [],
+    "Problem": "stack_three_building_blocks"
+  }
+}

@@ -1,0 +1,496 @@
+{
+  "layout": {
+    "benchmark_beverage_bottle_c7538202": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "cylindrical",
+          "red",
+          "metallic",
+          "beverage",
+          "portable"
+        ],
+        "dimensions": [
+          0.06459999829530716,
+          0.11520000547170639,
+          0.06460000947117805
+        ],
+        "full_description": [
+          "A red aluminum beverage can with white 'Coca-Cola' script logo and Chinese characters on its surface."
+        ],
+        "materials": [
+          "metal",
+          "plastic"
+        ],
+        "object_category": [
+          "container",
+          "beverage can"
+        ],
+        "semantic_name": [
+          "Coca-Cola can"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "coke_cola",
+        "object",
+        "coke cola",
+        "\u53ef\u53e3\u53ef\u4e50"
+      ],
+      "tags": [
+        "root_scene_312bde34",
+        "pick_object_relative_position_b5d1ace8",
+        "place_objects_on_table_e9ce4339",
+        "create_tabletop_object_e7ade19b",
+        "benchmark_beverage_bottle_c7538202"
+      ],
+      "usd": "benchmark_beverage_bottle_001",
+      "xyz": [
+        0.069,
+        -0.237,
+        0.789
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.035708,
+        0.999362
+      ]
+    },
+    "benchmark_building_blocks_b8ef265a": {
+      "description": {
+        "color": "red",
+        "descriptive_terms": [
+          "small",
+          "red",
+          "cubic",
+          "simple",
+          "solid"
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          0.03
+        ],
+        "full_description": [
+          "A small, solid red cube with a matte finish."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "toy",
+          "building_block"
+        ],
+        "semantic_name": [
+          "building_blocks"
+        ],
+        "shape": "cube",
+        "unit": "m"
+      },
+      "keywords": [
+        "building_blocks",
+        "object",
+        "building blocks",
+        "\u79ef\u6728"
+      ],
+      "tags": [
+        "root_scene_312bde34",
+        "pick_object_relative_position_b5d1ace8",
+        "place_objects_on_table_e9ce4339",
+        "create_tabletop_object_3cbd2698",
+        "benchmark_building_blocks_b8ef265a"
+      ],
+      "usd": "benchmark_building_blocks_072",
+      "xyz": [
+        0.182,
+        0.152,
+        0.747
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.614357,
+        0.789028
+      ]
+    },
+    "benchmark_cup_c84f861b": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "cylindrical",
+          "white",
+          "simple",
+          "printed",
+          "small"
+        ],
+        "dimensions": [
+          0.0634383037686348,
+          0.07829996943473816,
+          0.06343957036733627
+        ],
+        "full_description": [
+          "A white paper cup with a black line-drawn pattern and yellow accents depicting household items."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "kitchenware",
+          "drinking vessel"
+        ],
+        "semantic_name": [
+          "cup"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "paper_cup",
+        "object",
+        "paper cup",
+        "\u7eb8\u676f",
+        "target"
+      ],
+      "tags": [
+        "root_scene_312bde34",
+        "pick_object_relative_position_b5d1ace8",
+        "place_objects_on_table_e9ce4339",
+        "create_tabletop_object_3290ba7a",
+        "benchmark_cup_c84f861b"
+      ],
+      "usd": "benchmark_cup_105",
+      "xyz": [
+        -0.019,
+        0.064,
+        0.771
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.235575,
+        0.971856
+      ]
+    },
+    "benchmark_cup_e020d9f4": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "cylindrical",
+          "white",
+          "simple",
+          "printed",
+          "small"
+        ],
+        "dimensions": [
+          0.0634383037686348,
+          0.07829996943473816,
+          0.06343957036733627
+        ],
+        "full_description": [
+          "A white paper cup with a black line-drawn pattern and yellow accents depicting household items."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "kitchenware",
+          "drinking vessel"
+        ],
+        "semantic_name": [
+          "cup"
+        ],
+        "shape": "cylindrical",
+        "unit": "m"
+      },
+      "keywords": [
+        "paper_cup",
+        "object",
+        "paper cup",
+        "\u7eb8\u676f",
+        "target"
+      ],
+      "tags": [
+        "root_scene_312bde34",
+        "pick_object_relative_position_b5d1ace8",
+        "place_objects_on_table_e9ce4339",
+        "create_tabletop_object_66d9d61d",
+        "benchmark_cup_e020d9f4"
+      ],
+      "usd": "benchmark_cup_105",
+      "xyz": [
+        -0.073,
+        -0.104,
+        0.771
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.820395,
+        0.571797
+      ]
+    },
+    "benchmark_rubik_cube_85e10654": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "colorful",
+          "complex",
+          "geometric",
+          "small",
+          "plastic"
+        ],
+        "dimensions": [
+          0.057,
+          0.057,
+          0.057
+        ],
+        "full_description": [
+          "A 3x3 Rubik's cube with pastel-colored faces including yellow, pink, and cyan on a black background."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "puzzle",
+          "toy"
+        ],
+        "semantic_name": [
+          "rubik_cube"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "rubik_cube",
+        "object",
+        "rubik cube",
+        "\u9b54\u65b9"
+      ],
+      "tags": [
+        "root_scene_312bde34",
+        "pick_object_relative_position_b5d1ace8",
+        "place_objects_on_table_e9ce4339",
+        "create_tabletop_object_75f44256",
+        "benchmark_rubik_cube_85e10654"
+      ],
+      "usd": "benchmark_rubik_cube_001",
+      "xyz": [
+        0.019,
+        0.221,
+        0.768
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        -0.588514,
+        0.808487
+      ]
+    },
+    "table_1910758b": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_312bde34",
+        "pick_object_relative_position_b5d1ace8",
+        "place_objects_on_table_e9ce4339",
+        "table_1910758b"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_312bde34",
+          "target": "pick_object_relative_position_b5d1ace8"
+        },
+        {
+          "source": "pick_object_relative_position_b5d1ace8",
+          "target": "place_objects_on_table_e9ce4339"
+        },
+        {
+          "source": "place_objects_on_table_e9ce4339",
+          "target": "table_1910758b"
+        },
+        {
+          "source": "place_objects_on_table_e9ce4339",
+          "target": "create_tabletop_object_66d9d61d"
+        },
+        {
+          "source": "place_objects_on_table_e9ce4339",
+          "target": "create_tabletop_object_3290ba7a"
+        },
+        {
+          "source": "place_objects_on_table_e9ce4339",
+          "target": "create_tabletop_object_75f44256"
+        },
+        {
+          "source": "place_objects_on_table_e9ce4339",
+          "target": "create_tabletop_object_e7ade19b"
+        },
+        {
+          "source": "place_objects_on_table_e9ce4339",
+          "target": "create_tabletop_object_3cbd2698"
+        },
+        {
+          "source": "create_tabletop_object_66d9d61d",
+          "target": "benchmark_cup_e020d9f4"
+        },
+        {
+          "source": "create_tabletop_object_3290ba7a",
+          "target": "benchmark_cup_c84f861b"
+        },
+        {
+          "source": "create_tabletop_object_75f44256",
+          "target": "benchmark_rubik_cube_85e10654"
+        },
+        {
+          "source": "create_tabletop_object_e7ade19b",
+          "target": "benchmark_beverage_bottle_c7538202"
+        },
+        {
+          "source": "create_tabletop_object_3cbd2698",
+          "target": "benchmark_building_blocks_b8ef265a"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_312bde34"
+        },
+        {
+          "id": "pick_object_relative_position_b5d1ace8"
+        },
+        {
+          "id": "place_objects_on_table_e9ce4339"
+        },
+        {
+          "id": "table_1910758b",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_66d9d61d"
+        },
+        {
+          "id": "benchmark_cup_e020d9f4",
+          "tags": [
+            "paper_cup",
+            "object",
+            "paper cup",
+            "\u7eb8\u676f",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_3290ba7a"
+        },
+        {
+          "id": "benchmark_cup_c84f861b",
+          "tags": [
+            "paper_cup",
+            "object",
+            "paper cup",
+            "\u7eb8\u676f",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_75f44256"
+        },
+        {
+          "id": "benchmark_rubik_cube_85e10654",
+          "tags": [
+            "rubik_cube",
+            "object",
+            "rubik cube",
+            "\u9b54\u65b9"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_e7ade19b"
+        },
+        {
+          "id": "benchmark_beverage_bottle_c7538202",
+          "tags": [
+            "coke_cola",
+            "object",
+            "coke cola",
+            "\u53ef\u53e3\u53ef\u4e50"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_3cbd2698"
+        },
+        {
+          "id": "benchmark_building_blocks_b8ef265a",
+          "tags": [
+            "building_blocks",
+            "object",
+            "building blocks",
+            "\u79ef\u6728"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 1038527936
+}

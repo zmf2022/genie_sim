@@ -1,0 +1,341 @@
+{
+  "layout": {
+    "benchmark_clock_4aeb0214": {
+      "description": {
+        "color": "pink",
+        "descriptive_terms": [
+          "circular",
+          "compact",
+          "decorative",
+          "vintage",
+          "playful"
+        ],
+        "dimensions": [
+          0.08173294067382812,
+          0.13982281494140625,
+          0.13057781982421876
+        ],
+        "full_description": [
+          "A pink, pig-shaped alarm clock with a white face, black numbers, and two small ears on top."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "timepiece",
+          "analog clock"
+        ],
+        "semantic_name": [
+          "clock"
+        ],
+        "shape": "rounded",
+        "unit": "m"
+      },
+      "keywords": [
+        "clock",
+        "object",
+        "clock",
+        "\u95f9\u949f",
+        "target"
+      ],
+      "tags": [
+        "root_scene_92584e5c",
+        "pick_object_relative_position_7ae4d4e1",
+        "place_objects_on_table_cd87873b",
+        "create_tabletop_object_a1b306a5",
+        "benchmark_clock_4aeb0214"
+      ],
+      "usd": "benchmark_clock_044",
+      "xyz": [
+        0.024,
+        0.187,
+        0.802
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.83412,
+        -0.551583
+      ]
+    },
+    "benchmark_clock_71cab757": {
+      "description": {
+        "color": "pink",
+        "descriptive_terms": [
+          "circular",
+          "compact",
+          "decorative",
+          "vintage",
+          "playful"
+        ],
+        "dimensions": [
+          0.08173294067382812,
+          0.13982281494140625,
+          0.13057781982421876
+        ],
+        "full_description": [
+          "A pink, pig-shaped alarm clock with a white face, black numbers, and two small ears on top."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "timepiece",
+          "analog clock"
+        ],
+        "semantic_name": [
+          "clock"
+        ],
+        "shape": "rounded",
+        "unit": "m"
+      },
+      "keywords": [
+        "clock",
+        "object",
+        "clock",
+        "\u95f9\u949f",
+        "target"
+      ],
+      "tags": [
+        "root_scene_92584e5c",
+        "pick_object_relative_position_7ae4d4e1",
+        "place_objects_on_table_cd87873b",
+        "create_tabletop_object_60d958f4",
+        "benchmark_clock_71cab757"
+      ],
+      "usd": "benchmark_clock_044",
+      "xyz": [
+        -0.033,
+        -0.216,
+        0.802
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.990165,
+        -0.139903
+      ]
+    },
+    "benchmark_rubik_cube_8b208263": {
+      "description": {
+        "color": "colorful",
+        "descriptive_terms": [
+          "colorful",
+          "complex",
+          "geometric",
+          "small",
+          "plastic"
+        ],
+        "dimensions": [
+          0.057,
+          0.057,
+          0.057
+        ],
+        "full_description": [
+          "A 3x3 Rubik's cube with pastel-colored faces including yellow, pink, and cyan on a black background."
+        ],
+        "materials": [
+          "plastic"
+        ],
+        "object_category": [
+          "puzzle",
+          "toy"
+        ],
+        "semantic_name": [
+          "rubik_cube"
+        ],
+        "shape": "complex-shaped",
+        "unit": "m"
+      },
+      "keywords": [
+        "rubik_cube",
+        "object",
+        "rubik cube",
+        "\u9b54\u65b9"
+      ],
+      "tags": [
+        "root_scene_92584e5c",
+        "pick_object_relative_position_7ae4d4e1",
+        "place_objects_on_table_cd87873b",
+        "create_tabletop_object_df2c7be4",
+        "benchmark_rubik_cube_8b208263"
+      ],
+      "usd": "benchmark_rubik_cube_001",
+      "xyz": [
+        0.178,
+        -0.161,
+        0.76
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.921144,
+        -0.389223
+      ]
+    },
+    "table_bd029f3b": {
+      "description": {
+        "color": "white",
+        "descriptive_terms": [
+          "simple",
+          "modern",
+          "compact",
+          "stable",
+          "functional"
+        ],
+        "dimensions": [
+          0.1687,
+          0.0668,
+          0.0668
+        ],
+        "full_description": [
+          "A white rectangular table with a flat top and four slender legs, viewed from multiple angles."
+        ],
+        "materials": [
+          "plastic",
+          "metal"
+        ],
+        "object_category": [
+          "furniture",
+          "table"
+        ],
+        "semantic_name": [
+          "table"
+        ],
+        "shape": "rectangular",
+        "unit": "m"
+      },
+      "keywords": [
+        "workspace_table",
+        "table",
+        "white",
+        "desktop_with_legs"
+      ],
+      "tags": [
+        "root_scene_92584e5c",
+        "pick_object_relative_position_7ae4d4e1",
+        "place_objects_on_table_cd87873b",
+        "table_bd029f3b"
+      ],
+      "usd": "table_000",
+      "xyz": [
+        0.0,
+        0.0,
+        0.367
+      ],
+      "xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "relations": {
+    "graph": {
+      "directed": true,
+      "graph": {
+        "rankdir": "LR"
+      },
+      "links": [
+        {
+          "source": "root_scene_92584e5c",
+          "target": "pick_object_relative_position_7ae4d4e1"
+        },
+        {
+          "source": "pick_object_relative_position_7ae4d4e1",
+          "target": "place_objects_on_table_cd87873b"
+        },
+        {
+          "source": "place_objects_on_table_cd87873b",
+          "target": "table_bd029f3b"
+        },
+        {
+          "source": "place_objects_on_table_cd87873b",
+          "target": "create_tabletop_object_a1b306a5"
+        },
+        {
+          "source": "place_objects_on_table_cd87873b",
+          "target": "create_tabletop_object_60d958f4"
+        },
+        {
+          "source": "place_objects_on_table_cd87873b",
+          "target": "create_tabletop_object_df2c7be4"
+        },
+        {
+          "source": "create_tabletop_object_a1b306a5",
+          "target": "benchmark_clock_4aeb0214"
+        },
+        {
+          "source": "create_tabletop_object_60d958f4",
+          "target": "benchmark_clock_71cab757"
+        },
+        {
+          "source": "create_tabletop_object_df2c7be4",
+          "target": "benchmark_rubik_cube_8b208263"
+        }
+      ],
+      "multigraph": false,
+      "nodes": [
+        {
+          "id": "root_scene_92584e5c"
+        },
+        {
+          "id": "pick_object_relative_position_7ae4d4e1"
+        },
+        {
+          "id": "place_objects_on_table_cd87873b"
+        },
+        {
+          "id": "table_bd029f3b",
+          "tags": [
+            "workspace_table",
+            "table",
+            "white",
+            "desktop_with_legs"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_a1b306a5"
+        },
+        {
+          "id": "benchmark_clock_4aeb0214",
+          "tags": [
+            "clock",
+            "object",
+            "clock",
+            "\u95f9\u949f",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_60d958f4"
+        },
+        {
+          "id": "benchmark_clock_71cab757",
+          "tags": [
+            "clock",
+            "object",
+            "clock",
+            "\u95f9\u949f",
+            "target"
+          ]
+        },
+        {
+          "id": "create_tabletop_object_df2c7be4"
+        },
+        {
+          "id": "benchmark_rubik_cube_8b208263",
+          "tags": [
+            "rubik_cube",
+            "object",
+            "rubik cube",
+            "\u9b54\u65b9"
+          ]
+        }
+      ]
+    }
+  },
+  "scene_id": "pick_object_relative_position",
+  "seed": 1381094292
+}

@@ -1,0 +1,207 @@
+# joint_limits.yaml allows the dynamics properties specified in the URDF to be overwritten or augmented as needed
+
+# For beginners, we downscale velocity and acceleration limits.
+# You can always specify higher scaling factors (<= 1.0) in your motion requests.  # Increase the values below to 1.0 to always move at maximum speed.
+#
+# We've raised these from the conservative 0.1 default to 1.0 because the
+# per-joint max_velocity / max_acceleration values below are already
+# conservative (0.5 m/s and 1.0 rad/s for the chassis, which is what the
+# 4WS PlanarBaseController can actually track).  Stacking another 10x
+# down-scaling on top makes chassis motion glacial (5 cm/s) and provides
+# no safety benefit.  Application code can still pass an explicit
+# max_velocity_scaling_factor < 1.0 in the planning request when slower
+# motion is desired (e.g. for delicate manipulation).
+default_velocity_scaling_factor: 1.0
+default_acceleration_scaling_factor: 1.0
+
+# Specific joint properties can be changed with the keys [max_position, min_position, max_velocity, max_acceleration]
+# Joint limits can be turned off with [has_velocity_limits, has_acceleration_limits]
+#
+# NOTE: MoveIt's AddTimeOptimalParameterization adapter (default TOTG) REQUIRES
+# a positive max_acceleration on every active joint of the planning group, even
+# when has_acceleration_limits is false. Set both flags true and provide a
+# physically sensible cap — values are tuned so each joint reaches its v_max in
+# roughly 0.5 s (a_max ~= 2 * v_max), which matches a typical industrial-arm
+# acceleration envelope.
+joint_limits:
+  # Planar virtual_joint sub-DoFs (SRDF: <virtual_joint name="planar_joint"
+  # type="planar" parent_frame="odom" child_link="base_footprint"/>).  MoveIt 2
+  # exposes three sub-variables: planar_joint/x, planar_joint/y,
+  # planar_joint/theta.
+  #
+  # IMPORTANT: keep these velocity / acceleration caps in sync with
+  # ros2_controllers.yaml -> chassis_controller's max_linear_speed /
+  # max_angular_speed.  If MoveIt plans a velocity profile faster than
+  # the controller can execute, the base falls behind the RViz preview
+  # by `(planned_v - executable_v) * t`, then PlanarBaseController's
+  # P-feedback saturates trying to catch up, producing overshoot at
+  # segment ends.  Conservative envelope: 0.5 m/s linear,
+  # 1.0 rad/s yaw, 1.0 m/s^2 linear accel, 1.5 rad/s^2 yaw accel.
+  planar_joint/x:
+    has_position_limits: true
+    min_position: -100.0
+    max_position: 100.0
+    has_velocity_limits: true
+    max_velocity: 0.5
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  planar_joint/y:
+    has_position_limits: true
+    min_position: -100.0
+    max_position: 100.0
+    has_velocity_limits: true
+    max_velocity: 0.5
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  planar_joint/theta:
+    # MoveIt rejects ANY position bounds on a planar joint's orientation
+    # ("Cannot specify position limits for orientation of planar joint
+    # 'planar_joint'") even when ``has_position_limits: false`` -- the
+    # robot_model_loader scans for the keys and errors on their presence.
+    # Leave only velocity / acceleration; theta is unbounded by definition
+    # (mobile base can yaw freely).
+    has_position_limits: false
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.5
+
+  # Passive prismatic Z joint injected by genie.urdf.xacro to communicate
+  # the chassis's live ride height to MoveIt's RobotState.  Position bounds
+  # match the URDF declaration (0..0.5 m); velocity / accel caps exist
+  # only because TOTG refuses to time-parameterise an unbounded joint.
+  # The chassis controller never drives this joint -- its value is sourced
+  # from /joint_states (synthesised simulator-side from body_q[base_link].z).
+  base_footprint_to_base_link:
+    has_position_limits: true
+    min_position: 0.0
+    max_position: 0.5
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+
+  # ----- Body (waist + torso, 5 DoF) -----
+  idx01_body_joint1:
+    has_velocity_limits: true
+    max_velocity: 1.21
+    has_acceleration_limits: true
+    max_acceleration: 2.5
+  idx02_body_joint2:
+    has_velocity_limits: true
+    max_velocity: 1.21
+    has_acceleration_limits: true
+    max_acceleration: 2.5
+  idx03_body_joint3:
+    has_velocity_limits: true
+    max_velocity: 1.21
+    has_acceleration_limits: true
+    max_acceleration: 2.5
+  idx04_body_joint4:
+    has_velocity_limits: true
+    max_velocity: 1.21
+    has_acceleration_limits: true
+    max_acceleration: 2.5
+  idx05_body_joint5:
+    has_velocity_limits: true
+    max_velocity: 1.21
+    has_acceleration_limits: true
+    max_acceleration: 2.5
+
+  # ----- Left arm (7 DoF) -----
+  idx21_arm_l_joint1:
+    has_velocity_limits: true
+    max_velocity: 3.05
+    has_acceleration_limits: true
+    max_acceleration: 6.0
+  idx22_arm_l_joint2:
+    has_velocity_limits: true
+    max_velocity: 3.05
+    has_acceleration_limits: true
+    max_acceleration: 6.0
+  idx23_arm_l_joint3:
+    has_velocity_limits: true
+    max_velocity: 3.76
+    has_acceleration_limits: true
+    max_acceleration: 7.5
+  idx24_arm_l_joint4:
+    has_velocity_limits: true
+    max_velocity: 3.76
+    has_acceleration_limits: true
+    max_acceleration: 7.5
+  idx25_arm_l_joint5:
+    has_velocity_limits: true
+    max_velocity: 3.35
+    has_acceleration_limits: true
+    max_acceleration: 7.0
+  idx26_arm_l_joint6:
+    has_velocity_limits: true
+    max_velocity: 3.35
+    has_acceleration_limits: true
+    max_acceleration: 7.0
+  idx27_arm_l_joint7:
+    has_velocity_limits: true
+    max_velocity: 3.35
+    has_acceleration_limits: true
+    max_acceleration: 7.0
+
+  # ----- Left gripper (1 active + 1 mimic passive) -----
+  idx31_gripper_l_inner_joint1:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 5.0
+  idx32_gripper_l_outer_joint1:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 5.0
+
+  # ----- Right arm (7 DoF) -----
+  idx61_arm_r_joint1:
+    has_velocity_limits: true
+    max_velocity: 3.05
+    has_acceleration_limits: true
+    max_acceleration: 6.0
+  idx62_arm_r_joint2:
+    has_velocity_limits: true
+    max_velocity: 3.05
+    has_acceleration_limits: true
+    max_acceleration: 6.0
+  idx63_arm_r_joint3:
+    has_velocity_limits: true
+    max_velocity: 3.76
+    has_acceleration_limits: true
+    max_acceleration: 7.5
+  idx64_arm_r_joint4:
+    has_velocity_limits: true
+    max_velocity: 3.76
+    has_acceleration_limits: true
+    max_acceleration: 7.5
+  idx65_arm_r_joint5:
+    has_velocity_limits: true
+    max_velocity: 3.35
+    has_acceleration_limits: true
+    max_acceleration: 7.0
+  idx66_arm_r_joint6:
+    has_velocity_limits: true
+    max_velocity: 3.35
+    has_acceleration_limits: true
+    max_acceleration: 7.0
+  idx67_arm_r_joint7:
+    has_velocity_limits: true
+    max_velocity: 3.35
+    has_acceleration_limits: true
+    max_acceleration: 7.0
+
+  # ----- Right gripper (1 active + 1 mimic passive) -----
+  idx71_gripper_r_inner_joint1:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 5.0
+  idx72_gripper_r_outer_joint1:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 5.0
