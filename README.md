@@ -419,9 +419,9 @@ Baseline model repositories:
 | Recognize Size          |               **0.93**                |                  0.75                   |                **0.94**                 |                   0.75                    |
 | Grasp Targets           |               **0.72**                |                  0.54                   |                **0.71**                 |                   0.58                    |
 | Organize Items          |               **0.48**                |                  0.45                   |                **0.60**                 |                   0.40                    |
-| Pack in Supermarket     |               **0.94**                |                **1.00**                 |                **0.95**                 |                 **0.95**                  |
+| Pack in Supermarket     |                 0.94                  |                **1.00**                 |                **0.95**                 |                 **0.95**                  |
 | Sort Fruit              |               **0.90**                |                **0.90**                 |                **1.00**                 |                 **1.00**                  |
-| Place Block into Drawer |               **0.80**                |                **0.90**                 |                **0.85**                 |                 **0.90**                  |
+| Place Block into Drawer |                 0.80                  |                **0.90**                 |                  0.85                   |                 **0.90**                  |
 | Bimanual Chip Handover  |               **0.80**                |                  0.70                   |                **0.73**                 |                   0.71                    |
 | **Avg.**                |               **0.80**                |                  0.75                   |                **0.83**                 |                   0.75                    |
 
