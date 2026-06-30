@@ -10,6 +10,16 @@ VALID_SUITES=(
     "sim2real"
 )
 
+# Remote subdir under task_suite/ for a suite (defaults to the suite name).
+# The instruction and robust boards share one published dataset, exposed on
+# ModelScope as task_suite/instruction_and_robust, so map "instruction" there.
+remote_subdir_for() {
+    case "$1" in
+        instruction) echo "instruction_and_robust" ;;
+        *) echo "$1" ;;
+    esac
+}
+
 show_help() {
     echo "Usage: $0 [SUITE_NAME] [LOCAL_DIR]"
     echo ""
@@ -65,6 +75,8 @@ fi
 download_suite() {
     local suite=$1
     local target_dir=$2
+    local remote_subdir
+    remote_subdir=$(remote_subdir_for "$suite")
 
     mkdir -p "$target_dir"
 
@@ -74,14 +86,14 @@ download_suite() {
     echo "========================================="
     echo "Downloading task suite: $suite"
     echo "Dataset: $DATASET_ID"
-    echo "Remote path: task_suite/$suite"
+    echo "Remote path: task_suite/$remote_subdir"
     echo "Target directory: $target_dir"
     echo "========================================="
 
-    modelscope download --dataset "$DATASET_ID" --include "task_suite/$suite/**" --local_dir "$TEMP_DIR"
+    modelscope download --dataset "$DATASET_ID" --include "task_suite/$remote_subdir/**" --local_dir "$TEMP_DIR"
 
     if [ $? -eq 0 ]; then
-        cp -a "$TEMP_DIR/task_suite/$suite"/. "$target_dir"/
+        cp -a "$TEMP_DIR/task_suite/$remote_subdir"/. "$target_dir"/
         echo ""
         echo "========================================="
         echo "✓ Task suite '$suite' downloaded to $target_dir"

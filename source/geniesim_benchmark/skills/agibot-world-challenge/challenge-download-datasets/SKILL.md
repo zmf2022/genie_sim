@@ -41,7 +41,7 @@ command -v modelscope >/dev/null || pip install modelscope
 
 | Suite | Remote path | Notes |
 |-------|-------------|-------|
-| `instruction`  | `task_suite/instruction/**`  | instruction-following demos |
+| `instruction`  | `task_suite/instruction_and_robust/**` | instruction-following demos — the **instruction** and **robust** boards share this one dataset |
 | `manipulation` | `task_suite/manipulation/**` | manipulation demos |
 
 Each suite is downloaded in **LeRobot v2.1** format.
