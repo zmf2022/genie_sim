@@ -6,6 +6,8 @@ saved_task/
 
 assets/
 assets
+geniesim_assets/
+source/external/
 
 **/*/data/
 **/__pycache__

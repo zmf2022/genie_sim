@@ -213,10 +213,11 @@ _pip_install() {
 # Single source of truth for the tier-1 peer list: the umbrella's
 # ``source/geniesim/pyproject.toml``. ``docker/collect_deps.py --peers``
 # reads that pyproject (same parser as ``geniesim_cli._tiers``) and
-# prints the peer names one per line. Tier-2 peers (geniesim_teleop /
-# generator / world) are deliberately NOT installed by the entrypoint —
-# users opt in via ``pip install -e "source/geniesim/[teleop|generator|world|all]"``
-# inside the container.
+# prints the peer names one per line.
+#
+# Tier-2 peers (geniesim_teleop / generator / world) are also installed
+# automatically when their source directories are mounted under
+# /workspace/source/ — the user no longer needs to opt-in manually.
 #
 # Two non-pyproject inputs the script can't derive:
 #   * ``/geniesim_assets`` — distributed out-of-band, baked into the image;
@@ -245,6 +246,26 @@ if [ -x "${_PEERS_SCRIPT}" ] || [ -f "${_PEERS_SCRIPT}" ]; then
             echo -e "   ${YELLOW}⚠ ${peer} listed in umbrella pyproject but not mounted at ${pkg_dir} — skipping${RST}"
         fi
     done < <(python3 "${_PEERS_SCRIPT}" /workspace/source --peers 2>/dev/null)
+
+    # Also install tier-2 peers (teleop, generator, world) when their
+    # source directories are mounted — the pyproject.toml COPY in the
+    # Dockerfile ensures their third-party deps are baked into the image.
+    for tier2 in geniesim_teleop geniesim_generator geniesim_world; do
+        t2_dir="/workspace/source/${tier2}"
+        if [ -f "${t2_dir}/pyproject.toml" ]; then
+            # Check it's not already in EDITABLE_ARGS (tier-1 overlap guard)
+            if echo "${EDITABLE_ARGS}" | grep -q -- "-e ${t2_dir}"; then
+                continue
+            fi
+            # geniesim_world requires external/ml-sharp checkout next to it
+            if [ "${tier2}" = "geniesim_world" ] && [ ! -d "/workspace/source/external/ml-sharp" ]; then
+                echo -e "   ${DIM}⏭️ ${tier2} — missing external/ml-sharp, skipping${RST}"
+                continue
+            fi
+            EDITABLE_ARGS="${EDITABLE_ARGS} -e ${t2_dir}"
+            echo -e "   ${DIM}+ ${tier2}${RST}"
+        fi
+    done
 else
     echo -e "   ${RED}❌ ${_PEERS_SCRIPT} missing — cannot derive tier-1 peer list. Aborting install.${RST}"
     EDITABLE_ARGS=""

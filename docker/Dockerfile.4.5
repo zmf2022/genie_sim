@@ -146,7 +146,19 @@ RUN curl -fsSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key \
         ros-dev-tools && \
     rm -rf /var/lib/apt/lists/*
 
-RUN rosdep init && rosdep update --rosdistro humble --include-eol-distros 2>&1 | grep -v "as root is not recommended"
+RUN mkdir -p /etc/ros/rosdep/sources.list.d && \
+    { \
+        echo "yaml https://raw.githubusercontent.com/ros/rosdistro/master/rosdep/base.yaml"; \
+        echo "yaml https://raw.githubusercontent.com/ros/rosdistro/master/rosdep/python.yaml"; \
+        echo "yaml https://raw.githubusercontent.com/ros/rosdistro/master/rosdep/ruby.yaml"; \
+        echo "yaml https://raw.githubusercontent.com/ros/rosdistro/master/rosdep/pypi.yaml"; \
+        echo "yaml https://raw.githubusercontent.com/ros/rosdistro/master/rosdep/bleeding.yaml"; \
+    } > /etc/ros/rosdep/sources.list.d/20-default.list && \
+    if [ -n "${APT_MIRROR}" ]; then \
+        sed -i 's|https://raw\.githubusercontent\.com/|https://raw.staticdn.net/|g' \
+            /etc/ros/rosdep/sources.list.d/20-default.list; \
+    fi && \
+    rosdep update --rosdistro humble --include-eol-distros 2>&1 | grep -v "as root is not recommended"
 
 # ------------------------------------------------------------
 # Isaac Sim 4.5 — install into SYSTEM python3.10 (not a venv).
@@ -186,20 +198,41 @@ COPY source/geniesim_cli/pyproject.toml /tmp/source/geniesim_cli/pyproject.toml
 COPY source/geniesim/pyproject.toml /tmp/source/geniesim/pyproject.toml
 COPY source/geniesim_benchmark/pyproject.toml /tmp/source/geniesim_benchmark/pyproject.toml
 COPY source/geniesim_ros/pyproject.toml /tmp/source/geniesim_ros/pyproject.toml
+COPY source/geniesim_teleop/pyproject.toml /tmp/source/geniesim_teleop/pyproject.toml
+COPY source/geniesim_generator/pyproject.toml /tmp/source/geniesim_generator/pyproject.toml
+COPY source/geniesim_world/pyproject.toml /tmp/source/geniesim_world/pyproject.toml
+# scikit-build-core >= 0.10 deprecated cmake.targets in favor of
+# build.targets. ruckig's pyproject.toml still uses the old key, so
+# pin the constraint to keep the isolated build environment compatible.
 RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
+    echo "scikit-build-core<0.10" > /tmp/pip-constraint.txt && \
     python3 /tmp/collect_deps.py /tmp/source > /tmp/geniesim_deps.txt && \
-    python3 -m pip install --ignore-installed -r /tmp/geniesim_deps.txt && \
-    rm -rf /tmp/collect_deps.py /tmp/source /tmp/geniesim_deps.txt
+    PIP_CONSTRAINT=/tmp/pip-constraint.txt python3 -m pip install --ignore-installed -r /tmp/geniesim_deps.txt && \
+    rm -rf /tmp/collect_deps.py /tmp/source /tmp/geniesim_deps.txt /tmp/pip-constraint.txt
 
 COPY docker/entrypoint.sh /usr/local/bin/geniesim-entrypoint
 RUN chmod +x /usr/local/bin/geniesim-entrypoint
 
 # ------------------------------------------------------------
 # rosdep install for geniesim_ros packages
+#
+# Some rosdep keys are missing from the Humble database.
+# Pre-install apt equivalents and skip unresolvable keys.
+#   eigen             → libeigen3-dev (already installed above)
+#   yaml-cpp          → libyaml-cpp-dev
+#   python3-yaml      → python3-yaml
+#   nlohmann-json-dev → nlohmann-json3-dev
+#   libqt5-widgets    → libqt5widgets5 (via qtbase5-dev)
 # ------------------------------------------------------------
 COPY source/geniesim_ros/src/ros_ws/src /tmp/geniesim_ros_src
 RUN apt-get update && \
-    rosdep install --from-paths /tmp/geniesim_ros_src --ignore-src -y --rosdistro humble && \
+    apt-get install -y --no-install-recommends \
+        libyaml-cpp-dev \
+        python3-yaml \
+        nlohmann-json3-dev \
+        qtbase5-dev && \
+    rosdep install --from-paths /tmp/geniesim_ros_src --ignore-src -y --rosdistro humble \
+        --skip-keys "eigen yaml-cpp python3-yaml nlohmann-json-dev qtbase5-dev libqt5-core libqt5-gui libqt5-widgets" && \
     rm -rf /tmp/geniesim_ros_src /var/lib/apt/lists/*
 
 WORKDIR /workspace
