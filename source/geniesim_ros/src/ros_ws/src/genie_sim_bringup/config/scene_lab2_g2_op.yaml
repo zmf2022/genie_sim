@@ -1,0 +1,56 @@
+robot:
+  robot_name: G2_crs_omnipicker
+  robot_prefix: genie
+  robot_source:
+    arm: crs
+    body: g2
+    gripper: "omnipicker"
+    robot_model: genie
+    package: genie_sim_robot_model
+    pin_base_to_world: true
+    convert_joints_to_fixed: []
+    urdf: {}
+  init_base_pose:
+    x: 0.0
+    y: 0.0
+    z: 0.04
+    theta: 0.0
+  init_joint_pos:
+    idx22_arm_l_joint2: -45
+    idx24_arm_l_joint4: -75
+    idx26_arm_l_joint6: -55
+    idx62_arm_r_joint2: -45
+    idx64_arm_r_joint4: -75
+    idx66_arm_r_joint6: -55
+
+viewer_camera:
+  pos:    [3.5, -2.5, 1.8]
+  lookat: [1.0,  0.0, 0.8]
+
+cameras:
+- prim_path: head_link3/Head_Front_Camera
+  frame_id: head_link3
+  topic:
+    rgb: /genie_sim/head_front_camera_rgb
+    depth: /genie_sim/head_front_camera_depth
+  sensor:
+    width: 640
+    height: 400
+    freq: 10.0
+    min_range: 0.01
+    max_range: 10000
+  intrinsic:
+    cx: 318.7979431152
+    cy: 202.4943847656
+    fx: 305.6425170898
+    fy: 305.6007080078
+    k1: 0
+    k2: 0
+    p1: 0
+    p2: 0
+    k3: 0
+  extrinsic:
+    xyz: [0.0, 0.0, 0.0]
+    wxyz: [1.0, 0.0, 0.0, 0.0]
+lidars: []
+scene: background/laboratory/laboratory_2/background.usda
