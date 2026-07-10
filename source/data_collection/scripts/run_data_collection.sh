@@ -219,8 +219,9 @@ CONTAINER_ID=$(docker run -d --name $CONTAINER_NAME \
     -v /dev/input:/dev/input:rw \
     -v $ASSETS_SRC:/geniesim_assets:rw \
     -v $CURRENT_DIR:/geniesim/main/data_collection:rw \
-    -v $LOG_DIR:/geniesim/main/data_collection/logs/${TASK_NAME}:rw \
-    -w /geniesim/main/data_collection \
+        -v $LOG_DIR:/geniesim/main/data_collection/logs/${TASK_NAME}:rw \
+        -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+        -w /geniesim/main/data_collection \
     registry.agibot.com/genie-sim/geniesim3-data-collection:latest \
     $ENTRYPOINT_ARGS)
 

@@ -867,7 +867,7 @@ def convert_pose_quat2euler(poses_quat):
     return poses_euler
 
 
-@njit(cache=True, fastmath=True)
+@njit(fastmath=True)
 def quat_slerp_jitted(quat0, quat1, fraction, shortestpath=True):
     """
     Return spherical linear interpolation between two quaternions.

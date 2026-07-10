@@ -53,7 +53,7 @@ colcon 编译 `genie_sim_*` 这套 ROS 2 包,产出 `devel/` overlay。每次开
 ```bash
 geniesim ros build dev
 source devel/setup.bash
-ros2 pkg list | grep genie_sim     # 应列出 ~15 个包
+ros2 pkg list | grep genie_sim     # 应列出 ~11 个包
 ```
 
 ---
@@ -69,7 +69,6 @@ ros2 launch genie_sim_bringup app.launch.py \
   headless:=false
 ```
 
-首次启动 shader 编译要 5-10 分钟。如果 GUI 卡顿,加 `physics_hz:=50 render_hz:=15` 降频(默认 100/30 对 48GB 卡压力大)。
 
 ---
 
@@ -88,6 +87,12 @@ geniesim benchmark categories    # 看可用任务类别
 ## Step 7(可选):VR 遥操作
 
 用 Pico VR 头显控制仿真里的机器人,同时录制 episodes。前提是有 VR 设备且能访问容器。
+
+需要先在容器内安装 teleop 包:
+
+```bash
+pip install -e source/geniesim_teleop/
+```
 
 ```bash
 geniesim teleop run --device_type=pico --port=8080
@@ -110,6 +115,57 @@ pip install --extra-index-url https://download.pytorch.org/whl/cu128 -e .
 
 geniesim_world create --panorama path/to/pano.png --work-dir runs/demo
 ```
+
+---
+
+## Step 9(可选):自动化数据采集(data_collection)
+
+基于 Isaac Sim 5.1 + cuRobo 的自动化轨迹采集,产出 agibot 格式的 episode 数据(`aligned_joints*.h5` + `camera/` + `observations/` + `data_info.json`)。
+
+**前提**:主机需要 editable-install `geniesim_assets` 并激活 conda 环境。
+
+```bash
+# 1. 安装 geniesim_assets(只需一次)
+pip install -e geniesim_assets
+
+# 2. 激活 conda 环境
+conda activate genie_sim
+
+# 3. 查看可用任务(~295 个)
+geniesim autocollect list                        # 全部 task
+geniesim autocollect list --robot=g2 sort_fruit  # 按机器人/任务过滤
+geniesim autocollect tasks                       # 查看任务族
+geniesim autocollect robots                      # 查看机器人(g1/g2)
+
+# 4. 预览任务(不启动容器)
+geniesim autocollect run sort_the_fruit_into_the_box_apple_g2 --dry-run
+
+# 5. 无人值守采集(推荐)
+geniesim autocollect run sort_the_fruit_into_the_box_apple_g2 --headless --standalone
+```
+
+**常用 run 参数**:
+
+| 参数 | 说明 |
+|---|---|
+| `--headless` | 无 GUI,无 X11 主机必须 |
+| `--standalone` | 仅写文件日志,不输出终端 |
+| `--no-record` | 禁用录制 |
+| `--dry-run` | 只打印命令,不启动容器 |
+| `--container-name=N` | 自定义容器名(默认 `data_collection_open_source`) |
+
+**数据产出**:
+
+- 每个 episode 约 **1.5–2.2 GB**,位于 `source/data_collection/recording_data/[<task>_<index>]/`
+- 包含:`camera/`(原始 mcap,~2G) + `observations/`(视频帧,~120M) + `aligned_joints.h5`(关节轨迹) + `data_info.json`(动作标签) + `state.json`
+- 日志位于 `source/data_collection/logs/<task>/`
+
+**关键细节**:
+
+- 运行方式:主机 CLI 自动 `docker run -d` 拉起专用镜像(`geniesim3-data-collection:latest`),容器内跑两个进程(Isaac Sim server + task client)通过 gRPC 通信。**不是在已有容器里 exec**,而是独立拉起一个临时容器,退出后自动清理。
+- 录制数据通过 bind-mount 直接落盘到主机,不需要从容器拷贝。
+- cuRobo motion planning 偶发失败(`Stage X place fail at first step, try next sequence`)是正常现象,自动重试多个 sequence;每个 episode 约 1–3 分钟。
+- 首次构建镜像:`geniesim autocollect build`(依赖 `geniesim3:latest` 基础镜像已就绪)。
 
 ---
 
