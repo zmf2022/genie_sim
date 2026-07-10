@@ -842,7 +842,10 @@ class DataCollectionAgent(BaseAgent):
         render_semantic=False,
         origin_task_info={},
     ):
-        tasks = glob.glob(task_folder + "/*.json")
+        tasks = sorted(
+            glob.glob(task_folder + "/*.json"),
+            key=lambda p: int(re.search(r"_(\d+)\.json$", p).group(1)),
+        )
         for index, task_file in enumerate(tasks):
             success = True
             if not self.check_task_file(task_file):
