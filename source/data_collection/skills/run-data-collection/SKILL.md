@@ -105,5 +105,30 @@ Success looks like `job done` in the client log, the container auto-removed
   validating.
 - The container is ephemeral; only the mounted `recording_data/`, `logs/`,
   `saved_task/` and the Isaac cache survive a run.
+- **cuRobo world cache degrades after ~6-8 tasks** in one container session
+  (success rate drops to 0%). Official task JSONs pin `num_of_episode=8` on
+  purpose. For bulk collection, loop the CLI with container restarts between
+  batches — see the batch recipe below and `AGENTS.md §10`.
 - Full task-config authoring: `source/data_collection/TASK_CONFIG_GUIDE.md`.
   Module reference: `source/data_collection/AGENTS.md`.
+
+## Batch collection (high-volume, hundreds of episodes)
+
+Never run a single monolithic session for 100+ tasks. Loop the CLI with
+container restarts so each batch starts on a clean cuRobo world cache:
+
+```bash
+# 3000 episodes = 375 batches × 8 tasks/batch
+for i in $(seq 1 375); do
+    geniesim autocollect run <TASK> --headless --standalone
+    docker stop data_collection_open_source 2>/dev/null
+    docker rm   data_collection_open_source 2>/dev/null
+    sleep 5
+done
+```
+
+Wrap in `scripts/run_batch_collect.sh` if you want persistence. Monitor
+`logs/<TASK>/run_data_collection.log` for `stage finish: N, status: success` and
+`attach_result=True`. Expected: **70-90%** success rate per batch on
+well-calibrated tasks; if it drops below 50%, investigate task JSON or
+container age.

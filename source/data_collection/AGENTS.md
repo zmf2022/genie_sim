@@ -212,6 +212,9 @@ python scripts/run_data_collection.py --task_template tasks/.../<name>.json --us
 | cuRobo install/import fails | GPU arch mismatch — image is built for `TORCH_CUDA_ARCH_LIST=8.9` (4090D); 50-series (SM_120) may be unsupported by cuRobo. |
 | `Ambiguous task 'X'` | Substring matched ≥2 task stems — use a longer substring or full basename. |
 | Container left running after a crash | `run_data_collection.sh` traps EXIT to clean up; if killed hard, `docker rm -f data_collection_open_source`. |
+| **Success rate drops to 0% after ~6-8 tasks in one session** | cuRobo's world collision cache accumulates obstacles across tasks; `detach_obj` clears `attached_objects` but doesn't purge all stale world model entries. **Fix: restart the container** — official task JSONs set `num_of_episode=8` (matches cuRobo's reliable window). For bulk collection, loop `geniesim autocollect run <TASK> --headless --standalone` with container restart between batches (see §10). |
+| **Stale `tail -f` processes accumulating** | Each non-`--standalone` container run spawns `tail -f` processes on server/client logs. After many runs they keep printing to terminals. **Fix:** `pkill -f "tail -f.*data_collection.*\.log"` (kills ~25 orphans per session of 10 batches). Always prefer `--standalone` for unattended runs. |
+| All tasks fail at `Stage 0 pick fail at first step` consistently | cuRobo motion planning returned no valid trajectory (server log: no `end_time` entries). Cache is corrupted — restart the container. Also verify task JSON wasn't mutated (see §8). |
 
 ---
 
@@ -224,6 +227,9 @@ python scripts/run_data_collection.py --task_template tasks/.../<name>.json --us
 - Don't assume cuRobo builds on any GPU — the image targets 4090D (SM 8.9).
 - Don't treat `run` as an in-container exec like `benchmark run` — it brings up
   its own container from the host (§2).
+- Don't modify reference task JSONs like `sort_the_fruit_into_the_box_apple_g2.json` (e.g. changing `grasp_offset`, `grasp_upper_percentile`, `pick_up_distance`). These are calibrated baselines used across the team — unexpected tuning here breaks their expected behavior without warning.
+- Don't try to collect 100+ tasks in a single container session — cuRobo's state degrades after ~6-8 tasks; loop with container restarts (see §10).
+- Don't assume `task_generate.py` preserves prior task JSONs — it calls `shutil.rmtree(save_path)` before regenerating, deleting all files in `saved_task/<name>/`. This is intentional (clean state per batch) but means saved tasks are ephemeral.
 
 ---
 
@@ -231,3 +237,37 @@ python scripts/run_data_collection.py --task_template tasks/.../<name>.json --us
 
 Episodes produced here are **agibot-format** (`.h5` + videos + `data_info.json`
 with pick/place action labels). This tree is the data *generation* side.
+
+---
+
+## 10. Batch collection (high-volume runs)
+
+For collecting **hundreds of episodes**, never run one monolithic session. cuRobo
+planner state degrades after ~6-8 tasks; the official `num_of_episode=8` is
+deliberate. Instead, loop the CLI with container restarts:
+
+```bash
+# Example: 3000 episodes = 375 batches × 8 tasks
+for i in $(seq 1 375); do
+    geniesim autocollect run <TASK> --headless --standalone
+    docker stop data_collection_open_source 2>/dev/null
+    docker rm data_collection_open_source 2>/dev/null
+    sleep 5
+done
+```
+
+Or wrap in a shell script under `scripts/`. Each batch:
+- Starts a fresh container (clean cuRobo world cache)
+- Generates 8 random task variations per `task_generate.py` (`np.random` for object
+  positions / grasp poses / anchor offsets — no seed, so every batch is unique)
+- Produces `recording_data/[<task>_<i>]/` directories (rosbag2 auto-appends
+  suffixes `1`, `2`, … to avoid collisions across batches; this is expected)
+- Exits cleanly when client prints `job done`
+
+**Monitoring:** watch `logs/<TASK>/run_data_collection.log` for:
+- `stage finish: 0, status: success` — Stage 0 (pick) passed
+- `stage finish: 1, status: success` — Stage 1 (place) passed
+- `attach_result=True` — cuRobo attach succeeded (False for the 2nd attach in a task is normal — left arm after right arm already grabbed)
+- `HARD RESET completed` — between tasks (reset clears robot state + cuRobo cache)
+
+**Expected success rates:** 70-90% for well-calibrated tasks; below 50% suggests either a task JSON issue or a container that's been running too long.

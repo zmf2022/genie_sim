@@ -524,8 +524,9 @@
                 "arm": "auto",
                 "disable_upside_down": true,
                 "flip_grasp": true,
-                "grasp_offset": 0.0,
-                "pick_up_distance": 0.1
+                "grasp_offset": 0.01,
+                "pick_up_distance": 0.1,
+                "grasp_upper_percentile": 75
             },
             "passive": {
                 "object_id": "geniesim_2025_target_grasp_object",

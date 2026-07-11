@@ -239,7 +239,18 @@ def load_extrinsics(agibot_dir: Path) -> dict:
         filepath = sensor_dir / filename
         if filepath.exists():
             with filepath.open() as f:
-                extrinsics[key] = json.load(f)
+                raw = json.load(f)
+                extrinsics[key] = [
+                    {
+                        "rotation": item["extrinsic"]["rotation_matrix"]
+                        if "extrinsic" in item
+                        else item["rotation"],
+                        "translation": item["extrinsic"]["translation_vector"]
+                        if "extrinsic" in item
+                        else item["translation"],
+                    }
+                    for item in raw
+                ]
     return extrinsics
 
 

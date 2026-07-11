@@ -340,7 +340,7 @@
             "/G2/gripper_l_base_link/Left_Camera"
         ],
         "fps": 30,
-        "num_of_episode": 800,
+        "num_of_episode": 8,
         "noised_probability": 0.1
     },
     "robot": {
