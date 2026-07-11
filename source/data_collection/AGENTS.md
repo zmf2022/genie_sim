@@ -271,3 +271,117 @@ Or wrap in a shell script under `scripts/`. Each batch:
 - `HARD RESET completed` — between tasks (reset clears robot state + cuRobo cache)
 
 **Expected success rates:** 70-90% for well-calibrated tasks; below 50% suggests either a task JSON issue or a container that's been running too long.
+
+---
+
+## 11. Convert agibot episodes to LeRobot v2.1
+
+`recording_data/` is the agibot format (h5 + raw mcap + decoded images). To feed
+it into LeRobot-based policies (π₀, ACT, Diffusion, …), convert it to the
+Hugging Face `lerobot` v2.1 dataset layout. The converter lives under
+`source/geniesim_benchmark/src/geniesim_benchmark/dataset/convert/agibot_to_lerobot.py`
+and ships the CLI verb `geniesim dataset convert agibot-to-lerobot`.
+
+**Prereq** — `geniesim_benchmark` must be installed so the dispatch subcommand
+is reachable:
+
+```bash
+pip install -e source/geniesim_benchmark
+```
+
+### Single episode
+
+```bash
+geniesim dataset convert agibot-to-lerobot \
+  --agibot-dir source/data_collection/recording_data/'[<TASK>_<INDEX>]' \
+  --output-dir lerobot_out/<my_dataset> \
+  --fps 30.0
+```
+
+Auto-detected because `--agibot-dir` contains `aligned_joints.h5` directly.
+
+### Batch (whole dir of episodes)
+
+Point `--agibot-dir` at the parent directory — the converter walks its subdirs
+and assigns monotonically increasing `episode_index`:
+
+```bash
+geniesim dataset convert agibot-to-lerobot \
+  --agibot-dir source/data_collection/recording_data/ \
+  --output-dir lerobot_out/<my_dataset> \
+  --fps 30.0
+```
+
+### Fill missing fisheye extrinsics from a reference
+
+Pass a pre-existing LeRobot dataset via `--lerobot-ref-dir` to back-fill
+`head_left_fisheye` / `head_right_fisheye` / `head_back_fisheye` extrinsic
+columns (agibot `sim_data_converter` doesn't produce them):
+
+```bash
+geniesim dataset convert agibot-to-lerobot \
+  --agibot-dir source/data_collection/recording_data/ \
+  --output-dir lerobot_out/<my_dataset> \
+  --lerobot-ref-dir path/to/reference_lerobot_dataset/
+```
+
+### Output layout (v2.1)
+
+```
+<output-dir>/
+├── meta/
+│   ├── info.json                # HF metadata, total_episodes / features
+│   ├── episodes.jsonl           # {episode_index} + {tasks, length}
+│   ├── tasks.jsonl              # single-row task description
+│   └── stats.safetensors        # per-channel min/mean/max/std
+├── data/
+│   └── chunk-000/
+│       ├── episode_000000.parquet   # observation.state (159-dim), action (40-dim)
+│       ├── episode_000001.parquet
+│       └── …
+└── videos/
+    └── chunk-000/
+        ├── observation.images_top_head/<top_head_color>_episode_000000.mp4
+        ├── observation.images_hand_left/…
+        ├── observation.images_hand_left_depth/…   (lossless png16)
+        └── observation.images_hand_right/…
+```
+
+### State / action vector layout
+
+The converter packs agibot h5 fields into **159-dim state** and **40-dim
+action** fixed-size lists (offsets defined at the top of
+`agibot_to_lerobot.py`):
+
+| Range | Field |
+|---|---|
+| `[0:87]` | robot state (effectors, end pose, arm pose, joints pos/eff/vel, head, waist, base) |
+| `[87:96]` | `hand_left_rgbd` extrinsic rotation (3×3 flattened, **relative to end-effector**) |
+| `[96:105]` | `hand_right_rgbd` extrinsic rotation |
+| `[105:114]` | `head_left_fisheye` extrinsic rotation |
+| `[114:123]` | `head_right_fisheye` extrinsic rotation |
+| `[123:132]` | `head_front_rgbd` extrinsic rotation |
+| `[132:141]` | `head_back_fisheye` extrinsic rotation |
+| `[141:144]` | `hand_left_rgbd` translation |
+| `[144:147]` | `hand_right_rgbd` translation |
+| `[147:150]` | `head_left_fisheye` translation |
+| `[150:153]` | `head_right_fisheye` translation |
+| `[153:156]` | `head_front_rgbd` translation |
+| `[156:159]` | `head_back_fisheye` translation |
+
+Action (`[2:16]` joints, `[30:33]` head, `[33:38]` waist, `[38:40]` robot
+velocity, effectors at slots 0/1, end pose `[2:16]`).
+
+Extrinsic rotation entries encode the camera-from-end-effector transform
+per frame (`sim_data_converter.py` computes `world_to_robot @ cam_pose_world`
+and stores the 3×3 rotation + 3-vec translation under the nested
+`{"extrinsic": {"rotation_matrix": ..., "translation_vector": ...}}` JSON shape).
+
+### Load the result
+
+```python
+from lerobot.common.datasets.lerobot_dataset import LeRobotDataset
+ds = LeRobotDataset("lerobot_out/<my_dataset>")
+```
+
+Or from Hugging Face after pushing with `huggingface_hub`.

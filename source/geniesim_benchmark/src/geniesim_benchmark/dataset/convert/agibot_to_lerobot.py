@@ -39,57 +39,77 @@ from typing import Optional
 # LeRobot v2.1 parquet schema constants
 # ============================================================
 
-ARROW_SCHEMA_HUGGINGFACE_METADATA = {
-    "info": {
-        "features": {
-            "observation.state": {
-                "feature": {"dtype": "float32", "_type": "Value"},
-                "length": 159,
-                "_type": "Sequence",
-            },
-            "action": {
-                "feature": {"dtype": "float32", "_type": "Value"},
-                "length": 40,
-                "_type": "Sequence",
-            },
-            "episode_index": {"dtype": "int64", "_type": "Value"},
-            "frame_index": {"dtype": "int64", "_type": "Value"},
-            "index": {"dtype": "int64", "_type": "Value"},
-            "task_index": {"dtype": "int64", "_type": "Value"},
-            "timestamp": {"dtype": "float32", "_type": "Value"},
+SUPPORTED_FORMATS = ("agibot", "vla")
+
+AGIBOT_STATE_LEN = 159
+AGIBOT_ACTION_LEN = 40
+
+VLA_STATE_LEN = 16
+VLA_ACTION_LEN = 16
+
+
+def _arrow_schema_huggingface_metadata(state_len: int, action_len: int):
+    return {
+        "info": {
+            "features": {
+                "observation.state": {
+                    "feature": {"dtype": "float32", "_type": "Value"},
+                    "length": state_len,
+                    "_type": "Sequence",
+                },
+                "action": {
+                    "feature": {"dtype": "float32", "_type": "Value"},
+                    "length": action_len,
+                    "_type": "Sequence",
+                },
+                "episode_index": {"dtype": "int64", "_type": "Value"},
+                "frame_index": {"dtype": "int64", "_type": "Value"},
+                "index": {"dtype": "int64", "_type": "Value"},
+                "task_index": {"dtype": "int64", "_type": "Value"},
+                "timestamp": {"dtype": "float32", "_type": "Value"},
+            }
         }
     }
-}
 
 
 # ============================================================
 # Data mapping constants (from lerobot meta/info.json)
 # ============================================================
 
+# --- VLA format: state 21 dims, action 21 dims ---
+# State: arm_joint_pos(14) + gripper_pos(2)
+VLA_STATE_JOINT_POSITION = 0
+VLA_STATE_GRIPPER_POSITION = 14
+
+# Action: arm_joint_pos(14) + gripper_pos(2)
+VLA_ACTION_JOINT_POSITION = 0
+VLA_ACTION_GRIPPER_POSITION = 14
+
+# --- Agibot format: state 159 dims, action 40 dims ---
 # State vector: 159 dimensions
-STATE_LEFT_EFFECTOR_POS = 0  # 1 dim
-STATE_RIGHT_EFFECTOR_POS = 1  # 1 dim
-STATE_END_POSITION = 2  # 6 dims (2 arms x 3)
-STATE_END_ORIENTATION = 8  # 8 dims (2 arms x 4)
-STATE_END_ARM_ORIENTATION = 16  # 8 dims (2 arms x 4)
-STATE_END_ARM_POSITION = 24  # 6 dims (2 arms x 3)
-STATE_JOINT_POSITION = 30  # 14 dims
-STATE_JOINT_EFFORT = 44  # 14 dims
-STATE_JOINT_VELOCITY = 58  # 14 dims
-STATE_HEAD_POSITION = 72  # 3 dims
-STATE_WAIST_POSITION = 75  # 5 dims
-STATE_ROBOT_POSITION = 80  # 3 dims
-STATE_ROBOT_ORIENTATION = 83  # 4 dims
+STATE_LEFT_EFFECTOR_POS = 0
+STATE_RIGHT_EFFECTOR_POS = 1
+STATE_END_POSITION = 2
+STATE_END_ORIENTATION = 8
+STATE_END_ARM_ORIENTATION = 16
+STATE_END_ARM_POSITION = 24
+STATE_JOINT_POSITION = 30
+STATE_JOINT_EFFORT = 44
+STATE_JOINT_VELOCITY = 58
+STATE_HEAD_POSITION = 72
+STATE_WAIST_POSITION = 75
+STATE_ROBOT_POSITION = 80
+STATE_ROBOT_ORIENTATION = 83
 
 # Action vector: 40 dimensions
-ACTION_LEFT_EFFECTOR = 0  # 1 dim
-ACTION_RIGHT_EFFECTOR = 1  # 1 dim
-ACTION_END_POSITION = 2  # 6 dims
-ACTION_END_ORIENTATION = 8  # 8 dims
-ACTION_JOINT_POSITION = 16  # 14 dims
-ACTION_HEAD_POSITION = 30  # 3 dims
-ACTION_WAIST_POSITION = 33  # 5 dims
-ACTION_ROBOT_VELOCITY = 38  # 2 dims
+ACTION_LEFT_EFFECTOR = 0
+ACTION_RIGHT_EFFECTOR = 1
+ACTION_END_POSITION = 2
+ACTION_END_ORIENTATION = 8
+ACTION_JOINT_POSITION = 16
+ACTION_HEAD_POSITION = 30
+ACTION_WAIST_POSITION = 33
+ACTION_ROBOT_VELOCITY = 38
 
 
 # ============================================================
@@ -127,12 +147,25 @@ def _require_heavy_deps():
 
 
 # ============================================================
+# Format helpers
+# ============================================================
+
+
+def _resolve_format(fmt: str) -> tuple:
+    """Return (state_len, action_len) for the given format string."""
+    if fmt == "agibot":
+        return AGIBOT_STATE_LEN, AGIBOT_ACTION_LEN
+    if fmt == "vla":
+        return VLA_STATE_LEN, VLA_ACTION_LEN
+    raise ValueError(f"Unknown format {fmt!r}. Supported: {SUPPORTED_FORMATS}")
+
+
+# ============================================================
 # Core data building functions
 # ============================================================
 
 
-def build_state(state_dict: dict, joint_all_dict: dict, extrinsic_data: dict, frame_idx: int = 0):
-    """Build 159-dim state vector from agibot state data."""
+def _build_state_agibot(state_dict: dict, joint_all_dict: dict, extrinsic_data: dict, frame_idx: int = 0):
     import numpy as np
     import h5py  # noqa: F401  (needed for downstream type guards)
 
@@ -178,8 +211,7 @@ def build_state(state_dict: dict, joint_all_dict: dict, extrinsic_data: dict, fr
     return state
 
 
-def build_action(action_dict: dict):
-    """Build 40-dim action vector from agibot action data."""
+def _build_action_agibot(action_dict: dict):
     import numpy as np
 
     action = np.zeros(40, dtype=np.float32)
@@ -194,6 +226,40 @@ def build_action(action_dict: dict):
     action[ACTION_ROBOT_VELOCITY : ACTION_ROBOT_VELOCITY + 2] = action_dict["robot"]["velocity"]
 
     return action
+
+
+def _build_state_vla(state_dict: dict, joint_all_dict: dict, extrinsic_data: dict, frame_idx: int = 0):
+    import numpy as np
+
+    state = np.zeros(VLA_STATE_LEN, dtype=np.float32)
+    state[VLA_STATE_JOINT_POSITION : VLA_STATE_JOINT_POSITION + 14] = joint_all_dict["joint"]["position"][:14]
+    state[VLA_STATE_GRIPPER_POSITION] = state_dict["left_effector"]["position"][0]
+    state[VLA_STATE_GRIPPER_POSITION + 1] = state_dict["right_effector"]["position"][0]
+    return state
+
+
+def _build_action_vla(action_dict: dict):
+    import numpy as np
+
+    action = np.zeros(VLA_ACTION_LEN, dtype=np.float32)
+    action[VLA_ACTION_JOINT_POSITION : VLA_ACTION_JOINT_POSITION + 14] = action_dict["joint"]["position"]
+    action[VLA_ACTION_GRIPPER_POSITION] = action_dict["left_effector"]["position"][0]
+    action[VLA_ACTION_GRIPPER_POSITION + 1] = action_dict["right_effector"]["position"][0]
+    return action
+
+
+_BUILDERS = {
+    "agibot": (_build_state_agibot, _build_action_agibot),
+    "vla": (_build_state_vla, _build_action_vla),
+}
+
+
+def build_state(state_dict: dict, joint_all_dict: dict, extrinsic_data: dict, frame_idx: int = 0, fmt: str = "vla"):
+    return _BUILDERS[fmt][0](state_dict, joint_all_dict, extrinsic_data, frame_idx)
+
+
+def build_action(action_dict: dict, fmt: str = "vla"):
+    return _BUILDERS[fmt][1](action_dict)
 
 
 def read_h5_frame(h5_file, frame_id: str) -> tuple:
@@ -289,21 +355,22 @@ def fill_extrinsics_from_lerobot(extrinsic_data: dict, template) -> dict:
     return extrinsic_data
 
 
-def encode_videos(agibot_dir: Path, output_dir: Path, episode_index: int, fps: float = 30.0):
+def encode_videos(agibot_dir: Path, output_dir: Path, episode_index: int, fps: float = 30.0, fmt: str = "vla"):
     """Encode camera images into MP4 videos using ffmpeg.
 
     RGB videos:   HEVC (libx265), yuv420p, keyframe every 8 frames, CRF 24
-    Depth videos: lossless PNG codec, gray16le
+    Depth videos: lossless PNG codec, gray16le (skipped when ``fmt == "vla"``)
     Output path:  videos/{chunk}/{video_key}/episode_{index:06d}.mp4
     """
     camera_dir = agibot_dir / "camera"
     chunk_name = f"chunk-{episode_index // 1000:03d}"
 
     # video_key -> [(image_stem, ext, is_depth), ...]
+    include_depth = fmt != "vla"
     camera_map = {
-        "top_head": [("head_color", "jpg", False), ("head_depth", "png", True)],
-        "hand_left": [("hand_left_color", "jpg", False), ("hand_left_depth", "png", True)],
-        "hand_right": [("hand_right_color", "jpg", False), ("hand_right_depth", "png", True)],
+        "top_head": [("head_color", "jpg", False)] + ([("head_depth", "png", True)] if include_depth else []),
+        "hand_left": [("hand_left_color", "jpg", False)] + ([("hand_left_depth", "png", True)] if include_depth else []),
+        "hand_right": [("hand_right_color", "jpg", False)] + ([("hand_right_depth", "png", True)] if include_depth else []),
     }
 
     for video_key, image_list in camera_map.items():
@@ -393,12 +460,14 @@ def detect_episodes(agibot_root: Path) -> list:
 
 
 def convert_episode(
-    agibot_dir: Path, output_dir: Path, episode_index: int, lerobot_template, fps: float = 30.0
+    agibot_dir: Path, output_dir: Path, episode_index: int, lerobot_template, fps: float = 30.0, fmt: str = "vla"
 ) -> dict:
     """Convert a single agibot episode. Returns dict with stats."""
     import h5py
     import pyarrow as pa
     import pyarrow.parquet as pq
+
+    state_len, action_len = _resolve_format(fmt)
 
     print(f"\n{'='*60}")
     print(f"Converting episode {episode_index}: {agibot_dir}")
@@ -426,8 +495,8 @@ def convert_episode(
             joint_all_dict = {
                 "joint": {"position": joint_pos_all[i], "effort": joint_eff_all[i], "velocity": joint_vel_all[i]}
             }
-            states.append(build_state(state_dict, joint_all_dict, extrinsic_data, frame_idx=i))
-            actions.append(build_action(action_dict))
+            states.append(build_state(state_dict, joint_all_dict, extrinsic_data, frame_idx=i, fmt=fmt))
+            actions.append(build_action(action_dict, fmt=fmt))
             timestamps.append(ts_ns)
 
     num_frames = len(frame_ids)
@@ -439,8 +508,8 @@ def convert_episode(
     # pa.list_(dtype, length) creates FixedSizeListType (matching reference parquet schema)
     table = pa.table(
         {
-            "observation.state": pa.array(states, type=pa.list_(pa.float32(), 159)),
-            "action": pa.array(actions, type=pa.list_(pa.float32(), 40)),
+            "observation.state": pa.array(states, type=pa.list_(pa.float32(), state_len)),
+            "action": pa.array(actions, type=pa.list_(pa.float32(), action_len)),
             "episode_index": pa.array([episode_index] * num_frames, type=pa.int64()),
             "frame_index": pa.array(list(range(num_frames)), type=pa.int64()),
             "index": pa.array(list(range(num_frames)), type=pa.int64()),
@@ -450,7 +519,7 @@ def convert_episode(
     )
 
     # Add huggingface schema metadata (present in reference v2.1 parquet files)
-    metadata = {b"huggingface": json.dumps(ARROW_SCHEMA_HUGGINGFACE_METADATA).encode()}
+    metadata = {b"huggingface": json.dumps(_arrow_schema_huggingface_metadata(state_len, action_len)).encode()}
     table = table.replace_schema_metadata(metadata)
 
     chunk_name = f"chunk-{episode_index // 1000:03d}"
@@ -463,7 +532,7 @@ def convert_episode(
     print(f"  Wrote {parquet_path} ({num_frames} frames)")
 
     # Encode videos
-    encode_videos(agibot_dir, output_dir, episode_index, fps=fps)
+    encode_videos(agibot_dir, output_dir, episode_index, fps=fps, fmt=fmt)
 
     return {"episode_index": episode_index, "length": num_frames}
 
@@ -488,10 +557,12 @@ def load_camera_parameters(agibot_dir: Path) -> dict:
     return cam_params
 
 
-def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list):
+def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: str = "vla"):
     """Generate info.json, tasks.jsonl, episodes.jsonl, episodes_stats.jsonl."""
     import numpy as np
     import pyarrow.parquet as pq
+
+    state_len, action_len = _resolve_format(fmt)
 
     meta_dir = output_dir / "meta"
     meta_dir.mkdir(parents=True, exist_ok=True)
@@ -696,13 +767,13 @@ def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list):
             },
             "observation.state": {
                 "dtype": "float32",
-                "shape": [159],
-                "field_descriptions": _get_state_field_descriptions(),
+                "shape": [state_len],
+                "field_descriptions": _get_state_field_descriptions(fmt),
             },
             "action": {
                 "dtype": "float32",
-                "shape": [40],
-                "field_descriptions": _get_action_field_descriptions(),
+                "shape": [action_len],
+                "field_descriptions": _get_action_field_descriptions(fmt),
             },
             "episode_index": {"dtype": "int64", "shape": [1], "names": None},
             "frame_index": {"dtype": "int64", "shape": [1], "names": None},
@@ -728,7 +799,19 @@ def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list):
     print(f"\nGenerated meta files in {meta_dir}/")
 
 
-def _get_state_field_descriptions():
+def _get_state_field_descriptions(fmt: str = "vla"):
+    if fmt == "vla":
+        return _get_state_field_descriptions_vla()
+    return _get_state_field_descriptions_agibot()
+
+
+def _get_action_field_descriptions(fmt: str = "vla"):
+    if fmt == "vla":
+        return _get_action_field_descriptions_vla()
+    return _get_action_field_descriptions_agibot()
+
+
+def _get_state_field_descriptions_agibot():
     return {
         "state/left_effector/position": {"description": "", "dimensions": 1, "indices": [0]},
         "state/right_effector/position": {"description": "", "dimensions": 1, "indices": [1]},
@@ -832,7 +915,7 @@ def _get_state_field_descriptions():
     }
 
 
-def _get_action_field_descriptions():
+def _get_action_field_descriptions_agibot():
     return {
         "action/left_effector/position": {"description": "", "dimensions": 1, "indices": [0]},
         "action/right_effector/position": {"description": "", "dimensions": 1, "indices": [1]},
@@ -842,6 +925,36 @@ def _get_action_field_descriptions():
         "action/head/position": {"description": "", "dimensions": 3, "indices": list(range(30, 33))},
         "action/waist/position": {"description": "", "dimensions": 5, "indices": list(range(33, 38))},
         "action/robot/velocity": {"description": "", "dimensions": 2, "indices": list(range(38, 40))},
+    }
+
+
+def _get_state_field_descriptions_vla():
+    return {
+        "state/joint_position": {
+            "description": "arm joint angles (14 dims: left_arm[7] + right_arm[7])",
+            "dimensions": 14,
+            "indices": list(range(VLA_STATE_JOINT_POSITION, VLA_STATE_JOINT_POSITION + 14)),
+        },
+        "state/gripper_position": {
+            "description": "gripper positions (left, right)",
+            "dimensions": 2,
+            "indices": list(range(VLA_STATE_GRIPPER_POSITION, VLA_STATE_GRIPPER_POSITION + 2)),
+        },
+    }
+
+
+def _get_action_field_descriptions_vla():
+    return {
+        "action/joint_position": {
+            "description": "arm joint target angles (14 dims: left_arm[7] + right_arm[7])",
+            "dimensions": 14,
+            "indices": list(range(VLA_ACTION_JOINT_POSITION, VLA_ACTION_JOINT_POSITION + 14)),
+        },
+        "action/gripper_position": {
+            "description": "gripper target positions (left, right)",
+            "dimensions": 2,
+            "indices": list(range(VLA_ACTION_GRIPPER_POSITION, VLA_ACTION_GRIPPER_POSITION + 2)),
+        },
     }
 
 
@@ -855,6 +968,7 @@ def convert_agibot_to_lerobot(
     output_dir: Path,
     lerobot_ref_dir: Optional[Path] = None,
     fps: float = 30.0,
+    fmt: str = "vla",
 ) -> dict:
     """Convert one or more agibot episodes to LeRobot v2.1 format.
 
@@ -878,6 +992,10 @@ def convert_agibot_to_lerobot(
         columns are left empty.
     fps
         Video frame rate (default ``30.0``).
+    fmt
+        Output format: ``"vla"`` (16-dim state / 16-dim action — arm joints +
+        gripper, suitable for pi0.5 and standard VLA training; default) or
+        ``"agibot"`` (159-dim state / 40-dim action, full vector).
 
     Returns
     -------
@@ -925,10 +1043,10 @@ def convert_agibot_to_lerobot(
 
     episode_info = []
     for i, ep_dir in enumerate(episodes):
-        result = convert_episode(ep_dir, output_dir, i, lerobot_template, fps=fps)
+        result = convert_episode(ep_dir, output_dir, i, lerobot_template, fps=fps, fmt=fmt)
         episode_info.append(result)
 
-    generate_meta(output_dir, episode_info, episodes)
+    generate_meta(output_dir, episode_info, episodes, fmt=fmt)
 
     total_frames = sum(ep["length"] for ep in episode_info)
     print(f"\nConversion complete! {len(episode_info)} episode(s), {total_frames} total frames.")
@@ -986,6 +1104,14 @@ def convert_cli(argv: list) -> int:
         default=30.0,
         help="Video FPS (default 30.0)",
     )
+    parser.add_argument(
+        "--format",
+        type=str,
+        choices=SUPPORTED_FORMATS,
+        default="vla",
+        help="Output schema format: 'vla' (16+16 dim: arm joints + gripper; "
+        "default) or 'agibot' (full 159+40 dim vectors).",
+    )
     args = parser.parse_args(argv)
 
     try:
@@ -994,6 +1120,7 @@ def convert_cli(argv: list) -> int:
             output_dir=args.output_dir,
             lerobot_ref_dir=args.lerobot_ref_dir,
             fps=args.fps,
+            fmt=args.format,
         )
     except RuntimeError as exc:
         print(f"❌ {exc}", file=sys.stderr)
