@@ -32,8 +32,14 @@ import json
 import shutil
 import subprocess
 import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Optional
+
+from geniesim_benchmark.dataset.convert._lerobot_compute_stats import (
+    compute_episode_stats,
+    aggregate_stats,
+)
 
 # ============================================================
 # LeRobot v2.1 parquet schema constants
@@ -121,7 +127,8 @@ def _require_ffmpeg() -> None:
     """Verify ffmpeg is on PATH; raise a clear error if not."""
     if shutil.which("ffmpeg") is None:
         raise RuntimeError(
-            "ffmpeg is not on PATH. Install it first:\n"
+            "ffmpeg is not on PATH. The converter shells out to ffmpeg to "
+            "encode RGB (HEVC) and depth (PNG) videos. Install it first:\n"
             "    Ubuntu / Debian:  sudo apt install ffmpeg\n"
             "    macOS (Homebrew): brew install ffmpeg"
         )
@@ -358,16 +365,14 @@ TARGET_VIDEO_SIZE = "640:480"
 
 
 def encode_videos(agibot_dir: Path, output_dir: Path, episode_index: int, fps: float = 30.0, fmt: str = "vla"):
-    """Re-encode camera videos to unified 640×480 with ffmpeg.
+    """Encode camera images to MP4 videos with ffmpeg, unified to 640×480.
 
-    Prefers pre-encoded MP4 from ``observations/videos/`` as source; falls
-    back to raw camera images. All outputs are rescaled to 640×480 so
-    ``np.stack(cams, axis=2)`` works across camera views.
+    All 3 RGB cameras are encoded in parallel using ThreadPoolExecutor.
+    Depth is reserved for future use (not currently encoded).
 
     Output path: videos/{chunk}/{video_key}/episode_{index:06d}.mp4
     """
     chunk_name = f"chunk-{episode_index // 1000:03d}"
-    src_dir = agibot_dir / "observations" / "videos"
     camera_dir = agibot_dir / "camera"
 
     include_depth = fmt != "vla"
@@ -381,56 +386,55 @@ def encode_videos(agibot_dir: Path, output_dir: Path, episode_index: int, fps: f
         video_map["observation.images.hand_left_depth"] = ("hand_left_depth", "png", True)
         video_map["observation.images.hand_right_depth"] = ("hand_right_depth", "png", True)
 
-    for vid_key, (src_name, ext, is_depth) in video_map.items():
+    def _encode_one(vid_key):
+        stem, ext, is_depth = video_map[vid_key]
         dst_path = output_dir / "videos" / chunk_name / vid_key / f"episode_{episode_index:06d}.mp4"
         dst_path.parent.mkdir(parents=True, exist_ok=True)
+        _encode_from_images(camera_dir, dst_path, stem, ext, is_depth, fps)
+        return vid_key
 
-        src_path = src_dir / f"{src_name}.mp4"
-        if src_path.exists():
-            _encode_video(str(src_path), str(dst_path), is_depth, fps)
-            print(f"  Encoded {vid_key} (from pre-encoded MP4)")
-        else:
-            _encode_from_images(camera_dir, dst_path, src_name, ext, is_depth, fps)
-            print(f"  Encoded {vid_key} (from raw images)")
-
-
-def _encode_video(input_path: str, output_path: str, is_depth: bool, fps: float):
-    """Re-encode (and scale) a single video file to target size."""
-    _require_ffmpeg()
-    cmd = [
-        "ffmpeg", "-y",
-        "-i", input_path,
-        "-vf", f"scale={TARGET_VIDEO_SIZE}",
-        "-r", str(int(fps)),
-    ]
-    if is_depth:
-        cmd += ["-c:v", "png", "-sws_flags", "neighbor"]
-    else:
-        cmd += ["-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-g", "30"]
-    cmd += ["-movflags", "+faststart", output_path]
-
-    result = subprocess.run(cmd, capture_output=True, text=True)
-    if result.returncode != 0:
-        raise RuntimeError(f"Re-encoding {input_path} failed: {result.stderr[-500:]}")
+    with ThreadPoolExecutor(max_workers=len(video_map)) as pool:
+        futures = {pool.submit(_encode_one, k): k for k in video_map}
+        for fut in as_completed(futures):
+            print(f"  Encoded {fut.result()}")
 
 
 def _encode_from_images(camera_dir, video_path, image_stem, ext, is_depth, fps):
-    """Fallback: encode video from raw camera images using ffmpeg."""
+    """Encode video from raw camera images using ffmpeg."""
     _require_ffmpeg()
     input_pattern = str(camera_dir / f"%d/{image_stem}.{ext}")
+    scale_filter = f"scale={TARGET_VIDEO_SIZE}"
 
-    cmd = [
-        "ffmpeg", "-y",
-        "-framerate", str(int(fps)),
-        "-i", input_pattern,
-        "-vf", f"scale={TARGET_VIDEO_SIZE}",
-        "-r", str(int(fps)),
-    ]
     if is_depth:
-        cmd += ["-c:v", "png", "-pix_fmt", "gray16le", "-sws_flags", "neighbor"]
+        cmd = [
+            "ffmpeg", "-y",
+            "-framerate", str(int(fps)),
+            "-i", input_pattern,
+            "-c:v", "png",
+            "-pix_fmt", "gray16le",
+            "-sws_flags", "neighbor",
+            "-vf", scale_filter,
+            "-r", str(int(fps)),
+            "-movflags", "+faststart",
+            str(video_path),
+        ]
     else:
-        cmd += ["-f", "image2", "-vcodec", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-g", "30"]
-    cmd += ["-movflags", "+faststart", str(video_path)]
+        cmd = [
+            "ffmpeg", "-y",
+            "-f", "image2",
+            "-r", str(int(fps)),
+            "-i", input_pattern,
+            "-vcodec", "hevc_nvenc",
+            "-preset", "p4",
+            "-cq", "24",
+            "-b:v", "0",
+            "-pix_fmt", "yuv420p",
+            "-g", "8",
+            "-b_ref_mode", "0",
+            "-vf", f"{scale_filter},setpts=N/({int(fps)}*TB)",
+            "-movflags", "+faststart",
+            str(video_path),
+        ]
 
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
@@ -550,6 +554,22 @@ def load_camera_parameters(agibot_dir: Path) -> dict:
     return cam_params
 
 
+def _stats_to_json(stats: dict) -> dict:
+    """Convert a stats dict: numpy arrays -> JSON-serialisable lists."""
+    import numpy as np
+    out = {}
+    for k, v in stats.items():
+        if isinstance(v, np.ndarray):
+            out[k] = v.tolist()
+        elif isinstance(v, (int, float, np.integer, np.floating)):
+            out[k] = [v.item() if hasattr(v, "item") else v]
+        elif isinstance(v, dict):
+            out[k] = _stats_to_json(v)
+        else:
+            out[k] = v
+    return out
+
+
 def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: str = "vla"):
     """Generate info.json, tasks.jsonl, episodes.jsonl, episodes_stats.jsonl."""
     import numpy as np
@@ -579,99 +599,96 @@ def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: 
                 + "\n"
             )
 
-    # episodes_stats.jsonl
-    stats_episodes = []
-    for ep in episode_info:
+    # episodes_stats.jsonl — use official LeRobot compute_episode_stats for
+    # bit-exact statistics (per-channel video stats via histogram quantiles,
+    # parallel aggregation via Chan et al., etc.)
+    features_for_stats = {
+        "observation.images.top_head": {"dtype": "video", "shape": [480, 640, 3], "names": ["height", "width", "channel"]},
+        "observation.images.hand_left": {"dtype": "video", "shape": [480, 640, 3], "names": ["height", "width", "channel"]},
+        "observation.images.hand_right": {"dtype": "video", "shape": [480, 640, 3], "names": ["height", "width", "channel"]},
+        "observation.state": {"dtype": "float32", "shape": [state_len]},
+        "action": {"dtype": "float32", "shape": [action_len]},
+        "episode_index": {"dtype": "int64", "shape": [1]},
+        "frame_index": {"dtype": "int64", "shape": [1]},
+        "index": {"dtype": "int64", "shape": [1]},
+        "task_index": {"dtype": "int64", "shape": [1]},
+        "timestamp": {"dtype": "float32", "shape": [1]},
+    }
+    video_map_rgb = {
+        "observation.images.top_head": ("head_color", "jpg"),
+        "observation.images.hand_left": ("hand_left_color", "jpg"),
+        "observation.images.hand_right": ("hand_right_color", "jpg"),
+    }
+
+    per_episode_stats = []  # list of dict (or {} if parquet missing)
+    non_empty_stats = []    # list of stats dicts to feed aggregate_stats
+    for ep, agibot_dir in zip(episode_info, agibot_dirs):
         ep_idx = ep["episode_index"]
         chunk_name = f"chunk-{ep_idx // 1000:03d}"
         parquet_path = output_dir / "data" / chunk_name / f"episode_{ep_idx:06d}.parquet"
-        if parquet_path.exists():
-            table = pq.read_table(str(parquet_path))
-            rows = table.to_pylist()
-            num_frames = len(rows)
-            state_col = np.array([r["observation.state"] for r in rows], dtype=np.float32)
-            action_col = np.array([r["action"] for r in rows], dtype=np.float32)
-            frame_index_col = np.array([r["frame_index"] for r in rows], dtype=np.int64)
-            index_col = np.array([r["index"] for r in rows], dtype=np.int64)
-            timestamp_col = np.array([r["timestamp"] for r in rows], dtype=np.float32)
+        if not parquet_path.exists():
+            per_episode_stats.append({})
+            continue
 
-            # Video fields: per-frame stats as nested arrays (matches reference format)
-            video_keys = ["observation.images.top_head", "observation.images.hand_left", "observation.images.hand_right"]
-            video_stats = {}
-            for key in video_keys:
-                # For videos we don't have pixel data in parquet, use zeros as placeholder
-                # (matching the reference which also has zeros for video stats)
-                video_stats[key] = {
-                    "min": [[[0.0]], [[0.0]], [[0.0]]],
-                    "max": [[[0.0]], [[0.0]], [[0.0]]],
-                    "mean": [[[0.0]], [[0.0]], [[0.0]]],
-                    "std": [[[0.0]], [[0.0]], [[0.0]]],
-                    "count": [0],
-                }
+        table = pq.read_table(str(parquet_path))
+        rows = table.to_pylist()
+        num_frames = len(rows)
 
-            stats = {
-                "episode_index": ep_idx,
-                "stats": {
-                    **video_stats,
-                    "observation.state": {
-                        "mean": state_col.mean(axis=0).tolist(),
-                        "std": state_col.std(axis=0).tolist(),
-                        "min": state_col.min(axis=0).tolist(),
-                        "max": state_col.max(axis=0).tolist(),
-                        "count": [num_frames],
-                    },
-                    "action": {
-                        "mean": action_col.mean(axis=0).tolist(),
-                        "std": action_col.std(axis=0).tolist(),
-                        "min": action_col.min(axis=0).tolist(),
-                        "max": action_col.max(axis=0).tolist(),
-                        "count": [num_frames],
-                    },
-                    # Integer fields (episode_index, frame_index, index, task_index)
-                    "episode_index": {
-                        "min": [ep_idx],
-                        "max": [ep_idx],
-                        "mean": [float(ep_idx)],
-                        "std": [0.0],
-                        "count": [num_frames],
-                    },
-                    "frame_index": {
-                        "min": [int(frame_index_col.min())],
-                        "max": [int(frame_index_col.max())],
-                        "mean": [float(frame_index_col.mean())],
-                        "std": [float(frame_index_col.std())],
-                        "count": [num_frames],
-                    },
-                    "index": {
-                        "min": [int(index_col.min())],
-                        "max": [int(index_col.max())],
-                        "mean": [float(index_col.mean())],
-                        "std": [float(index_col.std())],
-                        "count": [num_frames],
-                    },
-                    "task_index": {
-                        "min": [0],
-                        "max": [0],
-                        "mean": [0.0],
-                        "std": [0.0],
-                        "count": [num_frames],
-                    },
-                    "timestamp": {
-                        "min": [float(timestamp_col.min())],
-                        "max": [float(timestamp_col.max())],
-                        "mean": [float(timestamp_col.mean())],
-                        "std": [float(timestamp_col.std())],
-                        "count": [num_frames],
-                    },
-                },
-            }
-            stats_episodes.append(stats)
-        else:
-            stats_episodes.append({})
+        # Build episode_data as expected by compute_episode_stats:
+        # video keys -> list[Path]; numeric keys -> np.ndarray
+        state_col = np.array([r["observation.state"] for r in rows], dtype=np.float32)
+        action_col = np.array([r["action"] for r in rows], dtype=np.float32)
+        frame_index_col = np.array([r["frame_index"] for r in rows], dtype=np.int64)
+        index_col = np.array([r["index"] for r in rows], dtype=np.int64)
+        episode_index_col = np.array([r["episode_index"] for r in rows], dtype=np.int64)
+        task_index_col = np.array([r["task_index"] for r in rows], dtype=np.int64)
+        timestamp_col = np.array([r["timestamp"] for r in rows], dtype=np.float32)
+
+        camera_dir = agibot_dir / "camera"
+        frame_ids = sorted(
+            [d.name for d in camera_dir.iterdir() if d.is_dir()],
+            key=lambda x: int(x),
+        )
+
+        episode_data = {
+            "observation.state": state_col,
+            "action": action_col,
+            "episode_index": episode_index_col,
+            "frame_index": frame_index_col,
+            "index": index_col,
+            "task_index": task_index_col,
+            "timestamp": timestamp_col,
+        }
+        for feat_key, (stem, ext) in video_map_rgb.items():
+            episode_data[feat_key] = [
+                str(camera_dir / fid / f"{stem}.{ext}") for fid in frame_ids
+            ]
+
+        try:
+            ep_stats = compute_episode_stats(episode_data, features_for_stats)
+            ep_stats_json = {k: _stats_to_json(v) for k, v in ep_stats.items()}
+            per_episode_stats.append({"episode_index": ep_idx, "stats": ep_stats_json})
+            non_empty_stats.append(ep_stats)  # keep numpy arrays for aggregate_stats
+        except Exception as exc:
+            print(f"  WARNING: failed to compute stats for episode {ep_idx}: {exc}")
+            per_episode_stats.append({})
 
     with (meta_dir / "episodes_stats.jsonl").open("w") as f:
-        for s in stats_episodes:
+        for s in per_episode_stats:
             f.write(json.dumps(s) + "\n")
+
+    # Aggregate global stats.json via official aggregate_stats
+    if non_empty_stats:
+        global_stats_raw = aggregate_stats(non_empty_stats)
+        global_stats = {
+            feat: {k: v.tolist() if hasattr(v, "tolist") else v for k, v in ft.items()}
+            for feat, ft in global_stats_raw.items()
+        }
+    else:
+        global_stats = {}
+
+    with (meta_dir / "stats.json").open("w") as f:
+        json.dump(global_stats, f, indent=2)
 
     # info.json
     total_frames = sum(ep["length"] for ep in episode_info)
@@ -726,7 +743,7 @@ def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: 
                 "video_info": {
                     "video.is_depth_map": False,
                     "video.fps": 30.0,
-                    "video.codec": "h264",
+                    "video.codec": "hevc",
                     "video.pix_fmt": "yuv420p",
                     "has_audio": False,
                 },
@@ -738,7 +755,7 @@ def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: 
                 "video_info": {
                     "video.is_depth_map": False,
                     "video.fps": 30.0,
-                    "video.codec": "h264",
+                    "video.codec": "hevc",
                     "video.pix_fmt": "yuv420p",
                     "has_audio": False,
                 },
@@ -750,7 +767,7 @@ def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: 
                 "video_info": {
                     "video.is_depth_map": False,
                     "video.fps": 30.0,
-                    "video.codec": "h264",
+                    "video.codec": "hevc",
                     "video.pix_fmt": "yuv420p",
                     "has_audio": False,
                 },
