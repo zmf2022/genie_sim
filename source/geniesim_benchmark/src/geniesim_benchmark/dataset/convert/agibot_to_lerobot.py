@@ -121,8 +121,7 @@ def _require_ffmpeg() -> None:
     """Verify ffmpeg is on PATH; raise a clear error if not."""
     if shutil.which("ffmpeg") is None:
         raise RuntimeError(
-            "ffmpeg is not on PATH. The converter shells out to ffmpeg to "
-            "encode RGB (HEVC) and depth (PNG) videos. Install it first:\n"
+            "ffmpeg is not on PATH. Install it first:\n"
             "    Ubuntu / Debian:  sudo apt install ffmpeg\n"
             "    macOS (Homebrew): brew install ffmpeg"
         )
@@ -355,93 +354,87 @@ def fill_extrinsics_from_lerobot(extrinsic_data: dict, template) -> dict:
     return extrinsic_data
 
 
+TARGET_VIDEO_SIZE = "640:480"
+
+
 def encode_videos(agibot_dir: Path, output_dir: Path, episode_index: int, fps: float = 30.0, fmt: str = "vla"):
-    """Encode camera images into MP4 videos using ffmpeg.
+    """Re-encode camera videos to unified 640×480 with ffmpeg.
 
-    RGB videos:   HEVC (libx265), yuv420p, keyframe every 8 frames, CRF 24
-    Depth videos: lossless PNG codec, gray16le (skipped when ``fmt == "vla"``)
-    Output path:  videos/{chunk}/{video_key}/episode_{index:06d}.mp4
+    Prefers pre-encoded MP4 from ``observations/videos/`` as source; falls
+    back to raw camera images. All outputs are rescaled to 640×480 so
+    ``np.stack(cams, axis=2)`` works across camera views.
+
+    Output path: videos/{chunk}/{video_key}/episode_{index:06d}.mp4
     """
-    camera_dir = agibot_dir / "camera"
     chunk_name = f"chunk-{episode_index // 1000:03d}"
+    src_dir = agibot_dir / "observations" / "videos"
+    camera_dir = agibot_dir / "camera"
 
-    # video_key -> [(image_stem, ext, is_depth), ...]
     include_depth = fmt != "vla"
-    camera_map = {
-        "top_head": [("head_color", "jpg", False)] + ([("head_depth", "png", True)] if include_depth else []),
-        "hand_left": [("hand_left_color", "jpg", False)] + ([("hand_left_depth", "png", True)] if include_depth else []),
-        "hand_right": [("hand_right_color", "jpg", False)] + ([("hand_right_depth", "png", True)] if include_depth else []),
+    video_map = {
+        "observation.images.top_head": ("head_color", "jpg", False),
+        "observation.images.hand_left": ("hand_left_color", "jpg", False),
+        "observation.images.hand_right": ("hand_right_color", "jpg", False),
     }
+    if include_depth:
+        video_map["observation.images.top_head_depth"] = ("head_depth", "png", True)
+        video_map["observation.images.hand_left_depth"] = ("hand_left_depth", "png", True)
+        video_map["observation.images.hand_right_depth"] = ("hand_right_depth", "png", True)
 
-    for video_key, image_list in camera_map.items():
-        for image_stem, ext, is_depth in image_list:
-            # Depth uses video_key + "_depth" as subdirectory
-            vid_dir = video_key + "_depth" if is_depth else video_key
-            video_path = output_dir / "videos" / chunk_name / vid_dir / f"episode_{episode_index:06d}.mp4"
-            video_path.parent.mkdir(parents=True, exist_ok=True)
-            input_pattern = str(camera_dir / f"%d/{image_stem}.{ext}")
+    for vid_key, (src_name, ext, is_depth) in video_map.items():
+        dst_path = output_dir / "videos" / chunk_name / vid_key / f"episode_{episode_index:06d}.mp4"
+        dst_path.parent.mkdir(parents=True, exist_ok=True)
 
-            if is_depth:
-                result = subprocess.run(
-                    [
-                        "ffmpeg",
-                        "-y",
-                        "-framerate",
-                        str(int(fps)),
-                        "-i",
-                        input_pattern,
-                        "-c:v",
-                        "png",
-                        "-pix_fmt",
-                        "gray16le",
-                        "-r",
-                        str(int(fps)),
-                        "-movflags",
-                        "+faststart",
-                        str(video_path),
-                    ],
-                    capture_output=True,
-                    text=True,
-                )
-            else:
-                result = subprocess.run(
-                    [
-                        "ffmpeg",
-                        "-y",
-                        "-f",
-                        "image2",
-                        "-threads",
-                        "4",
-                        "-r",
-                        str(int(fps)),
-                        "-i",
-                        input_pattern,
-                        "-vcodec",
-                        "libx265",
-                        "-pix_fmt",
-                        "yuv420p",
-                        "-keyint_min",
-                        "8",
-                        "-sc_threshold",
-                        "0",
-                        "-vf",
-                        f"setpts=N/({int(fps)}*TB)",
-                        "-bf",
-                        "0",
-                        "-crf",
-                        "24",
-                        "-g",
-                        "8",
-                        str(video_path),
-                    ],
-                    capture_output=True,
-                    text=True,
-                )
+        src_path = src_dir / f"{src_name}.mp4"
+        if src_path.exists():
+            _encode_video(str(src_path), str(dst_path), is_depth, fps)
+            print(f"  Encoded {vid_key} (from pre-encoded MP4)")
+        else:
+            _encode_from_images(camera_dir, dst_path, src_name, ext, is_depth, fps)
+            print(f"  Encoded {vid_key} (from raw images)")
 
-            if result.returncode != 0:
-                print(f"  ERROR encoding {vid_dir}: {result.stderr[-500:]}")
-            else:
-                print(f"  Encoded {vid_dir}")
+
+def _encode_video(input_path: str, output_path: str, is_depth: bool, fps: float):
+    """Re-encode (and scale) a single video file to target size."""
+    _require_ffmpeg()
+    cmd = [
+        "ffmpeg", "-y",
+        "-i", input_path,
+        "-vf", f"scale={TARGET_VIDEO_SIZE}",
+        "-r", str(int(fps)),
+    ]
+    if is_depth:
+        cmd += ["-c:v", "png", "-sws_flags", "neighbor"]
+    else:
+        cmd += ["-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-g", "30"]
+    cmd += ["-movflags", "+faststart", output_path]
+
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        raise RuntimeError(f"Re-encoding {input_path} failed: {result.stderr[-500:]}")
+
+
+def _encode_from_images(camera_dir, video_path, image_stem, ext, is_depth, fps):
+    """Fallback: encode video from raw camera images using ffmpeg."""
+    _require_ffmpeg()
+    input_pattern = str(camera_dir / f"%d/{image_stem}.{ext}")
+
+    cmd = [
+        "ffmpeg", "-y",
+        "-framerate", str(int(fps)),
+        "-i", input_pattern,
+        "-vf", f"scale={TARGET_VIDEO_SIZE}",
+        "-r", str(int(fps)),
+    ]
+    if is_depth:
+        cmd += ["-c:v", "png", "-pix_fmt", "gray16le", "-sws_flags", "neighbor"]
+    else:
+        cmd += ["-f", "image2", "-vcodec", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-g", "30"]
+    cmd += ["-movflags", "+faststart", str(video_path)]
+
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        raise RuntimeError(f"Encoding {image_stem} failed: {result.stderr[-500:]}")
 
 
 def detect_episodes(agibot_root: Path) -> list:
@@ -603,10 +596,9 @@ def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: 
             timestamp_col = np.array([r["timestamp"] for r in rows], dtype=np.float32)
 
             # Video fields: per-frame stats as nested arrays (matches reference format)
-            video_keys = ["top_head", "hand_left", "hand_right"]
+            video_keys = ["observation.images.top_head", "observation.images.hand_left", "observation.images.hand_right"]
             video_stats = {}
-            for vk in video_keys:
-                key = f"observation.images.{vk}"
+            for key in video_keys:
                 # For videos we don't have pixel data in parquet, use zeros as placeholder
                 # (matching the reference which also has zeros for video stats)
                 video_stats[key] = {
@@ -734,11 +726,11 @@ def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: 
                 "video_info": {
                     "video.is_depth_map": False,
                     "video.fps": 30.0,
-                    "video.codec": "hevc",
+                    "video.codec": "h264",
                     "video.pix_fmt": "yuv420p",
                     "has_audio": False,
                 },
-                "shape": [400, 640, 3],
+                "shape": [480, 640, 3],
                 "names": ["height", "width", "channel"],
             },
             "observation.images.hand_left": {
@@ -746,11 +738,11 @@ def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: 
                 "video_info": {
                     "video.is_depth_map": False,
                     "video.fps": 30.0,
-                    "video.codec": "hevc",
+                    "video.codec": "h264",
                     "video.pix_fmt": "yuv420p",
                     "has_audio": False,
                 },
-                "shape": [1056, 1280, 3],
+                "shape": [480, 640, 3],
                 "names": ["height", "width", "channel"],
             },
             "observation.images.hand_right": {
@@ -758,11 +750,11 @@ def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: 
                 "video_info": {
                     "video.is_depth_map": False,
                     "video.fps": 30.0,
-                    "video.codec": "hevc",
+                    "video.codec": "h264",
                     "video.pix_fmt": "yuv420p",
                     "has_audio": False,
                 },
-                "shape": [1056, 1280, 3],
+                "shape": [480, 640, 3],
                 "names": ["height", "width", "channel"],
             },
             "observation.state": {
@@ -1011,12 +1003,11 @@ def convert_agibot_to_lerobot(
     Raises
     ------
     RuntimeError
-        If ffmpeg is not on ``PATH``, or heavy deps
-        (``h5py``/``pyarrow``/``numpy``) are missing, or no episode
-        directories are found.
+        If heavy deps (``h5py``/``pyarrow``/``numpy``) are missing, or no
+        episode directories are found, or ffmpeg is missing when video
+        fallback encoding is needed.
     """
     # Pre-flight checks (fail fast with friendly messages).
-    _require_ffmpeg()
     _require_heavy_deps()
 
     agibot_dir = Path(agibot_dir).resolve()
