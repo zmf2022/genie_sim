@@ -53,6 +53,11 @@ AGIBOT_ACTION_LEN = 40
 VLA_STATE_LEN = 16
 VLA_ACTION_LEN = 16
 
+# Threshold (mm) for binarizing gripper state: effector > this → 1 (closed),
+# else → 0 (open). The h5 raw data minimum non-zero value is ~11.97 mm, so 10
+# is a safe gap that separates "fully open / idle" (0) from "grasping" (1).
+VLA_GRIPPER_STATE_BINARY_THRESHOLD = 10.0
+
 
 def _arrow_schema_huggingface_metadata(state_len: int, action_len: int):
     return {
@@ -239,8 +244,11 @@ def _build_state_vla(state_dict: dict, joint_all_dict: dict, extrinsic_data: dic
 
     state = np.zeros(VLA_STATE_LEN, dtype=np.float32)
     state[VLA_STATE_JOINT_POSITION : VLA_STATE_JOINT_POSITION + 14] = joint_all_dict["joint"]["position"][:14]
-    state[VLA_STATE_GRIPPER_POSITION] = state_dict["left_effector"]["position"][0]
-    state[VLA_STATE_GRIPPER_POSITION + 1] = state_dict["right_effector"]["position"][0]
+    # Binarize gripper: raw effector (mm) > threshold → 1 (closed), else → 0 (open)
+    left_mm = float(state_dict["left_effector"]["position"][0])
+    right_mm = float(state_dict["right_effector"]["position"][0])
+    state[VLA_STATE_GRIPPER_POSITION] = float(left_mm > VLA_GRIPPER_STATE_BINARY_THRESHOLD)
+    state[VLA_STATE_GRIPPER_POSITION + 1] = float(right_mm > VLA_GRIPPER_STATE_BINARY_THRESHOLD)
     return state
 
 
