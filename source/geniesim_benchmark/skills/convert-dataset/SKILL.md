@@ -30,6 +30,14 @@ inputs:
     desc: Video frame rate
     required: false
     default: "30"
+  - name: task
+    desc: "Natural language task instruction (e.g. 'Pick up the apple and place it in the basket')."
+    required: false
+    default: ""
+  - name: format
+    desc: "Output schema: 'vla' (16+16) or 'agibot' (full 159+40)"
+    required: false
+    default: "vla"
 outputs:
   - desc: "LeRobot v2.1 dataset at output_dir (data/chunk-NNN/episode_*.parquet, videos/chunk-NNN/<key>/episode_*.mp4, meta/info.json + tasks.jsonl + episodes.jsonl + episodes_stats.jsonl)"
 ---
@@ -110,6 +118,28 @@ v2.1 timestamps (frame_index / fps). The `meta/info.json` always records
 `fps: 30` regardless — match this if you need consistency across a
 collection.
 
+### Set task instruction (VLA training)
+
+```bash
+geniesim dataset convert agibot-to-lerobot \
+  --agibot-dir ./agibot \
+  --output-dir ./lerobot_out \
+  --task "Pick up the apple and place it in the basket"
+```
+
+VLA models (gr00t, pi0.5, etc.) use the task instruction as a **language
+conditioning input**. Omitting `--task` leaves the language field empty.
+
+### Choose format
+
+```bash
+--format vla      # default: 16-dim state + 16-dim action (arm[14] + gripper[2])
+--format agibot   # full vectors: 159-dim state + 40-dim action
+```
+
+`vla` is the correct choice for VLA training. `agibot` preserves the
+full 159/40 vectors but is rarely used for modern training scripts.
+
 ## Programmatic use
 
 The same conversion is callable from Python:
@@ -123,6 +153,8 @@ manifest = convert_agibot_to_lerobot(
     output_dir=Path("./lerobot_out"),
     lerobot_ref_dir=Path("./ref_lerobot"),  # optional
     fps=30.0,
+    fmt="vla",  # "vla" or "agibot"
+    task="Pick up the apple and place it in the basket",  # language instruction
 )
 print(manifest["total_episodes"], manifest["total_frames"])
 ```
@@ -147,9 +179,15 @@ print('rows:', t.num_rows)
 "
 ```
 
-`observation.state` must be a `fixed_size_list<float32, 159>` and `action`
-a `fixed_size_list<float32, 40>` — those widths are part of the v2.1
-contract and the converter writes them literally.
+Dimensions depend on `--format`:
+
+| Format | `observation.state` | `action` |
+|---|---|---|
+| `vla` (default) | `fixed_size_list<float32, 16>` — arm[14] + gripper[2] | `fixed_size_list<float32, 16>` |
+| `agibot` | `fixed_size_list<float32, 159>` | `fixed_size_list<float32, 40>` |
+
+VLA gripper uses binary values `{0.0, 1.0}` (threshold 10.0 mm applied to
+raw values in `[0, 120]`).
 
 ## Troubleshooting
 
