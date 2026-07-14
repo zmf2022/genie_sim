@@ -578,7 +578,7 @@ def _stats_to_json(stats: dict) -> dict:
     return out
 
 
-def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: str = "vla"):
+def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: str = "vla", task: str = ""):
     """Generate info.json, tasks.jsonl, episodes.jsonl, episodes_stats.jsonl."""
     import numpy as np
     import pyarrow.parquet as pq
@@ -590,7 +590,7 @@ def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: 
 
     # tasks.jsonl
     with (meta_dir / "tasks.jsonl").open("w") as f:
-        f.write(json.dumps({"task_index": 0, "task": "Pop the popcorn"}, ensure_ascii=False) + "\n")
+        f.write(json.dumps({"task_index": 0, "task": task}, ensure_ascii=False) + "\n")
 
     # episodes.jsonl
     with (meta_dir / "episodes.jsonl").open("w") as f:
@@ -599,7 +599,7 @@ def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: 
                 json.dumps(
                     {
                         "episode_index": ep["episode_index"],
-                        "tasks": ["Pop the popcorn"],
+                        "tasks": [task],
                         "length": ep["length"],
                     },
                     ensure_ascii=False,
@@ -714,8 +714,8 @@ def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: 
 
     for i, ep_dir in enumerate(agibot_dirs):
         h5_path[str(i)] = f"frame://{ep_dir}/aligned_joints.h5"
-        high_level_instruction[str(i)] = {"high_level_instruction": ""}
-        instruction_segments[str(i)] = []
+        high_level_instruction[str(i)] = {"high_level_instruction": task}
+        instruction_segments[str(i)] = [task] if task else []
         intervention_info[str(i)] = {}
         key_frame[str(i)] = {"single": [], "dual": []}
         take_over[str(i)] = []
@@ -986,6 +986,7 @@ def convert_agibot_to_lerobot(
     lerobot_ref_dir: Optional[Path] = None,
     fps: float = 30.0,
     fmt: str = "vla",
+    task: str = "",
 ) -> dict:
     """Convert one or more agibot episodes to LeRobot v2.1 format.
 
@@ -1013,6 +1014,9 @@ def convert_agibot_to_lerobot(
         Output format: ``"vla"`` (16-dim state / 16-dim action — arm joints +
         gripper, suitable for pi0.5 and standard VLA training; default) or
         ``"agibot"`` (159-dim state / 40-dim action, full vector).
+    task
+        Natural language task instruction written into ``tasks.jsonl`` and
+        ``high_level_instruction`` metadata. Empty string if not provided.
 
     Returns
     -------
@@ -1062,7 +1066,7 @@ def convert_agibot_to_lerobot(
         result = convert_episode(ep_dir, output_dir, i, lerobot_template, fps=fps, fmt=fmt)
         episode_info.append(result)
 
-    generate_meta(output_dir, episode_info, episodes, fmt=fmt)
+    generate_meta(output_dir, episode_info, episodes, fmt=fmt, task=task)
 
     total_frames = sum(ep["length"] for ep in episode_info)
     print(f"\nConversion complete! {len(episode_info)} episode(s), {total_frames} total frames.")
@@ -1128,6 +1132,13 @@ def convert_cli(argv: list) -> int:
         help="Output schema format: 'vla' (16+16 dim: arm joints + gripper; "
         "default) or 'agibot' (full 159+40 dim vectors).",
     )
+    parser.add_argument(
+        "--task",
+        type=str,
+        default="",
+        help="Natural language task instruction (e.g. 'Pick up the apple and place it in the basket'). "
+        "Written into tasks.jsonl and high_level_instruction metadata.",
+    )
     args = parser.parse_args(argv)
 
     try:
@@ -1137,6 +1148,7 @@ def convert_cli(argv: list) -> int:
             lerobot_ref_dir=args.lerobot_ref_dir,
             fps=args.fps,
             fmt=args.format,
+            task=args.task,
         )
     except RuntimeError as exc:
         print(f"❌ {exc}", file=sys.stderr)
