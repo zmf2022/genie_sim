@@ -16,7 +16,7 @@ from geniesim_benchmark.utils.generalization_utils import apply_camera_image_aug
 from collections import deque
 import numpy as np
 import cv2
-import msgpack
+from geniesim_benchmark.utils import msgpack_numpy
 import websockets.sync.client
 from scipy.spatial.transform import Rotation as R
 from geniesim_benchmark.utils.infer_post_process import process_action, get_arm_states
@@ -51,6 +51,7 @@ class CoRobotPolicy(BasePolicy):
         self.debug = debug
         self._ws_uri = f"ws://{host_ip}:{port}" if port is not None else f"ws://{host_ip}"
         self._ws = None
+        self._server_metadata = None
         self.infer_cnt = 0
         self._camera_dirt_cache: Dict[tuple, np.ndarray] = {}
         self._current_episode_idx = 0
@@ -90,7 +91,8 @@ class CoRobotPolicy(BasePolicy):
             ping_interval=_PING_INTERVAL_SEC,
             ping_timeout=_PING_TIMEOUT_SEC,
         )
-        logger.info("Connected to policy server")
+        self._server_metadata = msgpack_numpy.unpackb(self._ws.recv())
+        logger.info(f"Connected to policy server, metadata: {self._server_metadata}")
 
     def _drop_connection(self):
         if self._ws is not None:
@@ -177,48 +179,41 @@ class CoRobotPolicy(BasePolicy):
             obs["images"] = apply_camera_image_augmentation(self._camera_dirt_cache, obs["images"], gen_config)
         return obs
 
+    @staticmethod
+    def _resize_image(image_rgb, width=640, height=480):
+        """Resize image to uniform resolution for stacking."""
+        if image_rgb.shape[0] != height or image_rgb.shape[1] != width:
+            return cv2.resize(image_rgb, (width, height), interpolation=cv2.INTER_LINEAR)
+        return image_rgb
+
     def get_payload(self, obs, task_instruction, gen_config):
         obs = self._pre_process_obs(obs, gen_config)
 
         arm_states, gripper_states, waist_states, head_states = self._split_states(obs["states"])
 
-        ts_ns = time.time_ns()
+        # Binarize gripper: effector (mm, after label_state conversion) > threshold → 1 (closed)
+        # This must match agibot_to_lerobot.py `VLA_GRIPPER_STATE_BINARY_THRESHOLD = 10.0`.
+        gripper_state_binary_threshold = 10.0
+        gripper_states_binary = [
+            1.0 if g > gripper_state_binary_threshold else 0.0 for g in gripper_states
+        ]
+
+        # Resize all cameras to uniform 640x480, send as HWC format
+        head_img = self._resize_image(obs["images"]["head"])
+        left_hand_img = self._resize_image(obs["images"]["left_hand"])
+        right_hand_img = self._resize_image(obs["images"]["right_hand"])
 
         payload = {
-            "method": "infer",
-            "params": {
-                "timestamps": {
-                    "head": ts_ns,
-                    "states": ts_ns,
-                },
-                "images": {
-                    "head": self._encode_image_jpeg(obs["images"]["head"]),
-                    "hand_left": self._encode_image_jpeg(obs["images"]["left_hand"]),
-                    "hand_right": self._encode_image_jpeg(obs["images"]["right_hand"]),
-                    # "head_depth": self._encode_depth(obs["depth"]["head"], 1000),
-                    # "hand_left_depth": self._encode_depth(obs["depth"]["left_hand"], 10000),
-                    # "hand_right_depth": self._encode_depth(obs["depth"]["right_hand"], 10000),
-                },
-                "states": {
-                    "head_joint_states": head_states,
-                    "arm_joint_states": arm_states,
-                    "waist_joint_states": waist_states,
-                    "gripper_states": gripper_states,
-                },
-                "prompt": task_instruction,
-                "robot_type": self._robot_type,
-                "task_name": self.sub_task_name,
-                "episode_idx": self._current_episode_idx,
-                "episode_done": self._episode_done,
-                "task_progress": self._extract_scores(self._task_progress),
-            },
+            "observation.images.top_head": head_img,
+            "observation.images.hand_left": left_hand_img,
+            "observation.images.hand_right": right_hand_img,
+            "observation.state": np.concatenate([arm_states, gripper_states_binary]),
+            "task": task_instruction,
         }
+        
         if self.debug:
-            logger.debug(f"task_name: {payload['params']['task_name']}")
-            logger.debug(f"states: {payload['params']['states']}")
-            logger.debug(f"prompt: {payload['params']['prompt']}")
-            logger.debug(f"task_progress: {payload['params']['task_progress']}")
-            logger.debug(f"episode_done: {payload['params']['episode_done']}")
+            logger.debug(f"task: {payload['task']}")
+            logger.debug(f"state shape: {payload['observation.state'].shape}")
             cv2.imwrite("head.png", cv2.cvtColor(obs["images"]["head"], cv2.COLOR_RGB2BGR))
             cv2.imwrite("left_hand.png", cv2.cvtColor(obs["images"]["left_hand"], cv2.COLOR_RGB2BGR))
             cv2.imwrite("right_hand.png", cv2.cvtColor(obs["images"]["right_hand"], cv2.COLOR_RGB2BGR))
@@ -258,50 +253,32 @@ class CoRobotPolicy(BasePolicy):
 
     @staticmethod
     def _parse_result(result_dict):
-        left_arm = result_dict.get("left_arm", {})
-        right_arm = result_dict.get("right_arm", {})
-        waist = result_dict.get("waist", {})
-
-        left_arm_kind = left_arm.get("kind", "JOINT_ABS")
-        right_arm_kind = right_arm.get("kind", "JOINT_ABS")
-
-        has_waist = bool(waist and waist.get("kind") in ("JOINT_ABS", "ABS_JOINT"))
-
-        if left_arm_kind not in ("JOINT_ABS", "EEF_ABS") or right_arm_kind not in ("JOINT_ABS", "EEF_ABS"):
-            raise ValueError(f"Unsupported action kind: " f"left_arm={left_arm_kind}, " f"right_arm={right_arm_kind}")
-
-        if left_arm_kind != right_arm_kind:
-            raise ValueError(f"Left/right arm kind must match: left_arm={left_arm_kind}, right_arm={right_arm_kind}")
-
-        left_arm_vals = np.array(left_arm["values"])
-        right_arm_vals = np.array(right_arm["values"])
-
-        chunk = left_arm_vals.shape[0]
-
-        def _get_optional(key):
-            raw = result_dict.get(key)
-            if raw is None or (isinstance(raw, dict) and not raw.get("values")):
-                return None
-            arr = np.array(raw if not isinstance(raw, dict) else raw["values"])
-            return arr if arr.size > 0 else None
-
-        left_eff_vals = np.array(result_dict["left_effector"])
-        right_eff_vals = np.array(result_dict["right_effector"])
-        head_vals = _get_optional("head")
-        waist_vals = np.array(waist["values"]) if has_waist else None
-
+        """Parse server result into action list.
+        
+        OpenPI server returns: {"actions": numpy_array, "server_timing": {...}}
+        where actions.shape = (H, D) with D = arm_dim + gripper_dim = 16
+        """
+        actions_array = result_dict.get("actions")
+        if actions_array is None:
+            raise ValueError(f"Server response missing 'actions' key. Got keys: {list(result_dict.keys())}")
+        
+        actions_array = np.array(actions_array)
+        if actions_array.ndim == 1:
+            actions_array = actions_array.reshape(1, -1)
+        
+        arm_dim = 14
+        gripper_dim = 2
+        action_dim = actions_array.shape[1]
+        
         actions = []
-        for i in range(chunk):
-            entry = {
-                "arm": np.concatenate([left_arm_vals[i], right_arm_vals[i]]),
-                "gripper": np.concatenate([left_eff_vals[i], right_eff_vals[i]]),
-                "kind": left_arm_kind,
-            }
-            if head_vals is not None:
-                entry["head"] = head_vals[i]
-            if waist_vals is not None:
-                entry["waist"] = waist_vals[i]
-            actions.append(entry)
+        for i in range(actions_array.shape[0]):
+            action = actions_array[i]
+            actions.append({
+                "arm": action[:arm_dim],                         # First 14 dims: arm joints
+                "gripper": action[arm_dim:arm_dim + gripper_dim],  # Next 2 dims: gripper (explicit slice, not [:] to end)
+                "kind": "JOINT_ABS",
+            })
+        logger.info(f"[_parse_result] action_dim={action_dim}, arm_dim={arm_dim}, gripper_dim={gripper_dim}")
         return actions
 
     def _post_process_action(self, raw_entry, cur_arm):
@@ -360,17 +337,17 @@ class CoRobotPolicy(BasePolicy):
         """
         try:
             self._ensure_connection()
-            data = msgpack.packb(payload)
+            data = msgpack_numpy.packb(payload)
             logger.info(f"Sending payload to server, size={len(data)} bytes")
             self._ws.send(data)
             response = self._ws.recv()
             if isinstance(response, str):
                 raise RuntimeError(f"Server error: {response}")
-            result = msgpack.unpackb(response, raw=False)
-            if result.get("error"):
+            result = msgpack_numpy.unpackb(response)
+            if isinstance(result, dict) and result.get("error"):
                 raise RuntimeError(f"Server returned error: {result['error']}")
-            inner = result["result"]
-            actions = self._parse_result(inner)
+            # OpenPI format: result contains actions directly, not wrapped in result["result"]
+            actions = self._parse_result(result)
             n = max(len(actions), 1)
             self.action_buffer = deque(actions, maxlen=n)
             return True

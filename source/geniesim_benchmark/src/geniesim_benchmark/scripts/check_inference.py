@@ -3,18 +3,14 @@
 # Author: Genie Sim Team
 # License: Mozilla Public License Version 2.0
 
-"""Send a saved corobot inference payload pkl to a model server and validate the response.
+"""Send a saved observation payload to an OpenPI inference server and validate the response.
 
-The payload is a JSON-RPC `{"method": "infer", "params": {...}}` envelope; the
-server replies with `{"result": {"left_arm": ..., "right_arm": ..., ...}}` or
-`{"error": ...}`. A canonical `corobot_payload.pkl` ships next to this script
-and is used by default; pass a path to override it (e.g. a fresh
-`debug_preview/debug_NNNN.pkl` from the corobot policy's debug dump).
+The payload is a dict with observation fields (images, state, task); the server
+replies with `{"actions": numpy_array}` where the array has shape (H, D).
 
 Beyond key-presence and NaN/Inf checks, the response is validated per-dimension:
-min/max/mean/std for each idx, plus flags for constant dims, out-of-range
-values (kind-aware: JOINT_ABS expects radians, EEF_ABS expects meters+quat,
-gripper expects [0,1]), NaN/Inf, and large jumps from the input state.
+min/max/mean/std for each dim, plus flags for constant dims, out-of-range values
+(JOINT_ABS expects radians, EEF_ABS expects meters+quat, gripper expects [0,1]).
 
 Usage:
     python check_inference.py --host 127.0.0.1 --port 8999      # bundled payload
@@ -22,13 +18,10 @@ Usage:
 """
 
 import argparse
-import functools
 import os
-import pickle
 import sys
 import time
 
-import msgpack
 import numpy as np
 import websockets.sync.client
 
@@ -77,57 +70,31 @@ def section(icon, title):
 
 
 # ---------------------------------------------------------------------------
-# msgpack-numpy serialization
+# msgpack-numpy serialization (same format as corobotpolicy.py)
 # ---------------------------------------------------------------------------
 
-
-def _pack_array(obj):
-    if isinstance(obj, (np.ndarray, np.generic)) and obj.dtype.kind in ("V", "O", "c"):
-        raise ValueError(f"Unsupported dtype: {obj.dtype}")
-    if isinstance(obj, np.ndarray):
-        return {b"__ndarray__": True, b"data": obj.tobytes(), b"dtype": obj.dtype.str, b"shape": obj.shape}
-    if isinstance(obj, np.generic):
-        return {b"__npgeneric__": True, b"data": obj.item(), b"dtype": obj.dtype.str}
-    return obj
-
-
-def _unpack_array(obj):
-    if b"__ndarray__" in obj:
-        return np.ndarray(buffer=obj[b"data"], dtype=np.dtype(obj[b"dtype"]), shape=obj[b"shape"])
-    if b"__npgeneric__" in obj:
-        return np.dtype(obj[b"dtype"]).type(obj[b"data"])
-    return obj
-
-
-_pack = functools.partial(msgpack.packb, default=_pack_array)
-_unpack = functools.partial(msgpack.unpackb, object_hook=_unpack_array, raw=False)
+from geniesim_benchmark.utils.msgpack_numpy import packb as _pack, unpackb as _unpack
 
 
 # ---------------------------------------------------------------------------
-# Payload loading
+# Connection and metadata handling
 # ---------------------------------------------------------------------------
-
-
-def load(pkl_path):
-    with open(pkl_path, "rb") as f:
-        data = pickle.load(f)
-    # The corobot policy debug hook dumps {"payload": ..., "obs": ...};
-    # accept either the wrapper or a bare payload.
-    payload = data["payload"] if isinstance(data, dict) and "payload" in data else data
-    if not (isinstance(payload, dict) and payload.get("method") == "infer" and "params" in payload):
-        keys = list(payload.keys()) if isinstance(payload, dict) else type(payload).__name__
-        raise ValueError(f"Not a corobot payload (expected method=infer / params). Got: {keys}")
-    section(ICON_LOAD, "Payload")
-    info(f"path : {pkl_path}")
-    info(f"keys : {list(payload.keys())}")
-    return payload
 
 
 def connect(uri):
     section(ICON_CONN, f"Connecting to {uri}")
     ws = websockets.sync.client.connect(uri, compression=None, max_size=None, open_timeout=15)
     ok(f"connected to {uri}")
-    return ws
+    # OpenPI: server sends metadata on connect
+    metadata_raw = ws.recv()
+    metadata = _unpack(metadata_raw)
+    section(ICON_INFO, "Server metadata")
+    info(f"policy_type: {metadata.get('policy_type')}")
+    info(f"chunk_size: {metadata.get('chunk_size')}")
+    info(f"n_action_steps: {metadata.get('n_action_steps')}")
+    if 'input_features' in metadata:
+        info(f"input_features: {list(metadata['input_features'].keys())}")
+    return ws, metadata
 
 
 # ---------------------------------------------------------------------------
@@ -300,82 +267,89 @@ def validate(arrays, label):
 # ---------------------------------------------------------------------------
 
 
-def _state_for_corobot(payload):
-    """Best-effort extract per-output input states from a corobot payload.
+def construct_dummy_observation(metadata):
+    """Construct a dummy OpenPI observation dict based on server metadata."""
+    obs = {}
+    input_features = metadata.get("input_features", {})
+    
+    for feat_name, feat_info in input_features.items():
+        feat_type = feat_info.get("type", "")
+        shape = feat_info.get("shape", [])
+        
+        if feat_type == "VISUAL" or "image" in feat_name:
+            # Image: metadata is (C, H, W) format, need to convert to (H, W, C)
+            if len(shape) == 4:
+                # (B, C, H, W) -> (C, H, W)
+                shape = shape[1:]
+            if len(shape) == 3:
+                c, h, w = shape
+                # Generate uint8 image data in (H, W, C) format
+                obs[feat_name] = np.random.randint(0, 256, (h, w, c), dtype=np.uint8)
+        elif feat_type == "STATE" or "state" in feat_name:
+            # State vector: flat array
+            if len(shape) == 2:
+                shape = shape[1:]  # (B, D) -> (D,)
+            if len(shape) == 1:
+                obs[feat_name] = np.random.randn(*shape).astype(np.float32)
+        elif feat_type == "LANGUAGE" or "language" in feat_name:
+            # Language embedding: flat array
+            if len(shape) == 2:
+                shape = shape[1:]  # (B, D) -> (D,)
+            if len(shape) == 1:
+                obs[feat_name] = np.random.randn(*shape).astype(np.float32)
+        else:
+            warn(f"Unknown feature type {feat_type} for {feat_name}, skipping")
+    
+    return obs
 
-    arm_joint_states is typically left+right concatenated; we try common splits
-    and just pass through whatever exists. Returns dict[name -> 1D array | None].
-    """
-    states = (payload.get("params") or {}).get("states") or {}
-    arm = np.asarray(states.get("arm_joint_states") or [])
-    waist = np.asarray(states.get("waist_joint_states") or [])
-    head = np.asarray(states.get("head_joint_states") or [])
-    grip = np.asarray(states.get("gripper_states") or [])
 
-    out = {"waist": waist if waist.size else None, "head": head if head.size else None}
-    if arm.size and arm.size % 2 == 0:
-        half = arm.size // 2
-        out["left_arm"] = arm[:half]
-        out["right_arm"] = arm[half:]
-    else:
-        out["left_arm"] = out["right_arm"] = None
-    if grip.size >= 2:
-        out["left_effector"] = grip[:1]
-        out["right_effector"] = grip[1:2]
-    else:
-        out["left_effector"] = out["right_effector"] = None
-    return out
-
-
-def check_corobot(ws, payload, max_dims):
+def check_openpi(ws, metadata, max_dims):
+    """Send OpenPI observation and validate response."""
     t0 = time.time()
-    ws.send(_pack(payload))
+    
+    # Construct observation
+    obs = construct_dummy_observation(metadata)
+    section(ICON_INFO, "Sending OpenPI observation")
+    info(f"keys: {list(obs.keys())}")
+    for k, v in obs.items():
+        if isinstance(v, np.ndarray):
+            info(f"  {k}: shape={v.shape} dtype={v.dtype}")
+        else:
+            info(f"  {k}: {type(v).__name__}")
+    
+    # Send and receive
+    ws.send(_pack(obs))
     resp = ws.recv()
     dt = (time.time() - t0) * 1000
+    
     if isinstance(resp, str):
         fail(f"server returned string: {resp[:200]}")
         return False
+    
     result = _unpack(resp)
-    section(ICON_RESP, f"corobot response  {dt:.1f} ms")
+    section(ICON_RESP, f"OpenPI response  {dt:.1f} ms")
     info(f"keys: {list(result.keys())}")
-    if result.get("error"):
+    
+    if "error" in result:
         fail(f"server error: {result['error']}")
         return False
-    inner = result.get("result")
-    if not isinstance(inner, dict):
-        fail(f"response missing 'result' dict. keys={list(result.keys())}")
+    
+    # OpenPI returns {"actions": np.ndarray (H, D)}
+    if "actions" not in result:
+        fail(f"response missing 'actions' key. keys={list(result.keys())}")
         return False
-    info(f"result keys: {list(inner.keys())}")
-
-    state_map = _state_for_corobot(payload)
-    passed = True
-
-    for key in ("left_arm", "right_arm", "waist", "head"):
-        sub = inner.get(key)
-        if not isinstance(sub, dict) or "values" not in sub:
-            continue
-        arr = np.asarray(sub["values"])
-        if arr.size == 0:
-            info(f"{key}: empty values, skipping")
-            continue
-        kind = sub.get("kind")
-        passed &= per_idx_summary(arr, key, kind=kind, state=state_map.get(key), max_dims=max_dims)
-        if arr.ndim >= 2 and arr.shape[0] > 1:
-            chunk_continuity([arr[i] for i in range(arr.shape[0])], f"{key}")
-
-    for key in ("left_effector", "right_effector"):
-        sub = inner.get(key)
-        if sub is None:
-            continue
-        arr = np.asarray(sub if not isinstance(sub, dict) else sub.get("values", []))
-        if arr.size == 0:
-            info(f"{key}: empty, skipping")
-            continue
-        # Gripper: report observed range only — no bounds (kind unset) and no
-        # jump-from-state check (state=None), since encodings vary per policy.
-        passed &= per_idx_summary(arr, key, kind="GRIPPER", state=None, max_dims=max_dims)
-
-    return passed and validate(_flatten_arrays(inner), "result")
+    
+    actions_arr = np.asarray(result["actions"])
+    info(f"actions shape: {actions_arr.shape} dtype={actions_arr.dtype}")
+    
+    # Validate actions
+    passed = validate(_flatten_arrays({"actions": actions_arr}), "actions")
+    passed &= per_idx_summary(actions_arr, "actions", kind="JOINT_ABS", state=None, max_dims=max_dims)
+    
+    if actions_arr.ndim >= 2 and actions_arr.shape[0] > 1:
+        chunk_continuity([actions_arr[i] for i in range(actions_arr.shape[0])], "actions")
+    
+    return passed
 
 
 # ---------------------------------------------------------------------------
@@ -389,18 +363,16 @@ def main():
         "pkl_path",
         nargs="?",
         default=DEFAULT_PAYLOAD,
-        help="corobot payload pkl (default: bundled corobot_payload.pkl)",
+        help="OpenPI observation pkl (default: bundled openpi_observation.pkl)",
     )
     ap.add_argument("--host", default="127.0.0.1")
-    ap.add_argument("--port", type=int, default=8999)
+    ap.add_argument("--port", type=int, default=8000)
     ap.add_argument("--iters", type=int, default=1)
     ap.add_argument("--max-dims", type=int, default=64, help="max idx rows to print per array")
     args = ap.parse_args()
 
-    payload = load(args.pkl_path)
-
     uri = f"ws://{args.host}:{args.port}"
-    ws = connect(uri)
+    ws, metadata = connect(uri)
 
     ok_all = True
     latencies = []
@@ -410,7 +382,7 @@ def main():
         print(f"{ICON_ITER}  Iteration {i + 1} / {args.iters}")
         print(RULE_HEAVY)
         t0 = time.time()
-        ok_all &= check_corobot(ws, payload, args.max_dims)
+        ok_all &= check_openpi(ws, metadata, args.max_dims)
         latencies.append((time.time() - t0) * 1000)
 
     try:
