@@ -64,14 +64,14 @@ geniesim benchmark check-inference --infer-host=127.0.0.1:8000 --iters 10
 ### 6.3 数据格式验证(debug 模式)
 
 ```bash
-geniesim benchmark run g2op_manip_sort_fruit \
+geniesim benchmark run g2op_if_pick_block_color \
   --infer-host=127.0.0.1:8000 --benchmark.debug
 ```
 
 ### 6.4 图像可视化(preview 模式)
 
 ```bash
-geniesim benchmark run g2op_manip_sort_fruit \
+geniesim benchmark run g2op_if_pick_block_color \
   --infer-host=127.0.0.1:8000 --benchmark.preview
 
 # 生成 preview_<step>_<timestamp>_<camera>.png
@@ -81,7 +81,7 @@ geniesim benchmark run g2op_manip_sort_fruit \
 ### 6.5 端到端完整测试
 
 ```bash
-geniesim benchmark run g2op_manip_sort_fruit \
+geniesim benchmark run g2op_if_pick_block_color \
   --infer-host=127.0.0.1:8000
 
 # 观察:
