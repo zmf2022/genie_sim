@@ -76,6 +76,7 @@ if [ "$ACTION" == "run" ]; then
         -e "OMNI_USER=geniesim" \
         -e "OMNI_PASS=geniesim" \
         -e "SIM_ASSETS=/geniesim_assets" \
+        -e "CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES}" \
         -e DISPLAY \
         -v ~/docker/isaac-sim/cache/main:/isaac-sim/.cache:rw \
         -v ~/docker/isaac-sim/cache/computecache:/isaac-sim/.nv/ComputeCache:rw \
