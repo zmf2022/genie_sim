@@ -415,7 +415,7 @@ def _encode_from_images(camera_dir, video_path, image_stem, ext, is_depth, fps):
 
     if is_depth:
         cmd = [
-            "ffmpeg", "-y",
+            "ffmpeg", "-nostdin", "-y",
             "-framerate", str(int(fps)),
             "-i", input_pattern,
             "-c:v", "png",
@@ -428,7 +428,7 @@ def _encode_from_images(camera_dir, video_path, image_stem, ext, is_depth, fps):
         ]
     else:
         cmd = [
-            "ffmpeg", "-y",
+            "ffmpeg", "-nostdin", "-y",
             "-f", "image2",
             "-r", str(int(fps)),
             "-i", input_pattern,
@@ -444,7 +444,7 @@ def _encode_from_images(camera_dir, video_path, image_stem, ext, is_depth, fps):
             str(video_path),
         ]
 
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, stdin=subprocess.DEVNULL)
     if result.returncode != 0:
         raise RuntimeError(f"Encoding {image_stem} failed: {result.stderr[-500:]}")
 
