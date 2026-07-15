@@ -786,11 +786,13 @@ def generate_meta(output_dir: Path, episode_info: list, agibot_dirs: list, fmt: 
                 "dtype": "float32",
                 "shape": [state_len],
                 "field_descriptions": _get_state_field_descriptions(fmt),
+                "names": _get_state_action_names(fmt, state_len),
             },
             "action": {
                 "dtype": "float32",
                 "shape": [action_len],
                 "field_descriptions": _get_action_field_descriptions(fmt),
+                "names": _get_state_action_names(fmt, action_len),
             },
             "episode_index": {"dtype": "int64", "shape": [1], "names": None},
             "frame_index": {"dtype": "int64", "shape": [1], "names": None},
@@ -943,6 +945,25 @@ def _get_action_field_descriptions_agibot():
         "action/waist/position": {"description": "", "dimensions": 5, "indices": list(range(33, 38))},
         "action/robot/velocity": {"description": "", "dimensions": 2, "indices": list(range(38, 40))},
     }
+
+
+def _get_state_action_names(fmt: str, length: int) -> list:
+    """Return per-dimension joint names for state/action features.
+
+    Only VLA format (16 dims: left_arm[7] + right_arm[7] + gripper[2]) is
+    named explicitly. Other formats return generic dim_N names.
+    """
+    if fmt == "vla":
+        names = [
+            "left_arm_0", "left_arm_1", "left_arm_2", "left_arm_3",
+            "left_arm_4", "left_arm_5", "left_arm_6",
+            "right_arm_0", "right_arm_1", "right_arm_2", "right_arm_3",
+            "right_arm_4", "right_arm_5", "right_arm_6",
+            "gripper_left", "gripper_right",
+        ]
+        return names[:length] if length < len(names) else names + [f"dim_{i}" for i in range(len(names), length)]
+
+    return [f"dim_{i}" for i in range(length)]
 
 
 def _get_state_field_descriptions_vla():
