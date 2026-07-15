@@ -9,6 +9,7 @@ from geniesim_benchmark.utils.infer_post_process import (
     process_gripper_action_relabel,
     process_gripper_action_crsb,
     process_gripper_action_passthrough,
+    process_gripper_action_g2op,
 )
 
 G1_JOINT_NAMES = [
@@ -168,12 +169,11 @@ ROBOT_CONFIGS = {
         "waist_joints": G2_WAIST_JOINT_NAMES,
         "head_joints": G2_HEAD_JOINT_NAMES,
         "gripper_offset": 0.0,
-        "gripper_scale": -1.0,
         "limit_val": 0.785,
-        "label_state": label_state_crsb,
-        "process_gripper_action": process_gripper_action_crsb,
+        "label_state": label_state_omnipicker,
+        "process_gripper_action": process_gripper_action_relabel,
         "obs_extra_joints": [],
-        "init_gripper_open": [0.785, 0.785],
+        "init_gripper_open": [0.0, 0.0],
     },
     "G2_90d_gp": {
         "arm_joints": G2_DUAL_ARM_JOINT_NAMES,
@@ -220,12 +220,18 @@ ROBOT_CONFIGS = {
     },
 }
 
+for _key, _alias in list(ROBOT_CONFIGS.items()):
+    if _key.endswith((".json", ".yaml")):
+        continue
+    _ext = f"{_key}.json"
+    if _ext not in ROBOT_CONFIGS:
+        ROBOT_CONFIGS[_ext] = _alias
+
 DEFAULT_ROBOT_CONFIG = {
     "gripper_offset": 0.0,
     "gripper_scale": 1.0,
-    "limit_val": 0.78,
     "label_state": label_state_passthrough,
-    "process_gripper_action": process_gripper_action_passthrough,
+    "process_gripper_action": process_gripper_action_g2op,
 }
 
 

@@ -90,6 +90,26 @@ def process_gripper_action_passthrough(action_slice, cfg):
     return [float(v) + cfg["gripper_offset"] for v in action_slice]
 
 
+def process_gripper_action_g2op(action_slice, cfg):
+    """Binarize model gripper output {0,1} → GenieSim joint target.
+
+    Training convention: action=1.0 → open (effector.position=1),
+    action=0.0 → closed (effector.position=0).
+
+    GenieSim omnipicker joint: 0 rad ≈ closed, 2 rad ≈ open.
+    Threshold at 0.5 to absorb float noise from the model.
+    """
+    closed_pos = cfg.get("gripper_closed_pos", 0.0)
+    open_pos = cfg.get("gripper_open_pos", 2.0)
+    offset = cfg.get("gripper_offset", 0.0)
+    out = []
+    for v in action_slice:
+        is_open = float(v) >= 0.5
+        joint = open_pos if is_open else closed_pos
+        out.append(joint + offset)
+    return out
+
+
 def abs_ee_to_abs_joint(ikfk_solver, arm_joint_state, action: np.ndarray):
     abs_eef_action = [action]
     joint_actions = ikfk_solver.eef_actions_to_joint(abs_eef_action, arm_joint_state, [0, 0])

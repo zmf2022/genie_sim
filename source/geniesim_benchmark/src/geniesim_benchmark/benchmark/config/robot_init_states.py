@@ -315,6 +315,9 @@ TASK_INFO_DICT = {
         "G1_120s": G1_DEFAULT_STATES,
         "G2_omnipicker": G2_DEFAULT_STATES,
     },
+    "sort_fruit_data_collection": {
+        "G2_omnipicker": G2_DEFAULT_STATES,
+    },
     "open_door": {"G2_omnipicker": G2_STATES_1},
     "clean_the_desktop": {"G2_omnipicker": G2_DEFAULT_STATES},
     "hold_pot": {"G2_omnipicker": G2_STATES_1},

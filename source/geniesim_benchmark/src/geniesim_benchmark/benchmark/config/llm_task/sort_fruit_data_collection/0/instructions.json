@@ -1,0 +1,15 @@
+{
+  "instruction_category": "sort_fruit_data_collection",
+  "instructions": [
+    {
+      "id": 1,
+      "instruction": "Use your closest hand to sort the apple into the corresponding storage box",
+      "target": {
+        "id1": "benchmark_apple_target",
+        "id2": "benchmark_storage_box_target"
+      },
+      "template_key": "sort_fruit_data_collection"
+    }
+  ],
+  "scene_id": "lab_dual_arm_sample_transfer_g2"
+}

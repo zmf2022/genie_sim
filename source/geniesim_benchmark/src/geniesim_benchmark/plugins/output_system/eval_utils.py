@@ -51,6 +51,7 @@ TASK_STEPS = {
     "pick_specific_object": ["Follow", "PickUpOnGripper"],
     "place_object_into_box_color": ["Follow", "PickUpOnGripper", "Inside"],
     "sort_fruit": ["Inside"],
+    "sort_fruit_data_collection": ["Inside"],
     "straighten_object": ["VLM"],
     "sorting_packages": ["Follow", "PickUpOnGripper", "Inside", "Upright", "PickUpOnGripper", "Inside"],
     "sorting_packages_continuous": ["Upright", "Upright", "Upright", "Upright"],
