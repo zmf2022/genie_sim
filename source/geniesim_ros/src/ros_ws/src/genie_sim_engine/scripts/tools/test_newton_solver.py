@@ -1293,7 +1293,11 @@ def main() -> int:
             logger.warn(f"[tools] init-pose keyframe step failed (continuing): {exc!r}")
 
     # === STEP 8: Adapter post_joint_map (selective PD) =============
-    adapter.post_joint_map(model, joint_name_to_dof, control, logger)
+    # Adapters expect the engine's JointIndex snapshot (they call
+    # ``jindex.name_to_dof()``), not the raw dict computed above.
+    from engine.newton.joint_index import JointIndex
+
+    adapter.post_joint_map(model, JointIndex(model), control, logger)
 
     # === STEP 9: Sync BOTH states with model.joint_q ===============
     # Production lifecycle.py:344-352 seeds state_0 AND state_1 so the
